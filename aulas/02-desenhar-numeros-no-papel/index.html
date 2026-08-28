@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aula 2 — Desenhar números no papel | Matemática do Zero</title>
+<style>
+:root{
+  --papel:#f6f2e9; --papel2:#fffdf7; --tinta:#1b1b1b; --cinza:#6b7280;
+  --azul:#2563eb; --azulc:#dbeafe; --verm:#dc2626; --vermc:#fee2e2;
+  --verde:#059669; --verdec:#d1fae5; --amar:#fde68a; --laranja:#d97706;
+  --roxo:#7c3aed; --linha:#c9c1ae;
+  --mao:'Comic Sans MS','Comic Neue','Chalkboard SE','Bradley Hand','Marker Felt','Segoe Print','Ink Free',cursive;
+  --corpo:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--corpo);font-size:17px;line-height:1.65}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 90px}
+
+header{background:var(--tinta);color:var(--papel2);padding:34px 22px 30px;margin-bottom:34px;border-bottom:6px solid var(--laranja)}
+header .inner{max-width:820px;margin:0 auto}
+.serie{font-family:var(--mao);font-size:15px;letter-spacing:.5px;color:var(--amar);margin:0 0 6px}
+header h1{margin:0;font-size:40px;line-height:1.1;letter-spacing:-.5px}
+header .sub{margin:12px 0 0;color:#cfc9bb;font-size:17px;max-width:620px}
+.aula-num{display:inline-block;background:var(--laranja);color:#fff;font-weight:700;padding:3px 13px;border-radius:20px;font-size:14px;margin-bottom:14px;letter-spacing:.5px}
+.voltou{background:#3a3a3a;border-left:5px solid var(--amar);padding:12px 18px;margin:18px 0 0;font-size:15.5px;color:#e6e0d2;border-radius:0 8px 8px 0}
+
+h2{font-size:29px;margin:52px 0 6px;line-height:1.2;border-bottom:3px solid var(--tinta);padding-bottom:8px}
+h2 .n{color:var(--laranja);font-family:var(--mao);font-size:24px;margin-right:8px}
+h3{font-size:21px;margin:32px 0 8px}
+p{margin:14px 0}
+.grande{font-size:20px}
+.centro{text-align:center}
+code,.mono{font-family:'Consolas','Monaco',monospace;background:#eae4d6;padding:2px 7px;border-radius:4px;font-size:.95em}
+
+.guru{display:flex;gap:18px;align-items:flex-start;margin:34px 0;background:linear-gradient(#efe9db,#e8e1d0);border-left:6px solid var(--roxo);padding:20px 22px;border-radius:4px}
+.guru svg{flex:0 0 92px}
+.guru .fala{position:relative;background:#fff;border:2px solid var(--tinta);border-radius:16px;padding:14px 18px;font-family:var(--mao);font-size:16.5px;line-height:1.55}
+.guru .fala:before{content:"";position:absolute;left:-11px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:var(--tinta)}
+.guru .fala:after{content:"";position:absolute;left:-8px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:#fff}
+.guru .quem{font-family:var(--mao);font-size:13px;color:var(--roxo);text-align:center;margin-top:4px;font-weight:700}
+
+.idiota{background:#e7eefc;border:3px solid var(--azul);border-radius:10px;padding:6px 24px 20px;margin:34px 0}
+.idiota .tit{font-family:var(--mao);font-size:20px;font-weight:700;color:#fff;background:var(--azul);display:inline-block;padding:5px 16px;border-radius:0 0 10px 10px;margin:0 0 8px}
+.idiota .q{font-weight:700;margin:16px 0 4px}
+.idiota .q:before{content:"P: ";color:var(--azul);font-weight:800}
+.idiota .a{margin:0 0 6px}
+.idiota .a:before{content:"R: ";color:var(--verm);font-weight:800}
+
+.cuidado{background:var(--vermc);border:3px dashed var(--verm);border-radius:10px;padding:16px 20px;margin:30px 0}
+.cuidado .tit{font-family:var(--mao);font-weight:700;color:var(--verm);font-size:19px;margin-bottom:2px}
+
+.pontos{background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:8px 26px 22px;margin:44px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.pontos .tit{font-family:var(--mao);font-size:22px;font-weight:700;background:var(--amar);display:inline-block;padding:6px 18px;border:3px solid var(--tinta);border-radius:8px;transform:rotate(-1.5deg);margin:-22px 0 10px}
+.pontos ul{padding-left:22px;margin:8px 0}
+.pontos li{margin:9px 0}
+
+.sticky{background:var(--amar);padding:16px 20px;font-family:var(--mao);font-size:16px;transform:rotate(-1.2deg);box-shadow:3px 4px 9px rgba(0,0,0,.16);margin:30px auto;max-width:540px;border-radius:2px}
+.sticky.dir{transform:rotate(1.4deg)}
+.rabisco{font-family:var(--mao);color:var(--laranja);font-size:15.5px;line-height:1.4}
+
+.lab{background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:8px 24px 26px;margin:34px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.lab .tit{font-family:var(--mao);font-size:19px;font-weight:700;background:var(--verde);color:#fff;display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;border:3px solid var(--tinta)}
+.controles{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
+button{font-family:var(--corpo);font-size:16px;font-weight:700;cursor:pointer;background:var(--azul);color:#fff;border:3px solid var(--tinta);border-radius:9px;padding:9px 18px;box-shadow:3px 3px 0 var(--tinta);transition:.09s}
+button:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--tinta)}
+button:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--tinta)}
+button.sec{background:#fff;color:var(--tinta)}
+button.on{background:var(--verde)}
+input[type=number]{font-family:var(--corpo);font-size:18px;font-weight:700;width:92px;padding:8px 10px;border:3px solid var(--tinta);border-radius:9px;background:#fff;text-align:center}
+input:focus{outline:3px solid var(--amar)}
+input[type=range]{width:100%;max-width:300px;accent-color:var(--azul);height:26px;vertical-align:middle}
+label.lab-l{font-weight:700;font-size:15px}
+.sl-linha{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0}
+.sl-val{font-family:var(--mao);font-size:22px;font-weight:700;min-width:52px;text-align:center;background:var(--amar);border:2px solid var(--tinta);border-radius:8px;padding:1px 8px}
+
+.tela{background:#fff;border:2px solid var(--linha);border-radius:10px;padding:6px}
+.tela svg{width:100%;height:auto;display:block;max-width:460px;margin:0 auto}
+.duas{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
+.duas>div{flex:1;min-width:250px}
+
+.eq{font-size:26px;font-weight:800;text-align:center;margin:14px 0 4px;letter-spacing:.5px}
+.eq .a{color:var(--verm)} .eq .b{color:var(--roxo)}
+
+.predio{background:#fff;border:2px solid var(--linha);border-radius:10px;padding:6px}
+.predio svg{width:100%;height:auto;max-width:250px;display:block;margin:0 auto}
+
+table.t{border-collapse:collapse;margin:14px 0;font-size:18px}
+table.t th,table.t td{border:2px solid var(--tinta);padding:8px 22px;text-align:center}
+table.t th{background:var(--tinta);color:var(--papel2);font-family:var(--mao);font-size:17px}
+table.t td.ent{color:var(--verde);font-weight:800}
+table.t td.sai{color:var(--verm);font-weight:800}
+
+.ex{background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:8px 24px 24px;margin:30px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13);position:relative}
+.ex .tit{font-family:var(--mao);font-size:19px;font-weight:700;background:var(--laranja);color:#fff;display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;border:3px solid var(--tinta)}
+.alt{display:block;background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:12px 16px;margin:9px 0;cursor:pointer;font-size:16.5px;transition:.12s;font-weight:600}
+.alt:hover{background:var(--amar)}
+.alt.certa{background:var(--verdec);border-color:var(--verde)}
+.alt.errada{background:var(--vermc);border-color:var(--verm)}
+.fb{margin-top:14px;font-family:var(--mao);font-size:17px;min-height:0;padding:0;border-radius:9px;overflow:hidden;transition:.2s}
+.fb.mostra{padding:12px 16px;min-height:24px}
+.fb.ok{background:var(--verdec);border:3px solid var(--verde);color:#065f46}
+.fb.no{background:var(--vermc);border:3px solid var(--verm);color:#991b1b}
+@keyframes chacoalha{0%,100%{transform:translateX(0)}15%{transform:translateX(-10px)}30%{transform:translateX(10px)}45%{transform:translateX(-7px)}60%{transform:translateX(7px)}75%{transform:translateX(-3px)}}
+.chacoalha{animation:chacoalha .5s}
+@keyframes pulsa{0%{transform:scale(1)}45%{transform:scale(1.11)}100%{transform:scale(1)}}
+.pulsa{animation:pulsa .45s}
+.selo{position:absolute;right:16px;top:14px;font-size:34px;opacity:0;transform:scale(.2) rotate(-25deg);transition:.4s cubic-bezier(.34,1.7,.5,1)}
+.selo.ver{opacity:1;transform:scale(1) rotate(-12deg)}
+.dica{font-size:14.5px;color:var(--cinza);margin-top:10px;font-style:italic}
+
+.placar{background:var(--tinta);color:var(--papel2);border-radius:14px;padding:26px 28px;margin:44px 0 0;text-align:center}
+.placar .n{font-size:52px;font-weight:800;font-family:var(--mao);color:var(--amar);line-height:1}
+.barra{height:20px;background:#3a3a3a;border-radius:12px;overflow:hidden;margin:16px auto;max-width:420px}
+.barra i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--verde),var(--amar));transition:.6s}
+.conf{position:fixed;top:-20px;width:11px;height:16px;z-index:99;pointer-events:none;border-radius:2px}
+@keyframes cai{to{transform:translateY(105vh) rotate(720deg);opacity:.1}}
+
+footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:var(--cinza);font-size:15px;text-align:center}
+@media(max-width:620px){header h1{font-size:30px}h2{font-size:24px}.guru{flex-direction:column;align-items:center}.guru svg{flex:0 0 auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <p class="serie">✏️ MATEMÁTICA DO ZERO — uma série para quem só sabe somar, subtrair, multiplicar e dividir</p>
+    <span class="aula-num">AULA 2 de 6</span>
+    <h1>Desenhar números no papel</h1>
+    <p class="sub">Onde você descobre que todo ponto tem endereço, que existe número antes do zero, e que qualquer linha reta do mundo cabe em dois numerozinhos.</p>
+    <div class="voltou"><strong>Na aula passada:</strong> função é uma máquina — entra um número, sai outro. <span class="mono">f(3) = 6</span> quer dizer "joguei o 3, saiu o 6". E cada teste vira um pontinho no papel.</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<p class="grande">Na Aula 1 a gente marcou uns pontinhos meio no chute. Hoje você vai entender <strong>exatamente</strong> onde eles ficam — e, de quebra, vai sair sabendo ler qualquer linha reta como quem lê uma placa de rua.</p>
+
+<!-- ============ 1 ============ -->
+<h2><span class="n">1</span> Duas réguas, um endereço</h2>
+
+<p>Pegue uma folha quadriculada. Deite uma régua na horizontal. Encoste outra na vertical. As duas se cruzam no <strong>zero</strong>.</p>
+
+<p>Pronto: agora todo ponto do papel tem um <strong>endereço feito de dois números</strong>.</p>
+
+<p class="centro" style="font-size:30px;font-weight:800">(3, 5)</p>
+<p class="centro rabisco">"ando 3 para a direita, depois subo 5"</p>
+
+<p>Sempre nessa ordem — <strong>primeiro ando, depois subo</strong>. É como achar uma sala num prédio: primeiro você acha o corredor, depois pega o elevador.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: encontre o ponto</div>
+  <p>Escolha o endereço e clique em <em>Andar até lá</em> para ver o caminho.</p>
+
+  <div class="sl-linha">
+    <label class="lab-l" style="min-width:150px;color:var(--verde)">1º ando (direita):</label>
+    <input type="range" id="slX" min="-6" max="6" step="1" value="3">
+    <span class="sl-val" id="vX">3</span>
+  </div>
+  <div class="sl-linha">
+    <label class="lab-l" style="min-width:150px;color:var(--verm)">2º subo:</label>
+    <input type="range" id="slY" min="-6" max="6" step="1" value="5">
+    <span class="sl-val" id="vY">5</span>
+  </div>
+
+  <div class="controles">
+    <button id="andarGo">▶ Andar até lá</button>
+    <button class="sec" id="trocarGo">🔄 Trocar a ordem dos dois números</button>
+  </div>
+
+  <div class="tela">
+    <svg viewBox="0 0 420 420" id="svgP">
+      <g id="gradeP"></g>
+      <line x1="0" y1="210" x2="420" y2="210" stroke="#1b1b1b" stroke-width="3"/>
+      <line x1="210" y1="0" x2="210" y2="420" stroke="#1b1b1b" stroke-width="3"/>
+      <path id="camH" d="" stroke="#059669" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path id="camV" d="" stroke="#dc2626" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <circle id="ptA" cx="0" cy="0" r="9" fill="#2563eb" stroke="#fff" stroke-width="3" opacity="0"/>
+      <circle id="ptB" cx="0" cy="0" r="9" fill="#d97706" stroke="#fff" stroke-width="3" opacity="0"/>
+      <text id="rotA" x="0" y="0" font-size="15" font-weight="800" fill="#2563eb" opacity="0"></text>
+      <text id="rotB" x="0" y="0" font-size="15" font-weight="800" fill="#d97706" opacity="0"></text>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtP">Ponto (3, 5)</p>
+</div>
+
+<div class="cuidado">
+  <div class="tit">⚠️ Cuidado — a ordem muda tudo</div>
+  <p style="margin:6px 0 0"><strong>(3, 5) e (5, 3) são lugares diferentes.</strong> Aperte o botão "Trocar a ordem" ali em cima e veja os dois pontos aparecerem em cantos distintos. Trocar a ordem aqui é como trocar o número do prédio pelo número do apartamento.</p>
+</div>
+
+<!-- ============ 2 ============ -->
+<h2><span class="n">2</span> Antes do zero a régua continua</h2>
+
+<p>Aqui está a única coisa realmente nova de hoje: os <strong>números negativos</strong>.</p>
+
+<p>A régua não acaba no zero. Ela continua para o outro lado: −1, −2, −3, e assim por diante.</p>
+
+<p>Pense num prédio com subsolo. O zero é a <strong>rua</strong>. Os andares de cima são 1, 2, 3. As garagens embaixo são −1, −2, −3.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: o elevador</div>
+  <div class="duas">
+    <div>
+      <div class="predio">
+        <svg viewBox="0 0 220 340" id="svgEl">
+          <rect x="40" y="20" width="140" height="300" fill="#f3f4f6" stroke="#1b1b1b" stroke-width="3" rx="6"/>
+          <g id="andares"></g>
+          <rect id="cabine" x="96" y="0" width="52" height="38" fill="#fde68a" stroke="#1b1b1b" stroke-width="3" rx="5" style="transition:y .55s cubic-bezier(.4,0,.2,1)"/>
+          <text id="cabTxt" x="122" y="0" text-anchor="middle" font-size="17" font-weight="800" fill="#1b1b1b" style="transition:y .55s cubic-bezier(.4,0,.2,1)">0</text>
+        </svg>
+      </div>
+    </div>
+    <div>
+      <div class="controles" style="flex-direction:column;align-items:stretch">
+        <button id="elUp">▲ Subir um andar</button>
+        <button id="elDown">▼ Descer um andar</button>
+        <button class="sec" id="elRua">🏠 Voltar para a rua (zero)</button>
+      </div>
+      <p class="rabisco" id="elTxt" style="font-size:17px">Você está na rua. Andar <strong>0</strong>.</p>
+      <p style="font-size:15px;color:var(--cinza)">O sinal de menos não quer dizer "número ruim". Quer dizer <strong>"para o outro lado do zero"</strong>.</p>
+    </div>
+  </div>
+</div>
+
+<p>No papel funciona igualzinho:</p>
+<ul>
+  <li>1º número <strong>positivo</strong> → ando para a <strong>direita</strong>. Negativo → ando para a <strong>esquerda</strong>.</li>
+  <li>2º número <strong>positivo</strong> → <strong>subo</strong>. Negativo → <strong>desço</strong>.</li>
+</ul>
+<p>Então <strong>(−4, 2)</strong> é: ando 4 para a esquerda, subo 2. Volte no laboratório do ponto e arraste os controles para os números negativos — dá para ver os quatro cantos do papel.</p>
+
+<div class="guru">
+  <svg viewBox="0 0 100 118" width="92">
+    <ellipse cx="50" cy="112" rx="34" ry="6" fill="#00000018"/>
+    <path d="M50 60 L20 108 L80 108 Z" fill="#7c3aed" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="50" cy="34" r="20" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M30 36 q20 46 40 0 q-6 34 -20 34 q-14 0 -20 -34" fill="#e5e7eb" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M40 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M52 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M30 22 q20 -12 40 0" fill="none" stroke="#1b1b1b" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="24" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="76" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+  </svg>
+  <div>
+    <div class="fala">O zero não é o começo do mundo. É só o lugar onde alguém resolveu parar de contar para um lado e começar a contar para o outro. Um termômetro no inverno entende isso melhor que muito aluno.</div>
+    <div class="quem">— o Guru</div>
+  </div>
+</div>
+
+<!-- ============ 3 ============ -->
+<h2><span class="n">3</span> Toda máquina de multiplicar dá uma reta</h2>
+
+<p>Lembra da máquina DOBRAR da Aula 1? Quando marcamos todos os pontos dela, eles ficaram <strong>perfeitamente alinhados</strong>.</p>
+
+<p>E não é sorte da DOBRAR. <strong>Qualquer</strong> máquina do tipo "multiplico por um número" dá uma linha reta. O que muda é a <strong>inclinação</strong> dela.</p>
+
+<!-- ============ 4 ============ -->
+<h2><span class="n">4</span> O passo da escada</h2>
+
+<p>Este é o coração da aula. Pegue qualquer ponto da reta e faça o seguinte:</p>
+
+<div class="sticky"><strong>Ando 1 para a direita. Quanto eu subi?</strong><br>Esse tanto é o <u>passo da escada</u>. E ele é sempre igual, não importa onde você comece.</div>
+
+<p>Agora vem a parte bonita: <strong>o passo da escada é exatamente o número que multiplica.</strong> Se a máquina é <span class="mono">f(x) = 2 · x</span>, você anda 1 e sobe 2. Se é <span class="mono">f(x) = 5 · x</span>, você anda 1 e sobe 5.</p>
+
+<p>Os matemáticos chamam esse passo de <strong>inclinação</strong>. Mas "passo da escada" descreve melhor.</p>
+
+<!-- ============ 5 ============ -->
+<h2><span class="n">5</span> E o número solto no fim?</h2>
+
+<p>Na receita <span class="mono">f(x) = 2 · x + 3</span>, o <strong>+3</strong> não mexe no tamanho do passo. Os degraus continuam iguais. Ele só <strong>levanta a linha inteira</strong> 3 casas para cima.</p>
+
+<p>E tem um truque para achar onde a linha cruza a régua em pé: <strong>é exatamente esse número solto</strong>. Nem precisa contar.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: a fábrica de retas</div>
+  <p>Dois controles. Só isso constrói qualquer reta que existe.</p>
+
+  <div class="sl-linha">
+    <label class="lab-l" style="min-width:190px;color:var(--verm)">passo da escada (multiplica):</label>
+    <input type="range" id="slA" min="-4" max="4" step="1" value="2">
+    <span class="sl-val" id="vA">2</span>
+  </div>
+  <div class="sl-linha">
+    <label class="lab-l" style="min-width:190px;color:var(--roxo)">altura de partida (soma):</label>
+    <input type="range" id="slB" min="-5" max="5" step="1" value="3">
+    <span class="sl-val" id="vB">3</span>
+  </div>
+
+  <div class="eq" id="eqTxt">f(x) = <span class="a">2</span> · x + <span class="b">3</span></div>
+
+  <div class="controles">
+    <button class="sec on" id="btEsc">👣 Mostrar os degraus</button>
+    <button class="sec" id="btDesafio">🎯 Desafio: acerte a reta misteriosa</button>
+  </div>
+
+  <div class="tela">
+    <svg viewBox="0 0 420 420" id="svgR">
+      <g id="gradeR"></g>
+      <line x1="0" y1="210" x2="420" y2="210" stroke="#1b1b1b" stroke-width="3"/>
+      <line x1="210" y1="0" x2="210" y2="420" stroke="#1b1b1b" stroke-width="3"/>
+      <line id="misteriosa" x1="0" y1="0" x2="0" y2="0" stroke="#9ca3af" stroke-width="6" stroke-dasharray="10 8" opacity="0"/>
+      <g id="degraus"></g>
+      <line id="retaR" x1="0" y1="0" x2="0" y2="0" stroke="#2563eb" stroke-width="5"/>
+      <circle id="cruza" cx="210" cy="120" r="8" fill="#7c3aed" stroke="#fff" stroke-width="3"/>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtR">A bolinha roxa mostra onde a linha cruza a régua em pé. Repare que ela sempre cai no número da <em>altura de partida</em>.</p>
+</div>
+
+<div class="idiota">
+  <div class="tit">Não existe pergunta idiota</div>
+  <p class="q">E se o passo da escada for negativo?</p>
+  <p class="a">A linha desce em vez de subir. "Ando 1 para a direita e subo −3" é a mesma coisa que "desço 3". Teste no laboratório: arraste o primeiro controle para a esquerda do zero.</p>
+  <p class="q">E se o passo for zero?</p>
+  <p class="a">A linha fica deitada, reta como uma mesa. Faz sentido: ando 1 para a direita e não subo nada. A máquina devolve sempre o mesmo número, aconteça o que acontecer.</p>
+  <p class="q">Por que "altura de partida"?</p>
+  <p class="a">Porque é onde a linha está quando você ainda não andou nada — ou seja, quando x vale 0. Faça a conta: <span class="mono">f(0) = 2 · 0 + 3 = 3</span>. O 2 sumiu porque foi multiplicado por zero, e sobrou só o 3.</p>
+  <p class="q">Toda reta pode ser escrita assim?</p>
+  <p class="a">Quase todas — só falha numa reta em pé, totalmente vertical, porque ali você não anda nada e sobe infinito. É a única exceção, e ela quase nunca aparece na prática.</p>
+</div>
+
+<!-- ============ 6 ============ -->
+<h2><span class="n">6</span> A receita de qualquer reta</h2>
+
+<p>Juntando tudo:</p>
+
+<p class="centro" style="font-size:27px;font-weight:800;line-height:1.6">
+  f(x) = <span style="color:var(--verm)">(passo da escada)</span> · x + <span style="color:var(--roxo)">(altura de partida)</span>
+</p>
+
+<p><strong>Dois números descrevem qualquer linha reta do mundo.</strong> Um diz o quanto ela sobe a cada passo, o outro diz de onde ela partiu. Mais nada.</p>
+
+<div class="pontos">
+  <div class="tit">Pontos importantes</div>
+  <ul>
+    <li>Todo ponto tem endereço de <strong>dois números</strong>: <span class="mono">(quanto ando, quanto subo)</span> — nessa ordem.</li>
+    <li><strong>(3, 5) ≠ (5, 3)</strong>. Trocar a ordem muda o lugar.</li>
+    <li>Negativo no 1º número → ando para a <strong>esquerda</strong>. Negativo no 2º → <strong>desço</strong>.</li>
+    <li>Máquina de multiplicar sempre dá uma <strong>linha reta</strong>.</li>
+    <li>O número que <strong>multiplica</strong> é o <strong>passo da escada</strong>: ando 1 → subo aquele tanto.</li>
+    <li>Passo negativo → a linha <strong>desce</strong>. Passo zero → a linha fica <strong>deitada</strong>.</li>
+    <li>O número <strong>solto</strong> levanta a linha inteira, e é onde ela <strong>cruza a régua em pé</strong>.</li>
+    <li>Receita geral: <span class="mono">f(x) = passo · x + altura de partida</span>.</li>
+  </ul>
+</div>
+
+<!-- ============ exercicios ============ -->
+<h2><span class="n">✏️</span> Afie o lápis</h2>
+<p>Seis exercícios. Erre à vontade — a correção explica o porquê.</p>
+
+<div class="ex" id="ex1">
+  <div class="tit">Exercício 1</div>
+  <div class="selo">✅</div>
+  <p>Onde fica o ponto <strong>(−3, 1)</strong>?</p>
+  <div class="alts" data-r="2">
+    <div class="alt" data-i="0">Ando 3 para a direita e desço 1.</div>
+    <div class="alt" data-i="1">Ando 1 para a esquerda e subo 3.</div>
+    <div class="alt" data-i="2">Ando 3 para a esquerda e subo 1.</div>
+    <div class="alt" data-i="3">Ando 3 para a esquerda e desço 1.</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex2">
+  <div class="tit">Exercício 2</div>
+  <div class="selo">✅</div>
+  <p>Na máquina <span class="mono">f(x) = 3 · x</span>: se eu ando 1 para a direita, quanto eu subo?</p>
+  <p><input type="number" data-r="3"></p>
+  <button class="check" data-ex="ex2">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex3">
+  <div class="tit">Exercício 3</div>
+  <div class="selo">✅</div>
+  <p>Na máquina <span class="mono">f(x) = 2 · x + 5</span>: em que número a linha cruza a <strong>régua em pé</strong>?</p>
+  <p><input type="number" data-r="5"></p>
+  <button class="check" data-ex="ex3">Conferir</button>
+  <div class="fb"></div>
+  <p class="dica">Dica: não precisa desenhar nada. A resposta está escrita na própria receita.</p>
+</div>
+
+<div class="ex" id="ex4">
+  <div class="tit">Exercício 4</div>
+  <div class="selo">✅</div>
+  <p>A máquina <span class="mono">f(x) = −4 · x</span> faz a linha subir ou descer?</p>
+  <div class="alts" data-r="1">
+    <div class="alt" data-i="0">Sobe — e sobe bem rápido, de 4 em 4.</div>
+    <div class="alt" data-i="1">Desce — o passo é negativo, então ela cai 4 a cada passo.</div>
+    <div class="alt" data-i="2">Fica deitada, porque não tem número solto no fim.</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex5">
+  <div class="tit">Exercício 5 — o desafio</div>
+  <div class="selo">🏆</div>
+  <p>Uma linha cruza a régua em pé no <strong>1</strong> e, a cada 1 que você anda para a direita, ela sobe <strong>3</strong>. Qual é a receita dela?</p>
+  <div class="alts" data-r="1">
+    <div class="alt" data-i="0">f(x) = x + 3</div>
+    <div class="alt" data-i="1">f(x) = 3 · x + 1</div>
+    <div class="alt" data-i="2">f(x) = 1 · x + 3</div>
+    <div class="alt" data-i="3">f(x) = 3 · x − 1</div>
+  </div>
+  <div class="fb"></div>
+  <p class="dica">Dica: quem sobe é o passo (multiplica). Quem cruza é a altura de partida (soma).</p>
+</div>
+
+<div class="ex" id="ex6">
+  <div class="tit">Exercício 6 — leia o desenho</div>
+  <div class="selo">✅</div>
+  <p>Olhe a reta abaixo e descubra os dois números dela.</p>
+  <div class="tela" style="max-width:340px;margin:10px auto">
+    <svg viewBox="0 0 420 420" id="svgEx">
+      <g id="gradeE"></g>
+      <line x1="0" y1="210" x2="420" y2="210" stroke="#1b1b1b" stroke-width="3"/>
+      <line x1="210" y1="0" x2="210" y2="420" stroke="#1b1b1b" stroke-width="3"/>
+      <line x1="30" y1="330" x2="330" y2="30" stroke="#2563eb" stroke-width="5"/>
+      <line x1="240" y1="120" x2="270" y2="120" stroke="#059669" stroke-width="4"/>
+      <line x1="270" y1="120" x2="270" y2="90" stroke="#dc2626" stroke-width="4"/>
+      <circle cx="210" cy="150" r="8" fill="#7c3aed" stroke="#fff" stroke-width="3"/>
+    </svg>
+  </div>
+  <p>Passo da escada: <input type="number" data-r="1"> &nbsp;&nbsp; Altura de partida: <input type="number" data-r="2"></p>
+  <button class="check" data-ex="ex6">Conferir</button>
+  <div class="fb"></div>
+  <p class="dica">Dica: veja onde a bolinha roxa cruza a régua em pé. Depois ande 1 quadradinho para a direita e conte quantos ela subiu.</p>
+</div>
+
+<div class="placar" id="placar">
+  <p style="margin:0 0 4px;font-family:var(--mao);font-size:19px">Seu placar</p>
+  <div class="n"><span id="pn">0</span> / 6</div>
+  <div class="barra"><i id="pbar"></i></div>
+  <p id="pmsg" style="margin:0;color:#cfc9bb">Resolva os exercícios acima e acompanhe aqui.</p>
+</div>
+
+<footer>
+  Matemática do Zero · Aula 2 — Desenhar números no papel<br>
+  <strong>Próxima aula:</strong> ângulos e o círculo — o que é girar, e por que a volta inteira tem 360.
+</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+var NS="http://www.w3.org/2000/svg";
+var U=30, CX=210, CY=210;
+function X(x){return CX+x*U;}
+function Y(y){return CY-y*U;}
+
+function desenhaGrade(id,rotulos){
+  var g=document.getElementById(id);
+  for(var i=-6;i<=6;i++){
+    if(i===0) continue;
+    var lv=document.createElementNS(NS,"line");
+    lv.setAttribute("x1",X(i));lv.setAttribute("y1",0);lv.setAttribute("x2",X(i));lv.setAttribute("y2",420);
+    lv.setAttribute("stroke","#e6e1d4");lv.setAttribute("stroke-width",1.5);g.appendChild(lv);
+    var lh=document.createElementNS(NS,"line");
+    lh.setAttribute("x1",0);lh.setAttribute("y1",Y(i));lh.setAttribute("x2",420);lh.setAttribute("y2",Y(i));
+    lh.setAttribute("stroke","#e6e1d4");lh.setAttribute("stroke-width",1.5);g.appendChild(lh);
+    if(rotulos && i%2===0){
+      var t=document.createElementNS(NS,"text");
+      t.setAttribute("x",X(i));t.setAttribute("y",CY+16);t.setAttribute("text-anchor","middle");
+      t.setAttribute("font-size",11);t.setAttribute("fill","#6b7280");t.textContent=i;g.appendChild(t);
+      var t2=document.createElementNS(NS,"text");
+      t2.setAttribute("x",CX-7);t2.setAttribute("y",Y(i)+4);t2.setAttribute("text-anchor","end");
+      t2.setAttribute("font-size",11);t2.setAttribute("fill","#6b7280");t2.textContent=i;g.appendChild(t2);
+    }
+  }
+}
+desenhaGrade("gradeP",true); desenhaGrade("gradeR",true); desenhaGrade("gradeE",true);
+
+/* ---------- lab 1: o ponto ---------- */
+var slX=document.getElementById("slX"), slY=document.getElementById("slY");
+var camH=document.getElementById("camH"), camV=document.getElementById("camV");
+var ptA=document.getElementById("ptA"), rotA=document.getElementById("rotA");
+var ptB=document.getElementById("ptB"), rotB=document.getElementById("rotB");
+
+function limpaB(){ ptB.setAttribute("opacity",0); rotB.setAttribute("opacity",0); }
+function pinta(anim){
+  var a=parseInt(slX.value,10), b=parseInt(slY.value,10);
+  document.getElementById("vX").textContent=a;
+  document.getElementById("vY").textContent=b;
+  document.getElementById("txtP").textContent="Ponto ("+a+", "+b+") — ando "+
+    (a<0?Math.abs(a)+" para a esquerda":a+" para a direita")+" e "+
+    (b<0?"desço "+Math.abs(b):"subo "+b)+".";
+  var dH="M "+X(0)+" "+Y(0)+" L "+X(a)+" "+Y(0);
+  var dV="M "+X(a)+" "+Y(0)+" L "+X(a)+" "+Y(b);
+  camH.setAttribute("d",dH); camV.setAttribute("d",dV);
+  var lenH=Math.abs(a)*U, lenV=Math.abs(b)*U;
+  camH.style.transition="none"; camV.style.transition="none";
+  camH.setAttribute("stroke-dasharray",lenH+" "+lenH);
+  camV.setAttribute("stroke-dasharray",lenV+" "+lenV);
+  ptA.setAttribute("cx",X(a)); ptA.setAttribute("cy",Y(b));
+  rotA.setAttribute("x",X(a)+(a>=6?-12:12)); rotA.setAttribute("y",Y(b)-12);
+  rotA.setAttribute("text-anchor",a>=6?"end":"start");
+  rotA.textContent="("+a+", "+b+")";
+  if(anim){
+    camH.style.strokeDashoffset=lenH; camV.style.strokeDashoffset=lenV;
+    ptA.setAttribute("opacity",0); rotA.setAttribute("opacity",0);
+    requestAnimationFrame(function(){
+      camH.style.transition="stroke-dashoffset .55s ease";
+      camH.style.strokeDashoffset=0;
+      setTimeout(function(){
+        camV.style.transition="stroke-dashoffset .55s ease";
+        camV.style.strokeDashoffset=0;
+      },560);
+      setTimeout(function(){
+        ptA.setAttribute("opacity",1); rotA.setAttribute("opacity",1);
+        ptA.classList.remove("pulsa"); void ptA.getBBox(); ptA.classList.add("pulsa");
+      },1130);
+    });
+  }else{
+    camH.style.strokeDashoffset=0; camV.style.strokeDashoffset=0;
+    ptA.setAttribute("opacity",1); rotA.setAttribute("opacity",1);
+  }
+}
+slX.addEventListener("input",function(){limpaB();pinta(false);});
+slY.addEventListener("input",function(){limpaB();pinta(false);});
+document.getElementById("andarGo").addEventListener("click",function(){limpaB();pinta(true);});
+document.getElementById("trocarGo").addEventListener("click",function(){
+  var a=parseInt(slX.value,10), b=parseInt(slY.value,10);
+  ptB.setAttribute("cx",X(b)); ptB.setAttribute("cy",Y(a)); ptB.setAttribute("opacity",1);
+  rotB.setAttribute("x",X(b)+(b>=6?-12:12)); rotB.setAttribute("y",Y(a)-12);
+  rotB.setAttribute("text-anchor",b>=6?"end":"start");
+  rotB.textContent="("+b+", "+a+")"; rotB.setAttribute("opacity",1);
+  document.getElementById("txtP").innerHTML= (a===b)
+    ? "Aqui os dois números são iguais, então o ponto não sai do lugar. Experimente com números diferentes!"
+    : "Azul = ("+a+", "+b+"). Laranja = ("+b+", "+a+"). <strong>Lugares diferentes!</strong>";
+});
+pinta(false);
+
+/* ---------- lab 2: elevador ---------- */
+var andares=document.getElementById("andares");
+var mapaY={3:44,2:90,1:136,0:182,"-1":228,"-2":274};
+Object.keys(mapaY).forEach(function(k){
+  var y=mapaY[k];
+  var l=document.createElementNS(NS,"line");
+  l.setAttribute("x1",40);l.setAttribute("y1",y+40);l.setAttribute("x2",180);l.setAttribute("y2",y+40);
+  l.setAttribute("stroke", k==="0"?"#1b1b1b":"#d1d5db"); l.setAttribute("stroke-width", k==="0"?3:2);
+  andares.appendChild(l);
+  var t=document.createElementNS(NS,"text");
+  t.setAttribute("x",56);t.setAttribute("y",y+26);t.setAttribute("font-size",15);
+  t.setAttribute("font-weight","700");
+  t.setAttribute("fill", k==="0"?"#059669":(parseInt(k,10)<0?"#dc2626":"#2563eb"));
+  t.textContent= k==="0" ? "0 rua" : k;
+  andares.appendChild(t);
+});
+var andarAtual=0, cabine=document.getElementById("cabine"), cabTxt=document.getElementById("cabTxt");
+function moveEl(){
+  var y=mapaY[String(andarAtual)];
+  cabine.setAttribute("y",y); cabTxt.setAttribute("y",y+25); cabTxt.textContent=andarAtual;
+  var el=document.getElementById("elTxt");
+  if(andarAtual===0) el.innerHTML="Você está na rua. Andar <strong>0</strong>.";
+  else if(andarAtual>0) el.innerHTML="Você está no <strong>"+andarAtual+"º andar</strong>, "+andarAtual+" acima da rua.";
+  else el.innerHTML="Você está no subsolo <strong>"+andarAtual+"</strong>, "+Math.abs(andarAtual)+" abaixo da rua.";
+}
+document.getElementById("elUp").addEventListener("click",function(){ if(andarAtual<3){andarAtual++;moveEl();} });
+document.getElementById("elDown").addEventListener("click",function(){ if(andarAtual>-2){andarAtual--;moveEl();} });
+document.getElementById("elRua").addEventListener("click",function(){ andarAtual=0;moveEl(); });
+moveEl();
+
+/* ---------- lab 3: fabrica de retas ---------- */
+var slA=document.getElementById("slA"), slB=document.getElementById("slB");
+var retaR=document.getElementById("retaR"), cruza=document.getElementById("cruza");
+var gDeg=document.getElementById("degraus"), mist=document.getElementById("misteriosa");
+var mostrarDeg=true, desafio=false, alvoA=0, alvoB=0;
+
+function pintaReta(){
+  var a=parseInt(slA.value,10), b=parseInt(slB.value,10);
+  document.getElementById("vA").textContent=a;
+  document.getElementById("vB").textContent=b;
+  var sinal=b<0?" − ":" + ";
+  document.getElementById("eqTxt").innerHTML='f(x) = <span class="a">'+a+'</span> · x'+sinal+'<span class="b">'+Math.abs(b)+'</span>';
+  retaR.setAttribute("x1",X(-7)); retaR.setAttribute("y1",Y(a*-7+b));
+  retaR.setAttribute("x2",X(7));  retaR.setAttribute("y2",Y(a*7+b));
+  cruza.setAttribute("cx",X(0));  cruza.setAttribute("cy",Y(b));
+  while(gDeg.firstChild) gDeg.removeChild(gDeg.firstChild);
+  if(mostrarDeg && a!==0){
+    var cand=[];
+    for(var q=-6;q<=5;q++){
+      if(Math.abs(a*q+b)<=6.2 && Math.abs(a*(q+1)+b)<=6.2) cand.push(q);
+    }
+    var ini=Math.max(0,Math.floor((cand.length-3)/2));
+    var usar=cand.slice(ini,ini+3);
+    for(var k=0;k<usar.length;k++){
+      var x1=usar[k], y1=a*x1+b, y2=a*(x1+1)+b;
+      var lh=document.createElementNS(NS,"line");
+      lh.setAttribute("x1",X(x1));lh.setAttribute("y1",Y(y1));lh.setAttribute("x2",X(x1+1));lh.setAttribute("y2",Y(y1));
+      lh.setAttribute("stroke","#059669");lh.setAttribute("stroke-width",4);gDeg.appendChild(lh);
+      var lv=document.createElementNS(NS,"line");
+      lv.setAttribute("x1",X(x1+1));lv.setAttribute("y1",Y(y1));lv.setAttribute("x2",X(x1+1));lv.setAttribute("y2",Y(y2));
+      lv.setAttribute("stroke","#dc2626");lv.setAttribute("stroke-width",4);gDeg.appendChild(lv);
+    }
+  }
+  var t=document.getElementById("txtR");
+  if(desafio){
+    if(a===alvoA&&b===alvoB){
+      t.innerHTML="🎉 <strong>Acertou!</strong> A reta misteriosa era f(x) = "+alvoA+" · x "+(alvoB<0?"− "+Math.abs(alvoB):"+ "+alvoB)+". Clique em Desafio de novo para outra.";
+      mist.setAttribute("opacity",0); confete();
+      desafio=false;
+    } else {
+      t.innerHTML="Ajuste os dois controles até a linha azul cobrir a cinza tracejada.";
+    }
+  } else {
+    t.innerHTML= a===0
+      ? "Passo zero: a linha fica deitada. A máquina devolve sempre "+b+", não importa o que entre."
+      : "Ando 1 para a direita e "+(a<0?"desço "+Math.abs(a):"subo "+a)+". A bolinha roxa cruza a régua em pé no <strong>"+b+"</strong>.";
+  }
+}
+slA.addEventListener("input",pintaReta);
+slB.addEventListener("input",pintaReta);
+document.getElementById("btEsc").addEventListener("click",function(){
+  mostrarDeg=!mostrarDeg; this.classList.toggle("on",mostrarDeg);
+  this.textContent = mostrarDeg ? "👣 Mostrar os degraus" : "👣 Degraus escondidos";
+  pintaReta();
+});
+document.getElementById("btDesafio").addEventListener("click",function(){
+  var op=[-3,-2,-1,1,2,3];
+  alvoA=op[Math.floor(Math.random()*op.length)];
+  alvoB=Math.floor(Math.random()*9)-4;
+  if(alvoA===parseInt(slA.value,10)&&alvoB===parseInt(slB.value,10)) alvoB=alvoB===4?-4:alvoB+1;
+  desafio=true;
+  mist.setAttribute("x1",X(-7)); mist.setAttribute("y1",Y(alvoA*-7+alvoB));
+  mist.setAttribute("x2",X(7));  mist.setAttribute("y2",Y(alvoA*7+alvoB));
+  mist.setAttribute("opacity",1);
+  pintaReta();
+});
+pintaReta();
+
+/* ---------- exercicios ---------- */
+var feitos={}, TOTAL=6;
+function confete(){
+  var cores=["#fde68a","#2563eb","#dc2626","#059669","#7c3aed","#d97706"];
+  for(var i=0;i<40;i++){
+    (function(i){
+      var d=document.createElement("div");
+      d.className="conf"; d.style.left=(Math.random()*100)+"vw";
+      d.style.background=cores[i%cores.length];
+      d.style.animation="cai "+(1.9+Math.random()*1.5)+"s linear forwards";
+      d.style.animationDelay=(Math.random()*.5)+"s";
+      document.body.appendChild(d);
+      setTimeout(function(){d.remove();},4200);
+    })(i);
+  }
+}
+function marca(id,ok){
+  if(ok&&!feitos[id]){
+    feitos[id]=true;
+    var n=Object.keys(feitos).length;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Aula 2 fechada. 🎉</strong> Você já sabe ler qualquer reta. Bora para os ângulos."; confete(); }
+    else msg.textContent="Boa! Faltam "+(TOTAL-n)+".";
+    document.querySelector("#"+id+" .selo").classList.add("ver");
+  }
+}
+function fb(box,ok,txt){
+  var f=box.querySelector(".fb");
+  f.className="fb mostra "+(ok?"ok":"no"); f.innerHTML=txt;
+  box.classList.remove("chacoalha");
+  if(!ok){ void box.offsetWidth; box.classList.add("chacoalha"); }
+}
+var explica={
+  ex2:{ok:"Isso! O número que multiplica é o próprio passo da escada.",no:"Não. Em f(x) = 3 · x o passo é <strong>3</strong>: ando 1 e subo 3. Confira: f(1)=3 e f(2)=6, subiu 3."},
+  ex3:{ok:"Exato — e nem precisou desenhar.",no:"O número solto no fim é o lugar do cruzamento. Aqui é o <strong>5</strong>. Testando: f(0) = 2 · 0 + 5 = 5."},
+  ex6:{ok:"Leitura perfeita do desenho!",no:"Olhe de novo: a bolinha roxa está na altura <strong>2</strong> (altura de partida). E andando 1 quadradinho para a direita a linha sobe <strong>1</strong> (passo). A receita é f(x) = 1 · x + 2."}
+};
+document.querySelectorAll("button.check").forEach(function(b){
+  b.addEventListener("click",function(){
+    var box=document.getElementById(b.dataset.ex);
+    var ins=box.querySelectorAll("input[data-r]"), tudoOk=true, vazio=false;
+    ins.forEach(function(inp){
+      if(inp.value===""){vazio=true;return;}
+      var ok=parseFloat(inp.value)===parseFloat(inp.dataset.r);
+      inp.style.borderColor=ok?"#059669":"#dc2626";
+      inp.style.background=ok?"#d1fae5":"#fee2e2";
+      if(!ok) tudoOk=false;
+    });
+    if(vazio){ fb(box,false,"Preencha todos os campos antes de conferir. 🙂"); return; }
+    fb(box,tudoOk,(tudoOk?"✔ ":"✘ ")+(tudoOk?explica[b.dataset.ex].ok:explica[b.dataset.ex].no));
+    marca(b.dataset.ex,tudoOk);
+  });
+});
+var expAlt={
+  ex1:["Isso troca os dois sinais. O 1º número é −3 (esquerda) e o 2º é +1 (sobe).",
+       "Cuidado com a ordem: o 1º número diz quanto ANDO, o 2º quanto SUBO. Você inverteu os papéis.",
+       "Isso mesmo! O −3 manda para a esquerda e o +1 manda subir.",
+       "Quase — o primeiro passo está certo, mas o 2º número é +1, positivo. Positivo sobe."],
+  ex4:["Não. O sinal de menos na frente derruba a linha. Ela cai 4 a cada passo que você anda.",
+       "Isso! Passo negativo = linha descendo.",
+       "Deitada seria se o passo fosse zero. Aqui o passo é −4, então ela desce forte."],
+  ex5:["Aqui o passo seria 1 e o cruzamento no 3 — exatamente o contrário do que o enunciado pediu.",
+       "Isso! Sobe 3 a cada passo → multiplica por 3. Cruza no 1 → soma 1.",
+       "Trocado: esse sobe 1 por passo e cruza no 3.",
+       "O passo está certo, mas o −1 faria a linha cruzar em −1, abaixo do zero."]
+};
+document.querySelectorAll(".alts").forEach(function(grupo){
+  var box=grupo.closest(".ex"), certa=parseInt(grupo.dataset.r,10);
+  grupo.querySelectorAll(".alt").forEach(function(alt){
+    alt.addEventListener("click",function(){
+      var i=parseInt(alt.dataset.i,10), ok=(i===certa);
+      grupo.querySelectorAll(".alt").forEach(function(a){a.classList.remove("certa","errada");});
+      alt.classList.add(ok?"certa":"errada");
+      if(ok) alt.classList.add("pulsa");
+      fb(box,ok,(ok?"✔ ":"✘ ")+expAlt[box.id][i]);
+      marca(box.id,ok);
+    });
+  });
+});
+
+})();
+</script>
+</body>
+</html>

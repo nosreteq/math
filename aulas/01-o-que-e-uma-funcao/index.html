@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aula 1 — O que é uma função | Matemática do Zero</title>
+<style>
+:root{
+  --papel:#f6f2e9; --papel2:#fffdf7; --tinta:#1b1b1b; --cinza:#6b7280;
+  --azul:#2563eb; --azulc:#dbeafe; --verm:#dc2626; --vermc:#fee2e2;
+  --verde:#059669; --verdec:#d1fae5; --amar:#fde68a; --laranja:#d97706;
+  --roxo:#7c3aed; --linha:#c9c1ae;
+  --mao:'Comic Sans MS','Comic Neue','Chalkboard SE','Bradley Hand','Marker Felt','Segoe Print','Ink Free',cursive;
+  --corpo:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--papel); color:var(--tinta);
+  font-family:var(--corpo); font-size:17px; line-height:1.65;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- cabecalho ---------- */
+header{
+  background:var(--tinta); color:var(--papel2); padding:34px 22px 30px; margin-bottom:34px;
+  border-bottom:6px solid var(--laranja);
+}
+header .inner{max-width:820px;margin:0 auto}
+.serie{font-family:var(--mao);font-size:15px;letter-spacing:.5px;color:var(--amar);margin:0 0 6px}
+header h1{margin:0;font-size:40px;line-height:1.1;letter-spacing:-.5px}
+header .sub{margin:12px 0 0;color:#cfc9bb;font-size:17px;max-width:600px}
+.aula-num{
+  display:inline-block;background:var(--laranja);color:#fff;font-weight:700;
+  padding:3px 13px;border-radius:20px;font-size:14px;margin-bottom:14px;letter-spacing:.5px;
+}
+
+/* ---------- tipografia ---------- */
+h2{
+  font-size:29px;margin:52px 0 6px;line-height:1.2;
+  border-bottom:3px solid var(--tinta);padding-bottom:8px;
+}
+h2 .n{color:var(--laranja);font-family:var(--mao);font-size:24px;margin-right:8px}
+h3{font-size:21px;margin:32px 0 8px}
+p{margin:14px 0}
+strong{font-weight:700}
+.grande{font-size:20px}
+.centro{text-align:center}
+code,.mono{font-family:'Consolas','Monaco',monospace;background:#eae4d6;padding:2px 7px;border-radius:4px;font-size:.95em}
+
+/* ---------- caixas estilo head first ---------- */
+.guru{
+  display:flex;gap:18px;align-items:flex-start;margin:34px 0;
+  background:linear-gradient(#efe9db,#e8e1d0);border-left:6px solid var(--roxo);
+  padding:20px 22px;border-radius:4px;
+}
+.guru svg{flex:0 0 92px}
+.guru .fala{position:relative;background:#fff;border:2px solid var(--tinta);border-radius:16px;padding:14px 18px;font-family:var(--mao);font-size:16.5px;line-height:1.55}
+.guru .fala:before{content:"";position:absolute;left:-11px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:var(--tinta)}
+.guru .fala:after{content:"";position:absolute;left:-8px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:#fff}
+.guru .quem{font-family:var(--mao);font-size:13px;color:var(--roxo);text-align:center;margin-top:4px;font-weight:700}
+
+.idiota{background:#e7eefc;border:3px solid var(--azul);border-radius:10px;padding:6px 24px 20px;margin:34px 0}
+.idiota .tit{
+  font-family:var(--mao);font-size:20px;font-weight:700;color:#fff;background:var(--azul);
+  display:inline-block;padding:5px 16px;border-radius:0 0 10px 10px;margin:0 0 8px;
+}
+.idiota .q{font-weight:700;margin:16px 0 4px}
+.idiota .q:before{content:"P: ";color:var(--azul);font-weight:800}
+.idiota .a{margin:0 0 6px}
+.idiota .a:before{content:"R: ";color:var(--verm);font-weight:800}
+
+.cuidado{
+  background:var(--vermc);border:3px dashed var(--verm);border-radius:10px;
+  padding:16px 20px;margin:30px 0;
+}
+.cuidado .tit{font-family:var(--mao);font-weight:700;color:var(--verm);font-size:19px;margin-bottom:2px}
+
+.pontos{background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:8px 26px 22px;margin:44px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.pontos .tit{font-family:var(--mao);font-size:22px;font-weight:700;background:var(--amar);display:inline-block;padding:6px 18px;border:3px solid var(--tinta);border-radius:8px;transform:rotate(-1.5deg);margin:-22px 0 10px}
+.pontos ul{padding-left:22px;margin:8px 0}
+.pontos li{margin:9px 0}
+
+.sticky{
+  background:var(--amar);padding:16px 20px;font-family:var(--mao);font-size:16px;
+  transform:rotate(-1.2deg);box-shadow:3px 4px 9px rgba(0,0,0,.16);margin:30px auto;max-width:520px;
+  border-radius:2px;
+}
+.sticky.dir{transform:rotate(1.4deg)}
+
+.rabisco{font-family:var(--mao);color:var(--laranja);font-size:15.5px;line-height:1.4}
+
+/* ---------- laboratorios interativos ---------- */
+.lab{
+  background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;
+  padding:8px 24px 26px;margin:34px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13);
+}
+.lab .tit{
+  font-family:var(--mao);font-size:19px;font-weight:700;background:var(--verde);color:#fff;
+  display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;
+  border:3px solid var(--tinta);
+}
+.controles{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
+button{
+  font-family:var(--corpo);font-size:16px;font-weight:700;cursor:pointer;
+  background:var(--azul);color:#fff;border:3px solid var(--tinta);border-radius:9px;
+  padding:9px 18px;box-shadow:3px 3px 0 var(--tinta);transition:.09s;
+}
+button:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--tinta)}
+button:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--tinta)}
+button.sec{background:#fff;color:var(--tinta)}
+button.on{background:var(--verde)}
+input[type=number],input[type=text]{
+  font-family:var(--corpo);font-size:18px;font-weight:700;width:92px;padding:8px 10px;
+  border:3px solid var(--tinta);border-radius:9px;background:#fff;text-align:center;
+}
+input:focus{outline:3px solid var(--amar)}
+input[type=range]{width:100%;max-width:420px;accent-color:var(--azul);height:26px}
+label.lab-l{font-weight:700;font-size:15px}
+
+/* maquina */
+.maq-palco{position:relative;height:210px;margin:10px 0 4px}
+.maq-palco svg{position:absolute;inset:0;width:100%;height:100%}
+.bola{
+  position:absolute;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:23px;font-weight:800;color:#fff;top:77px;left:4%;
+  border:3px solid var(--tinta);box-shadow:2px 3px 0 rgba(0,0,0,.25);
+  transition:left .85s cubic-bezier(.5,0,.3,1),opacity .3s,transform .3s;z-index:3;
+}
+.bola.entra{background:var(--verde)}
+.bola.sai{background:var(--verm);left:83%}
+.escondido{opacity:0;transform:scale(.3)}
+@keyframes tremer{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+.trabalhando{animation:tremer .42s 2}
+
+/* tabela */
+table.t{border-collapse:collapse;margin:14px 0;font-size:18px}
+table.t th,table.t td{border:2px solid var(--tinta);padding:8px 22px;text-align:center}
+table.t th{background:var(--tinta);color:var(--papel2);font-family:var(--mao);font-size:17px}
+table.t td.ent{color:var(--verde);font-weight:800}
+table.t td.sai{color:var(--verm);font-weight:800}
+tr.nova{animation:aparece .45s}
+@keyframes aparece{from{opacity:0;transform:translateY(-9px)}to{opacity:1;transform:none}}
+
+/* anatomia da notacao */
+.anat{text-align:center;margin:26px 0 10px;position:relative}
+.anat .form{font-size:54px;font-weight:800;letter-spacing:2px;display:inline-block}
+.anat .peca{cursor:pointer;padding:0 3px;border-radius:6px;transition:.15s}
+.anat .peca:hover{background:var(--amar)}
+.anat .peca.ativo{background:var(--amar);box-shadow:0 4px 0 var(--laranja)}
+.anat-txt{
+  font-family:var(--mao);font-size:18px;min-height:56px;background:#fff;border:2px dashed var(--linha);
+  border-radius:10px;padding:12px 16px;margin-top:12px;
+}
+
+/* grafico */
+.graf{background:#fff;border:2px solid var(--linha);border-radius:10px;padding:8px}
+.graf svg{width:100%;height:auto;display:block}
+.pt{transition:opacity .4s,transform .4s}
+
+/* exercicios */
+.ex{
+  background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;
+  padding:8px 24px 24px;margin:30px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13);position:relative;
+}
+.ex .tit{
+  font-family:var(--mao);font-size:19px;font-weight:700;background:var(--laranja);color:#fff;
+  display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;
+  border:3px solid var(--tinta);
+}
+.alt{
+  display:block;background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:12px 16px;
+  margin:9px 0;cursor:pointer;font-size:16.5px;transition:.12s;font-weight:600;
+}
+.alt:hover{background:var(--amar)}
+.alt.certa{background:var(--verdec);border-color:var(--verde)}
+.alt.errada{background:var(--vermc);border-color:var(--verm)}
+.fb{margin-top:14px;font-family:var(--mao);font-size:17px;min-height:0;padding:0;border-radius:9px;overflow:hidden;transition:.2s}
+.fb.mostra{padding:12px 16px;min-height:24px}
+.fb.ok{background:var(--verdec);border:3px solid var(--verde);color:#065f46}
+.fb.no{background:var(--vermc);border:3px solid var(--verm);color:#991b1b}
+@keyframes chacoalha{0%,100%{transform:translateX(0)}15%{transform:translateX(-10px)}30%{transform:translateX(10px)}45%{transform:translateX(-7px)}60%{transform:translateX(7px)}75%{transform:translateX(-3px)}}
+.chacoalha{animation:chacoalha .5s}
+@keyframes pulsa{0%{transform:scale(1)}45%{transform:scale(1.11)}100%{transform:scale(1)}}
+.pulsa{animation:pulsa .45s}
+.selo{
+  position:absolute;right:16px;top:14px;font-size:34px;opacity:0;transform:scale(.2) rotate(-25deg);
+  transition:.4s cubic-bezier(.34,1.7,.5,1);
+}
+.selo.ver{opacity:1;transform:scale(1) rotate(-12deg)}
+.dica{font-size:14.5px;color:var(--cinza);margin-top:10px;font-style:italic}
+
+/* placar */
+.placar{
+  background:var(--tinta);color:var(--papel2);border-radius:14px;padding:26px 28px;margin:44px 0 0;
+  text-align:center;
+}
+.placar .n{font-size:52px;font-weight:800;font-family:var(--mao);color:var(--amar);line-height:1}
+.barra{height:20px;background:#3a3a3a;border-radius:12px;overflow:hidden;margin:16px auto;max-width:420px}
+.barra i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--verde),var(--amar));transition:.6s}
+.conf{position:fixed;top:-20px;width:11px;height:16px;z-index:99;pointer-events:none;border-radius:2px}
+@keyframes cai{to{transform:translateY(105vh) rotate(720deg);opacity:.1}}
+
+footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:var(--cinza);font-size:15px;text-align:center}
+@media(max-width:620px){
+  header h1{font-size:30px} h2{font-size:24px} .anat .form{font-size:38px}
+  .guru{flex-direction:column;align-items:center} .guru svg{flex:0 0 auto}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <p class="serie">✏️ MATEMÁTICA DO ZERO — uma série para quem só sabe somar, subtrair, multiplicar e dividir</p>
+    <span class="aula-num">AULA 1 de 6</span>
+    <h1>O que é uma função</h1>
+    <p class="sub">Também conhecida como: a máquina de números, aquela coisa do <em>f(x)</em> que assustou você na escola, e o alicerce de absolutamente tudo que vem depois.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<p class="grande"><strong>Você vai ficar surpreso.</strong> A palavra "função" tem fama de difícil, mas a ideia por trás dela é tão simples que dá até raiva. Se você sabe fazer <span class="mono">3 × 2 = 6</span>, você já entende funções — só não sabia que o negócio tinha nome.</p>
+
+<p>Nesta aula você vai: brincar com uma máquina de números de verdade, aprender a ler aquele <span class="mono">f(x)</span> sem suar frio, descobrir por que o <strong>x</strong> não é um monstro, e desenhar sua primeira função no papel.</p>
+
+<div class="sticky">Regra da casa: <strong>não decore nada.</strong> Se você entendeu, a fórmula vem de graça depois. Se você decorou sem entender, esquece em uma semana. 🙂</div>
+
+<!-- ============ 1 ============ -->
+<h2><span class="n">1</span> A função é uma máquina</h2>
+
+<p>Imagine uma máquina com um buraco na frente e outro atrás. Você joga um número lá dentro. Ela faz uma continha. Sai outro número do outro lado.</p>
+
+<p>É <strong>só isso</strong>. Sério. Uma função é uma máquina de transformar número em número.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: mexa na máquina</div>
+  <p>Escolha o que a máquina faz, digite um número e jogue lá dentro.</p>
+
+  <div class="controles">
+    <button class="sec maq-op on" data-op="dobrar">DOBRAR</button>
+    <button class="sec maq-op" data-op="somar5">SOMAR 5</button>
+    <button class="sec maq-op" data-op="triplo">TRIPLICAR e SOMAR 2</button>
+  </div>
+
+  <div class="maq-palco">
+    <svg viewBox="0 0 640 210" preserveAspectRatio="xMidYMid meet">
+      <rect x="215" y="52" width="210" height="110" rx="16" fill="#dbeafe" stroke="#1b1b1b" stroke-width="4"/>
+      <rect x="248" y="30" width="40" height="26" fill="#c7d9fb" stroke="#1b1b1b" stroke-width="4"/>
+      <circle cx="390" cy="80" r="9" fill="#fde68a" stroke="#1b1b1b" stroke-width="3" id="luz"/>
+      <text x="320" y="118" text-anchor="middle" font-size="30" font-weight="800" fill="#2563eb" font-family="'Segoe UI',sans-serif" id="maq-nome">DOBRAR</text>
+      <line x1="90" y1="105" x2="205" y2="105" stroke="#1b1b1b" stroke-width="4"/>
+      <polygon points="205,105 190,97 190,113" fill="#1b1b1b"/>
+      <line x1="435" y1="105" x2="550" y2="105" stroke="#1b1b1b" stroke-width="4"/>
+      <polygon points="550,105 535,97 535,113" fill="#1b1b1b"/>
+      <text x="140" y="90" text-anchor="middle" font-size="16" fill="#059669" font-weight="700">entra</text>
+      <text x="497" y="90" text-anchor="middle" font-size="16" fill="#dc2626" font-weight="700">sai</text>
+    </svg>
+    <div class="bola entra escondido" id="bolaE">3</div>
+    <div class="bola sai escondido" id="bolaS">6</div>
+  </div>
+
+  <div class="controles">
+    <label class="lab-l" for="maqIn">Número que entra:</label>
+    <input type="number" id="maqIn" value="3">
+    <button id="maqGo">▶ Jogar na máquina</button>
+  </div>
+
+  <p class="rabisco" id="maqConta" style="min-height:24px"></p>
+
+  <p style="margin-top:18px"><strong>Histórico do que você testou:</strong></p>
+  <table class="t" id="maqTab">
+    <tr><th>entra</th><th>sai</th></tr>
+  </table>
+</div>
+
+<div class="guru">
+  <svg viewBox="0 0 100 118" width="92">
+    <ellipse cx="50" cy="112" rx="34" ry="6" fill="#00000018"/>
+    <path d="M50 60 L20 108 L80 108 Z" fill="#7c3aed" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="50" cy="34" r="20" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M30 36 q20 46 40 0 q-6 34 -20 34 q-14 0 -20 -34" fill="#e5e7eb" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M40 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M52 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M30 22 q20 -12 40 0" fill="none" stroke="#1b1b1b" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="24" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="76" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+  </svg>
+  <div>
+    <div class="fala">Não tente entender a máquina por dentro. Ninguém liga para os parafusos. O que importa é: <strong>o que entrou</strong> e <strong>o que saiu</strong>. Quem entende isso já entendeu metade da matemática.</div>
+    <div class="quem">— o Guru</div>
+  </div>
+</div>
+
+<!-- ============ 2 ============ -->
+<h2><span class="n">2</span> Como isso vira aquele f(x) horroroso</h2>
+
+<p>Matemático é preguiçoso. Ele não vai escrever <em>"joguei o número 3 na máquina dobrar e saiu o 6"</em> toda vez. Ele escreve assim:</p>
+
+<div class="anat">
+  <div class="form">
+    <span class="peca" data-t="f">f</span><span class="peca" data-t="p">(</span><span class="peca" data-t="e">3</span><span class="peca" data-t="p">)</span> = <span class="peca" data-t="s">6</span>
+  </div>
+  <div class="anat-txt" id="anatTxt">👆 Clique em cada pedacinho da fórmula para descobrir o que ele significa.</div>
+</div>
+
+<p class="centro rabisco">Lê-se: <strong>"éfe de três é igual a seis"</strong></p>
+
+<div class="cuidado">
+  <div class="tit">⚠️ Cuidado — a armadilha número 1</div>
+  <p style="margin:6px 0 0">Aqui os parênteses <strong>NÃO são multiplicação</strong>. <span class="mono">f(3)</span> não é "f vezes 3". É "a máquina f recebeu o 3". Praticamente todo mundo tropeça nisso uma vez. Agora você não vai.</p>
+</div>
+
+<div class="idiota">
+  <div class="tit">Não existe pergunta idiota</div>
+  <p class="q">Por que logo a letra <em>f</em>? Tenho que usar essa?</p>
+  <p class="a">Não. O <em>f</em> vem de "função", mas é só um apelido. Pode ser <em>g</em>, <em>h</em>, <em>maria</em>. Se você tem duas máquinas na mesma conversa, dá nomes diferentes para elas — igual a dois cachorros na mesma casa.</p>
+  <p class="q">E se eu jogar o mesmo número duas vezes?</p>
+  <p class="a">Sai a mesma resposta. Sempre. Isso não é detalhe — é a regra que define uma função, e a gente chega nela na seção 5.</p>
+  <p class="q">Uma máquina pode receber número quebrado ou negativo?</p>
+  <p class="a">Pode. <span class="mono">f(2,5) = 5</span> e <span class="mono">f(−3) = −6</span> funcionam direitinho na máquina DOBRAR. Só existem casos em que a máquina "engasga" — dividir por zero, por exemplo — mas isso é papo de outra aula.</p>
+</div>
+
+<!-- ============ 3 ============ -->
+<h2><span class="n">3</span> O x é só um espaço em branco</h2>
+
+<p>Até agora a gente falou de um número por vez. Mas e se eu quiser descrever a máquina inteira, de uma vez, para <strong>qualquer</strong> número?</p>
+
+<p>Aí eu uso uma letra no lugar do número. Quase sempre o <strong>x</strong>. E ele significa exatamente isto:</p>
+
+<div class="sticky dir"><strong>x = "um número qualquer, o que você quiser"</strong><br>É um espaço em branco esperando ser preenchido. Nada mais.</div>
+
+<p>A receita completa da máquina DOBRAR é:</p>
+<p class="centro" style="font-size:34px;font-weight:800">f(x) = 2 · x</p>
+<p class="centro rabisco">"pego o número que você me der e multiplico por 2"</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: troque o x por um número</div>
+  <p>Arraste e veja o espaço em branco sendo preenchido.</p>
+  <input type="range" id="xSlider" min="-5" max="10" step="1" value="4">
+  <div class="centro" style="font-size:27px;font-weight:800;margin-top:14px;line-height:2">
+    <div>f(<span id="x1" style="color:var(--verde)">4</span>) = 2 · <span id="x2" style="color:var(--verde)">4</span></div>
+    <div style="color:var(--verm)">f(<span id="x3">4</span>) = <span id="x4">8</span></div>
+  </div>
+  <p class="centro rabisco" id="xFrase">Joguei o 4 na máquina e saiu o 8.</p>
+</div>
+
+<!-- ============ 4 ============ -->
+<h2><span class="n">4</span> Máquinas com dois passos</h2>
+
+<p>Uma máquina pode fazer duas contas seguidas. Por exemplo:</p>
+<p class="centro" style="font-size:30px;font-weight:800">f(x) = 2 · x + 1</p>
+<p class="centro rabisco">"dobro e <u>depois</u> somo 1"</p>
+
+<p>A ordem <strong>importa muito</strong>. Veja o que acontece com o número 3 nos dois caminhos:</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: a ordem das contas</div>
+  <div class="controles">
+    <button id="ordemGo">▶ Comparar os dois caminhos</button>
+  </div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap">
+    <div style="flex:1;min-width:230px;background:var(--verdec);border:3px solid var(--verde);border-radius:10px;padding:14px 18px">
+      <p style="margin:0 0 8px;font-weight:800;color:var(--verde)">✔ JEITO CERTO</p>
+      <p style="margin:0;font-size:19px;line-height:2" id="ordemC">clique no botão…</p>
+    </div>
+    <div style="flex:1;min-width:230px;background:var(--vermc);border:3px solid var(--verm);border-radius:10px;padding:14px 18px">
+      <p style="margin:0 0 8px;font-weight:800;color:var(--verm)">✘ JEITO ERRADO</p>
+      <p style="margin:0;font-size:19px;line-height:2" id="ordemE">clique no botão…</p>
+    </div>
+  </div>
+</div>
+
+<div class="guru">
+  <svg viewBox="0 0 100 118" width="92">
+    <ellipse cx="50" cy="112" rx="34" ry="6" fill="#00000018"/>
+    <path d="M50 60 L20 108 L80 108 Z" fill="#7c3aed" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="50" cy="34" r="20" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M30 36 q20 46 40 0 q-6 34 -20 34 q-14 0 -20 -34" fill="#e5e7eb" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M40 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M52 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M30 22 q20 -12 40 0" fill="none" stroke="#1b1b1b" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="24" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="76" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+  </svg>
+  <div>
+    <div class="fala">Multiplicação e divisão têm mais pressa que soma e subtração. Elas passam na frente da fila. Quando você quiser furar essa fila, use parênteses — eles mandam mais que todo mundo.</div>
+    <div class="quem">— o Guru</div>
+  </div>
+</div>
+
+<!-- ============ 5 ============ -->
+<h2><span class="n">5</span> A regra de ouro</h2>
+
+<p>Nem toda máquina merece o nome de função. Existe uma exigência, uma só:</p>
+
+<div class="pontos" style="text-align:center">
+  <div class="tit">A ÚNICA REGRA</div>
+  <p style="font-size:23px;font-weight:700;margin:14px 0">O mesmo número que entra<br>tem que dar <u>sempre</u> a mesma resposta.</p>
+</div>
+
+<p>Se hoje eu jogo o 3 e sai 6, amanhã tem que sair 6 de novo. E depois de amanhã também. Uma máquina que responde 6 numa vez e 7 na outra, para o mesmo 3, está quebrada — <strong>não é função</strong>.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: confiável ou quebrada?</div>
+  <p>Aperte o botão várias vezes em cada máquina, sempre jogando o número <strong>3</strong>.</p>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:12px">
+    <div style="flex:1;min-width:230px;border:3px solid var(--tinta);border-radius:10px;padding:16px;background:#fff">
+      <p style="margin:0 0 10px;font-weight:800">Máquina A</p>
+      <button class="sec" id="btnA">jogar o 3</button>
+      <p style="font-size:26px;font-weight:800;margin:12px 0 0" id="outA">—</p>
+      <p style="font-size:14px;color:var(--cinza);margin:6px 0 0" id="histA"></p>
+    </div>
+    <div style="flex:1;min-width:230px;border:3px solid var(--tinta);border-radius:10px;padding:16px;background:#fff">
+      <p style="margin:0 0 10px;font-weight:800">Máquina B</p>
+      <button class="sec" id="btnB">jogar o 3</button>
+      <p style="font-size:26px;font-weight:800;margin:12px 0 0" id="outB">—</p>
+      <p style="font-size:14px;color:var(--cinza);margin:6px 0 0" id="histB"></p>
+    </div>
+  </div>
+  <p class="rabisco" style="margin-top:16px">Depois de uns 5 cliques em cada uma, você já sabe qual das duas é função. 😉</p>
+</div>
+
+<!-- ============ 6 ============ -->
+<h2><span class="n">6</span> Desenhando a máquina: o gráfico</h2>
+
+<p>Agora o pulo do gato. Cada teste que você faz na máquina vira <strong>um pontinho no papel</strong>:</p>
+
+<p><strong>Entrou 3, saiu 6</strong> → ando <span style="color:var(--verde);font-weight:800">3 para a direita</span> e subo <span style="color:var(--verm);font-weight:800">6 para cima</span>. Marco o pontinho ali.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: veja o gráfico nascer</div>
+  <div class="controles">
+    <button id="grafGo">▶ Marcar os pontos um por um</button>
+    <button class="sec" id="grafLinha">Ligar os pontos</button>
+    <button class="sec" id="grafReset">↺ Limpar</button>
+  </div>
+  <div class="graf">
+    <svg viewBox="0 0 440 330" id="svgGraf">
+      <g id="grade"></g>
+      <line x1="50" y1="30" x2="50" y2="285" stroke="#1b1b1b" stroke-width="3"/>
+      <line x1="50" y1="285" x2="415" y2="285" stroke="#1b1b1b" stroke-width="3"/>
+      <text x="235" y="320" text-anchor="middle" font-size="14" fill="#059669" font-weight="700">o número que ENTRA</text>
+      <text x="16" y="160" text-anchor="middle" font-size="14" fill="#dc2626" font-weight="700" transform="rotate(-90 16 160)">o número que SAI</text>
+      <path id="linhaG" d="" fill="none" stroke="#2563eb" stroke-width="4" stroke-dasharray="600" stroke-dashoffset="600"/>
+      <g id="pontos"></g>
+    </svg>
+  </div>
+  <p class="rabisco" id="grafTxt">Os pontos ficam perfeitamente alinhados. Isso não é coincidência — toda máquina de "multiplicar por um número" dá uma linha reta.</p>
+</div>
+
+<p>Esse desenho tem nome: <strong>gráfico</strong>. Ele é a máquina inteira desenhada. Todas as respostas possíveis, de uma vez só, num retrato.</p>
+
+<!-- ============ resumo ============ -->
+<div class="pontos">
+  <div class="tit">Pontos importantes</div>
+  <ul>
+    <li>Uma <strong>função</strong> é uma máquina: entra um número, sai outro.</li>
+    <li><span class="mono">f(3) = 6</span> significa "joguei o 3, saiu o 6". Os parênteses <strong>não</strong> são multiplicação.</li>
+    <li>O <strong>x</strong> é só um espaço em branco: "um número qualquer".</li>
+    <li><span class="mono">f(x) = 2 · x</span> é a receita da máquina escrita de uma vez para todos os números.</li>
+    <li>Multiplicação e divisão vêm <strong>antes</strong> de soma e subtração.</li>
+    <li>Regra de ouro: mesma entrada → <strong>sempre</strong> a mesma saída. Senão, não é função.</li>
+    <li>Cada teste vira um ponto no papel: ando (entrada) e subo (saída). Todos os pontos juntos formam o <strong>gráfico</strong>.</li>
+  </ul>
+</div>
+
+<!-- ============ exercicios ============ -->
+<h2><span class="n">✏️</span> Afie o lápis</h2>
+<p>Cinco exercícios. Erre à vontade — errar aqui é de graça, e a correção explica o porquê.</p>
+
+<div class="ex" id="ex1">
+  <div class="tit">Exercício 1</div>
+  <div class="selo">✅</div>
+  <p>A máquina é <strong>SOMAR 5</strong>. Complete a tabela:</p>
+  <table class="t">
+    <tr><th>entra</th><th>sai</th></tr>
+    <tr><td class="ent">1</td><td><input type="number" data-r="6"></td></tr>
+    <tr><td class="ent">4</td><td><input type="number" data-r="9"></td></tr>
+    <tr><td class="ent">10</td><td><input type="number" data-r="15"></td></tr>
+  </table>
+  <button class="check" data-ex="ex1">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex2">
+  <div class="tit">Exercício 2</div>
+  <div class="selo">✅</div>
+  <p>A máquina é <span class="mono">f(x) = 3 · x + 2</span>. Quanto sai quando entra…</p>
+  <p style="font-size:19px">o <strong>4</strong>? <input type="number" data-r="14"> &nbsp;&nbsp; o <strong>0</strong>? <input type="number" data-r="2"></p>
+  <button class="check" data-ex="ex2">Conferir</button>
+  <div class="fb"></div>
+  <p class="dica">Dica: multiplicação primeiro, soma depois. E cuidado com o zero — ele engana.</p>
+</div>
+
+<div class="ex" id="ex3">
+  <div class="tit">Exercício 3</div>
+  <div class="selo">✅</div>
+  <p>Uma máquina recebeu o <strong>2</strong> e devolveu <strong>7</strong>. Mais tarde recebeu o <strong>2</strong> de novo e devolveu <strong>9</strong>. Ela é uma função?</p>
+  <div class="alts" data-r="1">
+    <div class="alt" data-i="0">Sim — ela devolveu um número nos dois casos, então está tudo certo.</div>
+    <div class="alt" data-i="1">Não — o mesmo número que entrou deu duas respostas diferentes.</div>
+    <div class="alt" data-i="2">Só é função se os dois números que saem forem iguais ao que entrou.</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex4">
+  <div class="tit">Exercício 4</div>
+  <div class="selo">✅</div>
+  <p>Olhando o gráfico da máquina <strong>DOBRAR</strong> lá em cima: se entrar o <strong>5</strong>, quanto sai?</p>
+  <p><input type="number" data-r="10"></p>
+  <button class="check" data-ex="ex4">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex5">
+  <div class="tit">Exercício 5 — o desafio</div>
+  <div class="selo">🏆</div>
+  <p>Uma máquina misteriosa fez isto:</p>
+  <table class="t">
+    <tr><th>entra</th><th>sai</th></tr>
+    <tr><td class="ent">1</td><td class="sai">4</td></tr>
+    <tr><td class="ent">2</td><td class="sai">7</td></tr>
+    <tr><td class="ent">3</td><td class="sai">10</td></tr>
+  </table>
+  <p>Qual é a receita dela?</p>
+  <div class="alts" data-r="2">
+    <div class="alt" data-i="0">f(x) = x + 3</div>
+    <div class="alt" data-i="1">f(x) = 4 · x</div>
+    <div class="alt" data-i="2">f(x) = 3 · x + 1</div>
+    <div class="alt" data-i="3">f(x) = 2 · x + 2</div>
+  </div>
+  <div class="fb"></div>
+  <p class="dica">Dica: de uma linha para a outra, a saída pula de quanto em quanto? Esse pulo é o número que multiplica.</p>
+</div>
+
+<div class="placar" id="placar">
+  <p style="margin:0 0 4px;font-family:var(--mao);font-size:19px">Seu placar</p>
+  <div class="n"><span id="pn">0</span> / 5</div>
+  <div class="barra"><i id="pbar"></i></div>
+  <p id="pmsg" style="margin:0;color:#cfc9bb">Resolva os exercícios acima e acompanhe aqui.</p>
+</div>
+
+<footer>
+  Matemática do Zero · Aula 1 — O que é uma função<br>
+  <strong>Próxima aula:</strong> desenhar números no papel — as duas réguas, os negativos e o passo da escada.
+</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------------- 1. maquina ---------------- */
+var ops = {
+  dobrar:{nome:"DOBRAR", f:function(n){return n*2;}, conta:function(n){return n+" × 2 = "+(n*2);}},
+  somar5:{nome:"SOMAR 5", f:function(n){return n+5;}, conta:function(n){return n+" + 5 = "+(n+5);}},
+  triplo:{nome:"×3 e +2", f:function(n){return n*3+2;}, conta:function(n){return n+" × 3 = "+(n*3)+" , depois "+(n*3)+" + 2 = "+(n*3+2);}}
+};
+var opAtual="dobrar", ocupado=false;
+var bolaE=document.getElementById("bolaE"), bolaS=document.getElementById("bolaS");
+var maqNome=document.getElementById("maq-nome"), luz=document.getElementById("luz");
+var maqTab=document.getElementById("maqTab"), maqConta=document.getElementById("maqConta");
+
+document.querySelectorAll(".maq-op").forEach(function(b){
+  b.addEventListener("click",function(){
+    document.querySelectorAll(".maq-op").forEach(function(o){o.classList.remove("on");});
+    b.classList.add("on");
+    opAtual=b.dataset.op;
+    maqNome.textContent=ops[opAtual].nome;
+    while(maqTab.rows.length>1){maqTab.deleteRow(1);}
+    maqConta.textContent="";
+  });
+});
+
+document.getElementById("maqGo").addEventListener("click",function(){
+  if(ocupado) return;
+  var n=parseFloat(document.getElementById("maqIn").value);
+  if(isNaN(n)) return;
+  if(n>9999||n<-9999){n=Math.max(-9999,Math.min(9999,n));document.getElementById("maqIn").value=n;}
+  ocupado=true;
+  var r=ops[opAtual].f(n);
+  maqConta.textContent="";
+  bolaS.classList.add("escondido");
+  bolaE.textContent=n; bolaE.classList.remove("escondido");
+  bolaE.style.left="4%";
+  setTimeout(function(){ bolaE.style.left="30%"; },40);
+  setTimeout(function(){
+    bolaE.classList.add("escondido");
+    document.querySelector(".maq-palco svg").classList.add("trabalhando");
+    luz.setAttribute("fill","#dc2626");
+  },900);
+  setTimeout(function(){
+    document.querySelector(".maq-palco svg").classList.remove("trabalhando");
+    luz.setAttribute("fill","#059669");
+    bolaS.textContent=r; bolaS.classList.remove("escondido");
+    maqConta.textContent="A máquina fez: "+ops[opAtual].conta(n);
+    var tr=maqTab.insertRow(-1); tr.className="nova";
+    var c1=tr.insertCell(0), c2=tr.insertCell(1);
+    c1.className="ent"; c2.className="sai";
+    c1.textContent=n; c2.textContent=r;
+    if(maqTab.rows.length>7) maqTab.deleteRow(1);
+    ocupado=false;
+  },1800);
+});
+
+/* ---------------- 2. anatomia ---------------- */
+var textos={
+  f:"<strong>f</strong> — é só o NOME da máquina. Um apelido. Podia ser g, h ou qualquer letra. Não é um número, não multiplica nada.",
+  p:"<strong>( )</strong> — os parênteses são a boca da máquina. O que estiver dentro deles é o número que você jogou lá. NÃO é multiplicação!",
+  e:"<strong>3</strong> — o número que ENTROU na máquina.",
+  s:"<strong>6</strong> — o número que SAIU. É a resposta que a máquina devolveu."
+};
+var anatTxt=document.getElementById("anatTxt");
+document.querySelectorAll(".anat .peca").forEach(function(p){
+  p.addEventListener("click",function(){
+    document.querySelectorAll(".anat .peca").forEach(function(o){o.classList.remove("ativo");});
+    document.querySelectorAll('.anat .peca[data-t="'+p.dataset.t+'"]').forEach(function(o){o.classList.add("ativo");});
+    anatTxt.innerHTML=textos[p.dataset.t];
+    anatTxt.classList.remove("pulsa"); void anatTxt.offsetWidth; anatTxt.classList.add("pulsa");
+  });
+});
+
+/* ---------------- 3. slider do x ---------------- */
+var sl=document.getElementById("xSlider");
+function attX(){
+  var v=parseInt(sl.value,10);
+  ["x1","x2","x3"].forEach(function(id){document.getElementById(id).textContent=v;});
+  document.getElementById("x4").textContent=v*2;
+  document.getElementById("xFrase").textContent="Joguei o "+v+" na máquina e saiu o "+(v*2)+".";
+}
+sl.addEventListener("input",attX); attX();
+
+/* ---------------- 4. ordem das contas ---------------- */
+document.getElementById("ordemGo").addEventListener("click",function(){
+  var C=document.getElementById("ordemC"), E=document.getElementById("ordemE");
+  C.innerHTML=""; E.innerHTML="";
+  var passosC=["f(3) = 2 · 3 + 1","primeiro multiplico: 2 · 3 = <strong>6</strong>","depois somo: 6 + 1 = <strong>7</strong>","resposta: <strong style='font-size:24px'>7</strong> ✔"];
+  var passosE=["f(3) = 2 · 3 + 1","somei antes: 3 + 1 = <strong>4</strong>","depois multipliquei: 2 · 4 = <strong>8</strong>","resposta: <strong style='font-size:24px'>8</strong> ✘"];
+  passosC.forEach(function(t,i){ setTimeout(function(){ var d=document.createElement("div"); d.className="nova"; d.innerHTML=t; C.appendChild(d); }, i*650); });
+  passosE.forEach(function(t,i){ setTimeout(function(){ var d=document.createElement("div"); d.className="nova"; d.innerHTML=t; E.appendChild(d); }, i*650+250); });
+});
+
+/* ---------------- 5. confiavel x quebrada ---------------- */
+var hA=[], hB=[];
+document.getElementById("btnA").addEventListener("click",function(){
+  var r=6; hA.push(r);
+  var o=document.getElementById("outA"); o.textContent=r;
+  o.classList.remove("pulsa"); void o.offsetWidth; o.classList.add("pulsa");
+  document.getElementById("histA").textContent="respostas até agora: "+hA.join(", ");
+  if(hA.length>=3) document.getElementById("histA").textContent+=" → sempre igual ✔ é função";
+});
+document.getElementById("btnB").addEventListener("click",function(){
+  var r=Math.floor(Math.random()*9)+2; hB.push(r);
+  var o=document.getElementById("outB"); o.textContent=r;
+  o.classList.remove("chacoalha"); void o.offsetWidth; o.classList.add("chacoalha");
+  var el=document.getElementById("histB");
+  el.textContent="respostas até agora: "+hB.join(", ");
+  var unicos={}; hB.forEach(function(v){unicos[v]=1;});
+  if(Object.keys(unicos).length>1) el.textContent+=" → respostas diferentes ✘ NÃO é função";
+});
+
+/* ---------------- 6. grafico ---------------- */
+var SVGNS="http://www.w3.org/2000/svg";
+var PX=function(x){return 50+x*70;}, PY=function(y){return 285-y*24.5;};
+var grade=document.getElementById("grade");
+for(var i=1;i<=5;i++){
+  var l=document.createElementNS(SVGNS,"line");
+  l.setAttribute("x1",PX(i)); l.setAttribute("y1",30); l.setAttribute("x2",PX(i)); l.setAttribute("y2",285);
+  l.setAttribute("stroke","#e2ddd0"); l.setAttribute("stroke-width",2); grade.appendChild(l);
+  var t=document.createElementNS(SVGNS,"text");
+  t.setAttribute("x",PX(i)); t.setAttribute("y",303); t.setAttribute("text-anchor","middle");
+  t.setAttribute("font-size",13); t.setAttribute("fill","#6b7280"); t.textContent=i; grade.appendChild(t);
+}
+for(var j=2;j<=10;j+=2){
+  var l2=document.createElementNS(SVGNS,"line");
+  l2.setAttribute("x1",50); l2.setAttribute("y1",PY(j)); l2.setAttribute("x2",415); l2.setAttribute("y2",PY(j));
+  l2.setAttribute("stroke","#e2ddd0"); l2.setAttribute("stroke-width",2); grade.appendChild(l2);
+  var t2=document.createElementNS(SVGNS,"text");
+  t2.setAttribute("x",40); t2.setAttribute("y",PY(j)+5); t2.setAttribute("text-anchor","end");
+  t2.setAttribute("font-size",13); t2.setAttribute("fill","#6b7280"); t2.textContent=j; grade.appendChild(t2);
+}
+var gPontos=document.getElementById("pontos"), linhaG=document.getElementById("linhaG");
+function limpaGraf(){
+  while(gPontos.firstChild) gPontos.removeChild(gPontos.firstChild);
+  linhaG.setAttribute("d",""); linhaG.style.strokeDashoffset=600;
+  document.getElementById("grafTxt").textContent="Clique em “Marcar os pontos” para ver o gráfico nascer.";
+}
+document.getElementById("grafGo").addEventListener("click",function(){
+  limpaGraf();
+  [1,2,3,4,5].forEach(function(x,k){
+    setTimeout(function(){
+      var g=document.createElementNS(SVGNS,"g");
+      var lh=document.createElementNS(SVGNS,"line");
+      lh.setAttribute("x1",PX(x)); lh.setAttribute("y1",285); lh.setAttribute("x2",PX(x)); lh.setAttribute("y2",PY(2*x));
+      lh.setAttribute("stroke","#059669"); lh.setAttribute("stroke-width",2); lh.setAttribute("stroke-dasharray","4 4");
+      var lv=document.createElementNS(SVGNS,"line");
+      lv.setAttribute("x1",50); lv.setAttribute("y1",PY(2*x)); lv.setAttribute("x2",PX(x)); lv.setAttribute("y2",PY(2*x));
+      lv.setAttribute("stroke","#dc2626"); lv.setAttribute("stroke-width",2); lv.setAttribute("stroke-dasharray","4 4");
+      var c=document.createElementNS(SVGNS,"circle");
+      c.setAttribute("cx",PX(x)); c.setAttribute("cy",PY(2*x)); c.setAttribute("r",8);
+      c.setAttribute("fill","#2563eb"); c.setAttribute("stroke","#fff"); c.setAttribute("stroke-width",3);
+      c.setAttribute("class","pt"); c.style.opacity=0;
+      var tx=document.createElementNS(SVGNS,"text");
+      var fim=(x===5);
+      tx.setAttribute("x",PX(x)+(fim?-13:13)); tx.setAttribute("y",PY(2*x)-9); tx.setAttribute("font-size",13);
+      tx.setAttribute("text-anchor",fim?"end":"start");
+      tx.setAttribute("font-weight","700"); tx.setAttribute("fill","#1b1b1b");
+      tx.textContent="("+x+", "+(2*x)+")";
+      g.appendChild(lh); g.appendChild(lv); g.appendChild(c); g.appendChild(tx);
+      gPontos.appendChild(g);
+      requestAnimationFrame(function(){c.style.opacity=1;});
+      document.getElementById("grafTxt").textContent="Entrou "+x+", saiu "+(2*x)+" → ando "+x+" e subo "+(2*x)+".";
+    }, k*700);
+  });
+});
+document.getElementById("grafLinha").addEventListener("click",function(){
+  linhaG.setAttribute("d","M "+PX(0)+" "+PY(0)+" L "+PX(5)+" "+PY(10));
+  linhaG.style.transition="stroke-dashoffset 1.1s ease";
+  requestAnimationFrame(function(){ linhaG.style.strokeDashoffset=0; });
+  document.getElementById("grafTxt").textContent="Todos os pontos numa reta só. Esse desenho é o retrato da máquina inteira.";
+});
+document.getElementById("grafReset").addEventListener("click",limpaGraf);
+
+/* ---------------- exercicios ---------------- */
+var feitos={}, TOTAL=5;
+function confete(){
+  var cores=["#fde68a","#2563eb","#dc2626","#059669","#7c3aed","#d97706"];
+  for(var i=0;i<40;i++){
+    (function(i){
+      var d=document.createElement("div");
+      d.className="conf";
+      d.style.left=(Math.random()*100)+"vw";
+      d.style.background=cores[i%cores.length];
+      d.style.animation="cai "+(1.9+Math.random()*1.5)+"s linear forwards";
+      d.style.animationDelay=(Math.random()*.5)+"s";
+      document.body.appendChild(d);
+      setTimeout(function(){d.remove();},4200);
+    })(i);
+  }
+}
+function marca(id,ok){
+  if(ok && !feitos[id]){
+    feitos[id]=true;
+    var n=Object.keys(feitos).length;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Você fechou a Aula 1. 🎉</strong> Pode seguir para a Aula 2 de cabeça erguida."; confete(); }
+    else msg.textContent="Boa! Faltam "+(TOTAL-n)+".";
+    document.querySelector("#"+id+" .selo").classList.add("ver");
+  }
+}
+function fb(box,ok,txt){
+  var f=box.querySelector(".fb");
+  f.className="fb mostra "+(ok?"ok":"no");
+  f.innerHTML=txt;
+  box.classList.remove("chacoalha");
+  if(!ok){ void box.offsetWidth; box.classList.add("chacoalha"); }
+}
+var explica={
+  ex1:{ok:"Isso! Somar 5 é só empurrar cada número 5 casas para a frente.",no:"Ainda não. A máquina SOMA 5: o 1 vira 6, o 4 vira 9, o 10 vira 15."},
+  ex2:{ok:"Perfeito — inclusive o caso do zero, que derruba muita gente.",no:"Quase. Com o 4: primeiro 3 × 4 = 12, depois 12 + 2 = <strong>14</strong>. Com o 0: 3 × 0 = 0, e 0 + 2 = <strong>2</strong> (não é 0!)."},
+  ex4:{ok:"Exato. O ponto (5, 10) está bem no fim da reta.",no:"Olhe a reta de novo: andando 5 para a direita, ela está na altura <strong>10</strong>. A máquina dobra."}
+};
+document.querySelectorAll("button.check").forEach(function(b){
+  b.addEventListener("click",function(){
+    var box=document.getElementById(b.dataset.ex);
+    var ins=box.querySelectorAll("input[data-r]");
+    var tudoOk=true, vazio=false;
+    ins.forEach(function(inp){
+      if(inp.value===""){vazio=true;return;}
+      var ok=parseFloat(inp.value)===parseFloat(inp.dataset.r);
+      inp.style.borderColor=ok?"#059669":"#dc2626";
+      inp.style.background=ok?"#d1fae5":"#fee2e2";
+      if(!ok) tudoOk=false;
+    });
+    if(vazio){ fb(box,false,"Preencha todos os campos antes de conferir. 🙂"); return; }
+    fb(box,tudoOk,tudoOk?"✔ "+explica[b.dataset.ex].ok:"✘ "+explica[b.dataset.ex].no);
+    marca(b.dataset.ex,tudoOk);
+  });
+});
+var expAlt={
+  ex3:["Não é bem assim — devolver um número não basta. O problema é ter devolvido DOIS números diferentes para a mesma entrada.",
+       "Isso mesmo! Mesma entrada com respostas diferentes quebra a regra de ouro. Máquina não confiável, não é função.",
+       "Não — a saída não precisa ter nenhuma relação de igualdade com a entrada. A máquina DOBRAR nunca devolve o mesmo número e é função."],
+  ex5:["Testando: 1 + 3 = 4 ✔, mas 2 + 3 = 5, e a tabela diz 7. Não serve.",
+       "Testando: 4 × 1 = 4 ✔, mas 4 × 2 = 8, e a tabela diz 7. Não serve.",
+       "Isso! A saída pula de 3 em 3 (4 → 7 → 10), então multiplica por 3. E 3 × 1 = 3, falta 1 para chegar no 4: por isso o + 1.",
+       "Testando: 2 × 1 + 2 = 4 ✔, mas 2 × 2 + 2 = 6, e a tabela diz 7. Não serve."]
+};
+document.querySelectorAll(".alts").forEach(function(grupo){
+  var box=grupo.closest(".ex");
+  var certa=parseInt(grupo.dataset.r,10);
+  grupo.querySelectorAll(".alt").forEach(function(alt){
+    alt.addEventListener("click",function(){
+      var i=parseInt(alt.dataset.i,10), ok=(i===certa);
+      grupo.querySelectorAll(".alt").forEach(function(a){a.classList.remove("certa","errada");});
+      alt.classList.add(ok?"certa":"errada");
+      if(ok){ grupo.querySelectorAll(".alt")[certa].classList.add("certa"); alt.classList.add("pulsa"); }
+      fb(box,ok,(ok?"✔ ":"✘ ")+expAlt[box.id][i]);
+      marca(box.id,ok);
+    });
+  });
+});
+
+})();
+</script>
+</body>
+</html>
