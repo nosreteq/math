@@ -4,6 +4,11 @@ __pycache__/
 .venv/
 venv/
 
+# Backend de progresso
+server/math.db
+server/math.db-*
+server/.env
+
 # Sistema operacional
 .DS_Store
 Thumbs.db

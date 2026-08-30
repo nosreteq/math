@@ -444,9 +444,11 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 </div>
 
+<script src="../../assets/progresso.js"></script>
 <script>
 (function(){
 "use strict";
+var AULA_ID = "02-desenhar-numeros-no-papel";
 var NS="http://www.w3.org/2000/svg";
 var U=30, CX=210, CY=210;
 function X(x){return CX+x*U;}
@@ -651,6 +653,7 @@ function confete(){
 function marca(id,ok){
   if(ok&&!feitos[id]){
     feitos[id]=true;
+    if(window.Progresso) Progresso.marcar(AULA_ID,id);
     var n=Object.keys(feitos).length;
     document.getElementById("pn").textContent=n;
     document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
@@ -659,6 +662,25 @@ function marca(id,ok){
     else msg.textContent="Boa! Faltam "+(TOTAL-n)+".";
     document.querySelector("#"+id+" .selo").classList.add("ver");
   }
+}
+function restauraProgresso(){
+  if(!window.Progresso) return;
+  Progresso.carregar(AULA_ID).then(function(itens){
+    itens.forEach(function(id){
+      if(!feitos[id] && document.getElementById(id)){
+        feitos[id]=true;
+        document.querySelector("#"+id+" .selo").classList.add("ver");
+      }
+    });
+    var n=Object.keys(feitos).length;
+    if(n===0) return;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    msg.textContent = n===TOTAL
+      ? "Você já tinha concluído esta aula. 🎉"
+      : "Progresso salvo: "+n+"/"+TOTAL+". Faltam "+(TOTAL-n)+".";
+  });
 }
 function fb(box,ok,txt){
   var f=box.querySelector(".fb");
@@ -713,6 +735,8 @@ document.querySelectorAll(".alts").forEach(function(grupo){
     });
   });
 });
+
+restauraProgresso();
 
 })();
 </script>
