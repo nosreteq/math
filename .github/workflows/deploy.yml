@@ -1,0 +1,86 @@
+name: Deploy API de progresso
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "server/**"
+      - "deploy/math-progresso.service"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.MATH_VM_HOST }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -euo pipefail
+
+            SERVICE=math-progresso
+            APP_DIR=/home/ubuntu/math
+            SRV_DIR="$APP_DIR/server"
+            ENV_FILE="$SRV_DIR/.env"
+            PORT=8001
+
+            echo "== parando serviço (se existir) =="
+            sudo systemctl stop "$SERVICE" 2>/dev/null || true
+
+            echo "== atualizando código =="
+            cd "$APP_DIR"
+            git fetch origin main
+            git reset --hard origin/main
+
+            echo "== venv + dependências =="
+            cd "$SRV_DIR"
+            if [ ! -d .venv ]; then
+              python3 -m venv .venv
+            fi
+            .venv/bin/pip install --quiet --upgrade pip
+            .venv/bin/pip install --quiet -r requirements.txt
+
+            echo "== garantindo .env (upsert, nunca sobrescreve o que já existe) =="
+            touch "$ENV_FILE"
+            upsert_env() {
+              local key="$1" val="$2"
+              if ! grep -q "^${key}=" "$ENV_FILE"; then
+                echo "${key}=${val}" >> "$ENV_FILE"
+              fi
+            }
+            upsert_env MD0_ALLOWED_ORIGINS "https://nosreteq.github.io"
+            upsert_env MD0_DB_PATH "$SRV_DIR/math.db"
+            if ! grep -q "^MD0_JWT_SECRET=" "$ENV_FILE"; then
+              SECRET=$(python3 -c "import secrets; print(secrets.token_hex(32))")
+              echo "MD0_JWT_SECRET=${SECRET}" >> "$ENV_FILE"
+              echo "MD0_JWT_SECRET gerado agora (primeira vez)."
+            fi
+
+            echo "== instalando unit systemd =="
+            sudo cp "$APP_DIR/deploy/math-progresso.service" /etc/systemd/system/"$SERVICE".service
+            sudo systemctl daemon-reload
+            sudo systemctl enable "$SERVICE"
+            sudo systemctl restart "$SERVICE"
+
+            echo "== esperando /api/health responder =="
+            ok=0
+            for i in $(seq 1 30); do
+              if curl -fsS "http://127.0.0.1:${PORT}/api/health" >/dev/null 2>&1; then
+                ok=1
+                break
+              fi
+              sleep 2
+            done
+
+            if [ "$ok" != "1" ]; then
+              echo "!! serviço não respondeu a tempo, diagnóstico:"
+              sudo systemctl status "$SERVICE" --no-pager || true
+              sudo journalctl -u "$SERVICE" --no-pager -n 80 || true
+              exit 1
+            fi
+
+            echo "== deploy ok =="

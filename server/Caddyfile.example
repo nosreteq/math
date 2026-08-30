@@ -1,7 +1,0 @@
-# Exemplo de proxy reverso com HTTPS automático (Let's Encrypt).
-# Troque api.seudominio.com por um subdomínio seu apontando para o IP público da VM,
-# ou por um endereço tipo SEU-IP.nip.io se ainda não tiver domínio próprio.
-
-api.seudominio.com {
-    reverse_proxy 127.0.0.1:8000
-}

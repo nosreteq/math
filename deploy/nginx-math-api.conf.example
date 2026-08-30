@@ -1,0 +1,25 @@
+# Exemplo de vhost do nginx para a API do math, na mesma VM do nexustrader.
+# Não mexe no vhost existente do nexustrader — é um server{} novo, apontando
+# para a porta 8001 (a 8000 já é do nexustrader).
+#
+# Domínio: como a VM ainda não tem domínio próprio, uso nip.io — resolve
+# sozinho para o IP embutido no nome, sem precisar configurar DNS.
+# math-api.144-22-225-125.nip.io  →  144.22.225.125
+
+server {
+    listen 80;
+    server_name math-api.144-22-225-125.nip.io;
+
+    location / {
+        proxy_pass http://127.0.0.1:8001;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+# Depois de instalar este arquivo e recarregar o nginx, rode:
+#   sudo certbot --nginx -d math-api.144-22-225-125.nip.io
+# O certbot edita este mesmo arquivo, adicionando o bloco de HTTPS (443) e o
+# redirecionamento automático de 80 -> 443. Não precisa editar isso na mão.

@@ -1,5 +1,5 @@
 [Unit]
-Description=Matematica do Zero - API de progresso
+Description=Matematica do Zero - API de contas e progresso
 After=network.target
 
 [Service]
@@ -7,9 +7,11 @@ Type=simple
 User=ubuntu
 WorkingDirectory=/home/ubuntu/math/server
 EnvironmentFile=/home/ubuntu/math/server/.env
-ExecStart=/home/ubuntu/math/server/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 8000
+ExecStart=/home/ubuntu/math/server/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 8001
 Restart=on-failure
 RestartSec=3
+StartLimitBurst=3
+StartLimitIntervalSec=60
 
 [Install]
 WantedBy=multi-user.target
