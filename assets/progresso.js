@@ -1,8 +1,8 @@
 /*
  * Progresso.js — salva e restaura o avanço do aluno nas aulas.
  *
- * Guarda sempre uma cópia local (localStorage), e se a API estiver
- * configurada e disponível, também sincroniza com o servidor — assim
+ * Sem login: guarda só neste navegador (localStorage).
+ * Logado (ver auth.js): sincroniza com a API, contado por conta —
  * o progresso passa a acompanhar o aluno em qualquer dispositivo.
  *
  * Uso em cada aula:
@@ -14,20 +14,10 @@ window.Progresso = (function () {
 
   // Preencha com a URL pública da API depois do deploy na VM, ex:
   // "https://api.seudominio.com". Enquanto estiver vazio, o progresso
-  // fica só neste navegador (localStorage).
+  // fica só neste navegador (localStorage) e o login fica desativado.
   var API_BASE = "";
 
-  var CHAVE_ALUNO = "md0_aluno_id";
   var PREFIXO_LOCAL = "md0_progresso_";
-
-  function alunoId() {
-    var id = localStorage.getItem(CHAVE_ALUNO);
-    if (!id) {
-      id = "al_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 10);
-      localStorage.setItem(CHAVE_ALUNO, id);
-    }
-    return id;
-  }
 
   function lerLocal(aulaId) {
     try {
@@ -42,6 +32,14 @@ window.Progresso = (function () {
     localStorage.setItem(PREFIXO_LOCAL + aulaId, JSON.stringify(itens));
   }
 
+  function logado() {
+    return !!(window.Auth && Auth.estaLogado());
+  }
+
+  function cabecalhos() {
+    return { "Content-Type": "application/json", "Authorization": "Bearer " + Auth.token() };
+  }
+
   function marcar(aulaId, itemId) {
     var itens = lerLocal(aulaId);
     if (itens.indexOf(itemId) === -1) {
@@ -49,11 +47,11 @@ window.Progresso = (function () {
       salvarLocal(aulaId, itens);
     }
 
-    if (!API_BASE) return;
+    if (!API_BASE || !logado()) return;
     fetch(API_BASE + "/api/progresso", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ aluno_id: alunoId(), aula_id: aulaId, item_id: itemId }),
+      headers: cabecalhos(),
+      body: JSON.stringify({ aula_id: aulaId, item_id: itemId }),
     }).catch(function () {
       /* offline ou API fora do ar: já ficou salvo localmente */
     });
@@ -62,9 +60,11 @@ window.Progresso = (function () {
   function carregar(aulaId) {
     var local = lerLocal(aulaId);
 
-    if (!API_BASE) return Promise.resolve(local);
+    if (!API_BASE || !logado()) return Promise.resolve(local);
 
-    return fetch(API_BASE + "/api/progresso/" + alunoId() + "?aula_id=" + encodeURIComponent(aulaId))
+    return fetch(API_BASE + "/api/progresso?aula_id=" + encodeURIComponent(aulaId), {
+      headers: cabecalhos(),
+    })
       .then(function (r) { return r.ok ? r.json() : {}; })
       .then(function (dados) {
         var remoto = dados[aulaId] || [];
@@ -78,5 +78,5 @@ window.Progresso = (function () {
       .catch(function () { return local; });
   }
 
-  return { marcar: marcar, carregar: carregar, alunoId: alunoId };
+  return { marcar: marcar, carregar: carregar, apiBase: API_BASE };
 })();
