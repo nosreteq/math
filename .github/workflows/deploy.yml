@@ -64,6 +64,7 @@ jobs:
             sudo cp "$APP_DIR/deploy/math-progresso.service" /etc/systemd/system/"$SERVICE".service
             sudo systemctl daemon-reload
             sudo systemctl enable "$SERVICE"
+            sudo systemctl reset-failed "$SERVICE" 2>/dev/null || true
             sudo systemctl restart "$SERVICE"
 
             echo "== esperando /api/health responder =="
