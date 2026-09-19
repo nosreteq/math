@@ -110,6 +110,8 @@ button:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--tinta)}
 button:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--tinta)}
 button.sec{background:#fff;color:var(--tinta)}
 button.on{background:var(--verde)}
+button:disabled{opacity:.5;cursor:not-allowed;box-shadow:none;transform:none}
+.anat .peca:focus-visible, .alt:focus-visible{outline:3px solid var(--laranja);outline-offset:2px}
 input[type=number],input[type=text]{
   font-family:var(--corpo);font-size:18px;font-weight:700;width:92px;padding:8px 10px;
   border:3px solid var(--tinta);border-radius:9px;background:#fff;text-align:center;
@@ -437,7 +439,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
     <button class="sec" id="grafReset">↺ Limpar</button>
   </div>
   <div class="graf">
-    <svg viewBox="0 0 440 330" id="svgGraf">
+    <svg viewBox="0 0 440 330" id="svgGraf" role="img" aria-label="Gráfico cartesiano mostrando os pontos e a reta da função f(x) = 2x">
       <g id="grade"></g>
       <line x1="50" y1="30" x2="50" y2="285" stroke="#1b1b1b" stroke-width="3"/>
       <line x1="50" y1="285" x2="415" y2="285" stroke="#1b1b1b" stroke-width="3"/>
@@ -621,12 +623,17 @@ var textos={
 };
 var anatTxt=document.getElementById("anatTxt");
 document.querySelectorAll(".anat .peca").forEach(function(p){
-  p.addEventListener("click",function(){
+  p.setAttribute("tabindex","0");
+  p.setAttribute("role","button");
+  p.setAttribute("aria-label","Ver significado de "+p.textContent.trim());
+  function ativa(){
     document.querySelectorAll(".anat .peca").forEach(function(o){o.classList.remove("ativo");});
     document.querySelectorAll('.anat .peca[data-t="'+p.dataset.t+'"]').forEach(function(o){o.classList.add("ativo");});
     anatTxt.innerHTML=textos[p.dataset.t];
     anatTxt.classList.remove("pulsa"); void anatTxt.offsetWidth; anatTxt.classList.add("pulsa");
-  });
+  }
+  p.addEventListener("click",ativa);
+  p.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();ativa();}});
 });
 
 /* ---------------- 3. slider do x ---------------- */
@@ -689,15 +696,22 @@ for(var j=2;j<=10;j+=2){
   t2.setAttribute("font-size",13); t2.setAttribute("fill","#6b7280"); t2.textContent=j; grade.appendChild(t2);
 }
 var gPontos=document.getElementById("pontos"), linhaG=document.getElementById("linhaG");
+var grafTimers=[];
 function limpaGraf(){
+  grafTimers.forEach(function(t){clearTimeout(t);});
+  grafTimers=[];
+  var btnGo=document.getElementById("grafGo");
+  if(btnGo) btnGo.disabled=false;
   while(gPontos.firstChild) gPontos.removeChild(gPontos.firstChild);
   linhaG.setAttribute("d",""); linhaG.style.strokeDashoffset=600;
   document.getElementById("grafTxt").textContent="Clique em “Marcar os pontos” para ver o gráfico nascer.";
 }
 document.getElementById("grafGo").addEventListener("click",function(){
   limpaGraf();
+  var btnGo=this;
+  btnGo.disabled=true;
   [1,2,3,4,5].forEach(function(x,k){
-    setTimeout(function(){
+    var tid=setTimeout(function(){
       var g=document.createElementNS(SVGNS,"g");
       var lh=document.createElementNS(SVGNS,"line");
       lh.setAttribute("x1",PX(x)); lh.setAttribute("y1",285); lh.setAttribute("x2",PX(x)); lh.setAttribute("y2",PY(2*x));
@@ -719,7 +733,9 @@ document.getElementById("grafGo").addEventListener("click",function(){
       gPontos.appendChild(g);
       requestAnimationFrame(function(){c.style.opacity=1;});
       document.getElementById("grafTxt").textContent="Entrou "+x+", saiu "+(2*x)+" → ando "+x+" e subo "+(2*x)+".";
+      if(k===4) btnGo.disabled=false;
     }, k*700);
+    grafTimers.push(tid);
   });
 });
 document.getElementById("grafLinha").addEventListener("click",function(){
@@ -821,14 +837,19 @@ document.querySelectorAll(".alts").forEach(function(grupo){
   var box=grupo.closest(".ex");
   var certa=parseInt(grupo.dataset.r,10);
   grupo.querySelectorAll(".alt").forEach(function(alt){
-    alt.addEventListener("click",function(){
+    alt.setAttribute("tabindex","0");
+    alt.setAttribute("role","button");
+    alt.setAttribute("aria-label","Alternativa "+alt.textContent.trim());
+    function escolhe(){
       var i=parseInt(alt.dataset.i,10), ok=(i===certa);
       grupo.querySelectorAll(".alt").forEach(function(a){a.classList.remove("certa","errada");});
       alt.classList.add(ok?"certa":"errada");
       if(ok){ grupo.querySelectorAll(".alt")[certa].classList.add("certa"); alt.classList.add("pulsa"); }
       fb(box,ok,(ok?"✔ ":"✘ ")+expAlt[box.id][i]);
       marca(box.id,ok);
-    });
+    }
+    alt.addEventListener("click",escolhe);
+    alt.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();escolhe();}});
   });
 });
 

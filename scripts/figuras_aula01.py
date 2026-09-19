@@ -1,5 +1,6 @@
-# Gera a figura estatica da Aula 1. Rode de dentro da pasta scripts/:  python3 figuras_aula01.py
+# Gera a figura estatica da Aula 1. Pode rodar de qualquer pasta: python scripts/figuras_aula01.py
 # -*- coding: utf-8 -*-
+from pathlib import Path
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
@@ -88,5 +89,6 @@ a.text(2.55, 1.1, "Esse desenho mostra\ntodas as respostas\nde uma vez só.",
 
 fig.suptitle("Aula 1 — O que é uma função", fontsize=18, weight="bold", color=TXT)
 fig.tight_layout(rect=[0, 0, 1, 0.955])
-fig.savefig("../aulas/01-o-que-e-uma-funcao/figuras.png", dpi=150, facecolor="white")
-print("ok")
+saida = Path(__file__).resolve().parent.parent / "aulas" / "01-o-que-e-uma-funcao" / "figuras.png"
+fig.savefig(saida, dpi=150, facecolor="white")
+print(f"Salvo em: {saida}")

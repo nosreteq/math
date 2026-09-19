@@ -9,17 +9,22 @@ colar num caderno ou usar num slide.
 ## Requisitos
 
 ```bash
-pip install matplotlib numpy
+pip install -r requirements.txt
 ```
 
 ## Uso
 
-Rode de dentro desta pasta — os caminhos de saída são relativos a ela:
+Você pode rodar os scripts a partir de qualquer pasta (da raiz ou de dentro de `scripts/`):
 
 ```bash
+# A partir da raiz do projeto:
+python scripts/figuras_aula01.py
+python scripts/figuras_aula02.py
+
+# Ou de dentro da pasta scripts:
 cd scripts
-python3 figuras_aula01.py    # grava ../aulas/01-o-que-e-uma-funcao/figuras.png
-python3 figuras_aula02.py    # grava ../aulas/02-desenhar-numeros-no-papel/figuras.png
+python figuras_aula01.py
+python figuras_aula02.py
 ```
 
 Cada script usa o backend `Agg`, então funciona em servidor sem tela.

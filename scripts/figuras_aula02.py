@@ -1,5 +1,6 @@
-# Gera a figura estatica da Aula 2. Rode de dentro da pasta scripts/:  python3 figuras_aula02.py
+# Gera a figura estatica da Aula 2. Pode rodar de qualquer pasta: python scripts/figuras_aula02.py
 # -*- coding: utf-8 -*-
+from pathlib import Path
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
@@ -89,5 +90,6 @@ a.legend(fontsize=9.5, loc="lower right", framealpha=0.95)
 
 fig.suptitle("Aula 2 — Desenhar números no papel", fontsize=18, weight="bold", color=TXT)
 fig.tight_layout(rect=[0, 0, 1, 0.955])
-fig.savefig("../aulas/02-desenhar-numeros-no-papel/figuras.png", dpi=150, facecolor="white")
-print("ok")
+saida = Path(__file__).resolve().parent.parent / "aulas" / "02-desenhar-numeros-no-papel" / "figuras.png"
+fig.savefig(saida, dpi=150, facecolor="white")
+print(f"Salvo em: {saida}")
