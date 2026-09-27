@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aula 4 — Potências e raízes | Matemática do Zero</title>
+<style>
+:root{
+  --papel:#f6f2e9; --papel2:#fffdf7; --tinta:#1b1b1b; --cinza:#6b7280;
+  --azul:#2563eb; --azulc:#dbeafe; --verm:#dc2626; --vermc:#fee2e2;
+  --verde:#059669; --verdec:#d1fae5; --amar:#fde68a; --laranja:#d97706;
+  --roxo:#7c3aed; --linha:#c9c1ae;
+  --mao:'Comic Sans MS','Comic Neue','Chalkboard SE','Bradley Hand','Marker Felt','Segoe Print','Ink Free',cursive;
+  --corpo:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--corpo);font-size:17px;line-height:1.65}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 90px}
+
+header{background:var(--tinta);color:var(--papel2);padding:34px 22px 30px;margin-bottom:34px;border-bottom:6px solid var(--laranja)}
+header .inner{max-width:820px;margin:0 auto}
+.serie{font-family:var(--mao);font-size:15px;letter-spacing:.5px;color:var(--amar);margin:0 0 6px}
+header h1{margin:0;font-size:40px;line-height:1.1;letter-spacing:-.5px}
+header .sub{margin:12px 0 0;color:#cfc9bb;font-size:17px;max-width:620px}
+.aula-num{display:inline-block;background:var(--laranja);color:#fff;font-weight:700;padding:3px 13px;border-radius:20px;font-size:14px;margin-bottom:14px;letter-spacing:.5px}
+.voltou{background:#3a3a3a;border-left:5px solid var(--amar);padding:12px 18px;margin:18px 0 0;font-size:15.5px;color:#e6e0d2;border-radius:0 8px 8px 0}
+
+h2{font-size:29px;margin:52px 0 6px;line-height:1.2;border-bottom:3px solid var(--tinta);padding-bottom:8px}
+h2 .n{color:var(--laranja);font-family:var(--mao);font-size:24px;margin-right:8px}
+h3{font-size:21px;margin:32px 0 8px}
+p{margin:14px 0}
+.grande{font-size:20px}
+.centro{text-align:center}
+code,.mono{font-family:'Consolas','Monaco',monospace;background:#eae4d6;padding:2px 7px;border-radius:4px;font-size:.95em}
+
+.guru{display:flex;gap:18px;align-items:flex-start;margin:34px 0;background:linear-gradient(#efe9db,#e8e1d0);border-left:6px solid var(--roxo);padding:20px 22px;border-radius:4px}
+.guru svg{flex:0 0 92px}
+.guru .fala{position:relative;background:#fff;border:2px solid var(--tinta);border-radius:16px;padding:14px 18px;font-family:var(--mao);font-size:16.5px;line-height:1.55}
+.guru .fala:before{content:"";position:absolute;left:-11px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:var(--tinta)}
+.guru .fala:after{content:"";position:absolute;left:-8px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:#fff}
+.guru .quem{font-family:var(--mao);font-size:13px;color:var(--roxo);text-align:center;margin-top:4px;font-weight:700}
+
+.idiota{background:#e7eefc;border:3px solid var(--azul);border-radius:10px;padding:6px 24px 20px;margin:34px 0}
+.idiota .tit{font-family:var(--mao);font-size:20px;font-weight:700;color:#fff;background:var(--azul);display:inline-block;padding:5px 16px;border-radius:0 0 10px 10px;margin:0 0 8px}
+.idiota .q{font-weight:700;margin:16px 0 4px}
+.idiota .q:before{content:"P: ";color:var(--azul);font-weight:800}
+.idiota .a{margin:0 0 6px}
+.idiota .a:before{content:"R: ";color:var(--verm);font-weight:800}
+
+.cuidado{background:var(--vermc);border:3px dashed var(--verm);border-radius:10px;padding:16px 20px;margin:30px 0}
+.cuidado .tit{font-family:var(--mao);font-weight:700;color:var(--verm);font-size:19px;margin-bottom:2px}
+
+.pontos{background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:8px 26px 22px;margin:44px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.pontos .tit{font-family:var(--mao);font-size:22px;font-weight:700;background:var(--amar);display:inline-block;padding:6px 18px;border:3px solid var(--tinta);border-radius:8px;transform:rotate(-1.5deg);margin:-22px 0 10px}
+.pontos ul{padding-left:22px;margin:8px 0}
+.pontos li{margin:9px 0}
+
+.sticky{background:var(--amar);padding:16px 20px;font-family:var(--mao);font-size:16px;transform:rotate(-1.2deg);box-shadow:3px 4px 9px rgba(0,0,0,.16);margin:30px auto;max-width:540px;border-radius:2px}
+.rabisco{font-family:var(--mao);color:var(--laranja);font-size:15.5px;line-height:1.4}
+
+.lab{background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:8px 24px 26px;margin:34px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.lab .tit{font-family:var(--mao);font-size:19px;font-weight:700;background:var(--verde);color:#fff;display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;border:3px solid var(--tinta)}
+.controles{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
+button{font-family:var(--corpo);font-size:16px;font-weight:700;cursor:pointer;background:var(--azul);color:#fff;border:3px solid var(--tinta);border-radius:9px;padding:9px 18px;box-shadow:3px 3px 0 var(--tinta);transition:.09s}
+button:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--tinta)}
+button:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--tinta)}
+button.sec{background:#fff;color:var(--tinta)}
+button.on{background:var(--verde)}
+button:disabled{opacity:.5;cursor:not-allowed;box-shadow:none;transform:none}
+.alt:focus-visible{outline:3px solid var(--laranja);outline-offset:2px}
+input[type=number]{font-family:var(--corpo);font-size:18px;font-weight:700;width:92px;padding:8px 10px;border:3px solid var(--tinta);border-radius:9px;background:#fff;text-align:center}
+input:focus{outline:3px solid var(--amar)}
+input[type=range]{width:100%;max-width:280px;accent-color:var(--azul);height:26px;vertical-align:middle}
+label.lab-l{font-weight:700;font-size:15px}
+.sl-linha{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0}
+.sl-val{font-family:var(--mao);font-size:22px;font-weight:700;min-width:52px;text-align:center;background:var(--amar);border:2px solid var(--tinta);border-radius:8px;padding:1px 8px}
+
+.tela{background:#fff;border:2px solid var(--linha);border-radius:10px;padding:6px}
+.tela svg{width:100%;height:auto;display:block;max-width:400px;margin:0 auto}
+
+.ex{background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:8px 24px 24px;margin:30px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13);position:relative}
+.ex .tit{font-family:var(--mao);font-size:19px;font-weight:700;background:var(--laranja);color:#fff;display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;border:3px solid var(--tinta)}
+.alt{display:block;background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:12px 16px;margin:9px 0;cursor:pointer;font-size:16.5px;transition:.12s;font-weight:600}
+.alt:hover{background:var(--amar)}
+.alt.certa{background:var(--verdec);border-color:var(--verde)}
+.alt.errada{background:var(--vermc);border-color:var(--verm)}
+.fb{margin-top:14px;font-family:var(--mao);font-size:17px;min-height:0;padding:0;border-radius:9px;overflow:hidden;transition:.2s}
+.fb.mostra{padding:12px 16px;min-height:24px}
+.fb.ok{background:var(--verdec);border:3px solid var(--verde);color:#065f46}
+.fb.no{background:var(--vermc);border:3px solid var(--verm);color:#991b1b}
+@keyframes chacoalha{0%,100%{transform:translateX(0)}15%{transform:translateX(-10px)}30%{transform:translateX(10px)}45%{transform:translateX(-7px)}60%{transform:translateX(7px)}75%{transform:translateX(-3px)}}
+.chacoalha{animation:chacoalha .5s}
+@keyframes pulsa{0%{transform:scale(1)}45%{transform:scale(1.11)}100%{transform:scale(1)}}
+.pulsa{animation:pulsa .45s}
+.selo{position:absolute;right:16px;top:14px;font-size:34px;opacity:0;transform:scale(.2) rotate(-25deg);transition:.4s cubic-bezier(.34,1.7,.5,1)}
+.selo.ver{opacity:1;transform:scale(1) rotate(-12deg)}
+.dica{font-size:14.5px;color:var(--cinza);margin-top:10px;font-style:italic}
+
+.placar{background:var(--tinta);color:var(--papel2);border-radius:14px;padding:26px 28px;margin:44px 0 0;text-align:center}
+.placar .n{font-size:52px;font-weight:800;font-family:var(--mao);color:var(--amar);line-height:1}
+.barra{height:20px;background:#3a3a3a;border-radius:12px;overflow:hidden;margin:16px auto;max-width:420px}
+.barra i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--verde),var(--amar));transition:.6s}
+.conf{position:fixed;top:-20px;width:11px;height:16px;z-index:99;pointer-events:none;border-radius:2px}
+@keyframes cai{to{transform:translateY(105vh) rotate(720deg);opacity:.1}}
+
+footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:var(--cinza);font-size:15px;text-align:center}
+@media(max-width:620px){header h1{font-size:30px}h2{font-size:24px}.guru{flex-direction:column;align-items:center}.guru svg{flex:0 0 auto}}
+</style>
+<link rel="stylesheet" href="../../assets/pecas.css">
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <p class="serie">✏️ MATEMÁTICA DO ZERO — nível 1, fundamentos</p>
+    <span class="aula-num">AULA 4 de 30 · NÍVEL 1</span>
+    <h1>Potências e raízes</h1>
+    <p class="sub">"Ao quadrado" é um quadrado de verdade, "ao cubo" é um cubo, e a raiz é o lado deles. De brinde: escrever números gigantes sem se perder nos zeros.</p>
+    <div class="voltou"><strong>Você já sabe:</strong> multiplicar, os números negativos e a regra de sinais (Aula 2), e decimais (Aula 2). Hoje a multiplicação repetida ganha um atalho.</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<p class="grande">Um tabuleiro de xadrez tem 8 por 8 casas: 64. Um cubo mágico tem 3 por 3 por 3 cubinhos: 27. A distância da Terra ao Sol é de uns 150.000.000 km. As três coisas pedem a mesma ferramenta: <strong>multiplicar um número por ele mesmo, várias vezes</strong>.</p>
+
+<div class="cerebro">
+  <div class="tit">🧠 Poder do cérebro</div>
+  <p>Um quadrado tem área 49. Quanto mede o lado dele? E se a área fosse 50?</p>
+  <details><summary>Ver a resposta</summary><p>Área 49: lado 7, porque 7 · 7 = 49. Área 50: um pouquinho mais que 7 — cerca de 7,07. Nenhum número inteiro serve, e tudo bem: a seção 2 mostra como pensar nesse "lado que não é inteiro".</p></details>
+</div>
+
+<!-- ============ 1 ============ -->
+<h2><span class="n">1</span> Ao quadrado é, literalmente, um quadrado</h2>
+
+<p><span class="mono">5²</span> (lê-se "cinco ao quadrado") é só <span class="mono">5 · 5 = 25</span>. O nome não é à toa: é a <strong>área de um quadrado de lado 5</strong> — 25 quadradinhos. O número pequeno lá em cima diz quantas vezes repetir a multiplicação. Isso se chama <strong>potência</strong>.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: o quadrado cresce</div>
+  <p>Mude o lado e conte os quadradinhos.</p>
+  <div class="sl-linha">
+    <label class="lab-l" for="slLado" style="min-width:60px">lado:</label>
+    <input type="range" id="slLado" min="1" max="8" step="1" value="3">
+    <span class="sl-val" id="vLado">3</span>
+  </div>
+  <div class="tela" style="max-width:280px;margin:0 auto">
+    <svg viewBox="0 0 240 240" id="svgQuadrado" role="img" aria-label="Quadrado dividido em quadradinhos mostrando o lado ao quadrado">
+      <g id="celulasQuadrado"></g>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtQuadrado">Lado 3 → área 3² = 3 · 3 = 9 quadradinhos.</p>
+</div>
+
+<!-- ============ 2 ============ -->
+<h2><span class="n">2</span> A raiz: o caminho de volta</h2>
+
+<p>E se eu disser só a área? "Um quadrado tem 36 quadradinhos — quanto mede o lado?" Resposta: 6, porque <span class="mono">6 · 6 = 36</span>. Isso é a <strong>raiz quadrada</strong>: <span class="mono">√36 = 6</span>. É a máquina do quadrado rodando ao contrário.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: ache o lado</div>
+  <p>Escolha a área. O laboratório desenha o quadrado e mede o lado.</p>
+  <div class="sl-linha">
+    <label class="lab-l" for="slArea" style="min-width:60px">área:</label>
+    <input type="range" id="slArea" min="1" max="64" step="1" value="36">
+    <span class="sl-val" id="vArea">36</span>
+  </div>
+  <div class="tela" style="max-width:280px;margin:0 auto">
+    <svg viewBox="0 0 240 240" id="svgRaiz" role="img" aria-label="Quadrado com a área escolhida e o lado calculado pela raiz">
+      <rect id="rectRaiz" x="8" y="8" width="168" height="168" fill="rgba(124,58,237,.18)" stroke="var(--roxo)" stroke-width="3"/>
+      <text id="ladoRaiz" x="92" y="200" text-anchor="middle" font-size="15" font-weight="800" fill="var(--roxo)">lado = 6</text>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtRaiz">√36 = 6, porque 6 · 6 = 36.</p>
+</div>
+
+<div class="cuidado">
+  <div class="tit">⚠️ Cuidado — nem toda raiz é inteira, e 2³ não é 2 · 3</div>
+  <p style="margin:6px 0 0"><span class="mono">√2</span> não é 1 (1 · 1 = 1, pouco) nem 2 (2 · 2 = 4, muito). Fica no meio: ≈ 1,41, com vírgula que nunca termina. E não confunda potência com multiplicação comum: <span class="mono">2³ = 2 · 2 · 2 = 8</span>, mas <span class="mono">2 · 3 = 6</span>.</p>
+</div>
+
+<!-- ============ 3 ============ -->
+<h2><span class="n">3</span> Ao cubo é, literalmente, um cubo</h2>
+
+<p>Suba uma dimensão: empilhe camadas de quadrados até virar um cubo. Um cubo de aresta 3 tem <span class="mono">3 · 3 · 3 = 27</span> cubinhos. Por isso <span class="mono">3³</span> se lê "três <strong>ao cubo</strong>" — é o <strong>volume</strong> do cubo.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: o cubo cresce</div>
+  <p>Mude a aresta e conte os cubinhos, camada por camada.</p>
+  <div class="sl-linha"><label class="lab-l" for="slC3" style="min-width:60px">aresta:</label><input type="range" id="slC3" min="1" max="5" step="1" value="3"><span class="sl-val" id="vC3">3</span></div>
+  <div class="tela" style="max-width:320px;margin:0 auto"><svg id="svg3" role="img" aria-label="Cubo feito de cubinhos"></svg></div>
+  <p class="rabisco centro" id="txt3"></p>
+</div>
+
+<!-- ============ 4 ============ -->
+<h2><span class="n">4</span> A raiz cúbica: a aresta de um volume</h2>
+
+<p>O caminho de volta do cubo: "um cubo tem 64 cubinhos — quanto mede a aresta?" 4, porque <span class="mono">4 · 4 · 4 = 64</span>. Essa é a <strong>raiz cúbica</strong>: <span class="mono">∛64 = 4</span>. O numerozinho no "telhado" da raiz diz quantas vezes o número foi multiplicado.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: ache a aresta</div>
+  <p>Escolha o volume. O laboratório procura a aresta.</p>
+  <div class="sl-linha"><label class="lab-l" for="slV4" style="min-width:70px">volume:</label><input type="range" id="slV4" min="1" max="125" step="1" value="64"><span class="sl-val" id="vV4">64</span></div>
+  <div class="tela" style="max-width:320px;margin:0 auto"><svg id="svg4" role="img" aria-label="Cubo com o volume escolhido e sua aresta"></svg></div>
+  <p class="rabisco centro" id="txt4"></p>
+</div>
+
+<div class="guru">
+  <svg viewBox="0 0 100 118" width="92">
+    <ellipse cx="50" cy="112" rx="34" ry="6" fill="#00000018"/>
+    <path d="M50 60 L20 108 L80 108 Z" fill="#7c3aed" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="50" cy="34" r="20" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M30 36 q20 46 40 0 q-6 34 -20 34 q-14 0 -20 -34" fill="#e5e7eb" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M40 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M52 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M30 22 q20 -12 40 0" fill="none" stroke="#1b1b1b" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="24" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="76" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+  </svg>
+  <div>
+        <div class="fala">Ao quadrado não é uma regra de conta: é um quadrado de verdade, e a raiz é o lado dele. Sempre que um símbolo parecer abstrato, pergunte que desenho ele esconde. Quase sempre é um desenho simples.</div>
+    <div class="quem">— o Guru</div>
+  </div>
+</div>
+
+<!-- ============ 5 ============ -->
+<h2><span class="n">5</span> Quadrado nunca é negativo</h2>
+
+<p><span class="mono">(−3)² = (−3) · (−3) = 9</span>. Menos vezes menos dá mais (Aula 2) — o sinal some. Por isso <strong>todo número ao quadrado é zero ou positivo</strong>. Esse detalhe vai ser a peça-chave do desvio padrão (Aula 5) e dos mínimos quadrados (Aula 23): diferenças elevadas ao quadrado não se cancelam. Já no cubo o sinal fica: <span class="mono">(−2)³ = −8</span>.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: quadrado nunca é negativo</div>
+  <p>Arraste x para os negativos e repare na barra do quadrado (e na do cubo).</p>
+  <div class="sl-linha">
+    <label class="lab-l" for="slXQ" style="min-width:40px">x:</label>
+    <input type="range" id="slXQ" min="-3" max="3" step="0.5" value="-2">
+    <span class="sl-val" id="vXQ">−2</span>
+  </div>
+  <div class="tela">
+    <svg viewBox="0 0 400 170" id="svgXQ" role="img" aria-label="Barras de x, x ao quadrado e x ao cubo">
+      <line x1="200" y1="10" x2="200" y2="160" stroke="#1b1b1b" stroke-width="2"/>
+      <text x="8" y="40" font-size="13" font-weight="700" fill="var(--azul)">x</text>
+      <text x="8" y="90" font-size="13" font-weight="700" fill="var(--roxo)">x²</text>
+      <text x="8" y="140" font-size="13" font-weight="700" fill="var(--laranja)">x³</text>
+      <rect id="barraX" x="200" y="25" width="0" height="22" fill="var(--azul)"/>
+      <rect id="barraX2" x="200" y="75" width="0" height="22" fill="var(--roxo)"/>
+      <rect id="barraX3" x="200" y="125" width="0" height="22" fill="var(--laranja)"/>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtXQ">x = −2 → x² = 4</p>
+</div>
+
+<!-- ============ 6 ============ -->
+<h2><span class="n">6</span> Potências de 10: números gigantes sem se perder</h2>
+
+<p><span class="mono">10² = 100</span>, <span class="mono">10³ = 1.000</span>, <span class="mono">10⁶ = 1.000.000</span>: o expoente de 10 é <strong>quantos zeros</strong> vêm depois do 1. Isso permite escrever números enormes de um jeito curto, a <strong>notação científica</strong>: a distância até o Sol, 150.000.000 km, vira <span class="mono">1,5 × 10⁸</span> km. (Números minúsculos, com expoente negativo, chegam na Aula 14.)</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: a régua das potências de 10</div>
+  <p>Monte um número em notação científica: um número de 1 a 9,9 vezes uma potência de 10.</p>
+  <div class="sl-linha"><label class="lab-l" for="slM6" style="min-width:90px">número:</label><input type="range" id="slM6" min="1" max="9.9" step="0.1" value="1.5"><span class="sl-val" id="vM6">1,5</span></div>
+  <div class="sl-linha"><label class="lab-l" for="slE6" style="min-width:90px">× 10 elevado a:</label><input type="range" id="slE6" min="0" max="12" step="1" value="8"><span class="sl-val" id="vE6">8</span></div>
+  <div class="tela"><svg id="svg6" role="img" aria-label="Régua em potências de 10 com exemplos"></svg></div>
+  <p class="rabisco centro" id="txt6"></p>
+</div>
+
+<div class="idiota">
+  <div class="tit">Não existe pergunta idiota</div>
+  <p class="q">√36 não poderia ser −6? Afinal, (−6) · (−6) = 36.</p>
+  <p class="a">Boa! As duas dão 36 ao quadrado. Mas o símbolo <span class="mono">√</span> foi combinado para devolver a <strong>positiva</strong> — é o lado do quadrado, e lado não tem tamanho negativo. A negativa não some: ela volta na Aula 13, quando a parábola cruza o zero dos dois lados.</p>
+  <p class="q">E a raiz de um número negativo?</p>
+  <p class="a">Depende da raiz. <span class="mono">∛−8 = −2</span> existe, porque <span class="mono">(−2)³ = −8</span> (no cubo o sinal fica). Já <span class="mono">√−4</span> não existe com os números que você conhece: nenhum quadrado é negativo (seção 5). Guarde essa pergunta — a Aula 18 inventa um número novo só para respondê-la.</p>
+</div>
+
+<div class="pontos">
+  <div class="tit">Pontos importantes</div>
+  <ul>
+    <li><strong>Potência:</strong> <span class="mono">5² = 5 · 5</span> (área do quadrado), <span class="mono">3³ = 3 · 3 · 3</span> (volume do cubo).</li>
+    <li><strong>Raiz quadrada:</strong> o lado do quadrado — <span class="mono">√36 = 6</span>. <strong>Raiz cúbica:</strong> a aresta do cubo — <span class="mono">∛64 = 4</span>.</li>
+    <li>Nem toda raiz é inteira: <span class="mono">√2 ≈ 1,41</span>.</li>
+    <li>Quadrado nunca é negativo; cubo guarda o sinal.</li>
+    <li>Potência de 10 = quantos zeros: <span class="mono">1,5 × 10⁸ = 150.000.000</span>.</li>
+  </ul>
+</div>
+
+<!-- ============ exercicios ============ -->
+<h2><span class="n">✏️</span> Afie o lápis</h2>
+<p>Seis exercícios. Erre à vontade — a correção explica o porquê.</p>
+
+<div class="ex" id="ex1">
+  <div class="tit">Exercício 1</div>
+  <div class="selo">✅</div>
+  <p>Quanto vale <span class="mono">4²</span>?</p>
+  <p><input type="number" data-r="16" aria-label="Resposta do exercício 1"></p>
+  <button class="check" data-ex="ex1">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex2">
+  <div class="tit">Exercício 2</div>
+  <div class="selo">✅</div>
+  <p>Quanto vale <span class="mono">√49</span>?</p>
+  <p><input type="number" data-r="7" aria-label="Resposta do exercício 2"></p>
+  <button class="check" data-ex="ex2">Conferir</button>
+  <div class="fb"></div>
+  <p class="dica">Dica: qual número vezes ele mesmo dá 49?</p>
+</div>
+
+<div class="ex" id="ex3">
+  <div class="tit">Exercício 3</div>
+  <div class="selo">✅</div>
+  <p>Escreva por extenso: <span class="mono">3 × 10⁴</span> = ?</p>
+  <p><input type="number" data-r="30000" aria-label="Resposta do exercício 3"></p>
+  <button class="check" data-ex="ex3">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex4">
+  <div class="tit">Exercício 4</div>
+  <div class="selo">✅</div>
+  <p>Quanto vale <span class="mono">(−3)²</span>?</p>
+  <p><input type="number" data-r="9" aria-label="Resposta do exercício 4"></p>
+  <button class="check" data-ex="ex4">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex5">
+  <div class="tit">Exercício 5 — o desafio</div>
+  <div class="selo">🏆</div>
+  <p>Uma caixa cúbica comporta exatamente 125 cubinhos de 1 cm. Quanto mede a aresta da caixa (em cm)?</p>
+  <p><input type="number" data-r="5" aria-label="Resposta do exercício 5"></p>
+  <button class="check" data-ex="ex5">Conferir</button>
+  <div class="fb"></div>
+  <p class="dica">Dica: qual número multiplicado por ele mesmo três vezes dá 125?</p>
+</div>
+
+<div class="ex" id="ex6">
+  <div class="tit">Exercício 6</div>
+  <div class="selo">✅</div>
+  <p>O que dá para dizer sobre <span class="mono">√2</span>?</p>
+  <div class="alts" data-r="2">
+    <div class="alt" data-i="0">É 1.</div>
+    <div class="alt" data-i="1">É 2.</div>
+    <div class="alt" data-i="2">Não é inteira: fica entre 1 e 2, perto de 1,41.</div>
+    <div class="alt" data-i="3">Não existe.</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="placar" id="placar">
+  <p style="margin:0 0 4px;font-family:var(--mao);font-size:19px">Seu placar</p>
+  <div class="n"><span id="pn">0</span> / 6</div>
+  <div class="barra"><i id="pbar"></i></div>
+  <p id="pmsg" style="margin:0;color:#cfc9bb">Resolva os exercícios acima e acompanhe aqui.</p>
+</div>
+
+<footer>
+  Matemática do Zero · Aula 4 — Potências e raízes<br>
+  <strong>Próxima aula:</strong> Dados: média, mediana, moda e desvio.
+</footer>
+
+</div>
+
+<script src="../../assets/progresso.js"></script>
+<script src="../../assets/auth.js"></script>
+<script src="../../assets/auth-ui.js"></script>
+<script src="../../assets/catalogo.js"></script>
+<script src="../../assets/menu.js"></script>
+<script>
+(function(){
+"use strict";
+var AULA_ID = "04-potencias-e-raizes";
+var NS="http://www.w3.org/2000/svg";
+function $(id){ return document.getElementById(id); }
+function num(v,d){
+  if(d===undefined) d=2;
+  var p=Math.pow(10,d), r=Math.round(v*p)/p;
+  if(r===0) r=0;
+  return String(r).replace(".",",").replace("-","−");
+}
+function milhar(v){
+  var s=Math.round(v).toString(), neg=s.charAt(0)==="-"; if(neg) s=s.slice(1);
+  var out=""; while(s.length>3){ out="."+s.slice(-3)+out; s=s.slice(0,-3); }
+  return (neg?"−":"")+s+out;
+}
+function el(tag,attrs,pai){
+  var e=document.createElementNS(NS,tag);
+  for(var k in attrs) e.setAttribute(k,attrs[k]);
+  if(pai) pai.appendChild(e);
+  return e;
+}
+function limpa(g){ while(g.firstChild) g.removeChild(g.firstChild); }
+/* plano cartesiano: grade, eixos e conversao de coordenadas */
+function plano(svg,o){
+  /* ox/oy: desenha o plano numa regiao de um svg maior (sem mexer no viewBox) */
+  var w=o.w||400, h=o.h||300, ox=o.ox||0, oy=o.oy||0, regiao=("ox" in o)||("oy" in o);
+  if(!regiao) svg.setAttribute("viewBox","0 0 "+w+" "+h);
+  var P={w:w,h:h,o:o};
+  P.X=function(x){ return ox+(x-o.xmin)/(o.xmax-o.xmin)*w; };
+  P.Y=function(y){ return oy+h-(y-o.ymin)/(o.ymax-o.ymin)*h; };
+  P.xDe=function(px){ return o.xmin+(px-ox)/w*(o.xmax-o.xmin); };
+  var g=el("g",{},svg), px=o.px||1, py=o.py||1, i, eps=1e-9;
+  for(i=Math.ceil(o.xmin/px)*px;i<=o.xmax+eps;i+=px) el("line",{x1:P.X(i),y1:oy,x2:P.X(i),y2:oy+h,stroke:"#ece7da","stroke-width":1},g);
+  for(i=Math.ceil(o.ymin/py)*py;i<=o.ymax+eps;i+=py) el("line",{x1:ox,y1:P.Y(i),x2:ox+w,y2:P.Y(i),stroke:"#ece7da","stroke-width":1},g);
+  if(o.ymin<=0&&o.ymax>=0) el("line",{x1:ox,y1:P.Y(0),x2:ox+w,y2:P.Y(0),stroke:"#1b1b1b","stroke-width":1.6},g);
+  if(o.xmin<=0&&o.xmax>=0) el("line",{x1:P.X(0),y1:oy,x2:P.X(0),y2:oy+h,stroke:"#1b1b1b","stroke-width":1.6},g);
+  if(o.rotulos){
+    var lx=o.rotX||px, ly=o.rotY||py, y0=(o.ymin<=0&&o.ymax>=0)?P.Y(0):oy+h, x0=(o.xmin<=0&&o.xmax>=0)?P.X(0):ox;
+    var dx=(o.xmax-o.xmin)*0.03, dy=(o.ymax-o.ymin)*0.04;
+    for(i=Math.ceil(o.xmin/lx)*lx;i<=o.xmax+eps;i+=lx) if(Math.abs(i)>eps&&i>o.xmin+dx&&i<o.xmax-dx) el("text",{x:P.X(i),y:Math.min(oy+h-3,y0+14),"font-size":11,fill:"#6b7280","text-anchor":"middle"},g).textContent=num(i);
+    for(i=Math.ceil(o.ymin/ly)*ly;i<=o.ymax+eps;i+=ly) if(Math.abs(i)>eps&&i>o.ymin+dy&&i<o.ymax-dy) el("text",{x:x0-4<ox+14?x0+4:x0-4,y:P.Y(i)+4,"font-size":11,fill:"#6b7280","text-anchor":x0-4<ox+14?"start":"end"},g).textContent=num(i);
+  }
+  P.camada=el("g",{},svg);
+  if(regiao){
+    /* numa regiao, o que passa da borda e cortado para nao invadir o vizinho */
+    plano.n=(plano.n||0)+1;
+    var id="corte"+plano.n+"_"+Math.floor(Math.random()*1e6);
+    var cp=el("clipPath",{id:id},svg);
+    el("rect",{x:ox,y:oy,width:w,height:h},cp);
+    P.camada.setAttribute("clip-path","url(#"+id+")");
+  }
+  /* caminho de uma funcao, amostrada; valores fora da tela sao cortados */
+  P.d=function(f,a,b,n){
+    a=(a===undefined)?o.xmin:a; b=(b===undefined)?o.xmax:b; n=n||240;
+    var s="", novo=true, lim=(o.ymax-o.ymin)*3;
+    for(var k=0;k<=n;k++){
+      var x=a+(b-a)*k/n, y=f(x);
+      if(!isFinite(y)){ novo=true; continue; }
+      y=Math.max(o.ymin-lim,Math.min(o.ymax+lim,y));
+      s+=(novo?"M":"L")+P.X(x).toFixed(1)+" "+P.Y(y).toFixed(1)+" "; novo=false;
+    }
+    return s||"M0 0";
+  };
+  return P;
+}
+/* arrastar uma alca dentro de um svg; cb recebe coordenadas do viewBox */
+function arrasta(svg,alca,cb){
+  var ativo=false;
+  function pos(ev){
+    var r=svg.getBoundingClientRect(), vb=svg.viewBox.baseVal;
+    cb((ev.clientX-r.left)/r.width*vb.width,(ev.clientY-r.top)/r.height*vb.height);
+  }
+  alca.addEventListener("pointerdown",function(ev){ ativo=true; ev.preventDefault(); pos(ev); });
+  svg.addEventListener("pointermove",function(ev){ if(ativo) pos(ev); });
+  window.addEventListener("pointerup",function(){ ativo=false; });
+}
+/* texto de receita sem "+ -": termos [[coef, "x²"], [coef, "x"], [coef, ""]] */
+function receita(termos){
+  var s="";
+  termos.forEach(function(t){
+    var c=t[0], v=t[1];
+    if(Math.abs(c)<1e-9) return;
+    var a=Math.abs(c), cs=(a===1&&v)?"":num(a);
+    if(s==="") s=(c<0?"−":"")+cs+v;
+    else s+=(c<0?" − ":" + ")+cs+v;
+  });
+  return s||"0";
+}
+/* potencia com expoente inteiro em sobrescrito (2¹⁰); com virgula fica 2^0,5 */
+function pot(b,n){
+  var t=num(n,1);
+  if(t.indexOf(",")!==-1) return b+"^"+t;
+  var m={"0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹","−":"⁻"};
+  return b+t.split("").map(function(c){return m[c]||c;}).join("");
+}
+
+
+/* ---------- lab: o quadrado cresce ---------- */
+var slLado=$("slLado"), celulas=$("celulasQuadrado");
+function pintaQuadrado(){
+  var l=parseInt(slLado.value,10), c=28;
+  $("vLado").textContent=l;
+  limpa(celulas);
+  for(var i=0;i<l;i++) for(var j=0;j<l;j++) el("rect",{x:8+j*c,y:8+i*c,width:c-2,height:c-2,fill:"var(--azulc)",stroke:"var(--azul)","stroke-width":1.5},celulas);
+  $("txtQuadrado").textContent="Lado "+l+" → área "+l+"² = "+l+" · "+l+" = "+(l*l)+(l*l===1?" quadradinho.":" quadradinhos.");
+}
+slLado.addEventListener("input",pintaQuadrado); pintaQuadrado();
+
+/* ---------- lab: ache o lado ---------- */
+var slArea=$("slArea");
+function pintaRaiz(){
+  var a=parseInt(slArea.value,10), l=Math.sqrt(a), px=l*21;
+  $("vArea").textContent=a;
+  var r=$("rectRaiz"); r.setAttribute("width",px); r.setAttribute("height",px);
+  var t=$("ladoRaiz"); t.setAttribute("x",8+px/2); t.setAttribute("y",Math.min(8+px+20,232)); t.textContent="lado = "+num(l);
+  var inteira=Math.round(l)*Math.round(l)===a;
+  $("txtRaiz").textContent = inteira
+    ? "√"+a+" = "+Math.round(l)+", porque "+Math.round(l)+" · "+Math.round(l)+" = "+a+"."
+    : "√"+a+" ≈ "+num(l)+" — fica entre "+Math.floor(l)+" e "+Math.ceil(l)+" ("+Math.floor(l)+"² = "+Math.floor(l)*Math.floor(l)+", "+Math.ceil(l)+"² = "+Math.ceil(l)*Math.ceil(l)+").";
+}
+slArea.addEventListener("input",pintaRaiz); pintaRaiz();
+
+/* ---------- cubo isometrico ---------- */
+function cubinhos(svg,n,lado){
+  /* desenha n x n x n cubinhos em perspectiva isometrica, de tras para frente */
+  var s=lado, cx=Math.cos(Math.PI/6)*s, cy=Math.sin(Math.PI/6)*s, ox=160, oy=40+n*s;
+  function P(x,y,z){ return [ox+(x-y)*cx, oy+(x+y)*cy-z*s]; }
+  function face(pts,cor){ el("polygon",{points:pts.map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1);}).join(" "),fill:cor,stroke:"#1e3a8a","stroke-width":0.9},svg); }
+  for(var z=0;z<n;z++) for(var x=0;x<n;x++) for(var y=0;y<n;y++){
+    face([P(x,y,z+1),P(x+1,y,z+1),P(x+1,y+1,z+1),P(x,y+1,z+1)],"#bfdbfe");
+    face([P(x+1,y,z),P(x+1,y+1,z),P(x+1,y+1,z+1),P(x+1,y,z+1)],"#60a5fa");
+    face([P(x,y+1,z),P(x+1,y+1,z),P(x+1,y+1,z+1),P(x,y+1,z+1)],"#3b82f6");
+  }
+}
+var svg3=$("svg3"); svg3.setAttribute("viewBox","0 0 320 300");
+function pinta3(){
+  var n=parseInt($("slC3").value,10);
+  $("vC3").textContent=n;
+  limpa(svg3);
+  cubinhos(svg3,n,Math.min(40,120/n));
+  $("txt3").textContent="aresta "+n+" → "+n+" camadas de "+n+" · "+n+" = "+(n*n)+" → volume "+n+"³ = "+(n*n*n)+(n===1?" cubinho":" cubinhos");
+}
+$("slC3").addEventListener("input",pinta3); pinta3();
+
+var svg4=$("svg4"); svg4.setAttribute("viewBox","0 0 320 300");
+function pinta4(){
+  var v=parseInt($("slV4").value,10), a=Math.cbrt(v), ai=Math.round(a), exato=ai*ai*ai===v;
+  $("vV4").textContent=v;
+  limpa(svg4);
+  var lado=a*22, s=lado, cx=Math.cos(Math.PI/6)*s, cy=Math.sin(Math.PI/6)*s, ox=160, oy=70+s;
+  function pt(x,y){ return x.toFixed(1)+","+y.toFixed(1); }
+  var A=[ox,oy], B=[ox+cx,oy+cy], C=[ox,oy+2*cy], D=[ox-cx,oy+cy];
+  el("polygon",{points:[pt(A[0],A[1]-s),pt(B[0],B[1]-s),pt(C[0],C[1]-s),pt(D[0],D[1]-s)].join(" "),fill:"#ddd6fe",stroke:"var(--roxo)","stroke-width":2},svg4);
+  el("polygon",{points:[pt(B[0],B[1]-s),pt(C[0],C[1]-s),pt(C[0],C[1]),pt(B[0],B[1])].join(" "),fill:"#a78bfa",stroke:"var(--roxo)","stroke-width":2},svg4);
+  el("polygon",{points:[pt(D[0],D[1]-s),pt(C[0],C[1]-s),pt(C[0],C[1]),pt(D[0],D[1])].join(" "),fill:"#8b5cf6",stroke:"var(--roxo)","stroke-width":2},svg4);
+  el("text",{x:(C[0]+B[0])/2+14,y:(C[1]+B[1])/2+12,"font-size":14,"font-weight":800,fill:"var(--roxo)"},svg4).textContent="aresta ≈ "+num(a);
+  $("txt4").textContent = exato ? "∛"+v+" = "+ai+", porque "+ai+" · "+ai+" · "+ai+" = "+v+"."
+    : "∛"+v+" ≈ "+num(a)+" — fica entre "+Math.floor(a)+" e "+Math.ceil(a)+" ("+Math.floor(a)+"³ = "+Math.pow(Math.floor(a),3)+", "+Math.ceil(a)+"³ = "+Math.pow(Math.ceil(a),3)+").";
+}
+$("slV4").addEventListener("input",pinta4); pinta4();
+
+/* ---------- lab: quadrado nunca e negativo ---------- */
+var slXQ=$("slXQ");
+function pintaXQ(){
+  var x=parseFloat(slXQ.value), x2=x*x, x3=x*x*x, e=6.5;
+  $("vXQ").textContent=num(x);
+  var bx=$("barraX"); bx.setAttribute("x", x>=0 ? 200 : 200+x*e); bx.setAttribute("width", Math.abs(x)*e);
+  $("barraX2").setAttribute("width", x2*e);
+  var b3=$("barraX3"); b3.setAttribute("x", x3>=0 ? 200 : 200+x3*e); b3.setAttribute("width", Math.abs(x3)*e);
+  var px = x<0 ? "("+num(x)+")" : num(x);
+  $("txtXQ").textContent="x = "+num(x)+" → x² = "+px+" · "+px+" = "+num(x2)+(x<0?" (o sinal sumiu)":"")+" · x³ = "+num(x3)+(x<0?" (no cubo o sinal fica)":"");
+}
+slXQ.addEventListener("input",pintaXQ); pintaXQ();
+
+/* ---------- lab: potencias de 10 ---------- */
+var svg6=$("svg6"); svg6.setAttribute("viewBox","0 0 400 170");
+var refs6=[[0,"uma pessoa"],[2,"uma escola"],[4,"um estádio lotado"],[6,"uma cidade grande"],[8,"km até o Sol"],[9,"pessoas na Terra"],[12,"km até Plutão"]];
+var nomes6={3:"milhares",6:"milhões",9:"bilhões",12:"trilhões"};
+function pinta6(){
+  var m=Math.round(parseFloat($("slM6").value)*10)/10, e=parseInt($("slE6").value,10), v=m*Math.pow(10,e);
+  $("vM6").textContent=num(m,1); $("vE6").textContent=e;
+  limpa(svg6);
+  var X=function(t){return 20+t*30;};
+  el("line",{x1:X(0),y1:100,x2:X(12),y2:100,stroke:"#1b1b1b","stroke-width":2},svg6);
+  for(var k=0;k<=12;k++){ el("line",{x1:X(k),y1:94,x2:X(k),y2:106,stroke:"#1b1b1b"},svg6); el("text",{x:X(k),y:122,"font-size":10.5,"text-anchor":"middle",fill:"#6b7280"},svg6).textContent="10"+pot("",k).slice(0); }
+  refs6.forEach(function(r,i){ var y=i%2?70:50; el("line",{x1:X(r[0]),y1:y+4,x2:X(r[0]),y2:94,stroke:"#c9c1ae"},svg6); el("text",{x:X(r[0]),y:y,"font-size":9.5,"text-anchor":i===0?"start":i===refs6.length-1?"end":"middle",fill:"#6b7280"},svg6).textContent=r[1]; });
+  var pos=e+Math.log(m)/Math.LN10;
+  el("circle",{cx:X(pos),cy:100,r:7,fill:"var(--verm)",stroke:"#fff","stroke-width":2},svg6);
+  el("text",{x:200,y:150,"font-size":12,"text-anchor":"middle",fill:"#6b7280"},svg6).textContent="cada tracinho é 10 vezes o anterior";
+  var nome=""; for(var p in nomes6){ if(v>=Math.pow(10,+p)) nome=nomes6[p]; }
+  $("txt6").textContent=num(m,1)+" × 10"+pot("",e)+" = "+(e===0?num(v,1):milhar(v))+(e>0?" ("+e+(e===1?" casa":" casas")+" para a direita)":"")+(nome&&v>=1000?" · na casa dos "+nome:"");
+}
+$("slM6").addEventListener("input",pinta6); $("slE6").addEventListener("input",pinta6); pinta6();
+
+/* ---------- exercicios ---------- */
+var feitos={}, TOTAL=6;
+function confete(){
+  var cores=["#fde68a","#2563eb","#dc2626","#059669","#7c3aed","#d97706"];
+  for(var i=0;i<40;i++){
+    (function(i){
+      var d=document.createElement("div");
+      d.className="conf"; d.style.left=(Math.random()*100)+"vw";
+      d.style.background=cores[i%cores.length];
+      d.style.animation="cai "+(1.9+Math.random()*1.5)+"s linear forwards";
+      d.style.animationDelay=(Math.random()*.5)+"s";
+      document.body.appendChild(d);
+      setTimeout(function(){d.remove();},4200);
+    })(i);
+  }
+}
+function marca(id,ok){
+  if(ok&&!feitos[id]){
+    feitos[id]=true;
+    if(window.Progresso) Progresso.marcar(AULA_ID,id);
+    var n=Object.keys(feitos).length;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Você fechou a Aula 4. 🎉</strong> Quadrados, cubos e raízes no bolso. Na próxima: resumir uma lista de dados."; confete(); }
+    else msg.textContent="Boa! Faltam "+(TOTAL-n)+".";
+    document.querySelector("#"+id+" .selo").classList.add("ver");
+  }
+}
+function restauraProgresso(){
+  if(!window.Progresso) return;
+  Progresso.carregar(AULA_ID).then(function(itens){
+    itens.forEach(function(id){
+      if(!feitos[id] && document.getElementById(id)){
+        feitos[id]=true;
+        document.querySelector("#"+id+" .selo").classList.add("ver");
+      }
+    });
+    var n=Object.keys(feitos).length;
+    if(n===0) return;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    msg.textContent = n===TOTAL
+      ? "Você já tinha concluído esta aula. 🎉"
+      : "Progresso salvo: "+n+"/"+TOTAL+". Faltam "+(TOTAL-n)+".";
+  });
+}
+function fb(box,ok,txt){
+  var f=box.querySelector(".fb");
+  f.className="fb mostra "+(ok?"ok":"no"); f.innerHTML=txt;
+  box.classList.remove("chacoalha");
+  if(!ok){ void box.offsetWidth; box.classList.add("chacoalha"); }
+}
+var explica={
+ "ex1": {
+  "ok": "Isso: 4 · 4 = 16 — um quadrado de lado 4.",
+  "no": "4² é 4 · 4 = 16 (e não 4 · 2 = 8)."
+ },
+ "ex2": {
+  "ok": "Exato: 7 · 7 = 49.",
+  "no": "Procure o número que vezes ele mesmo dá 49: 7 · 7 = 49, então √49 = 7."
+ },
+ "ex3": {
+  "ok": "Isso: 10⁴ = 10.000 (quatro zeros), e 3 × 10.000 = 30.000.",
+  "no": "10⁴ é 1 seguido de 4 zeros: 10.000. Vezes 3: 30.000."
+ },
+ "ex4": {
+  "ok": "Isso: menos vezes menos dá mais, então (−3) · (−3) = 9.",
+  "no": "(−3)² = (−3) · (−3). Sinais iguais dão mais: 9."
+ },
+ "ex5": {
+  "ok": "Perfeito: 5 · 5 · 5 = 125, então a aresta é ∛125 = 5 cm.",
+  "no": "Procure o número que multiplicado três vezes dá 125: 4 · 4 · 4 = 64 (pouco), 5 · 5 · 5 = 125. Aresta: 5 cm."
+ }
+};
+document.querySelectorAll("button.check").forEach(function(b){
+  b.addEventListener("click",function(){
+    var box=document.getElementById(b.dataset.ex);
+    var ins=box.querySelectorAll("input[data-r],select[data-r]"), tudoOk=true, vazio=false;
+    ins.forEach(function(inp){
+      if(inp.value===""){vazio=true;return;}
+      var ok=Math.abs(parseFloat(inp.value)-parseFloat(inp.dataset.r)) < 0.001;
+      inp.style.borderColor=ok?"#059669":"#dc2626";
+      inp.style.background=ok?"#d1fae5":"#fee2e2";
+      if(!ok) tudoOk=false;
+    });
+    if(vazio){ fb(box,false,"Preencha o campo antes de conferir. 🙂"); return; }
+    fb(box,tudoOk,(tudoOk?"✔ ":"✘ ")+(tudoOk?explica[b.dataset.ex].ok:explica[b.dataset.ex].no));
+    marca(b.dataset.ex,tudoOk);
+  });
+});
+var expAlt={
+ "ex6": [
+  "1 · 1 = 1, não 2. A raiz de 2 é maior que 1.",
+  "2 · 2 = 4, não 2. A raiz de 2 é menor que 2.",
+  "Isso! Fica entre 1 e 2, perto de 1,41 — com vírgula que nunca termina.",
+  "Existe sim: é o lado de um quadrado de área 2 (dá para desenhar!)."
+ ]
+};
+document.querySelectorAll(".alts").forEach(function(grupo){
+  var box=grupo.closest(".ex"), certa=parseInt(grupo.dataset.r,10);
+  grupo.querySelectorAll(".alt").forEach(function(alt){
+    alt.setAttribute("tabindex","0");
+    alt.setAttribute("role","button");
+    alt.setAttribute("aria-label","Alternativa "+alt.textContent.trim());
+    function escolhe(){
+      var i=parseInt(alt.dataset.i,10), ok=(i===certa);
+      grupo.querySelectorAll(".alt").forEach(function(a){a.classList.remove("certa","errada");});
+      alt.classList.add(ok?"certa":"errada");
+      if(ok) alt.classList.add("pulsa");
+      fb(box,ok,(ok?"✔ ":"✘ ")+expAlt[box.id][i]);
+      marca(box.id,ok);
+    }
+    alt.addEventListener("click",escolhe);
+    alt.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();escolhe();}});
+  });
+});
+
+restauraProgresso();
+
+})();
+</script>
+</body>
+</html>

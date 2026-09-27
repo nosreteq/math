@@ -156,6 +156,12 @@
   function rota() {
     var h = location.hash.replace(/^#\/?/, "");
     var m;
+    // endereço da numeração antiga (18 aulas): troca pelo novo sem empilhar histórico
+    var antigos = window.CATALOGO_ANTIGOS || {};
+    if ((m = h.match(/^aula\/([\w-]+)$/)) && acharAula(m[1]) === -1 && antigos[m[1]]) {
+      history.replaceState(null, "", "#/aula/" + antigos[m[1]]);
+      h = "aula/" + antigos[m[1]];
+    }
     if ((m = h.match(/^aula\/([\w-]+)$/)) && acharAula(m[1]) !== -1) {
       var i = acharAula(m[1]);
       var item = ordem[i];

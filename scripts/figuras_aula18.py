@@ -59,7 +59,7 @@ for n, cor in [(2, CINZA), (8, LARANJA), (64, VERDE)]:
 a.plot(np.cos(t), np.sin(t), "o", color=ROXO, ms=10)
 a.legend(loc="lower left"); a.set_xlim(-1.8, 1.6); a.set_ylim(-1.2, 2.3); a.set_aspect("equal")
 
-fig.suptitle("Aula 18 — Girar multiplicando", fontsize=18, weight="bold", color=TXT)
+fig.suptitle("Aula 18 — Girar multiplicando: números complexos", fontsize=18, weight="bold", color=TXT)
 fig.tight_layout(rect=[0, 0, 1, 0.955])
 saida = Path(__file__).resolve().parent.parent / "aulas" / "18-girar-multiplicando" / "figuras.png"
 fig.savefig(saida, dpi=150, facecolor="white")

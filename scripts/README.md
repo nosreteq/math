@@ -1,6 +1,7 @@
 # scripts
 
-Geradores das figuras estáticas (`figuras.png`) de cada aula, em Python com matplotlib.
+Geradores das figuras estáticas (`figuras.png`) de cada uma das 30 aulas, em Python com matplotlib.
+O número do script é o número da aula (`figuras_aula12.py` → `aulas/12-areas-volumes-e-pitagoras/`).
 
 As aulas em HTML **não dependem destes scripts** — os desenhos interativos são feitos em SVG puro,
 direto no navegador. Estes arquivos existem para reproduzir a versão em imagem, útil para imprimir,
@@ -17,46 +18,15 @@ pip install -r requirements.txt
 Você pode rodar os scripts a partir de qualquer pasta (da raiz ou de dentro de `scripts/`):
 
 ```bash
-# A partir da raiz do projeto:
+# A partir da raiz do projeto, uma aula (NN = número da aula, de 01 a 30):
 python scripts/figuras_aula01.py
-python scripts/figuras_aula02.py
-python scripts/figuras_aula03.py
-python scripts/figuras_aula04.py
-python scripts/figuras_aula05.py
-python scripts/figuras_aula06.py
-python scripts/figuras_aula07.py
-python scripts/figuras_aula08.py
-python scripts/figuras_aula09.py
-python scripts/figuras_aula10.py
-python scripts/figuras_aula11.py
-python scripts/figuras_aula12.py
-python scripts/figuras_aula13.py
-python scripts/figuras_aula14.py
-python scripts/figuras_aula15.py
-python scripts/figuras_aula16.py
-python scripts/figuras_aula17.py
-python scripts/figuras_aula18.py
+
+# Todas as 30:
+for f in scripts/figuras_aula*.py; do python "$f"; done
 
 # Ou de dentro da pasta scripts:
 cd scripts
-python figuras_aula01.py
-python figuras_aula02.py
-python figuras_aula03.py
-python figuras_aula04.py
-python figuras_aula05.py
-python figuras_aula06.py
-python figuras_aula07.py
-python figuras_aula08.py
-python figuras_aula09.py
-python figuras_aula10.py
-python figuras_aula11.py
-python figuras_aula12.py
-python figuras_aula13.py
-python figuras_aula14.py
-python figuras_aula15.py
-python figuras_aula16.py
-python figuras_aula17.py
-python figuras_aula18.py
+python figuras_aula27.py
 ```
 
 Cada script usa o backend `Agg`, então funciona em servidor sem tela.

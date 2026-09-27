@@ -1,0 +1,35 @@
+/*
+ * pecas.css — as peças Head First que entraram na reestruturação em 30 aulas.
+ * Cada aula carrega este arquivo (além do CSS próprio, embutido na página).
+ */
+
+/* 🧠 Poder do cérebro: uma pergunta para pensar ANTES da explicação */
+.cerebro{background:#fdf2f8;border:3px solid #db2777;border-radius:12px;padding:6px 22px 16px;margin:30px 0}
+.cerebro .tit{font-family:var(--mao);font-size:19px;font-weight:700;color:#fff;background:#db2777;display:inline-block;padding:5px 16px;border-radius:0 0 10px 10px;margin:0 0 6px}
+.cerebro p{margin:8px 0}
+.cerebro details{margin-top:8px}
+.cerebro summary{cursor:pointer;font-weight:700;color:#9d174d}
+
+/* Por que é verdade? — uma mini-demonstração pelo desenho */
+.porque{background:#ecfdf5;border:3px solid #059669;border-radius:12px;padding:6px 22px 16px;margin:30px 0}
+.porque .tit{font-family:var(--mao);font-size:19px;font-weight:700;color:#fff;background:#059669;display:inline-block;padding:5px 16px;border-radius:0 0 10px 10px;margin:0 0 6px}
+.porque ol{padding-left:22px;margin:8px 0}
+.porque li{margin:7px 0}
+
+/* Conversa ao pé da lareira — dois conceitos que se confundem, conversando */
+.lareira{background:linear-gradient(#fff7ed,#ffedd5);border:3px solid #d97706;border-radius:12px;padding:6px 22px 18px;margin:34px 0}
+.lareira .tit{font-family:var(--mao);font-size:20px;font-weight:700;color:#fff;background:#d97706;display:inline-block;padding:5px 16px;border-radius:0 0 10px 10px;margin:0 0 4px}
+.lareira .sub{font-size:14.5px;color:#92400e;margin:2px 0 10px;font-style:italic}
+.lareira .fala{display:flex;gap:10px;margin:10px 0;align-items:flex-start}
+.lareira .quem{flex:0 0 96px;font-family:var(--mao);font-weight:700;font-size:15px;padding-top:6px;text-align:right}
+.lareira .balao{flex:1;background:#fff;border:2px solid #1b1b1b;border-radius:14px;padding:9px 14px;font-size:16px;line-height:1.5}
+.lareira .a .quem{color:#2563eb}
+.lareira .b .quem{color:#dc2626}
+@media(max-width:620px){.lareira .fala{flex-direction:column;gap:2px}.lareira .quem{flex:none;text-align:left;padding:0}}
+
+/* Quem faz o quê? — exercício de ligar cada item à sua descrição */
+.ligar{width:100%;border-collapse:collapse;margin:10px 0}
+.ligar td{padding:7px 6px;border-bottom:1px dashed #c9c1ae;vertical-align:middle;font-size:16px}
+.ligar td:first-child{font-weight:700;width:38%}
+.ligar select{font-family:inherit;font-size:15px;padding:7px 8px;border:3px solid #1b1b1b;border-radius:9px;background:#fff;width:100%;max-width:100%}
+@media(max-width:620px){.ligar td{display:block;width:100%;border:none;padding:3px 0}.ligar tr{display:block;border-bottom:1px dashed #c9c1ae;padding:6px 0}}

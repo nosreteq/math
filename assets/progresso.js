@@ -19,6 +19,36 @@ window.Progresso = (function () {
 
   var PREFIXO_LOCAL = "md0_progresso_";
 
+  // Reestruturação em 30 aulas: o progresso das aulas que mudaram de número
+  // (com os mesmos exercícios) é copiado uma vez para o endereço novo. As
+  // aulas antigas 9, 10 e 17 foram divididas e ganharam exercícios novos,
+  // então não entram aqui.
+  var MIGRACAO_30 = {
+    "01-o-que-e-uma-funcao": "07-letras-no-lugar-de-numeros",
+    "02-desenhar-numeros-no-papel": "09-o-plano-e-a-reta",
+    "03-angulos-e-o-circulo": "11-angulos-circulo-e-pi",
+    "04-seno-e-cosseno": "15-trigonometria",
+    "05-ondas": "16-ondas",
+    "06-setas-e-tabelas-de-numeros": "17-vetores-e-matrizes",
+    "07-equacoes-a-balanca": "08-equacoes-e-inequacoes",
+    "08-sistemas-de-equacoes": "10-sistemas-de-equacoes",
+    "11-projecao-e-minimos-quadrados": "23-projecao-e-minimos-quadrados",
+    "12-decomposicao-de-sinais-em-ondas": "24-fourier",
+    "15-a-inclinacao-em-cada-ponto": "19-limites-e-a-derivada",
+    "16-somando-fatias": "20-a-integral"
+  };
+  (function migrar() {
+    try {
+      if (localStorage.getItem("md0_migracao_30")) return;
+      Object.keys(MIGRACAO_30).forEach(function (antigo) {
+        var v = localStorage.getItem(PREFIXO_LOCAL + antigo);
+        var novo = PREFIXO_LOCAL + MIGRACAO_30[antigo];
+        if (v && !localStorage.getItem(novo)) localStorage.setItem(novo, v);
+      });
+      localStorage.setItem("md0_migracao_30", "1");
+    } catch (e) { /* sem localStorage: nada a migrar */ }
+  })();
+
   function lerLocal(aulaId) {
     try {
       var raw = localStorage.getItem(PREFIXO_LOCAL + aulaId);

@@ -5,91 +5,78 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import FancyArrowPatch, Rectangle
+from matplotlib.patches import Rectangle, Polygon, Circle, Wedge, FancyArrowPatch
 
-AZUL, VERM, VERDE, LARANJA, CINZA, TXT = ("#2563eb", "#dc2626", "#059669",
-                                          "#d97706", "#9ca3af", "#111827")
+AZUL, VERM, VERDE, LARANJA, ROXO, CINZA, TXT = ("#2563eb", "#dc2626", "#059669",
+                                                 "#d97706", "#7c3aed", "#9ca3af", "#111827")
 
 fig, ax = plt.subplots(2, 2, figsize=(13, 10))
 fig.patch.set_facecolor("white")
 
 
-def papel(a, titulo, lim=7, passo=1):
-    a.set_xlim(-lim, lim); a.set_ylim(-lim, lim)
-    a.set_xticks(range(-lim + 1, lim, passo)); a.set_yticks(range(-lim + 1, lim, passo))
-    a.grid(True, alpha=0.35, lw=0.8)
-    a.axhline(0, color=TXT, lw=2, zorder=2); a.axvline(0, color=TXT, lw=2, zorder=2)
-    a.set_title(titulo, fontsize=13.5, weight="bold", color=TXT, pad=10)
-    a.tick_params(labelsize=9)
-    a.set_aspect("equal")
+def titulo(a, t):
+    a.set_title(t, fontsize=13.5, weight="bold", color=TXT, pad=10)
+
+
+def eixos(a, t):
+    titulo(a, t)
+    a.axhline(0, color=TXT, lw=1)
+    a.axvline(0, color=TXT, lw=1)
+    a.grid(True, color="#ece7da")
     for s in a.spines.values():
-        s.set_color(CINZA)
+        s.set_visible(False)
 
 
-# ---------------- 1. as duas reguas + marcar um ponto ---------------------
+def seta(a, p, q, cor, lw=3):
+    a.add_patch(FancyArrowPatch(p, q, arrowstyle="-|>", mutation_scale=18, color=cor, lw=lw))
+
+
+rng = np.random.default_rng(7)
+
+# ---------------- 1. pizza -------------------------------------------------------------------
 a = ax[0, 0]
-papel(a, "1. Duas réguas: uma deitada e uma em pé")
-a.add_patch(FancyArrowPatch((0, 0), (3, 0), arrowstyle="-|>", mutation_scale=20,
-                            color=VERDE, lw=3, zorder=4))
-a.add_patch(FancyArrowPatch((3, 0), (3, 5), arrowstyle="-|>", mutation_scale=20,
-                            color=VERM, lw=3, zorder=4))
-a.scatter([3], [5], s=170, color=AZUL, zorder=6, edgecolor="white", lw=2)
-a.text(3.35, 5.2, "(3, 5)", fontsize=14, weight="bold", color=AZUL)
-a.text(1.5, -1.1, "1º ando 3", fontsize=11, color=VERDE, ha="center", weight="bold")
-a.text(3.35, 2.4, "2º subo 5", fontsize=11, color=VERM, weight="bold")
-a.text(6.4, -0.75, "deitada", fontsize=10, color=TXT, ha="right", style="italic")
-a.text(0.25, 6.3, "em pé", fontsize=10, color=TXT, style="italic")
-a.text(-6.5, -6.2, "Sempre nessa ordem:\nprimeiro ando, depois subo.",
-       fontsize=10.5, color=TXT)
+titulo(a, "1. 3/8: a pizza em 8 fatias, 3 comidas")
+for k in range(8):
+    a.add_patch(Wedge((0, 0), 1, 90 - 45 * (k + 1), 90 - 45 * k, facecolor=LARANJA if k < 3 else "#fef3c7",
+                      edgecolor=TXT, lw=2, alpha=0.85 if k < 3 else 1))
+a.set_xlim(-1.3, 1.3); a.set_ylim(-1.3, 1.3); a.set_aspect("equal"); a.axis("off")
 
-# ---------------- 2. numeros negativos ------------------------------------
+# ---------------- 2. equivalentes ---------------------------------------------------------------
 a = ax[0, 1]
-papel(a, "2. Antes do zero a régua continua: negativos")
-a.add_patch(Rectangle((-7, 0), 7, 7, color=VERM, alpha=0.05, zorder=0))
-a.add_patch(Rectangle((-7, -7), 7, 7, color=VERM, alpha=0.09, zorder=0))
-a.add_patch(Rectangle((0, -7), 7, 7, color=VERM, alpha=0.05, zorder=0))
-pts = [(4, 3, 4.0, 4.4, "(4, 3)\ndireita, cima"),
-       (-4, 2, -4.0, 3.4, "(-4, 2)\nesquerda, cima"),
-       (-4, -4, -4.0, -5.9, "(-4, -4)\nesquerda, baixo"),
-       (4, -3, 4.0, -4.9, "(4, -3)\ndireita, baixo")]
-for px, py, tx, ty, rot in pts:
-    a.scatter([px], [py], s=150, color=AZUL, zorder=6, edgecolor="white", lw=2)
-    a.text(tx, ty, rot, fontsize=9.5, ha="center", color=TXT)
-a.text(0.3, 0.3, "0", fontsize=12, weight="bold", color=TXT)
+titulo(a, "2. Frações equivalentes: 1/2 = 2/4 = 4/8")
+for lin, n in enumerate([2, 4, 8]):
+    for k in range(n):
+        a.add_patch(Rectangle((k * 8 / n, -lin * 1.4), 8 / n, 1, facecolor=AZUL if k < n / 2 else "#f3f0e8",
+                              alpha=0.7 if k < n / 2 else 1, edgecolor=TXT, lw=1.5))
+    a.text(-0.4, -lin * 1.4 + 0.5, f"{n // 2}/{n}", ha="right", va="center", fontsize=13, weight="bold", color=TXT)
+a.set_xlim(-1.6, 8.3); a.set_ylim(-3.4, 1.4); a.axis("off")
 
-# ---------------- 3. retas: sobe rapido, devagar, desce -------------------
+# ---------------- 3. regua dos decimais ---------------------------------------------------------
 a = ax[1, 0]
-papel(a, "3. Toda máquina de multiplicar dá uma linha reta")
-xs = np.linspace(-7, 7, 100)
-a.plot(xs, 2 * xs, color=VERM, lw=3, label="dobro:  2 · x")
-a.plot(xs, xs, color=AZUL, lw=3, label="igual:  1 · x")
-a.plot(xs, 0.5 * xs, color=VERDE, lw=3, label="metade:  0,5 · x")
-a.plot(xs, -xs, color=LARANJA, lw=3, ls="--", label="negativo:  -1 · x")
-a.legend(fontsize=9.5, loc="upper left", framealpha=0.95)
-a.text(-6.6, -6.5, "Multiplicar por um número negativo\nvira a linha de cabeça para baixo.",
-       fontsize=10, color=LARANJA,
-       bbox=dict(boxstyle="round,pad=0.35", facecolor="white", edgecolor=LARANJA, alpha=0.95))
+titulo(a, "3. Décimos e centésimos: 0,25 = 25/100 = 1/4")
+a.plot([0, 1], [0, 0], color=TXT, lw=2)
+for k in range(11):
+    a.plot([k / 10, k / 10], [-0.05, 0.05], color=TXT, lw=1.5)
+    a.text(k / 10, -0.14, f"{k / 10:.1f}".replace(".", ","), ha="center", fontsize=10, color=CINZA)
+for v, txt, cor in [(0.25, "0,25 = 1/4", VERDE), (0.5, "0,5 = 1/2", AZUL), (0.75, "0,75 = 3/4", VERM)]:
+    a.plot(v, 0, "o", color=cor, ms=11)
+    a.text(v, 0.12, txt, ha="center", fontsize=12, weight="bold", color=cor)
+a.set_xlim(-0.08, 1.08); a.set_ylim(-0.4, 0.4); a.axis("off")
 
-# ---------------- 4. degraus + somar levanta a linha ----------------------
+# ---------------- 4. negativos --------------------------------------------------------------------
 a = ax[1, 1]
-papel(a, "4. O passo da escada e o número que levanta")
-a.plot(xs, 2 * xs, color=CINZA, lw=2.5, ls="--", label="2 · x")
-a.plot(xs, 2 * xs + 3, color=AZUL, lw=3, label="2 · x + 3")
-for i in range(0, 2):
-    x1 = i
-    a.plot([x1, x1 + 1], [2 * x1 + 3, 2 * x1 + 3], color=VERDE, lw=2.5, zorder=5)
-    a.plot([x1 + 1, x1 + 1], [2 * x1 + 3, 2 * x1 + 5], color=VERM, lw=2.5, zorder=5)
-a.text(2.35, 5.4, "ando 1\nsubo 2", fontsize=10, color=TXT, weight="bold")
-a.add_patch(FancyArrowPatch((-0.55, 0), (-0.55, 3), arrowstyle="<|-|>",
-                            mutation_scale=15, color=LARANJA, lw=2.5, zorder=6))
-a.text(-6.6, 0.9, "o + 3 levanta\na linha inteira", fontsize=10,
-       color=LARANJA, weight="bold",
-       bbox=dict(boxstyle="round,pad=0.3", facecolor="white", edgecolor=LARANJA, alpha=0.95))
-a.scatter([0], [3], s=140, color=LARANJA, zorder=7, edgecolor="white", lw=2)
-a.legend(fontsize=9.5, loc="lower right", framealpha=0.95)
+titulo(a, "4. Negativos: −3 + 5 = 2")
+a.plot([-6, 6], [0, 0], color=TXT, lw=2)
+for k in range(-6, 7):
+    a.plot([k, k], [-0.12, 0.12], color=TXT, lw=1.3)
+    a.text(k, -0.45, str(k).replace("-", "−"), ha="center", fontsize=11, color=VERM if k < 0 else (TXT if k == 0 else AZUL))
+seta(a, (-3, 0.35), (2, 0.35), VERDE)
+a.plot(-3, 0, "o", color=VERM, ms=11); a.plot(2, 0, "o", color=AZUL, ms=11)
+a.text(-0.5, 0.65, "+5", ha="center", fontsize=13, weight="bold", color=VERDE)
+a.set_xlim(-6.5, 6.5); a.set_ylim(-1.2, 1.4); a.axis("off")
 
-fig.suptitle("Aula 2 — Desenhar números no papel", fontsize=18, weight="bold", color=TXT)
+fig.suptitle("Aula 2 — Pedaços e sinais: frações, decimais e negativos", fontsize=18, weight="bold", color=TXT)
 fig.tight_layout(rect=[0, 0, 1, 0.955])
-saida = Path(__file__).resolve().parent.parent / "aulas" / "02-desenhar-numeros-no-papel" / "figuras.png"
+saida = Path(__file__).resolve().parent.parent / "aulas" / "02-fracoes-decimais-e-negativos" / "figuras.png"
 fig.savefig(saida, dpi=150, facecolor="white")
 print(f"Salvo em: {saida}")

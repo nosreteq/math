@@ -1,49 +1,94 @@
 # Gera a figura estatica da Aula 7. Pode rodar de qualquer pasta: python scripts/figuras_aula07.py
 # -*- coding: utf-8 -*-
 from pathlib import Path
+import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle, Polygon
+from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
 
-AZUL, VERM, VERDE, LARANJA, ROXO, CINZA, TXT = ("#2563eb", "#dc2626", "#059669",
-                                                 "#d97706", "#7c3aed", "#9ca3af", "#111827")
+AZUL, VERM, VERDE, CINZA, TXT = "#2563eb", "#dc2626", "#059669", "#9ca3af", "#111827"
 
-fig, ax = plt.subplots(2, 2, figsize=(13, 10))
+fig, ax = plt.subplots(2, 2, figsize=(13, 9.5))
 fig.patch.set_facecolor("white")
 
+# ---------------- 1. A maquina -------------------------------------------
+a = ax[0, 0]
+a.set_xlim(0, 10); a.set_ylim(0, 6); a.axis("off")
+a.set_title("1. A função é uma máquina", fontsize=14, weight="bold", color=TXT, pad=12)
 
-def balanca(a, titulo, caixas, pesos_esq, pesos_dir, inclina=0.0):
-    a.set_xlim(0, 10); a.set_ylim(0, 7); a.axis("off")
-    a.set_title(titulo, fontsize=13.5, weight="bold", color=TXT, pad=10)
-    a.add_patch(Polygon([[5, 3], [4.4, 0.6], [5.6, 0.6]], closed=True, facecolor="#c9c1ae", edgecolor=TXT, lw=2))
-    yl, yr = 3 - inclina, 3 + inclina
-    a.plot([1, 9], [yl, yr], color=TXT, lw=5)
-    def prato(x0, y0, itens):
-        for i, tipo in enumerate(itens):
-            col, lin = i % 5, i // 5
-            cor = ROXO if tipo == "x" else LARANJA
-            a.add_patch(Rectangle((x0 + col * 0.55, y0 + 0.1 + lin * 0.55), 0.48, 0.48, facecolor=cor, edgecolor=TXT, lw=1))
-            if tipo == "x":
-                a.text(x0 + col * 0.55 + 0.24, y0 + 0.34 + lin * 0.55, "x", color="white", ha="center", va="center", fontsize=9, weight="bold")
-    prato(0.8, yl, ["x"] * caixas + ["p"] * pesos_esq)
-    prato(6.3, yr, ["p"] * pesos_dir)
+box = FancyBboxPatch((3.5, 2.1), 3.0, 1.9, boxstyle="round,pad=0.15",
+                     facecolor="#dbeafe", edgecolor=AZUL, lw=2.5)
+a.add_patch(box)
+a.text(5.0, 3.05, "DOBRAR", fontsize=17, weight="bold", ha="center", va="center", color=AZUL)
 
+a.add_patch(FancyArrowPatch((1.3, 3.05), (3.35, 3.05), arrowstyle="-|>",
+                            mutation_scale=26, color=TXT, lw=2.5))
+a.add_patch(FancyArrowPatch((6.65, 3.05), (8.7, 3.05), arrowstyle="-|>",
+                            mutation_scale=26, color=TXT, lw=2.5))
+a.text(0.9, 3.05, "3", fontsize=28, weight="bold", ha="center", va="center", color=VERDE)
+a.text(9.1, 3.05, "6", fontsize=28, weight="bold", ha="center", va="center", color=VERM)
+a.text(2.3, 3.6, "entra", fontsize=11, ha="center", color=TXT)
+a.text(7.7, 3.6, "sai", fontsize=11, ha="center", color=TXT)
 
-balanca(ax[0, 0], "1. 2 · x + 3 = 11: a balança equilibrada", 2, 3, 11)
-balanca(ax[0, 1], "2. Tirei 3 dos dois lados: 2 · x = 8", 2, 0, 8)
-balanca(ax[1, 0], "3. Mexi num lado só: a balança entorta", 2, 5, 11, inclina=0.8)
+a.text(5.0, 1.1, "Põe um número, sai outro.\nO mesmo número que entra sempre dá a mesma resposta.",
+       fontsize=11.5, ha="center", va="center", color=TXT)
+
+# ---------------- 2. A tabela --------------------------------------------
+a = ax[0, 1]
+a.set_xlim(0, 10); a.set_ylim(0, 6); a.axis("off")
+a.set_title("2. Anotamos tudo numa tabela", fontsize=14, weight="bold", color=TXT, pad=12)
+
+entradas = [1, 2, 3, 4]
+x0, y0, dy = 3.0, 4.6, 0.72
+a.text(x0 + 0.6, y0 + 0.55, "entra", fontsize=12.5, weight="bold", ha="center", color=VERDE)
+a.text(x0 + 3.4, y0 + 0.55, "sai", fontsize=12.5, weight="bold", ha="center", color=VERM)
+a.plot([x0 - 0.4, x0 + 4.4], [y0 + 0.22, y0 + 0.22], color=TXT, lw=2)
+a.plot([x0 + 2.0, x0 + 2.0], [y0 + 0.45, y0 - dy * 3.6], color=CINZA, lw=1.5)
+
+for i, e in enumerate(entradas):
+    y = y0 - i * dy
+    a.text(x0 + 0.6, y, f"{e}", fontsize=15, ha="center", va="center", color=VERDE)
+    a.text(x0 + 2.0, y, "→", fontsize=12, ha="center", va="center", color=CINZA)
+    a.text(x0 + 3.4, y, f"{2*e}", fontsize=15, ha="center", va="center", color=VERM)
+
+a.text(5.0, 1.0, "Cada linha é uma pergunta e a resposta dela.",
+       fontsize=11.5, ha="center", va="center", color=TXT)
+
+# ---------------- 3. Pontos no papel quadriculado -------------------------
+def papel(a, titulo):
+    a.set_xlim(-0.6, 5.4); a.set_ylim(-0.9, 9.6)
+    a.set_xticks(range(0, 6)); a.set_yticks(range(0, 10, 2))
+    a.grid(True, alpha=0.35, lw=0.8)
+    a.axhline(0, color=TXT, lw=1.8); a.axvline(0, color=TXT, lw=1.8)
+    a.set_title(titulo, fontsize=14, weight="bold", color=TXT, pad=12)
+    a.set_xlabel("o número que entra", fontsize=10.5, color=VERDE)
+    a.set_ylabel("o número que sai", fontsize=10.5, color=VERM)
+    a.tick_params(labelsize=10)
+    for s in a.spines.values():
+        s.set_color(CINZA)
+
+a = ax[1, 0]
+papel(a, "3. Cada linha da tabela vira um ponto")
+for e in entradas:
+    a.plot([e, e], [0, 2 * e], color=VERDE, ls=":", lw=1.4, alpha=0.8)
+    a.plot([0, e], [2 * e, 2 * e], color=VERM, ls=":", lw=1.4, alpha=0.8)
+    a.scatter([e], [2 * e], s=130, color=AZUL, zorder=5, edgecolor="white", lw=1.5)
+a.annotate("ando 3 para a direita,\nsubo 6 para cima", xy=(3, 6), xytext=(0.35, 8.1),
+           fontsize=10.5, color=TXT,
+           arrowprops=dict(arrowstyle="->", color=TXT, lw=1.5))
 
 a = ax[1, 1]
-a.axis("off")
-a.set_title("4. A máquina ao contrário", fontsize=13.5, weight="bold", color=TXT, pad=10)
-passos = ["saiu 17 da máquina 3 · x + 2", "desfaço o + 2:  17 − 2 = 15", "desfaço o × 3:  15 ÷ 3 = 5", "entrou o 5  ✔"]
-for i, p in enumerate(passos):
-    a.text(0.03, 0.85 - i * 0.2, p, fontsize=14, transform=a.transAxes,
-           color=VERDE if i == 3 else TXT, weight="bold" if i == 3 else "normal")
+papel(a, "4. Ligando os pontos: o desenho da máquina")
+xs = np.linspace(0, 5, 100)
+a.plot(xs, 2 * xs, color=AZUL, lw=3, zorder=3)
+a.scatter(entradas, [2 * e for e in entradas], s=130, color=AZUL,
+          zorder=5, edgecolor="white", lw=1.5)
+a.text(2.55, 1.1, "Esse desenho mostra\ntodas as respostas\nde uma vez só.",
+       fontsize=11, color=TXT)
 
-fig.suptitle("Aula 7 — Equações: a balança", fontsize=18, weight="bold", color=TXT)
+fig.suptitle("Aula 7 — Letras no lugar de números: a função", fontsize=18, weight="bold", color=TXT)
 fig.tight_layout(rect=[0, 0, 1, 0.955])
-saida = Path(__file__).resolve().parent.parent / "aulas" / "07-equacoes-a-balanca" / "figuras.png"
+saida = Path(__file__).resolve().parent.parent / "aulas" / "07-letras-no-lugar-de-numeros" / "figuras.png"
 fig.savefig(saida, dpi=150, facecolor="white")
 print(f"Salvo em: {saida}")

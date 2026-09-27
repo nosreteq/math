@@ -5,67 +5,71 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import FancyArrowPatch
 
 AZUL, VERM, VERDE, LARANJA, ROXO, CINZA, TXT = ("#2563eb", "#dc2626", "#059669",
                                                  "#d97706", "#7c3aed", "#9ca3af", "#111827")
 
 fig, ax = plt.subplots(2, 2, figsize=(13, 10))
 fig.patch.set_facecolor("white")
-rng = np.random.default_rng(7)
 
 
-def nuvem(a, titulo, forca, cor=AZUL):
-    a.set_title(titulo, fontsize=13.5, weight="bold", color=TXT, pad=10)
-    x = rng.random(30)
-    ruido = rng.random(30) - 0.5
-    y = x * forca + ruido * (1 - forca) * 1.3
-    a.scatter(x, y, s=45, color=cor, alpha=0.75, edgecolor="white", lw=0.8)
+def papel(a, titulo, lim=7):
+    a.set_xlim(-lim, lim); a.set_ylim(-lim, lim)
+    a.axhline(0, color=TXT, lw=1.8); a.axvline(0, color=TXT, lw=1.8)
     a.set_xticks([]); a.set_yticks([])
+    a.set_aspect("equal")
+    a.set_title(titulo, fontsize=13.5, weight="bold", color=TXT, pad=10)
     for s in a.spines.values():
         s.set_visible(False)
-    a.axhline(min(y) - 0.1, color=TXT, lw=1.5)
-    a.axvline(-0.05, color=TXT, lw=1.5)
 
 
-# ---------------- 1. lista vira vetor -------------------------------------------
+xs = np.linspace(-7, 7, 50)
+
+# ---------------- 1. cruzamento ------------------------------------------------
 a = ax[0, 0]
-a.set_title("1. Uma lista de números é um vetor", fontsize=13.5, weight="bold", color=TXT, pad=10)
-notas = [6, 8, 7, 9, 5]
-a.bar(range(len(notas)), notas, color=ROXO, width=0.5)
-a.set_xticks(range(len(notas)))
-a.set_xticklabels([str(n) for n in notas], fontsize=11)
-a.set_yticks([])
-for s in ["top", "right", "left"]:
-    a.spines[s].set_visible(False)
-a.set_ylim(0, 11)
-a.text(2, 10.3, "v = (6, 8, 7, 9, 5)", fontsize=12, weight="bold", color=ROXO, ha="center")
+papel(a, "1. O cruzamento: onde as duas concordam")
+a.plot(xs, 2 * xs + 1, color=AZUL, lw=3, label="f(x) = 2x + 1")
+a.plot(xs, -xs + 7, color=LARANJA, lw=3, label="g(x) = −x + 7")
+a.scatter([2], [5], s=140, color=ROXO, zorder=6, edgecolor="white", lw=2)
+a.text(2.3, 5.3, "(2, 5)", fontsize=12, weight="bold", color=ROXO)
+a.legend(fontsize=9.5, loc="upper left", framealpha=0.95)
 
-# ---------------- 2. correlacao alta vs baixa ------------------------------------
+# ---------------- 2. tres casos --------------------------------------------------
 a = ax[0, 1]
-nuvem(a, "2. Correlação alta: quase uma reta", 0.92, AZUL)
+papel(a, "2. Uma, nenhuma ou infinitas soluções")
+a.plot(xs, xs + 1, color=AZUL, lw=2.5)
+a.plot(xs, -0.5 * xs - 1, color=LARANJA, lw=2.5)
+a.scatter([-1.33], [-0.33], s=90, color=ROXO, zorder=6, edgecolor="white", lw=1.5)
+a.text(-6.6, 5.6, "uma solução", fontsize=10, weight="bold", color=TXT)
+a.text(-6.6, -6, "(paralelas: use o laboratório\npara ver retas com o mesmo\npasso nunca se cruzando)",
+       fontsize=8.8, color=CINZA)
 
+# ---------------- 3. substituicao -------------------------------------------------
 a = ax[1, 0]
-nuvem(a, "3. Correlação baixa: nuvem espalhada", 0.15, LARANJA)
-
-# ---------------- 4. angulo entre vetores -----------------------------------------
-a = ax[1, 1]
-a.set_title("4. Correlação = cosseno do ângulo", fontsize=13.5, weight="bold", color=TXT, pad=10)
-a.set_xlim(-1.3, 1.3); a.set_ylim(-1.3, 1.3)
-a.set_aspect("equal")
 a.axis("off")
-a.add_patch(FancyArrowPatch((0, 0), (1, 0), arrowstyle="-|>", mutation_scale=18, color=AZUL, lw=3))
-deg = 25
-rad = np.radians(deg)
-a.add_patch(FancyArrowPatch((0, 0), (np.cos(rad), np.sin(rad)), arrowstyle="-|>",
-                            mutation_scale=18, color=VERDE, lw=3))
-a.text(1.05, -0.05, "lista A", fontsize=11, color=AZUL, weight="bold")
-a.text(np.cos(rad) + 0.05, np.sin(rad), "lista B", fontsize=11, color=VERDE, weight="bold")
-a.text(0.3, 0.08, f"{deg}°", fontsize=11, color=TXT)
-a.text(0, -1.2, "ângulo pequeno → correlação perto de 1", fontsize=10.5, color=TXT, ha="center")
+a.set_title("3. Resolver por substituição", fontsize=13.5, weight="bold", color=TXT, pad=10)
+passos = [
+    "f(x) = 2x + 1      g(x) = −x + 7",
+    "f(x) = g(x):  2x + 1 = −x + 7",
+    "3x = 6",
+    "x = 2",
+    "f(2) = 2·2 + 1 = 5",
+    "cruzamento: (2, 5)",
+]
+for i, p in enumerate(passos):
+    a.text(0.02, 0.92 - i * 0.16, p, fontsize=13, color=AZUL if i == len(passos) - 1 else TXT,
+           weight="bold" if i == len(passos) - 1 else "normal", transform=a.transAxes)
 
-fig.suptitle("Aula 10 — Estatística com vetores", fontsize=18, weight="bold", color=TXT)
+# ---------------- 4. leia o cruzamento -----------------------------------------------
+a = ax[1, 1]
+papel(a, "4. Leia o cruzamento no desenho")
+a.plot(xs, xs + 2, color=AZUL, lw=3)
+a.plot(xs, -xs + 4, color=LARANJA, lw=3)
+a.scatter([1], [3], s=140, color=ROXO, zorder=6, edgecolor="white", lw=2)
+a.text(1.3, 3.3, "(1, 3)", fontsize=12, weight="bold", color=ROXO)
+
+fig.suptitle("Aula 10 — Sistemas de equações", fontsize=18, weight="bold", color=TXT)
 fig.tight_layout(rect=[0, 0, 1, 0.955])
-saida = Path(__file__).resolve().parent.parent / "aulas" / "10-estatistica-com-vetores" / "figuras.png"
+saida = Path(__file__).resolve().parent.parent / "aulas" / "10-sistemas-de-equacoes" / "figuras.png"
 fig.savefig(saida, dpi=150, facecolor="white")
 print(f"Salvo em: {saida}")

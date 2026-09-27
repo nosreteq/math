@@ -5,83 +5,84 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, Polygon, Circle, Wedge, FancyArrowPatch
 
 AZUL, VERM, VERDE, LARANJA, ROXO, CINZA, TXT = ("#2563eb", "#dc2626", "#059669",
                                                  "#d97706", "#7c3aed", "#9ca3af", "#111827")
 
 fig, ax = plt.subplots(2, 2, figsize=(13, 10))
 fig.patch.set_facecolor("white")
-xs = np.linspace(0, 720, 400)
 
 
-def onda(a, titulo, ylim=1.6):
-    a.set_title(titulo, fontsize=13.5, weight="bold", color=TXT, pad=10)
-    a.axhline(0, color=TXT, lw=1.5)
-    a.set_ylim(-ylim, ylim)
-    a.set_xlim(0, 720)
-    a.set_xticks([0, 180, 360, 540, 720])
-    a.set_yticks([])
+def titulo(a, t):
+    a.set_title(t, fontsize=13.5, weight="bold", color=TXT, pad=10)
+
+
+def eixos(a, t):
+    titulo(a, t)
+    a.axhline(0, color=TXT, lw=1)
+    a.axvline(0, color=TXT, lw=1)
+    a.grid(True, color="#ece7da")
     for s in a.spines.values():
         s.set_visible(False)
-    a.tick_params(labelsize=9)
 
 
-# ---------------- 1. desenrolando o circulo -----------------------------------
+def seta(a, p, q, cor, lw=3):
+    a.add_patch(FancyArrowPatch(p, q, arrowstyle="-|>", mutation_scale=18, color=cor, lw=lw))
+
+
+rng = np.random.default_rng(7)
+
+# ---------------- 1. gangorra -----------------------------------------------------------------
 a = ax[0, 0]
-a.set_title("1. Desenrolando o círculo em onda", fontsize=13.5, weight="bold", color=TXT, pad=10)
-a.axis("off")
-circ = plt.Circle((-1.4, 0), 1, fill=False, color=CINZA, lw=1.5, transform=a.transData)
-a.add_patch(circ)
-degs = np.linspace(0, 360, 200)
-ys = np.sin(np.radians(degs))
-xs_line = -0.4 + degs / 360 * 2.6
-a.plot(xs_line, ys, color=VERM, lw=2.5)
-a.axhline(0, xmin=0.13, xmax=0.98, color=CINZA, lw=1)
-deg0 = 60
-x0, y0 = np.cos(np.radians(deg0)) - 1.4, np.sin(np.radians(deg0))
-a.scatter([x0], [y0], s=70, color=AZUL, zorder=6, edgecolor="white", lw=1.3)
-a.plot([-1.4, x0], [0, y0], color=AZUL, lw=1.5, ls="--")
-xw = -0.4 + deg0 / 360 * 2.6
-a.scatter([xw], [y0], s=70, color=VERM, zorder=6, edgecolor="white", lw=1.3)
-a.plot([x0, xw], [y0, y0], color=CINZA, lw=1, ls=":")
-a.set_xlim(-2.6, 2.4); a.set_ylim(-1.4, 1.4)
+titulo(a, "1. A média é o ponto de equilíbrio da gangorra")
+dados = [2, 3, 3, 5, 9]
+m = np.mean(dados)
+a.plot([0, 10], [0, 0], color=TXT, lw=4)
+for v in sorted(set(dados)):
+    for k in range(dados.count(v)):
+        a.add_patch(Circle((v, 0.45 + 0.8 * k), 0.35, facecolor=AZUL, edgecolor=TXT, lw=1.5))
+a.add_patch(Polygon([[m, -0.05], [m - 0.5, -1], [m + 0.5, -1]], closed=True, facecolor=VERM))
+a.text(m, -1.6, f"média = {m:g}".replace(".", ","), ha="center", fontsize=13, weight="bold", color=VERM)
+for k in range(11):
+    a.text(k, -0.35, str(k), ha="center", fontsize=9, color=CINZA)
+a.set_xlim(-0.5, 10.5); a.set_ylim(-2.2, 2.6); a.set_aspect("equal"); a.axis("off")
 
-# ---------------- 2. tres controles ---------------------------------------------
+# ---------------- 2. media x mediana -----------------------------------------------------------
 a = ax[0, 1]
-onda(a, "2. Amplitude, frequência e fase")
-a.plot(xs, np.sin(np.radians(xs)), color=CINZA, lw=1.5, ls="--", label="seno(x)")
-a.plot(xs, 1.4 * np.sin(np.radians(xs)), color=VERDE, lw=2.5, label="amplitude maior")
-a.plot(xs, np.sin(np.radians(2 * xs)), color=AZUL, lw=2.5, label="frequência maior")
-a.plot(xs, np.sin(np.radians(xs - 90)), color=ROXO, lw=2.5, label="fase deslocada")
-a.legend(fontsize=8.5, loc="upper right", framealpha=0.95)
+titulo(a, "2. O salário do chefe puxa a média")
+sal = [2, 2.5, 3, 3, 3.5, 4, 40]
+a.bar(range(7), sal, color=[AZUL] * 6 + [VERM], width=0.7)
+media, med = np.mean(sal), np.median(sal)
+a.axhline(media, color=LARANJA, lw=2.5, ls="--"); a.axhline(med, color=VERDE, lw=2.5, ls="--")
+a.text(0, media + 1, f"média ≈ {media:.1f} mil".replace(".", ","), fontsize=12, weight="bold", color=LARANJA)
+a.text(0, med + 1, f"mediana = {med:g} mil".replace(".", ","), fontsize=12, weight="bold", color=VERDE)
+a.set_xticks([]); a.set_ylim(0, 43)
+for s in a.spines.values():
+    s.set_visible(False)
 
-# ---------------- 3. reencontro aula 1 -------------------------------------------
+# ---------------- 3. histograma -----------------------------------------------------------------
 a = ax[1, 0]
-onda(a, "3. As mesmas transformações da Aula 1")
-a.plot(xs, np.sin(np.radians(xs)), color=CINZA, lw=2, ls="--")
-a.plot(xs, 1.3 * np.sin(np.radians(xs)), color=VERDE, lw=2.5)
-a.annotate("multiplica a saída\n(amplitude)", xy=(90, 1.3), xytext=(150, 1.5),
-           fontsize=9, color=VERDE, weight="bold",
-           arrowprops=dict(arrowstyle="->", color=VERDE))
-a.annotate("multiplica a entrada\n(frequência)", xy=(360, 0), xytext=(430, -1.0),
-           fontsize=9, color=AZUL, weight="bold",
-           arrowprops=dict(arrowstyle="->", color=AZUL))
-a.annotate("soma na entrada\n(fase)", xy=(540, -1), xytext=(560, 1.1),
-           fontsize=9, color=ROXO, weight="bold",
-           arrowprops=dict(arrowstyle="->", color=ROXO))
+eixos(a, "3. Histograma: a moda é a barra mais alta")
+alturas = rng.normal(165, 8, 300)
+cont, bordas, barras = a.hist(alturas, bins=np.arange(140, 192, 4), color=AZUL, alpha=0.75, edgecolor="white")
+i = int(np.argmax(cont)); barras[i].set_facecolor(VERM)
+a.set_xlabel("altura (cm)", fontsize=12); a.set_xlim(138, 192)
 
-# ---------------- 4. somar duas ondas --------------------------------------------
+# ---------------- 4. desvio ---------------------------------------------------------------------
 a = ax[1, 1]
-onda(a, "4. Somar duas ondas", ylim=2.1)
-y1 = np.sin(np.radians(xs))
-y2 = 0.6 * np.sin(np.radians(2 * xs))
-a.plot(xs, y1, color=VERDE, lw=2, ls="--", label="onda 1")
-a.plot(xs, y2, color=AZUL, lw=2, ls="--", label="onda 2")
-a.plot(xs, y1 + y2, color=ROXO, lw=3, label="soma")
-a.legend(fontsize=8.5, loc="upper right", framealpha=0.95)
+titulo(a, "4. Mesma média, desvios diferentes")
+for lin, (d, cor) in enumerate([([4, 5, 5, 5, 6], VERDE), ([1, 3, 5, 7, 9], VERM)]):
+    y = -lin * 1.5
+    a.plot([0, 10], [y, y], color=CINZA, lw=1.5)
+    for v in d:
+        a.plot(v, y, "o", color=cor, ms=12)
+    a.plot([5, 5], [y - 0.35, y + 0.35], color=TXT, lw=2)
+    a.text(10.3, y, f"desvio ≈ {np.std(d):.1f}".replace(".", ","), va="center", fontsize=12, weight="bold", color=cor)
+a.set_xlim(-0.5, 13.5); a.set_ylim(-2.3, 0.8); a.axis("off")
 
-fig.suptitle("Aula 5 — Ondas", fontsize=18, weight="bold", color=TXT)
+fig.suptitle("Aula 5 — Dados: média, mediana, moda e desvio", fontsize=18, weight="bold", color=TXT)
 fig.tight_layout(rect=[0, 0, 1, 0.955])
-saida = Path(__file__).resolve().parent.parent / "aulas" / "05-ondas" / "figuras.png"
+saida = Path(__file__).resolve().parent.parent / "aulas" / "05-dados-media-mediana-moda-e-desvio" / "figuras.png"
 fig.savefig(saida, dpi=150, facecolor="white")
 print(f"Salvo em: {saida}")

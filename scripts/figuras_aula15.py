@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle, Polygon, Circle
+from matplotlib.patches import FancyArrowPatch
 
 AZUL, VERM, VERDE, LARANJA, ROXO, CINZA, TXT = ("#2563eb", "#dc2626", "#059669",
                                                  "#d97706", "#7c3aed", "#9ca3af", "#111827")
@@ -14,56 +14,63 @@ fig, ax = plt.subplots(2, 2, figsize=(13, 10))
 fig.patch.set_facecolor("white")
 
 
-def eixos(a, titulo):
+def circulo(a, titulo):
+    a.set_xlim(-1.35, 1.35); a.set_ylim(-1.35, 1.35)
+    a.set_aspect("equal")
+    a.axis("off")
     a.set_title(titulo, fontsize=13.5, weight="bold", color=TXT, pad=10)
-    a.axhline(0, color=TXT, lw=1)
-    a.axvline(0, color=TXT, lw=1)
-    a.grid(True, color="#ece7da")
-    for s in a.spines.values():
-        s.set_visible(False)
+    c = plt.Circle((0, 0), 1, fill=False, color=CINZA, lw=1.5)
+    a.add_patch(c)
+    a.plot([-1.25, 1.25], [0, 0], color="#e6e1d4", lw=1)
+    a.plot([0, 0], [-1.25, 1.25], color="#e6e1d4", lw=1)
 
-# ---------------- 1. tangente -------------------------------------------------------------
+
+# ---------------- 1. sombra e altura -----------------------------------------
 a = ax[0, 0]
-eixos(a, "1. A reta que encosta em x = 1 sobe 2 por passo")
-x = np.linspace(-2.5, 2.5, 300)
-a.plot(x, x**2, color=AZUL, lw=3)
-a.plot(x, 1 + 2 * (x - 1), color=VERM, lw=2.5)
-a.plot(1, 1, "o", color=LARANJA, ms=10, mec=TXT)
-a.set_xlim(-2.5, 2.5); a.set_ylim(-2, 6)
+circulo(a, "1. A sombra (cosseno) e a altura (seno)")
+deg = 40
+rad = np.radians(deg)
+x, y = np.cos(rad), np.sin(rad)
+a.plot([0, x], [0, y], color=AZUL, lw=2.5, ls="--")
+a.scatter([x], [y], s=100, color=AZUL, zorder=6, edgecolor="white", lw=1.5)
+a.plot([0, x], [0, 0], color=VERDE, lw=4, solid_capstyle="round")
+a.plot([x, x], [0, y], color=VERM, lw=4, solid_capstyle="round")
+a.text(x / 2, -0.14, "cosseno", fontsize=10.5, color=VERDE, weight="bold", ha="center")
+a.text(x + 0.08, y / 2, "seno", fontsize=10.5, color=VERM, weight="bold")
 
-# ---------------- 2. secantes ---------------------------------------------------------------
+# ---------------- 2. sempre entre -1 e 1 --------------------------------------
 a = ax[0, 1]
-eixos(a, "2. Dois pontos se aproximando: o passo vai para 2")
-x = np.linspace(-0.5, 3.2, 300)
-a.plot(x, x**2, color=AZUL, lw=3)
-for h, cor in [(2, CINZA), (1, LARANJA), (0.3, ROXO)]:
-    m = ((1 + h)**2 - 1) / h
-    a.plot(x, 1 + m * (x - 1), color=cor, lw=1.8, label=f"h = {h:g}: passo {m:g}".replace(".", ","))
-a.plot(1, 1, "o", color=TXT, ms=8)
-a.legend(loc="upper left"); a.set_xlim(-0.5, 3.2); a.set_ylim(-1, 10)
+circulo(a, "2. Preso na borda: sempre entre −1 e 1")
+for d, cor in [(20, AZUL), (100, LARANJA), (200, ROXO), (320, VERM)]:
+    r = np.radians(d)
+    a.scatter([np.cos(r)], [np.sin(r)], s=70, color=cor, zorder=6, edgecolor="white", lw=1.2)
+a.text(0, -1.3, "nenhum ponto sai do círculo de raio 1", fontsize=10.5, color=TXT, ha="center")
 
-# ---------------- 3. derivada -----------------------------------------------------------------
+# ---------------- 3. valores de olho ------------------------------------------
 a = ax[1, 0]
-eixos(a, "3. Em radianos, a inclinação do seno é o cosseno")
-x = np.linspace(-2 * np.pi, 2 * np.pi, 400)
-a.plot(x, np.sin(x), color=AZUL, lw=3, label="seno")
-a.plot(x, np.cos(x), color=VERM, lw=2.5, ls="--", label="inclinação = cosseno")
-a.set_xticks([-2 * np.pi, -np.pi, 0, np.pi, 2 * np.pi]); a.set_xticklabels(["−2π", "−π", "0", "π", "2π"])
-a.legend(loc="lower left"); a.set_ylim(-1.6, 1.6)
+circulo(a, "3. Os quatro valores de olho")
+for d, txt in [(0, "(1, 0)"), (90, "(0, 1)"), (180, "(−1, 0)"), (270, "(0, −1)")]:
+    r = np.radians(d)
+    x, y = np.cos(r), np.sin(r)
+    a.scatter([x], [y], s=90, color=VERDE if d in (0, 180) else VERM, zorder=6, edgecolor="white", lw=1.5)
+    a.text(1.22 * np.cos(r), 1.22 * np.sin(r), f"{d}°\n{txt}", fontsize=9.5, weight="bold",
+           color=TXT, ha="center", va="center")
 
-# ---------------- 4. topo e fundo -------------------------------------------------------------
+# ---------------- 4. o ponto e as duas coordenadas ----------------------------
 a = ax[1, 1]
-eixos(a, "4. x³ − 3x: inclinação zero no morro e no vale")
-x = np.linspace(-2.3, 2.3, 300)
-a.plot(x, x**3 - 3 * x, color=AZUL, lw=3)
-for x0 in (-1, 1):
-    y0 = x0**3 - 3 * x0
-    a.plot([x0 - 0.7, x0 + 0.7], [y0, y0], color=VERM, lw=2.5)
-    a.plot(x0, y0, "o", color=LARANJA, ms=10, mec=TXT)
-a.set_xlim(-2.5, 2.5); a.set_ylim(-3.5, 3.5)
+circulo(a, "4. O ponto = (cosseno, seno)")
+deg = 130
+rad = np.radians(deg)
+x, y = np.cos(rad), np.sin(rad)
+a.add_patch(FancyArrowPatch((0, 0), (x, y), arrowstyle="-|>", mutation_scale=18, color=AZUL, lw=3))
+a.plot([0, x], [0, 0], color=VERDE, lw=3, ls=":")
+a.plot([x, x], [0, y], color=VERM, lw=3, ls=":")
+a.text(x, y + 0.12, f"({x:.2f}, {y:.2f})", fontsize=10.5, weight="bold", color=AZUL, ha="center")
+a.text(0, -1.3, "mesmo endereço de dois números da Aula 2", fontsize=10, color=TXT,
+       ha="center", style="italic")
 
-fig.suptitle("Aula 15 — A inclinação em cada ponto", fontsize=18, weight="bold", color=TXT)
+fig.suptitle("Aula 15 — Trigonometria: seno, cosseno, tangente e radianos", fontsize=18, weight="bold", color=TXT)
 fig.tight_layout(rect=[0, 0, 1, 0.955])
-saida = Path(__file__).resolve().parent.parent / "aulas" / "15-a-inclinacao-em-cada-ponto" / "figuras.png"
+saida = Path(__file__).resolve().parent.parent / "aulas" / "15-trigonometria" / "figuras.png"
 fig.savefig(saida, dpi=150, facecolor="white")
 print(f"Salvo em: {saida}")

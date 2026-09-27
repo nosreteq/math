@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aula 8 — Equações e inequações: a balança | Matemática do Zero</title>
+<style>
+:root{
+  --papel:#f6f2e9; --papel2:#fffdf7; --tinta:#1b1b1b; --cinza:#6b7280;
+  --azul:#2563eb; --azulc:#dbeafe; --verm:#dc2626; --vermc:#fee2e2;
+  --verde:#059669; --verdec:#d1fae5; --amar:#fde68a; --laranja:#d97706;
+  --roxo:#7c3aed; --linha:#c9c1ae;
+  --mao:'Comic Sans MS','Comic Neue','Chalkboard SE','Bradley Hand','Marker Felt','Segoe Print','Ink Free',cursive;
+  --corpo:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--corpo);font-size:17px;line-height:1.65}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 90px}
+
+header{background:var(--tinta);color:var(--papel2);padding:34px 22px 30px;margin-bottom:34px;border-bottom:6px solid var(--laranja)}
+header .inner{max-width:820px;margin:0 auto}
+.serie{font-family:var(--mao);font-size:15px;letter-spacing:.5px;color:var(--amar);margin:0 0 6px}
+header h1{margin:0;font-size:40px;line-height:1.1;letter-spacing:-.5px}
+header .sub{margin:12px 0 0;color:#cfc9bb;font-size:17px;max-width:620px}
+.aula-num{display:inline-block;background:var(--laranja);color:#fff;font-weight:700;padding:3px 13px;border-radius:20px;font-size:14px;margin-bottom:14px;letter-spacing:.5px}
+.voltou{background:#3a3a3a;border-left:5px solid var(--amar);padding:12px 18px;margin:18px 0 0;font-size:15.5px;color:#e6e0d2;border-radius:0 8px 8px 0}
+
+h2{font-size:29px;margin:52px 0 6px;line-height:1.2;border-bottom:3px solid var(--tinta);padding-bottom:8px}
+h2 .n{color:var(--laranja);font-family:var(--mao);font-size:24px;margin-right:8px}
+h3{font-size:21px;margin:32px 0 8px}
+p{margin:14px 0}
+.grande{font-size:20px}
+.centro{text-align:center}
+code,.mono{font-family:'Consolas','Monaco',monospace;background:#eae4d6;padding:2px 7px;border-radius:4px;font-size:.95em}
+
+.guru{display:flex;gap:18px;align-items:flex-start;margin:34px 0;background:linear-gradient(#efe9db,#e8e1d0);border-left:6px solid var(--roxo);padding:20px 22px;border-radius:4px}
+.guru svg{flex:0 0 92px}
+.guru .fala{position:relative;background:#fff;border:2px solid var(--tinta);border-radius:16px;padding:14px 18px;font-family:var(--mao);font-size:16.5px;line-height:1.55}
+.guru .fala:before{content:"";position:absolute;left:-11px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:var(--tinta)}
+.guru .fala:after{content:"";position:absolute;left:-8px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:#fff}
+.guru .quem{font-family:var(--mao);font-size:13px;color:var(--roxo);text-align:center;margin-top:4px;font-weight:700}
+
+.idiota{background:#e7eefc;border:3px solid var(--azul);border-radius:10px;padding:6px 24px 20px;margin:34px 0}
+.idiota .tit{font-family:var(--mao);font-size:20px;font-weight:700;color:#fff;background:var(--azul);display:inline-block;padding:5px 16px;border-radius:0 0 10px 10px;margin:0 0 8px}
+.idiota .q{font-weight:700;margin:16px 0 4px}
+.idiota .q:before{content:"P: ";color:var(--azul);font-weight:800}
+.idiota .a{margin:0 0 6px}
+.idiota .a:before{content:"R: ";color:var(--verm);font-weight:800}
+
+.cuidado{background:var(--vermc);border:3px dashed var(--verm);border-radius:10px;padding:16px 20px;margin:30px 0}
+.cuidado .tit{font-family:var(--mao);font-weight:700;color:var(--verm);font-size:19px;margin-bottom:2px}
+
+.pontos{background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:8px 26px 22px;margin:44px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.pontos .tit{font-family:var(--mao);font-size:22px;font-weight:700;background:var(--amar);display:inline-block;padding:6px 18px;border:3px solid var(--tinta);border-radius:8px;transform:rotate(-1.5deg);margin:-22px 0 10px}
+.pontos ul{padding-left:22px;margin:8px 0}
+.pontos li{margin:9px 0}
+
+.sticky{background:var(--amar);padding:16px 20px;font-family:var(--mao);font-size:16px;transform:rotate(-1.2deg);box-shadow:3px 4px 9px rgba(0,0,0,.16);margin:30px auto;max-width:540px;border-radius:2px}
+.rabisco{font-family:var(--mao);color:var(--laranja);font-size:15.5px;line-height:1.4}
+
+.lab{background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:8px 24px 26px;margin:34px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.lab .tit{font-family:var(--mao);font-size:19px;font-weight:700;background:var(--verde);color:#fff;display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;border:3px solid var(--tinta)}
+.controles{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
+button{font-family:var(--corpo);font-size:16px;font-weight:700;cursor:pointer;background:var(--azul);color:#fff;border:3px solid var(--tinta);border-radius:9px;padding:9px 18px;box-shadow:3px 3px 0 var(--tinta);transition:.09s}
+button:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--tinta)}
+button:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--tinta)}
+button.sec{background:#fff;color:var(--tinta)}
+button.on{background:var(--verde)}
+button:disabled{opacity:.5;cursor:not-allowed;box-shadow:none;transform:none}
+.alt:focus-visible{outline:3px solid var(--laranja);outline-offset:2px}
+input[type=number]{font-family:var(--corpo);font-size:18px;font-weight:700;width:92px;padding:8px 10px;border:3px solid var(--tinta);border-radius:9px;background:#fff;text-align:center}
+input:focus{outline:3px solid var(--amar)}
+input[type=range]{width:100%;max-width:280px;accent-color:var(--azul);height:26px;vertical-align:middle}
+label.lab-l{font-weight:700;font-size:15px}
+.sl-linha{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0}
+.sl-val{font-family:var(--mao);font-size:22px;font-weight:700;min-width:52px;text-align:center;background:var(--amar);border:2px solid var(--tinta);border-radius:8px;padding:1px 8px}
+
+.tela{background:#fff;border:2px solid var(--linha);border-radius:10px;padding:6px}
+.tela svg{width:100%;height:auto;display:block;max-width:400px;margin:0 auto}
+
+.ex{background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:8px 24px 24px;margin:30px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13);position:relative}
+.ex .tit{font-family:var(--mao);font-size:19px;font-weight:700;background:var(--laranja);color:#fff;display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;border:3px solid var(--tinta)}
+.alt{display:block;background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:12px 16px;margin:9px 0;cursor:pointer;font-size:16.5px;transition:.12s;font-weight:600}
+.alt:hover{background:var(--amar)}
+.alt.certa{background:var(--verdec);border-color:var(--verde)}
+.alt.errada{background:var(--vermc);border-color:var(--verm)}
+.fb{margin-top:14px;font-family:var(--mao);font-size:17px;min-height:0;padding:0;border-radius:9px;overflow:hidden;transition:.2s}
+.fb.mostra{padding:12px 16px;min-height:24px}
+.fb.ok{background:var(--verdec);border:3px solid var(--verde);color:#065f46}
+.fb.no{background:var(--vermc);border:3px solid var(--verm);color:#991b1b}
+@keyframes chacoalha{0%,100%{transform:translateX(0)}15%{transform:translateX(-10px)}30%{transform:translateX(10px)}45%{transform:translateX(-7px)}60%{transform:translateX(7px)}75%{transform:translateX(-3px)}}
+.chacoalha{animation:chacoalha .5s}
+@keyframes pulsa{0%{transform:scale(1)}45%{transform:scale(1.11)}100%{transform:scale(1)}}
+.pulsa{animation:pulsa .45s}
+.selo{position:absolute;right:16px;top:14px;font-size:34px;opacity:0;transform:scale(.2) rotate(-25deg);transition:.4s cubic-bezier(.34,1.7,.5,1)}
+.selo.ver{opacity:1;transform:scale(1) rotate(-12deg)}
+.dica{font-size:14.5px;color:var(--cinza);margin-top:10px;font-style:italic}
+
+.placar{background:var(--tinta);color:var(--papel2);border-radius:14px;padding:26px 28px;margin:44px 0 0;text-align:center}
+.placar .n{font-size:52px;font-weight:800;font-family:var(--mao);color:var(--amar);line-height:1}
+.barra{height:20px;background:#3a3a3a;border-radius:12px;overflow:hidden;margin:16px auto;max-width:420px}
+.barra i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--verde),var(--amar));transition:.6s}
+.conf{position:fixed;top:-20px;width:11px;height:16px;z-index:99;pointer-events:none;border-radius:2px}
+@keyframes cai{to{transform:translateY(105vh) rotate(720deg);opacity:.1}}
+
+footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:var(--cinza);font-size:15px;text-align:center}
+@media(max-width:620px){header h1{font-size:30px}h2{font-size:24px}.guru{flex-direction:column;align-items:center}.guru svg{flex:0 0 auto}}
+</style>
+<link rel="stylesheet" href="../../assets/pecas.css">
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <p class="serie">✏️ MATEMÁTICA DO ZERO — nível 2, álgebra e geometria</p>
+    <span class="aula-num">AULA 8 de 30 · NÍVEL 2</span>
+    <h1>Equações e inequações: a balança</h1>
+    <p class="sub">Onde você aprende a descobrir um número escondido — sem chute, só mantendo a balança equilibrada. E o que muda quando a balança pende para um lado.</p>
+    <div class="voltou"><strong>Você já sabe:</strong> jogar um número na máquina e ver o que sai (Aula 7), e os negativos na reta numerada (Aula 2). Hoje é o contrário: você sabe o que saiu e quer descobrir o que entrou.</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<p class="grande">Na Aula 7, a pergunta era: "joguei o 4 na máquina <span class="mono">2 · x + 3</span>, o que sai?". Hoje a pergunta vira do avesso: "saiu 11 — <strong>qual número entrou?</strong>". Isso é uma <strong>equação</strong>.</p>
+
+<div class="cerebro">
+  <div class="tit">🧠 Poder do cérebro</div>
+  <p>Numa balança em equilíbrio há, de um lado, 3 caixas iguais e um peso de 2 kg; do outro, 11 kg. Sem abrir as caixas, como descobrir quanto pesa cada uma?</p>
+  <details><summary>Ver a resposta</summary><p>Tire 2 kg dos dois pratos (fica 3 caixas = 9 kg) e divida os dois lados por 3: cada caixa pesa 3 kg. Fazer a mesma coisa dos dois lados nunca desequilibra a balança — essa é a aula inteira.</p></details>
+</div>
+
+<!-- ============ 1 ============ -->
+<h2><span class="n">1</span> Uma equação é uma balança</h2>
+
+<p>Escreva <span class="mono">2 · x + 3 = 11</span>. O sinal de igual diz que os dois lados <strong>pesam a mesma coisa</strong>. Pense numa balança de dois pratos: no esquerdo, duas caixas misteriosas (cada uma pesa <span class="mono">x</span>) e 3 pesinhos; no direito, 11 pesinhos. A balança está equilibrada.</p>
+
+<p>Resolver a equação é descobrir quanto pesa cada caixa — tirando coisas da balança <strong>sem deixar ela entortar</strong>.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: a balança em equilíbrio</div>
+  <p>Use os botões para esvaziar a balança até sobrar uma caixa sozinha de um lado. Cada botão mexe <strong>nos dois pratos ao mesmo tempo</strong>.</p>
+  <div class="controles">
+    <button id="btTiraPeso">− 1 pesinho dos dois lados</button>
+    <button id="btDivide">÷ pelo número de caixas, dos dois lados</button>
+    <button class="sec" id="btResetBal">↺ Recomeçar</button>
+  </div>
+  <div class="tela">
+    <svg viewBox="0 0 420 250" id="svgBal1" role="img" aria-label="Balança com caixas x e pesinhos, sempre equilibrada">
+      <polygon points="210,150 185,240 235,240" fill="#c9c1ae" stroke="#1b1b1b" stroke-width="3"/>
+      <g id="travessaBal1">
+        <line x1="50" y1="150" x2="370" y2="150" stroke="#1b1b1b" stroke-width="6" stroke-linecap="round"/>
+        <rect x="20" y="150" width="140" height="8" fill="#1b1b1b" rx="3"/>
+        <rect x="260" y="150" width="140" height="8" fill="#1b1b1b" rx="3"/>
+        <g id="itensBal1"></g>
+      </g>
+      <circle cx="210" cy="150" r="7" fill="var(--laranja)" stroke="#1b1b1b" stroke-width="2"/>
+    </svg>
+  </div>
+  <p class="eq centro" id="eqBal1" style="font-size:26px;font-weight:800">2 · x + 3 = 11</p>
+  <p class="rabisco centro" id="txtBal1">Comece tirando pesinhos dos dois lados.</p>
+</div>
+
+<!-- ============ 2 ============ -->
+<h2><span class="n">2</span> A regra de ouro da balança</h2>
+
+<p>Existe uma regra só, e ela é tudo:</p>
+
+<div class="sticky"><strong>O que você fizer de um lado, faça do outro.</strong><br>Tirou 3 da esquerda? Tire 3 da direita. Dividiu a esquerda por 2? Divida a direita por 2. Assim a balança nunca entorta — e a igualdade continua verdadeira.</div>
+
+
+<div class="cuidado">
+  <div class="tit">⚠️ Cuidado — mexer de um lado só</div>
+  <p style="margin:6px 0 0">O erro mais comum é "passar o número para o outro lado" trocando o sinal sem entender por quê. Não decore isso: o que acontece de verdade é que você <strong>tirou o mesmo tanto dos dois lados</strong>. Se lembrar da balança, nunca vai errar o sinal.</p>
+</div>
+
+<!-- ============ 3 ============ -->
+<h2><span class="n">3</span> A máquina ao contrário</h2>
+
+<p>Lembra da ordem das contas da Aula 7? A máquina <span class="mono">3 · x + 2</span> primeiro multiplica, depois soma. Para descobrir o que entrou, você <strong>desfaz na ordem inversa</strong>: primeiro desfaz a soma, depois desfaz a multiplicação — como tirar a meia depois do sapato.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: a máquina ao contrário</div>
+  <p>A máquina <span class="mono">3 · x + 2</span> devolveu <strong>17</strong>. Que número entrou?</p>
+  <div class="controles">
+    <button id="btContrario">▶ Desfazer passo a passo</button>
+  </div>
+  <div style="background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:14px 18px" id="caixaContrario">
+    <p style="margin:0;font-size:18px">clique no botão…</p>
+  </div>
+</div>
+
+<div class="guru">
+  <svg viewBox="0 0 100 118" width="92">
+    <ellipse cx="50" cy="112" rx="34" ry="6" fill="#00000018"/>
+    <path d="M50 60 L20 108 L80 108 Z" fill="#7c3aed" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="50" cy="34" r="20" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M30 36 q20 46 40 0 q-6 34 -20 34 q-14 0 -20 -34" fill="#e5e7eb" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M40 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M52 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M30 22 q20 -12 40 0" fill="none" stroke="#1b1b1b" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="24" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="76" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+  </svg>
+  <div>
+        <div class="fala">Equação não é um bicho diferente de função. É a mesma máquina da Aula 7, só que a pergunta anda de trás para frente: você conhece a saída e quer a entrada. Quem sabe montar a máquina sabe desmontar — é só fazer os passos na ordem contrária.</div>
+    <div class="quem">— o Guru</div>
+  </div>
+</div>
+
+<!-- ============ 4 ============ -->
+<h2><span class="n">4</span> Quando o x aparece dos dois lados</h2>
+
+<p>Às vezes há caixas nos dois pratos: <span class="mono">5 · x − 4 = 2 · x + 8</span>. A regra é a mesma. Primeiro tire <strong>2 caixas de cada lado</strong> — assim todas as caixas ficam de um lado só. Depois é o que você já sabe fazer.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: x dos dois lados, passo a passo</div>
+  <div class="controles">
+    <button id="btDoisLados">▶ Ver os passos</button>
+  </div>
+  <div style="background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:14px 18px" id="caixaDoisLados">
+    <p style="margin:0;font-size:18px">clique no botão…</p>
+  </div>
+</div>
+
+<div class="idiota">
+  <div class="tit">Não existe pergunta idiota</div>
+  <p class="q">E se a resposta não for um número inteiro?</p>
+  <p class="a">Sem problema: <span class="mono">2 · x = 7</span> dá <span class="mono">x = 3,5</span>. A balança não liga para vírgula — a regra continua a mesma.</p>
+  <p class="q">Como eu sei que acertei?</p>
+  <p class="a">Coloque o número de volta na equação e faça a conta dos dois lados. Se der igual, acertou. É o laboratório logo abaixo — e é um hábito que vale para a vida inteira.</p>
+  <p class="q">Por que isso vem antes de sistemas de equações?</p>
+  <p class="a">Porque resolver um sistema (Aula 10) termina sempre numa equação como estas. Sem a balança, a Aula 10 viraria mágica.</p>
+</div>
+
+<!-- ============ 5 ============ -->
+<h2><span class="n">5</span> Conferir é de graça</h2>
+
+<p>Achou o x? Substitua na equação original. Se os dois lados derem o mesmo número, está certo — sem precisar de gabarito.</p>
+
+
+<!-- ============ 6 ============ -->
+<h2><span class="n">6</span> Abrir parênteses: cada pedaço vezes cada pedaço</h2>
+
+<p>Às vezes a equação vem com parênteses: <span class="mono">3 · (x + 2) = 21</span>. Dá para desfazer como na seção 3 (dividir por 3 primeiro), mas vale conhecer o outro jeito: <strong>abrir os parênteses</strong>. O desenho é uma área de retângulo: um retângulo de altura 3 e largura <span class="mono">x + 2</span> se divide em dois pedaços, <span class="mono">3 · x</span> e <span class="mono">3 · 2</span>.</p>
+
+<p class="centro" style="font-size:21px;font-weight:800">3 · (x + 2) = 3x + 6</p>
+
+<p>Com dois parênteses, a regra é a mesma: <strong>cada pedaço de um vezes cada pedaço do outro</strong>, e soma tudo. Com sinais de menos, vale a regra de sinais da Aula 2.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: abra os parênteses</div>
+  <p>Monte <span class="mono">(x + a) · (x + b)</span> e veja o retângulo se dividir em quatro pedaços.</p>
+  <div class="sl-linha"><label class="lab-l" for="slPa" style="min-width:40px">a:</label><input type="range" id="slPa" min="1" max="5" step="1" value="2"><span class="sl-val" id="vPa">2</span></div>
+  <div class="sl-linha"><label class="lab-l" for="slPb" style="min-width:40px">b:</label><input type="range" id="slPb" min="1" max="5" step="1" value="3"><span class="sl-val" id="vPb">3</span></div>
+  <div class="tela"><svg id="svgPar" role="img" aria-label="Retângulo dividido em quatro áreas"></svg></div>
+  <p class="rabisco centro" id="txtPar"></p>
+</div>
+
+<!-- ============ 7 ============ -->
+<h2><span class="n">7</span> Inequações: a balança que pende</h2>
+
+<p>E quando os pratos <strong>não</strong> são iguais? "O dobro do número mais 1 é <strong>maior</strong> que 7": <span class="mono">2x + 1 &gt; 7</span>. Isso é uma <strong>inequação</strong>, e a resposta não é um número só — é um <strong>pedaço da reta</strong>. A balança pende para o lado do x a partir do ponto em que ela ficaria equilibrada: resolva <span class="mono">2x + 1 = 7</span> (x = 3) e descubra para que lado ela pende.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: a balança que pende</div>
+  <p>Mova o x e veja a balança de <span class="mono">2x + 1</span> contra 7. A faixa verde da reta são os x que deixam o lado esquerdo mais pesado.</p>
+  <div class="sl-linha"><label class="lab-l" for="slXi" style="min-width:40px">x:</label><input type="range" id="slXi" min="-2" max="8" step="0.5" value="1"><span class="sl-val" id="vXi">1</span></div>
+  <div class="tela"><svg id="svgIne" role="img" aria-label="Balança de 2x mais 1 contra 7 e a reta com a solução"></svg></div>
+  <p class="rabisco centro" id="txtIne"></p>
+</div>
+
+<!-- ============ 8 ============ -->
+<h2><span class="n">8</span> O sinal que vira</h2>
+
+<p>Nas inequações vale quase tudo da balança: somar ou tirar o mesmo dos dois lados, multiplicar ou dividir pelo mesmo número positivo. Com uma exceção: <strong>multiplicar ou dividir por um número negativo vira o sinal</strong>. <span class="mono">2 &lt; 5</span>, mas <span class="mono">−2 &gt; −5</span>.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: o sinal que vira</div>
+  <p>Os pontos azul (2) e vermelho (5) são multiplicados pelo mesmo número. Quem fica à esquerda?</p>
+  <div class="sl-linha"><label class="lab-l" for="slMi" style="min-width:110px">multiplicar por:</label><input type="range" id="slMi" min="-3" max="3" step="0.5" value="-1"><span class="sl-val" id="vMi">−1</span></div>
+  <div class="tela"><svg id="svgSinal" role="img" aria-label="Dois pontos na reta antes e depois de multiplicar"></svg></div>
+  <p class="rabisco centro" id="txtSinal"></p>
+</div>
+
+<div class="porque">
+  <div class="tit">✅ Por que é verdade?</div>
+  <p style="margin:6px 0 0">Multiplicar por −1 é espelhar a reta em volta do zero (Aula 2): quem estava à direita vai para a esquerda, e vice-versa. Como <span class="mono">5</span> estava à direita de <span class="mono">2</span>, depois do espelho <span class="mono">−5</span> fica à esquerda de <span class="mono">−2</span>. A ordem inverteu — por isso o sinal da desigualdade vira. Multiplicar por um positivo só estica a reta, e a ordem não muda.</p>
+</div>
+
+<div class="pontos">
+  <div class="tit">Pontos importantes</div>
+  <ul>
+    <li>Uma <strong>equação</strong> é uma balança equilibrada: os dois lados valem a mesma coisa.</li>
+    <li>Resolver é descobrir o <strong>x</strong> que mantém a balança equilibrada.</li>
+    <li>Regra de ouro: <strong>o que fizer de um lado, faça do outro</strong>.</li>
+    <li>Desfaça as contas na <strong>ordem inversa</strong>: primeiro a soma/subtração, depois a multiplicação/divisão.</li>
+    <li>x dos dois lados? Junte todas as caixas num lado só primeiro.</li>
+    <li>Sempre dá para <strong>conferir</strong>: substitua o x e veja se os dois lados empatam.</li>
+    <li>Abrir parênteses: cada pedaço vezes cada pedaço — <span class="mono">(x + 2)(x + 3) = x² + 5x + 6</span>.</li>
+    <li><strong>Inequação</strong>: a balança que pende; a resposta é um pedaço da reta.</li>
+    <li>Multiplicar ou dividir uma inequação por negativo <strong>vira o sinal</strong>.</li>
+  </ul>
+</div>
+
+<!-- ============ exercicios ============ -->
+<h2><span class="n">✏️</span> Afie o lápis</h2>
+<p>Seis exercícios. Erre à vontade — a correção explica o porquê.</p>
+
+<div class="ex" id="ex1">
+  <div class="tit">Exercício 1 — quem faz o quê?</div>
+  <div class="selo">✅</div>
+  <p>Ligue cada ideia da balança ao seu papel.</p>
+  <table class="ligar">
+    <tr><td>equação</td><td><select data-r="0" aria-label="equação"><option value="">escolha...</option><option value="0">balança em equilíbrio (=)</option><option value="1">balança que pende (<, >)</option><option value="2">a regra de ouro: não desequilibra</option><option value="3">vira o sinal da desigualdade</option></select></td></tr>
+    <tr><td>inequação</td><td><select data-r="1" aria-label="inequação"><option value="">escolha...</option><option value="0">balança em equilíbrio (=)</option><option value="1">balança que pende (<, >)</option><option value="2">a regra de ouro: não desequilibra</option><option value="3">vira o sinal da desigualdade</option></select></td></tr>
+    <tr><td>fazer o mesmo dos dois lados</td><td><select data-r="2" aria-label="fazer o mesmo dos dois lados"><option value="">escolha...</option><option value="0">balança em equilíbrio (=)</option><option value="1">balança que pende (<, >)</option><option value="2">a regra de ouro: não desequilibra</option><option value="3">vira o sinal da desigualdade</option></select></td></tr>
+    <tr><td>multiplicar por um negativo</td><td><select data-r="3" aria-label="multiplicar por um negativo"><option value="">escolha...</option><option value="0">balança em equilíbrio (=)</option><option value="1">balança que pende (<, >)</option><option value="2">a regra de ouro: não desequilibra</option><option value="3">vira o sinal da desigualdade</option></select></td></tr>
+  </table>
+  <button class="check" data-ex="ex1">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex2">
+  <div class="tit">Exercício 2</div>
+  <div class="selo">✅</div>
+  <p>Resolva <span class="mono">x + 7 = 12</span>.</p>
+  <p>x = <input type="number" data-r="5"></p>
+  <button class="check" data-ex="ex2">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex3">
+  <div class="tit">Exercício 3</div>
+  <div class="selo">✅</div>
+  <p>Resolva <span class="mono">3 · x = 21</span>.</p>
+  <p>x = <input type="number" data-r="7"></p>
+  <button class="check" data-ex="ex3">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex4">
+  <div class="tit">Exercício 4</div>
+  <div class="selo">✅</div>
+  <p>Resolva <span class="mono">2 · x + 3 = 11</span>.</p>
+  <p>x = <input type="number" data-r="4"></p>
+  <button class="check" data-ex="ex4">Conferir</button>
+  <div class="fb"></div>
+  <p class="dica">Dica: primeiro tire 3 dos dois lados, depois divida os dois lados por 2.</p>
+</div>
+
+<div class="ex" id="ex5">
+  <div class="tit">Exercício 5 — o desafio</div>
+  <div class="selo">🏆</div>
+  <p>Resolva <span class="mono">5 · x − 4 = 2 · x + 8</span>.</p>
+  <p>x = <input type="number" data-r="4"></p>
+  <button class="check" data-ex="ex5">Conferir</button>
+  <div class="fb"></div>
+  <p class="dica">Dica: tire 2 · x dos dois lados primeiro.</p>
+</div>
+
+<div class="ex" id="ex6">
+  <div class="tit">Exercício 6</div>
+  <div class="selo">✅</div>
+  <p>A máquina <span class="mono">3 · x + 2</span> primeiro multiplica por 3 e depois soma 2. Para desfazer, qual é a ordem certa?</p>
+  <div class="alts" data-r="1">
+    <div class="alt" data-i="0">Dividir por 3, depois subtrair 2.</div>
+    <div class="alt" data-i="1">Subtrair 2, depois dividir por 3.</div>
+    <div class="alt" data-i="2">Somar 2, depois multiplicar por 3.</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="placar" id="placar">
+  <p style="margin:0 0 4px;font-family:var(--mao);font-size:19px">Seu placar</p>
+  <div class="n"><span id="pn">0</span> / 6</div>
+  <div class="barra"><i id="pbar"></i></div>
+  <p id="pmsg" style="margin:0;color:#cfc9bb">Resolva os exercícios acima e acompanhe aqui.</p>
+</div>
+
+<footer>
+  Matemática do Zero · Aula 8 — Equações e inequações: a balança<br>
+  <strong>Próxima aula:</strong> O plano e a reta.
+</footer>
+
+</div>
+
+<script src="../../assets/progresso.js"></script>
+<script src="../../assets/auth.js"></script>
+<script src="../../assets/auth-ui.js"></script>
+<script src="../../assets/catalogo.js"></script>
+<script src="../../assets/menu.js"></script>
+<script>
+(function(){
+"use strict";
+var AULA_ID = "08-equacoes-e-inequacoes";
+var NS="http://www.w3.org/2000/svg";
+
+function desenhaItens(g, esq, dir){
+  while(g.firstChild) g.removeChild(g.firstChild);
+  function prato(itens, x0){
+    itens.forEach(function(tipo,i){
+      var col=i%7, lin=Math.floor(i/7);
+      var x=x0+col*19, y=132-lin*19;
+      var r=document.createElementNS(NS,"rect");
+      r.setAttribute("x",x); r.setAttribute("y",y); r.setAttribute("width",16); r.setAttribute("height",16);
+      r.setAttribute("rx",3);
+      r.setAttribute("fill", tipo==="x" ? "var(--roxo)" : "var(--laranja)");
+      r.setAttribute("stroke","#1b1b1b"); r.setAttribute("stroke-width",1.5);
+      g.appendChild(r);
+      if(tipo==="x"){
+        var t=document.createElementNS(NS,"text");
+        t.setAttribute("x",x+8); t.setAttribute("y",y+12.5); t.setAttribute("text-anchor","middle");
+        t.setAttribute("font-size",11); t.setAttribute("font-weight",800); t.setAttribute("fill","#fff");
+        t.textContent="x"; g.appendChild(t);
+      }
+    });
+  }
+  prato(esq,24); prato(dir,264);
+}
+function itens(caixas, pesos){
+  var a=[], i;
+  for(i=0;i<caixas;i++) a.push("x");
+  for(i=0;i<pesos;i++) a.push("p");
+  return a;
+}
+function numTxt(v){ return String(v).replace(".",",").replace("-","−"); }
+
+/* ---------- lab: a balanca em equilibrio ---------- */
+var itensBal1=document.getElementById("itensBal1"), eqBal1=document.getElementById("eqBal1"), txtBal1=document.getElementById("txtBal1");
+var bal={a:2,b:3,c:11};
+function pintaBal1(){
+  desenhaItens(itensBal1, itens(bal.a,bal.b), itens(0,bal.c));
+  var esq = (bal.a===1 ? "x" : bal.a+" · x") + (bal.b>0 ? " + "+bal.b : "");
+  eqBal1.textContent = esq+" = "+numTxt(bal.c);
+  if(bal.a===1 && bal.b===0) txtBal1.innerHTML="🎉 Sobrou uma caixa sozinha: <strong>x = "+numTxt(bal.c)+"</strong>. Confira: 2 · "+numTxt(bal.c)+" + 3 = 11.";
+  else if(bal.b>0) txtBal1.textContent="Ainda há pesinhos junto das caixas. Tire-os — dos dois lados.";
+  else txtBal1.textContent="Só caixas à esquerda: agora divida os dois lados pelo número de caixas.";
+}
+document.getElementById("btTiraPeso").addEventListener("click",function(){
+  if(bal.b===0){ txtBal1.textContent="Não há mais pesinhos soltos do lado das caixas. Hora de dividir."; return; }
+  bal.b--; bal.c--; pintaBal1();
+});
+document.getElementById("btDivide").addEventListener("click",function(){
+  if(bal.b>0){ txtBal1.textContent="Ainda não: com pesinhos soltos do lado das caixas, dividir fica bagunçado. Tire-os antes."; return; }
+  if(bal.a===1){ txtBal1.textContent="Já sobrou uma caixa só — a balança está resolvida."; return; }
+  bal.c=bal.c/bal.a; bal.a=1; pintaBal1();
+});
+document.getElementById("btResetBal").addEventListener("click",function(){ bal={a:2,b:3,c:11}; pintaBal1(); });
+pintaBal1();
+
+/* ---------- labs passo a passo ---------- */
+function passoAPasso(idCaixa, passos){
+  var caixa=document.getElementById(idCaixa);
+  caixa.innerHTML="";
+  passos.forEach(function(t,i){
+    setTimeout(function(){
+      var d=document.createElement("p");
+      d.style.margin="0 0 8px"; d.style.fontSize="18px";
+      d.innerHTML=t; caixa.appendChild(d);
+    }, i*650);
+  });
+}
+document.getElementById("btContrario").addEventListener("click",function(){
+  passoAPasso("caixaContrario",[
+    "A máquina fez: × 3, depois + 2. Saiu <strong>17</strong>.",
+    "Desfaço o último passo primeiro (o + 2): 17 − 2 = <strong>15</strong>",
+    "Desfaço o primeiro passo (o × 3): 15 ÷ 3 = <strong>5</strong>",
+    "Entrou o <strong style='font-size:22px'>5</strong>. Confira: 3 · 5 + 2 = 17 ✔"
+  ]);
+});
+document.getElementById("btDoisLados").addEventListener("click",function(){
+  passoAPasso("caixaDoisLados",[
+    "5 · x − 4 = 2 · x + 8",
+    "Tiro 2 · x dos dois lados: &nbsp; 3 · x − 4 = 8",
+    "Somo 4 dos dois lados: &nbsp; 3 · x = 12",
+    "Divido os dois lados por 3: &nbsp; x = <strong>4</strong>",
+    "Confiro: 5 · 4 − 4 = 16 &nbsp;e&nbsp; 2 · 4 + 8 = 16 ✔"
+  ]);
+});
+
+/* ---------- exercicios ---------- */
+var feitos={}, TOTAL=6;
+function confete(){
+  var cores=["#fde68a","#2563eb","#dc2626","#059669","#7c3aed","#d97706"];
+  for(var i=0;i<40;i++){
+    (function(i){
+      var d=document.createElement("div");
+      d.className="conf"; d.style.left=(Math.random()*100)+"vw";
+      d.style.background=cores[i%cores.length];
+      d.style.animation="cai "+(1.9+Math.random()*1.5)+"s linear forwards";
+      d.style.animationDelay=(Math.random()*.5)+"s";
+      document.body.appendChild(d);
+      setTimeout(function(){d.remove();},4200);
+    })(i);
+  }
+}
+function marca(id,ok){
+  if(ok&&!feitos[id]){
+    feitos[id]=true;
+    if(window.Progresso) Progresso.marcar(AULA_ID,id);
+    var n=Object.keys(feitos).length;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Você fechou a Aula 8. 🎉</strong> A balança é sua — equilibrada ou pendendo. Na próxima: O plano e a reta."; confete(); }
+    else msg.textContent="Boa! Faltam "+(TOTAL-n)+".";
+    document.querySelector("#"+id+" .selo").classList.add("ver");
+  }
+}
+function restauraProgresso(){
+  if(!window.Progresso) return;
+  Progresso.carregar(AULA_ID).then(function(itens){
+    itens.forEach(function(id){
+      if(!feitos[id] && document.getElementById(id)){
+        feitos[id]=true;
+        document.querySelector("#"+id+" .selo").classList.add("ver");
+      }
+    });
+    var n=Object.keys(feitos).length;
+    if(n===0) return;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    msg.textContent = n===TOTAL
+      ? "Você já tinha concluído esta aula. 🎉"
+      : "Progresso salvo: "+n+"/"+TOTAL+". Faltam "+(TOTAL-n)+".";
+  });
+}
+function fb(box,ok,txt){
+  var f=box.querySelector(".fb");
+  f.className="fb mostra "+(ok?"ok":"no"); f.innerHTML=txt;
+  box.classList.remove("chacoalha");
+  if(!ok){ void box.offsetWidth; box.classList.add("chacoalha"); }
+}
+var explica={
+  ex1:{"ok": "Tudo certo! Equilíbrio, balança pendendo, a regra de ouro e o sinal que vira.", "no": "Quase. Equação = balança em equilíbrio; inequação = balança que pende; fazer o mesmo dos dois lados = a regra de ouro; multiplicar por negativo = vira o sinal."},
+ "ex2": {
+  "ok": "Isso! Tirando 7 dos dois lados: x = 12 − 7 = 5.",
+  "no": "Tire 7 dos dois lados: x = 12 − 7 = <strong>5</strong>. Confira: 5 + 7 = 12."
+ },
+ "ex3": {
+  "ok": "Isso! Dividindo os dois lados por 3: x = 7.",
+  "no": "Divida os dois lados por 3: x = 21 ÷ 3 = <strong>7</strong>."
+ },
+ "ex4": {
+  "ok": "Isso! 2x = 8, então x = 4. Confira: 2 · 4 + 3 = 11.",
+  "no": "Tire 3 dos dois lados: 2 · x = 8. Divida por 2: x = <strong>4</strong>."
+ },
+ "ex5": {
+  "ok": "Isso! 3x − 4 = 8 → 3x = 12 → x = 4.",
+  "no": "Tire 2 · x dos dois lados: 3 · x − 4 = 8. Some 4: 3 · x = 12. Divida por 3: x = <strong>4</strong>."
+ }
+};
+document.querySelectorAll("button.check").forEach(function(b){
+  b.addEventListener("click",function(){
+    var box=document.getElementById(b.dataset.ex);
+    var ins=box.querySelectorAll("input[data-r],select[data-r]"), tudoOk=true, vazio=false;
+    ins.forEach(function(inp){
+      if(inp.value===""){vazio=true;return;}
+      var ok=Math.abs(parseFloat(inp.value)-parseFloat(inp.dataset.r)) < 0.001;
+      inp.style.borderColor=ok?"#059669":"#dc2626";
+      inp.style.background=ok?"#d1fae5":"#fee2e2";
+      if(!ok) tudoOk=false;
+    });
+    if(vazio){ fb(box,false,"Preencha o campo antes de conferir. 🙂"); return; }
+    fb(box,tudoOk,(tudoOk?"✔ ":"✘ ")+(tudoOk?explica[b.dataset.ex].ok:explica[b.dataset.ex].no));
+    marca(b.dataset.ex,tudoOk);
+  });
+});
+var expAlt={
+ "ex1": [
+  "Mexer só num lado entorta a balança — a igualdade deixa de valer.",
+  "Isso! Mexendo igual nos dois lados, a balança continua equilibrada.",
+  "Dividir por 2 só faz sentido em algumas equações — não é uma regra geral."
+ ],
+ "ex6": [
+  "Ordem trocada: 3 · 5 + 2 = 17, mas 17 ÷ 3 − 2 não dá 5.",
+  "Isso! Desfaz-se o último passo primeiro: tira o + 2, depois desfaz o × 3.",
+  "Somar e multiplicar é fazer a máquina de novo, não desfazer."
+ ]
+};
+document.querySelectorAll(".alts").forEach(function(grupo){
+  var box=grupo.closest(".ex"), certa=parseInt(grupo.dataset.r,10);
+  grupo.querySelectorAll(".alt").forEach(function(alt){
+    alt.setAttribute("tabindex","0");
+    alt.setAttribute("role","button");
+    alt.setAttribute("aria-label","Alternativa "+alt.textContent.trim());
+    function escolhe(){
+      var i=parseInt(alt.dataset.i,10), ok=(i===certa);
+      grupo.querySelectorAll(".alt").forEach(function(a){a.classList.remove("certa","errada");});
+      alt.classList.add(ok?"certa":"errada");
+      if(ok) alt.classList.add("pulsa");
+      fb(box,ok,(ok?"✔ ":"✘ ")+expAlt[box.id][i]);
+      marca(box.id,ok);
+    }
+    alt.addEventListener("click",escolhe);
+    alt.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();escolhe();}});
+  });
+});
+
+restauraProgresso();
+
+})();
+</script>
+<script>
+(function(){
+"use strict";
+/* laboratorios da reestruturacao: parenteses, inequacoes e o sinal que vira */
+var NS="http://www.w3.org/2000/svg";
+function $(id){ return document.getElementById(id); }
+function num(v,d){
+  if(d===undefined) d=2;
+  var p=Math.pow(10,d), r=Math.round(v*p)/p;
+  if(r===0) r=0;
+  return String(r).replace(".",",").replace("-","−");
+}
+function milhar(v){
+  var s=Math.round(v).toString(), neg=s.charAt(0)==="-"; if(neg) s=s.slice(1);
+  var out=""; while(s.length>3){ out="."+s.slice(-3)+out; s=s.slice(0,-3); }
+  return (neg?"−":"")+s+out;
+}
+function el(tag,attrs,pai){
+  var e=document.createElementNS(NS,tag);
+  for(var k in attrs) e.setAttribute(k,attrs[k]);
+  if(pai) pai.appendChild(e);
+  return e;
+}
+function limpa(g){ while(g.firstChild) g.removeChild(g.firstChild); }
+/* plano cartesiano: grade, eixos e conversao de coordenadas */
+function plano(svg,o){
+  /* ox/oy: desenha o plano numa regiao de um svg maior (sem mexer no viewBox) */
+  var w=o.w||400, h=o.h||300, ox=o.ox||0, oy=o.oy||0, regiao=("ox" in o)||("oy" in o);
+  if(!regiao) svg.setAttribute("viewBox","0 0 "+w+" "+h);
+  var P={w:w,h:h,o:o};
+  P.X=function(x){ return ox+(x-o.xmin)/(o.xmax-o.xmin)*w; };
+  P.Y=function(y){ return oy+h-(y-o.ymin)/(o.ymax-o.ymin)*h; };
+  P.xDe=function(px){ return o.xmin+(px-ox)/w*(o.xmax-o.xmin); };
+  var g=el("g",{},svg), px=o.px||1, py=o.py||1, i, eps=1e-9;
+  for(i=Math.ceil(o.xmin/px)*px;i<=o.xmax+eps;i+=px) el("line",{x1:P.X(i),y1:oy,x2:P.X(i),y2:oy+h,stroke:"#ece7da","stroke-width":1},g);
+  for(i=Math.ceil(o.ymin/py)*py;i<=o.ymax+eps;i+=py) el("line",{x1:ox,y1:P.Y(i),x2:ox+w,y2:P.Y(i),stroke:"#ece7da","stroke-width":1},g);
+  if(o.ymin<=0&&o.ymax>=0) el("line",{x1:ox,y1:P.Y(0),x2:ox+w,y2:P.Y(0),stroke:"#1b1b1b","stroke-width":1.6},g);
+  if(o.xmin<=0&&o.xmax>=0) el("line",{x1:P.X(0),y1:oy,x2:P.X(0),y2:oy+h,stroke:"#1b1b1b","stroke-width":1.6},g);
+  if(o.rotulos){
+    var lx=o.rotX||px, ly=o.rotY||py, y0=(o.ymin<=0&&o.ymax>=0)?P.Y(0):oy+h, x0=(o.xmin<=0&&o.xmax>=0)?P.X(0):ox;
+    var dx=(o.xmax-o.xmin)*0.03, dy=(o.ymax-o.ymin)*0.04;
+    for(i=Math.ceil(o.xmin/lx)*lx;i<=o.xmax+eps;i+=lx) if(Math.abs(i)>eps&&i>o.xmin+dx&&i<o.xmax-dx) el("text",{x:P.X(i),y:Math.min(oy+h-3,y0+14),"font-size":11,fill:"#6b7280","text-anchor":"middle"},g).textContent=num(i);
+    for(i=Math.ceil(o.ymin/ly)*ly;i<=o.ymax+eps;i+=ly) if(Math.abs(i)>eps&&i>o.ymin+dy&&i<o.ymax-dy) el("text",{x:x0-4<ox+14?x0+4:x0-4,y:P.Y(i)+4,"font-size":11,fill:"#6b7280","text-anchor":x0-4<ox+14?"start":"end"},g).textContent=num(i);
+  }
+  P.camada=el("g",{},svg);
+  if(regiao){
+    /* numa regiao, o que passa da borda e cortado para nao invadir o vizinho */
+    plano.n=(plano.n||0)+1;
+    var id="corte"+plano.n+"_"+Math.floor(Math.random()*1e6);
+    var cp=el("clipPath",{id:id},svg);
+    el("rect",{x:ox,y:oy,width:w,height:h},cp);
+    P.camada.setAttribute("clip-path","url(#"+id+")");
+  }
+  /* caminho de uma funcao, amostrada; valores fora da tela sao cortados */
+  P.d=function(f,a,b,n){
+    a=(a===undefined)?o.xmin:a; b=(b===undefined)?o.xmax:b; n=n||240;
+    var s="", novo=true, lim=(o.ymax-o.ymin)*3;
+    for(var k=0;k<=n;k++){
+      var x=a+(b-a)*k/n, y=f(x);
+      if(!isFinite(y)){ novo=true; continue; }
+      y=Math.max(o.ymin-lim,Math.min(o.ymax+lim,y));
+      s+=(novo?"M":"L")+P.X(x).toFixed(1)+" "+P.Y(y).toFixed(1)+" "; novo=false;
+    }
+    return s||"M0 0";
+  };
+  return P;
+}
+/* arrastar uma alca dentro de um svg; cb recebe coordenadas do viewBox */
+function arrasta(svg,alca,cb){
+  var ativo=false;
+  function pos(ev){
+    var r=svg.getBoundingClientRect(), vb=svg.viewBox.baseVal;
+    cb((ev.clientX-r.left)/r.width*vb.width,(ev.clientY-r.top)/r.height*vb.height);
+  }
+  alca.addEventListener("pointerdown",function(ev){ ativo=true; ev.preventDefault(); pos(ev); });
+  svg.addEventListener("pointermove",function(ev){ if(ativo) pos(ev); });
+  window.addEventListener("pointerup",function(){ ativo=false; });
+}
+/* texto de receita sem "+ -": termos [[coef, "x²"], [coef, "x"], [coef, ""]] */
+function receita(termos){
+  var s="";
+  termos.forEach(function(t){
+    var c=t[0], v=t[1];
+    if(Math.abs(c)<1e-9) return;
+    var a=Math.abs(c), cs=(a===1&&v)?"":num(a);
+    if(s==="") s=(c<0?"−":"")+cs+v;
+    else s+=(c<0?" − ":" + ")+cs+v;
+  });
+  return s||"0";
+}
+/* potencia com expoente inteiro em sobrescrito (2¹⁰); com virgula fica 2^0,5 */
+function pot(b,n){
+  var t=num(n,1);
+  if(t.indexOf(",")!==-1) return b+"^"+t;
+  var m={"0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹","−":"⁻"};
+  return b+t.split("").map(function(c){return m[c]||c;}).join("");
+}
+
+/* ---------- lab: abra os parenteses ---------- */
+var svgPar=$("svgPar"); svgPar.setAttribute("viewBox","0 0 400 290");
+function pintaPar(){
+  var a=parseInt($("slPa").value,10), b=parseInt($("slPb").value,10), X=6, u=26;
+  $("vPa").textContent=a; $("vPb").textContent=b;
+  limpa(svgPar);
+  var ox=40, oy=20, W1=X*u, W2=b*u, H1=X*u*0.55, H2=a*u*0.55;
+  var pecas=[[ox,oy,W1,H1,"#2563eb","x²"],[ox+W1,oy,W2,H1,"#059669",b+"x"],[ox,oy+H1,W1,H2,"#d97706",a+"x"],[ox+W1,oy+H1,W2,H2,"#7c3aed",String(a*b)]];
+  pecas.forEach(function(p){
+    el("rect",{x:p[0],y:p[1],width:p[2],height:p[3],fill:p[4],"fill-opacity":.2,stroke:p[4],"stroke-width":2},svgPar);
+    el("text",{x:p[0]+p[2]/2,y:p[1]+p[3]/2+6,"font-size":17,"font-weight":800,"text-anchor":"middle",fill:p[4]},svgPar).textContent=p[5];
+  });
+  el("text",{x:ox+W1/2,y:oy-5,"font-size":13,"font-weight":700,"text-anchor":"middle"},svgPar).textContent="x";
+  el("text",{x:ox+W1+W2/2,y:oy-5,"font-size":13,"font-weight":700,"text-anchor":"middle"},svgPar).textContent=b;
+  el("text",{x:ox-12,y:oy+H1/2+5,"font-size":13,"font-weight":700,"text-anchor":"middle"},svgPar).textContent="x";
+  el("text",{x:ox-12,y:oy+H1+H2/2+5,"font-size":13,"font-weight":700,"text-anchor":"middle"},svgPar).textContent=a;
+  $("txtPar").textContent="(x + "+a+") · (x + "+b+") = x² + "+b+"x + "+a+"x + "+(a*b)+" = x² + "+(a+b)+"x + "+(a*b);
+}
+$("slPa").addEventListener("input",pintaPar); $("slPb").addEventListener("input",pintaPar); pintaPar();
+
+/* ---------- lab: a balanca que pende ---------- */
+var svgIne=$("svgIne"); svgIne.setAttribute("viewBox","0 0 400 230");
+function pintaIne(){
+  var x=parseFloat($("slXi").value), esq=2*x+1, dif=esq-7, ang=Math.max(-14,Math.min(14,-dif*2.5));
+  $("vXi").textContent=num(x);
+  limpa(svgIne);
+  el("polygon",{points:"200,110 180,150 220,150",fill:"#c9c1ae",stroke:"#1b1b1b","stroke-width":2},svgIne);
+  var g=el("g",{transform:"rotate("+ang.toFixed(2)+" 200 110)"},svgIne);
+  el("line",{x1:60,y1:110,x2:340,y2:110,stroke:"#1b1b1b","stroke-width":5,"stroke-linecap":"round"},g);
+  el("text",{x:90,y:96,"font-size":15,"font-weight":800,"text-anchor":"middle",fill:"var(--azul)"},g).textContent="2x + 1 = "+num(esq);
+  el("text",{x:310,y:96,"font-size":15,"font-weight":800,"text-anchor":"middle",fill:"var(--verm)"},g).textContent="7";
+  var X=function(v){return 40+(v+2)*32;};
+  el("rect",{x:X(3),y:176,width:X(8)-X(3),height:10,fill:"rgba(5,150,105,.35)"},svgIne);
+  el("line",{x1:X(-2),y1:181,x2:X(8),y2:181,stroke:"#1b1b1b","stroke-width":2},svgIne);
+  for(var v=-2;v<=8;v++){ el("line",{x1:X(v),y1:175,x2:X(v),y2:187,stroke:"#1b1b1b"},svgIne); el("text",{x:X(v),y:204,"font-size":10.5,"text-anchor":"middle",fill:"#6b7280"},svgIne).textContent=num(v); }
+  el("circle",{cx:X(3),cy:181,r:6,fill:"#fff",stroke:"var(--verde)","stroke-width":2.5},svgIne);
+  el("circle",{cx:X(x),cy:181,r:6,fill:"var(--laranja)",stroke:"#1b1b1b","stroke-width":1.5},svgIne);
+  el("text",{x:X(5.5),y:224,"font-size":11,"font-weight":700,"text-anchor":"middle",fill:"var(--verde)"},svgIne).textContent="x > 3";
+  $("txtIne").textContent="x = "+num(x)+": 2 · "+(x<0?"("+num(x)+")":num(x))+" + 1 = "+num(esq)+(dif>0?" > 7 — pende para o lado do x: verdadeira.":dif<0?" < 7 — pende para o 7: falsa.":" = 7 — equilibrada: é a fronteira (não vale o \"maior\").");
+}
+$("slXi").addEventListener("input",pintaIne); pintaIne();
+
+/* ---------- lab: o sinal que vira ---------- */
+var svgSinal=$("svgSinal"); svgSinal.setAttribute("viewBox","0 0 400 190");
+function reta(y,titulo){
+  var X=function(v){return 200+v*12;};
+  el("line",{x1:X(-15),y1:y,x2:X(15),y2:y,stroke:"#1b1b1b","stroke-width":2},svgSinal);
+  for(var v=-15;v<=15;v+=5){ el("line",{x1:X(v),y1:y-6,x2:X(v),y2:y+6,stroke:"#1b1b1b","stroke-width":v===0?2.5:1.2},svgSinal); el("text",{x:X(v),y:y+22,"font-size":10,"text-anchor":"middle",fill:"#6b7280"},svgSinal).textContent=num(v); }
+  el("text",{x:6,y:y-12,"font-size":11,"font-weight":700,fill:"#6b7280"},svgSinal).textContent=titulo;
+  return X;
+}
+function pintaSinal(){
+  var m=parseFloat($("slMi").value), a=2*m, b=5*m;
+  $("vMi").textContent=num(m);
+  limpa(svgSinal);
+  var X1=reta(50,"antes"); el("circle",{cx:X1(2),cy:50,r:7,fill:"var(--azul)"},svgSinal); el("circle",{cx:X1(5),cy:50,r:7,fill:"var(--verm)"},svgSinal);
+  var X2=reta(140,"depois de × "+num(m)); el("circle",{cx:X2(a),cy:140,r:7,fill:"var(--azul)",opacity:.9},svgSinal); el("circle",{cx:X2(b),cy:140,r:7,fill:"var(--verm)",opacity:.9},svgSinal);
+  var rel = a<b?"<":a>b?">":"=";
+  $("txtSinal").textContent="2 < 5 → vezes "+num(m)+": "+num(a)+" "+rel+" "+num(b)+(m<0?" — multiplicou por negativo: o sinal virou!":m===0?" — multiplicar por zero apaga tudo: os dois viram 0.":" — multiplicou por positivo: a ordem continua.");
+}
+$("slMi").addEventListener("input",pintaSinal); pintaSinal();
+})();
+</script>
+</body>
+</html>

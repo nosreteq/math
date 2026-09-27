@@ -107,16 +107,17 @@ label.lab-l{font-weight:700;font-size:15px}
 footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:var(--cinza);font-size:15px;text-align:center}
 @media(max-width:620px){header h1{font-size:30px}h2{font-size:24px}.guru{flex-direction:column;align-items:center}.guru svg{flex:0 0 auto}}
 </style>
+<link rel="stylesheet" href="../../assets/pecas.css">
 </head>
 <body>
 
 <header>
   <div class="inner">
-    <p class="serie">✏️ MATEMÁTICA DO ZERO — nível 3, avançado</p>
-    <span class="aula-num">AULA 13 de 18 · NÍVEL 3</span>
+    <p class="serie">✏️ MATEMÁTICA DO ZERO — nível 3, ensino médio</p>
+    <span class="aula-num">AULA 13 de 30 · NÍVEL 3</span>
     <h1>Curvas que não são retas</h1>
-    <p class="sub">Parábolas e polinômios: a máquina da Aula 1 com um quadrado dentro — e, de repente, o gráfico dobra.</p>
-    <div class="voltou"><strong>Você já sabe:</strong> máquinas e gráficos (Aula 1), a receita da reta e o passo da escada (Aula 2), esticar e deslocar (Aula 5), a balança (Aula 7) e o quadrado que nunca é negativo (Aula 9). Hoje tudo isso se junta numa curva.</div>
+    <p class="sub">Parábolas e polinômios: a máquina da Aula 7 com um quadrado dentro — e, de repente, o gráfico dobra.</p>
+    <div class="voltou"><strong>Você já sabe:</strong> máquinas e gráficos (Aula 7), a balança e abrir parênteses (Aula 8), a receita da reta e o passo da escada (Aula 9), a média (Aula 5) e o quadrado que nunca é negativo (Aula 4). Hoje tudo isso se junta numa curva.</div>
   </div>
 </header>
 
@@ -124,12 +125,18 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <p class="grande">Até aqui, toda máquina que você desenhou virou uma <strong>reta</strong>. Não é coincidência: as receitas só somavam e multiplicavam por números fixos. Basta a máquina multiplicar o <span class="mono">x</span> <strong>por ele mesmo</strong> para o desenho dobrar. Essa dobra é o começo de tudo o que vem no Nível 3.</p>
 
+<div class="cerebro">
+  <div class="tit">🧠 Poder do cérebro</div>
+  <p>Você chuta uma bola para o alto. Imagine o caminho dela no ar. É uma reta? O que acontece no ponto mais alto?</p>
+  <details><summary>Ver a resposta</summary><p>É uma curva que sobe, faz a volta e desce: uma parábola. No ponto mais alto, o vértice, a bola para de subir e começa a cair. Achar esse ponto é achar o "melhor valor".</p></details>
+</div>
+
 <!-- ============ 1 ============ -->
 <h2><span class="n">1</span> A máquina que dobra</h2>
 
-<p>A máquina <span class="mono">f(x) = x²</span> recebe um número e devolve o quadrado dele (Aula 9). Teste alguns: <span class="mono">f(1) = 1</span>, <span class="mono">f(2) = 4</span>, <span class="mono">f(3) = 9</span>. A saída não sobe no mesmo passo — cada passo é maior que o anterior. E do lado negativo, <span class="mono">f(−2) = 4</span> também: o sinal some.</p>
+<p>A máquina <span class="mono">f(x) = x²</span> recebe um número e devolve o quadrado dele (Aula 4). Teste alguns: <span class="mono">f(1) = 1</span>, <span class="mono">f(2) = 4</span>, <span class="mono">f(3) = 9</span>. A saída não sobe no mesmo passo — cada passo é maior que o anterior. E do lado negativo, <span class="mono">f(−2) = 4</span> também: o sinal some.</p>
 
-<p>Marque todos esses pontos no papel (Aula 1) e aparece uma curva em forma de <strong>U</strong>, simétrica: a <strong>parábola</strong>.</p>
+<p>Marque todos esses pontos no papel (Aula 7) e aparece uma curva em forma de <strong>U</strong>, simétrica: a <strong>parábola</strong>.</p>
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: a máquina que dobra</div>
@@ -150,14 +157,14 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <!-- ============ 2 ============ -->
 <h2><span class="n">2</span> As mesmas transformações de sempre</h2>
 
-<p>Na Aula 5 você esticou, levantou e deslocou ondas. A parábola obedece aos mesmos três botões:</p>
+<p>Na Aula 9, o número que multiplica deixava a reta mais inclinada e o número solto a levantava. A parábola tem esses botões e ganha um terceiro — deslocar para o lado:</p>
 
 <p class="centro" style="font-size:22px;font-weight:800">y = a · (x − h)² + k</p>
 
 <ul>
   <li><strong>a</strong> estica (e, se for negativo, vira de cabeça para baixo);</li>
-  <li><strong>h</strong> desloca para o lado — o mesmo "atraso" da fase na Aula 5;</li>
-  <li><strong>k</strong> levanta ou abaixa — o "somar na saída" das Aulas 1 e 2.</li>
+  <li><strong>h</strong> desloca para o lado — atenção ao sinal: <span class="mono">(x − 2)</span> anda para a <em>direita</em> (o mesmo "atraso" vai aparecer nas ondas da Aula 16);</li>
+  <li><strong>k</strong> levanta ou abaixa — o "somar na saída" das Aulas 7 e 9.</li>
 </ul>
 
 <p>O ponto da dobra fica em <span class="mono">(h, k)</span>. Ele se chama <strong>vértice</strong>.</p>
@@ -180,11 +187,11 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <!-- ============ 3 ============ -->
 <h2><span class="n">3</span> Onde a parábola cruza o zero</h2>
 
-<p>Os pontos onde a curva encosta no eixo deitado são os x que fazem <span class="mono">y = 0</span>. Descobrir esses x é resolver uma <strong>equação do 2º grau</strong> — e a balança da Aula 7 resolve, com um detalhe novo no final:</p>
+<p>Os pontos onde a curva encosta no eixo deitado são os x que fazem <span class="mono">y = 0</span>. Descobrir esses x é resolver uma <strong>equação do 2º grau</strong> — e a balança da Aula 8 resolve, com um detalhe novo no final:</p>
 
 <div class="sticky"><span class="mono">(x − 1)² − 4 = 0</span><br>some 4 dos dois lados: <span class="mono">(x − 1)² = 4</span><br>que número ao quadrado dá 4? <strong>2 ou −2!</strong><br><span class="mono">x − 1 = 2</span> → x = 3 &nbsp;·&nbsp; <span class="mono">x − 1 = −2</span> → x = −1</div>
 
-<p>O detalhe é esse: a raiz tem <strong>dois lados</strong>. Como <span class="mono">(−2)² = 4</span> também (Aula 9), a volta do quadrado aceita o positivo e o negativo — por isso a parábola costuma cruzar o zero em dois lugares.</p>
+<p>O detalhe é esse: a raiz tem <strong>dois lados</strong>. Como <span class="mono">(−2)² = 4</span> também (Aula 4), a volta do quadrado aceita o positivo e o negativo — por isso a parábola costuma cruzar o zero em dois lugares.</p>
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: ache onde ela cruza o zero</div>
@@ -195,37 +202,12 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p class="rabisco centro" id="txt3"></p>
 </div>
 
-<h3>Abrir os parênteses: cada pedaço vezes cada pedaço</h3>
-
-<p>Às vezes a receita vem "fechada", como <span class="mono">(x + 2) · (x + 3)</span>, e a gente quer ela "aberta", como uma soma de potências. O jeito de abrir é um desenho que você já conhece desde a Aula 9: <strong>área de retângulo</strong>. Um retângulo de lados <span class="mono">x + 2</span> e <span class="mono">x + 3</span> se divide em quatro pedaços:</p>
-
-<div class="tela" style="max-width:360px;margin:14px auto">
-  <svg viewBox="0 0 300 250" role="img" aria-label="Retângulo de lados x mais 2 e x mais 3 dividido em quatro áreas: x ao quadrado, 3x, 2x e 6">
-    <rect x="40" y="30" width="150" height="150" fill="rgba(37,99,235,.18)" stroke="#2563eb" stroke-width="2"/>
-    <rect x="190" y="30" width="90" height="150" fill="rgba(5,150,105,.18)" stroke="#059669" stroke-width="2"/>
-    <rect x="40" y="180" width="150" height="60" fill="rgba(217,119,6,.2)" stroke="#d97706" stroke-width="2"/>
-    <rect x="190" y="180" width="90" height="60" fill="rgba(124,58,237,.2)" stroke="#7c3aed" stroke-width="2"/>
-    <text x="115" y="112" font-size="20" font-weight="800" text-anchor="middle" fill="#2563eb">x²</text>
-    <text x="235" y="112" font-size="18" font-weight="800" text-anchor="middle" fill="#059669">3x</text>
-    <text x="115" y="216" font-size="18" font-weight="800" text-anchor="middle" fill="#d97706">2x</text>
-    <text x="235" y="216" font-size="18" font-weight="800" text-anchor="middle" fill="#7c3aed">6</text>
-    <text x="115" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1b1b1b">x</text>
-    <text x="235" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1b1b1b">3</text>
-    <text x="28" y="110" font-size="14" font-weight="700" text-anchor="middle" fill="#1b1b1b">x</text>
-    <text x="28" y="214" font-size="14" font-weight="700" text-anchor="middle" fill="#1b1b1b">2</text>
-  </svg>
-</div>
-
-<p class="centro" style="font-size:20px;font-weight:800">(x + 2) · (x + 3) = x² + 3x + 2x + 6 = x² + 5x + 6</p>
-
-<p>A regra é: <strong>cada pedaço de um lado vezes cada pedaço do outro</strong>, e soma tudo. Com sinais de menos vale igual, lembrando que menos vezes menos dá mais (Aula 9):</p>
-
-<p class="centro" style="font-size:19px;font-weight:800">(x − 1) · (x − 1) = x·x − x·1 − 1·x + 1·1 = x² − 2x + 1</p>
+<p>Para arrumar uma equação dessas vale abrir parênteses (Aula 8): <span class="mono">(x − 1)² = (x − 1) · (x − 1) = x² − 2x + 1</span> — cada pedaço vezes cada pedaço, e menos vezes menos dá mais (Aula 2).</p>
 
 <div class="idiota">
   <div class="tit">Não existe pergunta idiota</div>
   <p class="q">E quando a equação não vem arrumada, tipo x² − 2x − 3 = 0?</p>
-  <p class="a">Dá para arrumar sempre: <span class="mono">x² − 2x − 3</span> é o mesmo que <span class="mono">(x − 1)² − 4</span> (abra os parênteses como no quadro acima: <span class="mono">(x − 1)² = x² − 2x + 1</span>, e <span class="mono">x² − 2x + 1 − 4 = x² − 2x − 3</span>). Existe uma receita pronta que faz essa arrumação por você — a famosa fórmula de Bhaskara — mas ela é só esse "arrumar e passar para o outro lado da balança", feito uma vez para todos os casos.</p>
+  <p class="a">Dá para arrumar sempre: <span class="mono">x² − 2x − 3</span> é o mesmo que <span class="mono">(x − 1)² − 4</span> (abra os parênteses como na Aula 8: <span class="mono">(x − 1)² = x² − 2x + 1</span>, e <span class="mono">x² − 2x + 1 − 4 = x² − 2x − 3</span>). Existe uma receita pronta que faz essa arrumação por você — a famosa fórmula de Bhaskara — mas ela é só esse "arrumar e passar para o outro lado da balança", feito uma vez para todos os casos.</p>
   <p class="q">Uma parábola pode não cruzar o zero nenhuma vez?</p>
   <p class="a">Pode. <span class="mono">(x − 1)² + 2</span> nunca vale zero: o quadrado é no mínimo 0, então a soma é no mínimo 2. Na balança aparece <span class="mono">(x − 1)² = −2</span> — e nenhum número ao quadrado dá negativo. Guarde esse "nenhum": a Aula 18 vai inventar um número que dá.</p>
 </div>
@@ -237,7 +219,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <p class="centro" style="font-size:22px;font-weight:800">área = x · (10 − x) = 10x − x²</p>
 
-<p>Isso é uma parábola de cabeça para baixo: cruza o zero em x = 0 e x = 10 (horta sem largura) e tem um <strong>topo</strong> exatamente no meio dos dois — na média, como na Aula 10. O topo é o melhor valor possível.</p>
+<p>Isso é uma parábola de cabeça para baixo: cruza o zero em x = 0 e x = 10 (horta sem largura) e tem um <strong>topo</strong> exatamente no meio dos dois — na média, como na Aula 5. O topo é o melhor valor possível.</p>
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: caça ao vértice</div>
@@ -273,7 +255,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <p class="centro" style="font-size:21px;font-weight:800">y = d + c·x + b·x² + a·x³</p>
 
-<p>A maior potência que aparece se chama <strong>grau</strong>. Grau 1 é a reta da Aula 2. Grau 2 é a parábola, com uma dobra. Grau 3 pode ter até duas dobras — e assim por diante: <strong>cada grau a mais permite uma dobra a mais</strong>.</p>
+<p>A maior potência que aparece se chama <strong>grau</strong>. Grau 1 é a reta da Aula 9. Grau 2 é a parábola, com uma dobra. Grau 3 pode ter até duas dobras — e assim por diante: <strong>cada grau a mais permite uma dobra a mais</strong>.</p>
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: somador de potências</div>
@@ -289,7 +271,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <!-- ============ 6 ============ -->
 <h2><span class="n">6</span> Reta ou curva? O teste das diferenças</h2>
 
-<p>Dá para saber se uma tabela de números vem de uma reta sem desenhar nada. Na Aula 2, a reta tinha <strong>o mesmo passo da escada</strong> sempre: as diferenças entre saídas vizinhas são iguais. Na parábola, as diferenças mudam — mas as <strong>diferenças das diferenças</strong> ficam iguais.</p>
+<p>Dá para saber se uma tabela de números vem de uma reta sem desenhar nada. Na Aula 9, a reta tinha <strong>o mesmo passo da escada</strong> sempre: as diferenças entre saídas vizinhas são iguais. Na parábola, as diferenças mudam — mas as <strong>diferenças das diferenças</strong> ficam iguais.</p>
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: reta ou curva?</div>
@@ -355,15 +337,16 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 </div>
 
 <div class="ex" id="ex4">
-  <div class="tit">Exercício 4</div>
+  <div class="tit">Exercício 4 — quem faz o quê?</div>
   <div class="selo">✅</div>
-  <p>A parábola <span class="mono">y = x² + 5</span> cruza o eixo deitado?</p>
-  <div class="alts" data-r="2">
-    <div class="alt" data-i="0">Sim, em x = 5.</div>
-    <div class="alt" data-i="1">Sim, em x = −5.</div>
-    <div class="alt" data-i="2">Não: x² nunca é negativo, então y é sempre pelo menos 5.</div>
-    <div class="alt" data-i="3">Sim, em dois pontos, como toda parábola.</div>
-  </div>
+  <p>Ligue cada receita ao que ela faz com a parábola y = x².</p>
+  <table class="ligar">
+    <tr><td>o vértice</td><td><select data-r="0" aria-label="o vértice"><option value="">escolha...</option><option value="0">o ponto de virada da parábola</option><option value="1">anda 2 para a direita</option><option value="2">sobe 3</option><option value="3">vira de boca para baixo</option></select></td></tr>
+    <tr><td>y = (x − 2)²</td><td><select data-r="1" aria-label="y = (x − 2)²"><option value="">escolha...</option><option value="0">o ponto de virada da parábola</option><option value="1">anda 2 para a direita</option><option value="2">sobe 3</option><option value="3">vira de boca para baixo</option></select></td></tr>
+    <tr><td>y = x² + 3</td><td><select data-r="2" aria-label="y = x² + 3"><option value="">escolha...</option><option value="0">o ponto de virada da parábola</option><option value="1">anda 2 para a direita</option><option value="2">sobe 3</option><option value="3">vira de boca para baixo</option></select></td></tr>
+    <tr><td>y = −x²</td><td><select data-r="3" aria-label="y = −x²"><option value="">escolha...</option><option value="0">o ponto de virada da parábola</option><option value="1">anda 2 para a direita</option><option value="2">sobe 3</option><option value="3">vira de boca para baixo</option></select></td></tr>
+  </table>
+  <button class="check" data-ex="ex4">Conferir</button>
   <div class="fb"></div>
 </div>
 
@@ -399,7 +382,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <footer>
   Matemática do Zero · Aula 13 — Curvas que não são retas<br>
-  <strong>Próxima aula:</strong> crescimento que acelera — exponenciais e logaritmos.
+  <strong>Próxima aula:</strong> Crescimento que acelera.
 </footer>
 
 </div>
@@ -674,7 +657,7 @@ function marca(id,ok){
     document.getElementById("pn").textContent=n;
     document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
     var msg=document.getElementById("pmsg");
-    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Você fechou a Aula 13. 🎉</strong> A reta ganhou dobra. Na próxima, o crescimento que explode."; confete(); }
+    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Você fechou a Aula 13. 🎉</strong> A reta ganhou dobra. Na próxima: Crescimento que acelera."; confete(); }
     else msg.textContent="Boa! Faltam "+(TOTAL-n)+".";
     document.querySelector("#"+id+" .selo").classList.add("ver");
   }
@@ -705,6 +688,7 @@ function fb(box,ok,txt){
   if(!ok){ void box.offsetWidth; box.classList.add("chacoalha"); }
 }
 var explica={
+  ex4:{"ok": "Tudo certo! Vértice e as três transformações de sempre.", "no": "Quase. Vértice = ponto de virada; (x − 2)² = anda 2 para a direita; + 3 = sobe 3; o sinal de menos = vira de boca para baixo."},
  "ex1": {
   "ok": "Isso: 3² − 1 = 9 − 1 = 8. Primeiro o quadrado, depois o resto da receita.",
   "no": "Primeiro eleve ao quadrado: 3² = 3 · 3 = 9. Depois tire 1: 9 − 1 = 8. (Cuidado: 3² não é 3 · 2.)"
@@ -721,7 +705,7 @@ var explica={
 document.querySelectorAll("button.check").forEach(function(b){
   b.addEventListener("click",function(){
     var box=document.getElementById(b.dataset.ex);
-    var ins=box.querySelectorAll("input[data-r]"), tudoOk=true, vazio=false;
+    var ins=box.querySelectorAll("input[data-r],select[data-r]"), tudoOk=true, vazio=false;
     ins.forEach(function(inp){
       if(inp.value===""){vazio=true;return;}
       var ok=Math.abs(parseFloat(inp.value)-parseFloat(inp.dataset.r)) < 0.001;

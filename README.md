@@ -5,11 +5,10 @@ Um curso de matemática construído do chão para cima, para quem só sabe as qu
 faculdade** — frações e porcentagem, álgebra, geometria, trigonometria, álgebra linear, cálculo,
 probabilidade, números complexos e equações diferenciais — sem passar por nenhuma etapa no escuro.
 
-> **Em reestruturação:** o curso está sendo reorganizado em **5 níveis e 30 aulas**, na ordem da
-> escola (Fundamental → Médio → Faculdade). O roteiro completo, com o mapa das 18 aulas atuais para
-> a numeração nova, está em **[PLANO.md](PLANO.md)**; a trilha de referência usada está em
-> [`trilha_de_aprendizado_em_matemativa.md`](trilha_de_aprendizado_em_matemativa.md). As tabelas
-> abaixo mostram as aulas publicadas hoje.
+O curso segue a **ordem da escola** — Fundamental → Médio → Faculdade — em **5 níveis e 30 aulas**.
+O roteiro completo, com o que entra em cada aula e de onde vem cada pré-requisito, está em
+**[PLANO.md](PLANO.md)**; a trilha de referência usada para montar a ordem está em
+[`trilha_de_aprendizado_em_matemativa.md`](trilha_de_aprendizado_em_matemativa.md).
 
 Cada aula é uma **página HTML interativa e autocontida**: você mexe nos controles, o gráfico
 responde na hora, e os exercícios se corrigem sozinhos com explicação do erro. O formato é
@@ -23,38 +22,60 @@ soltando uma frase no meio do caminho e nenhuma fórmula caindo do céu.
 O curso é dividido em níveis. Dentro de cada nível, cada aula resolve exatamente um obstáculo, sem
 usar nada que não tenha sido apresentado numa aula anterior — nem entre níveis.
 
-### Nível 1 — Básico ✅
+### Nível 1 — Fundamentos (Ensino Fundamental I e II) ✅
 
-| # | Aula | Assunto | Estado |
-|---|------|---------|--------|
-| 01 | [O que é uma função](aulas/01-o-que-e-uma-funcao/) | A máquina de números, a notação `f(x)`, a regra de ouro e o primeiro gráfico | ✅ pronta |
-| 02 | [Desenhar números no papel](aulas/02-desenhar-numeros-no-papel/) | As duas réguas, números negativos, o passo da escada e a receita de qualquer reta | ✅ pronta |
-| 03 | [Ângulos e o círculo](aulas/03-angulos-e-o-circulo/) | O que é girar, a volta completa, medir giro | ✅ pronta |
-| 04 | [Seno e cosseno](aulas/04-seno-e-cosseno/) | A altura e a sombra de um ponto girando | ✅ pronta |
-| 05 | [Ondas](aulas/05-ondas/) | Amplitude, frequência e fase | ✅ pronta |
-| 06 | [Setas e tabelas de números](aulas/06-setas-e-tabelas-de-numeros/) | Vetores e matrizes | ✅ pronta |
+| # | Aula | Assunto |
+|---|------|---------|
+| 01 | [Múltiplos, divisores e primos](aulas/01-multiplos-divisores-e-primos/) | Quem cabe dentro de quem: pulos na reta, o crivo dos primos, engrenagens (MMC) e ladrilhos (MDC). |
+| 02 | [Pedaços e sinais: frações, decimais e negativos](aulas/02-fracoes-decimais-e-negativos/) | Pizza, régua e termômetro: todo tipo de número morando na mesma reta. |
+| 03 | [Porcentagem, razão e regra de três](aulas/03-porcentagem-razao-e-regra-de-tres/) | Desconto, receita de bolo e mapa são a mesma conta: comparar por divisão. |
+| 04 | [Potências e raízes](aulas/04-potencias-e-raizes/) | Ao quadrado é um quadrado, ao cubo é um cubo, e a raiz é o lado deles. Mais: números gigantes com potências de 10. |
+| 05 | [Dados: média, mediana, moda e desvio](aulas/05-dados-media-mediana-moda-e-desvio/) | Resumir uma lista em poucos números — e descobrir o que cada resumo esconde. |
+| 06 | [Contagem e chance](aulas/06-contagem-e-chance/) | Árvores de possibilidades, filas e moedas: o acaso tem régua. |
 
-### Nível 2 — Intermediário ✅
+### Nível 2 — Álgebra e Geometria (Ensino Fundamental II) ✅
 
-| # | Aula | Assunto | Estado |
-|---|------|---------|--------|
-| 07 | [Equações: a balança](aulas/07-equacoes-a-balanca/) | Isolar o x mantendo a balança equilibrada | ✅ pronta |
-| 08 | [Sistemas de equações](aulas/08-sistemas-de-equacoes/) | Resolver = achar onde duas retas se cruzam | ✅ pronta |
-| 09 | [Potências, raízes e Pitágoras](aulas/09-potencias-raizes-e-pitagoras/) | O quadrado, o lado dele e o tamanho de qualquer seta | ✅ pronta |
-| 10 | [Estatística com vetores](aulas/10-estatistica-com-vetores/) | Média, desvio padrão e correlação como cosseno | ✅ pronta |
-| 11 | [Projeção e mínimos quadrados](aulas/11-projecao-e-minimos-quadrados/) | Regressão como geometria de sombra | ✅ pronta |
-| 12 | [Decomposição de sinais em ondas](aulas/12-decomposicao-de-sinais-em-ondas/) | Fourier como projeção sobre ondas | ✅ pronta |
+| # | Aula | Assunto |
+|---|------|---------|
+| 07 | [Letras no lugar de números: a função](aulas/07-letras-no-lugar-de-numeros/) | A máquina de números, aquele f(x) que assustou você na escola, a regra de ouro e o primeiro gráfico. |
+| 08 | [Equações e inequações: a balança](aulas/08-equacoes-e-inequacoes/) | Descobrir o número escondido sem chute — e o que muda quando a balança pende. |
+| 09 | [O plano e a reta](aulas/09-o-plano-e-a-reta/) | As duas réguas, o endereço de um ponto e a receita que descreve qualquer linha reta. |
+| 10 | [Sistemas de equações](aulas/10-sistemas-de-equacoes/) | Resolver duas equações ao mesmo tempo é só achar onde duas retas se cruzam. |
+| 11 | [Ângulos, círculo e π](aulas/11-angulos-circulo-e-pi/) | O que é girar, por que a volta tem 360° e de onde sai o π. |
+| 12 | [Áreas, volumes e Pitágoras](aulas/12-areas-volumes-e-pitagoras/) | Toda figura é um retângulo arrumado — e três quadrados guardam o segredo do triângulo retângulo. |
 
-### Nível 3 — Avançado ✅
+### Nível 3 — Ensino Médio (Ensino Médio) ✅
 
-| # | Aula | Assunto | Estado |
-|---|------|---------|--------|
-| 13 | [Curvas que não são retas](aulas/13-curvas-que-nao-sao-retas/) | Parábolas, equação do 2º grau, vértice e polinômios | ✅ pronta |
-| 14 | [Crescimento que acelera](aulas/14-crescimento-que-acelera/) | Exponenciais, expoente zero/negativo/fracionário, logaritmos e o número e | ✅ pronta |
-| 15 | [A inclinação em cada ponto](aulas/15-a-inclinacao-em-cada-ponto/) | Derivada, radianos e π, topos e fundos | ✅ pronta |
-| 16 | [Somando fatias](aulas/16-somando-fatias/) | Integral e o Teorema Fundamental do Cálculo | ✅ pronta |
-| 17 | [Acaso com régua](aulas/17-acaso-com-regua/) | Probabilidade, valor esperado e a curva normal | ✅ pronta |
-| 18 | [Girar multiplicando](aulas/18-girar-multiplicando/) | Números complexos e a fórmula de Euler | ✅ pronta |
+| # | Aula | Assunto |
+|---|------|---------|
+| 13 | [Curvas que não são retas](aulas/13-curvas-que-nao-sao-retas/) | Parábolas e polinômios: a máquina de sempre com um quadrado dentro. |
+| 14 | [Crescimento que acelera](aulas/14-crescimento-que-acelera/) | PA e PG, juros simples e compostos, exponenciais e logaritmos. |
+| 15 | [Trigonometria: seno, cosseno, tangente e radianos](aulas/15-trigonometria/) | A altura, a sombra e a inclinação de um ponto girando — medidas em graus e em radianos. |
+| 16 | [Ondas](aulas/16-ondas/) | Desenrolando o círculo: o giro vira onda. Altura, largura e atraso. |
+| 17 | [Vetores e matrizes](aulas/17-vetores-e-matrizes/) | Vetor é uma seta. Matriz é uma tabela que move setas. Álgebra linear desmistificada. |
+| 18 | [Girar multiplicando: números complexos](aulas/18-girar-multiplicando/) | A raiz de −1 é só um jeito de escrever \ |
+
+### Nível 4 — Superior I (Faculdade: cálculo e dados) ✅
+
+| # | Aula | Assunto |
+|---|------|---------|
+| 19 | [Limites e a derivada](aulas/19-limites-e-a-derivada/) | A lupa que endireita a curva: a inclinação em cada ponto. |
+| 20 | [A integral](aulas/20-a-integral/) | Somar fatias cada vez mais finas — e o caminho de volta da derivada. |
+| 21 | [A curva normal](aulas/21-a-curva-normal/) | Pascal, Galton e o sino: milhares de acasos desenham sempre a mesma curva. |
+| 22 | [Correlação: estatística com vetores](aulas/22-correlacao/) | Correlação é só o cosseno do ângulo entre duas listas de números. |
+| 23 | [Projeção e mínimos quadrados](aulas/23-projecao-e-minimos-quadrados/) | A reta que melhor se ajusta aos pontos é geometria de sombra. |
+| 24 | [Decomposição de sinais: Fourier](aulas/24-fourier/) | Todo som complicado é várias ondas simples somadas — ou setas girando. |
+
+### Nível 5 — Superior II (Faculdade: aplicada e computacional) ✅
+
+| # | Aula | Assunto |
+|---|------|---------|
+| 25 | [Matrizes que transformam](aulas/25-determinante-inversa-e-autovalores/) | Determinante é área, inversa desfaz, autovetor é a seta que só estica. |
+| 26 | [PCA: as direções principais](aulas/26-pca/) | A direção mais comprida de uma nuvem de pontos — e como resumir muitos dados em poucos. |
+| 27 | [Otimização: descer a ladeira](aulas/27-otimizacao-e-gradiente/) | Curvas de nível, a seta do gradiente e o tamanho do passo. |
+| 28 | [Equações diferenciais e o método de Euler](aulas/28-equacoes-diferenciais/) | Quando a regra fala da inclinação: campos de setinhas, molas e populações. |
+| 29 | [Acaso no tempo: passeio aleatório](aulas/29-passeio-aleatorio/) | Uma moeda que anda: o √n do espalhamento e o movimento browniano. |
+| 30 | [Pensar como matemático](aulas/30-pensar-como-matematico/) | Contraexemplo, demonstração, indução e os problemas que ninguém resolveu. |
 
 O roteiro completo, com o que entra em cada aula, está em **[PLANO.md](PLANO.md)**.
 
@@ -74,7 +95,10 @@ de anterior/próxima. As rotas ficam no `#` do endereço, então dá para favori
 |---|---|
 | `index.html#/` | início do curso |
 | `index.html#/nivel/2` | painel do Nível 2, com o progresso de cada aula |
-| `index.html#/aula/07-equacoes-a-balanca` | a Aula 7 aberta dentro do curso |
+| `index.html#/aula/08-equacoes-e-inequacoes` | a Aula 8 aberta dentro do curso |
+
+Endereços da numeração antiga (18 aulas) continuam funcionando: a SPA redireciona para a aula nova, e
+o progresso já salvo é migrado automaticamente.
 
 Uma aula aberta sozinha (`aulas/<aula>/index.html`) continua funcionando e ganha uma barra fina
 no topo com o caminho do curso e o link para abri-la dentro dele.
@@ -100,39 +124,52 @@ math/
 ├── trilha_de_aprendizado_em_matemativa.md   trilha de referência usada no plano
 │
 ├── aulas/
-│   ├── 01-o-que-e-uma-funcao/
+│   ├── 01-multiplos-divisores-e-primos/
 │   │   ├── index.html                  a aula interativa
 │   │   ├── notas.md                    o texto da aula, para ler ou imprimir
 │   │   └── figuras.png                 versão estática das ilustrações
 │   │
-│   ├── 02-desenhar-numeros-no-papel/       ] Nível 1 — Básico
-│   ├── 03-angulos-e-o-circulo/             ]
-│   ├── 04-seno-e-cosseno/                  ]
-│   ├── 05-ondas/                           ]
-│   ├── 06-setas-e-tabelas-de-numeros/      ]
-│   ├── 07-equacoes-a-balanca/              ] Nível 2 — Intermediário
-│   ├── 08-sistemas-de-equacoes/            ]
-│   ├── 09-potencias-raizes-e-pitagoras/    ]
-│   ├── 10-estatistica-com-vetores/         ]
-│   ├── 11-projecao-e-minimos-quadrados/    ]
-│   ├── 12-decomposicao-de-sinais-em-ondas/ ]
-│   ├── 13-curvas-que-nao-sao-retas/        ] Nível 3 — Avançado
-│   ├── 14-crescimento-que-acelera/         ]
-│   ├── 15-a-inclinacao-em-cada-ponto/      ]
-│   ├── 16-somando-fatias/                  ]
-│   ├── 17-acaso-com-regua/                 ]
-│   └── 18-girar-multiplicando/             ]
+│   ├── 02-fracoes-decimais-e-negativos/        ] Nível 1 — Fundamentos
+│   ├── 03-porcentagem-razao-e-regra-de-tres/   ]
+│   ├── 04-potencias-e-raizes/                  ]
+│   ├── 05-dados-media-mediana-moda-e-desvio/   ]
+│   ├── 06-contagem-e-chance/                   ]
+│   ├── 07-letras-no-lugar-de-numeros/          ] Nível 2 — Álgebra e Geometria
+│   ├── 08-equacoes-e-inequacoes/               ]
+│   ├── 09-o-plano-e-a-reta/                    ]
+│   ├── 10-sistemas-de-equacoes/                ]
+│   ├── 11-angulos-circulo-e-pi/                ]
+│   ├── 12-areas-volumes-e-pitagoras/           ]
+│   ├── 13-curvas-que-nao-sao-retas/            ] Nível 3 — Ensino Médio
+│   ├── 14-crescimento-que-acelera/             ]
+│   ├── 15-trigonometria/                       ]
+│   ├── 16-ondas/                               ]
+│   ├── 17-vetores-e-matrizes/                  ]
+│   ├── 18-girar-multiplicando/                 ]
+│   ├── 19-limites-e-a-derivada/                ] Nível 4 — Superior I
+│   ├── 20-a-integral/                          ]
+│   ├── 21-a-curva-normal/                      ]
+│   ├── 22-correlacao/                          ]
+│   ├── 23-projecao-e-minimos-quadrados/        ]
+│   ├── 24-fourier/                             ]
+│   ├── 25-determinante-inversa-e-autovalores/  ] Nível 5 — Superior II
+│   ├── 26-pca/                                 ]
+│   ├── 27-otimizacao-e-gradiente/              ]
+│   ├── 28-equacoes-diferenciais/               ]
+│   ├── 29-passeio-aleatorio/                   ]
+│   └── 30-pensar-como-matematico/              ]
 │       (mesma estrutura: index.html, notas.md, figuras.png)
 │
 ├── assets/
 │   ├── catalogo.js                     lista única de níveis e aulas (título, resumo, pasta)
 │   ├── spa.js                          rotas e painéis da página inicial
 │   ├── menu.js                         liga cada aula ao curso (barra avulsa, anterior/próxima)
+│   ├── pecas.css                       estilo das peças Head First (cérebro, lareira, por que é verdade?, quem faz o quê?)
 │   └── progresso.js, auth*.js          progresso salvo e login opcional
 │
 └── scripts/
     ├── README.md
-    └── figuras_aula01.py .. figuras_aula18.py    gera o figuras.png de cada aula (matplotlib)
+    └── figuras_aula01.py .. figuras_aula30.py    gera o figuras.png de cada aula (matplotlib)
 ```
 
 Cada aula tem três formas do mesmo conteúdo:
@@ -147,12 +184,16 @@ Cada aula tem três formas do mesmo conteúdo:
 
 Cada página segue sempre a mesma anatomia:
 
-- **Laboratórios** 🔧 — controles que mexem no desenho ao vivo. É onde a ideia entra de verdade.
+- **Poder do cérebro** 🧠 — uma pergunta aberta antes da explicação: você pensa primeiro.
+- **Laboratórios** 🔧 — seis por aula, controles que mexem no desenho ao vivo. É onde a ideia entra de verdade.
 - **O Guru** — uma frase que arruma a cabeça no momento certo.
 - **Não existe pergunta idiota** — as dúvidas que sempre aparecem, respondidas antes de você perguntar.
 - **Cuidado** ⚠️ — as armadilhas clássicas, marcadas antes de você cair nelas.
+- **Por que é verdade?** ✅ — uma mini-demonstração, sem formalismo, de um fato da aula.
+- **Conversa ao pé da lareira** 🔥 — dois conceitos que se confundem discutem a relação (uma por nível).
 - **Pontos importantes** — o resumo da aula em uma tela.
-- **Afie o lápis** ✏️ — exercícios com correção na hora: errou, sacode e explica; acertou, ganha selo.
+- **Afie o lápis** ✏️ — seis exercícios com correção na hora: errou, sacode e explica; acertou, ganha selo.
+  Um deles é o desafio 🏆, e a partir do Nível 2 um é de ligar colunas (**Quem faz o quê?**).
 
 ---
 
@@ -175,7 +216,7 @@ As imagens estáticas são geradas por scripts em Python. Detalhes em
 ```bash
 pip install matplotlib numpy
 cd scripts
-for n in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18; do python3 figuras_aula$n.py; done
+for f in figuras_aula*.py; do python3 "$f"; done
 ```
 
 ---

@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import FancyArrowPatch
+from matplotlib.patches import FancyArrowPatch, Arc, Wedge
 
 AZUL, VERM, VERDE, LARANJA, ROXO, CINZA, TXT = ("#2563eb", "#dc2626", "#059669",
                                                  "#d97706", "#7c3aed", "#9ca3af", "#111827")
@@ -14,66 +14,71 @@ fig, ax = plt.subplots(2, 2, figsize=(13, 10))
 fig.patch.set_facecolor("white")
 
 
-def papel(a, titulo, lim=6):
-    a.set_xlim(-lim, lim); a.set_ylim(-lim, lim)
-    a.axhline(0, color=TXT, lw=1.5); a.axvline(0, color=TXT, lw=1.5)
-    a.set_xticks([]); a.set_yticks([])
+def circulo(a, titulo):
+    a.set_xlim(-1.35, 1.35); a.set_ylim(-1.35, 1.35)
     a.set_aspect("equal")
+    a.axis("off")
     a.set_title(titulo, fontsize=13.5, weight="bold", color=TXT, pad=10)
-    for s in a.spines.values():
-        s.set_visible(False)
+    c = plt.Circle((0, 0), 1, fill=False, color=CINZA, lw=1.5)
+    a.add_patch(c)
 
 
-# ---------------- 1. projecao = sombra -----------------------------------------
+def ponteiro(a, deg, cor=AZUL, r=1.0):
+    rad = np.radians(deg)
+    x, y = r * np.cos(rad), r * np.sin(rad)
+    a.add_patch(FancyArrowPatch((0, 0), (x, y), arrowstyle="-|>", mutation_scale=18,
+                                color=cor, lw=3.5, zorder=5))
+    a.scatter([0], [0], s=40, color=TXT, zorder=6)
+
+
+# ---------------- 1. girar nao e andar --------------------------------------
 a = ax[0, 0]
-papel(a, "1. Projeção: a sombra de v sobre w")
-a.add_patch(FancyArrowPatch((0, 0), (4.5, 0), arrowstyle="-|>", mutation_scale=16, color=LARANJA, lw=3))
-deg = 35
-rad = np.radians(deg)
-vx, vy = 4 * np.cos(rad), 4 * np.sin(rad)
-a.add_patch(FancyArrowPatch((0, 0), (vx, vy), arrowstyle="-|>", mutation_scale=16, color=AZUL, lw=3))
-proj = 4 * np.cos(rad)
-a.add_patch(FancyArrowPatch((0, 0), (proj, 0), arrowstyle="-|>", mutation_scale=16, color=VERDE, lw=4))
-a.plot([vx, proj], [vy, 0], color=CINZA, lw=1.5, ls="--")
-a.text(4.6, -0.1, "w", fontsize=12, color=LARANJA, weight="bold")
-a.text(vx + 0.1, vy + 0.15, "v", fontsize=12, color=AZUL, weight="bold")
-a.text(proj / 2, -0.5, "sombra", fontsize=10.5, color=VERDE, weight="bold", ha="center")
+circulo(a, "1. Ângulo: quanto virou, não quanto andou")
+a.plot([0, 1], [0, 0], color=CINZA, lw=1.5, ls="--")
+arc = Arc((0, 0), 0.7, 0.7, angle=0, theta1=0, theta2=50, color=ROXO, lw=3)
+a.add_patch(arc)
+ponteiro(a, 50, ROXO)
+a.text(0.42, 0.16, "50°", fontsize=13, weight="bold", color=ROXO)
+a.text(0, -1.3, "o pé não sai do chão —\nsó a direção muda", fontsize=10.5, color=TXT, ha="center")
 
-# ---------------- 2. erro entre ponto e reta -------------------------------------
+# ---------------- 2. os quatro marcos ---------------------------------------
 a = ax[0, 1]
-papel(a, "2. Erro: distância do ponto até a reta")
-xs = np.linspace(-5, 5, 20)
-a.plot(xs, 0.6 * xs, color=ROXO, lw=2.5)
-pontos = [(-3, -1), (-1, 0.5), (1.5, 0.3), (3.5, 2.8)]
-for px, py in pontos:
-    yreta = 0.6 * px
-    a.plot([px, px], [py, yreta], color=VERM, lw=2, ls=":")
-    a.scatter([px], [py], s=70, color=AZUL, zorder=6, edgecolor="white", lw=1.2)
-a.text(-5.5, 5.2, "linhas vermelhas = erros", fontsize=9.5, color=VERM)
+circulo(a, "2. Os quatro marcos (fatias da pizza)")
+cores = [VERDE, AZUL, LARANJA, VERM]
+for i, (ini, fim, cor) in enumerate(zip([0, 90, 180, 270], [90, 180, 270, 360], cores)):
+    a.add_patch(Wedge((0, 0), 1, ini, fim, facecolor=cor, alpha=0.18, edgecolor=cor, lw=2))
+for deg, rot, txt in [(0, 0, "0°"), (90, 90, "90°\nreto"), (180, 180, "180°\nmeia volta"), (270, 270, "270°")]:
+    rad = np.radians(deg)
+    a.text(1.18 * np.cos(rad), 1.18 * np.sin(rad), txt, fontsize=10.5, weight="bold",
+           color=TXT, ha="center", va="center")
 
-# ---------------- 3. minimos quadrados -----------------------------------------------
+# ---------------- 3. sentido de contagem -------------------------------------
 a = ax[1, 0]
-papel(a, "3. A reta que minimiza a soma dos erros²")
-rng = np.random.default_rng(3)
-xs2 = np.linspace(-4, 4, 10)
-ys2 = 0.5 * xs2 + rng.normal(0, 0.8, size=10)
-a.scatter(xs2, ys2, s=60, color=AZUL, zorder=6, edgecolor="white", lw=1.2)
-coef = np.polyfit(xs2, ys2, 1)
-a.plot(xs2, coef[0] * xs2 + coef[1], color=ROXO, lw=3, label="melhor ajuste")
-a.plot(xs2, 0.5 * xs2 - 2, color=CINZA, lw=2, ls="--", label="outra reta qualquer")
-a.legend(fontsize=8.5, loc="upper left", framealpha=0.95)
+circulo(a, "3. Começa na direita, conta contra o relógio")
+a.plot([0, 1.05], [0, 0], color=TXT, lw=2)
+a.text(1.1, -0.05, "0°\ninício", fontsize=9.5, color=TXT, ha="left", va="top")
+arc = Arc((0, 0), 1.5, 1.5, angle=0, theta1=0, theta2=150, color=VERDE, lw=3)
+a.add_patch(arc)
+a.annotate("", xy=(0.75 * np.cos(np.radians(150)), 0.75 * np.sin(np.radians(150))),
+           xytext=(0.75 * np.cos(np.radians(140)), 0.75 * np.sin(np.radians(140))),
+           arrowprops=dict(arrowstyle="-|>", color=VERDE, lw=3))
+ponteiro(a, 150, VERDE)
+a.text(-1.05, 0.55, "sentido\nanti-horário\n= positivo", fontsize=10, color=VERDE, weight="bold")
+a.text(0, -1.3, "sentido do relógio = ângulo negativo", fontsize=10, color=TXT, ha="center")
 
-# ---------------- 4. mesma receita da aula 2 --------------------------------------------
+# ---------------- 4. onde o ponto para ---------------------------------------
 a = ax[1, 1]
-a.axis("off")
-a.set_title("4. A receita continua igual", fontsize=13.5, weight="bold", color=TXT, pad=10)
-a.text(0.5, 0.65, "f(x) = passo · x + altura de partida", fontsize=15, weight="bold",
-       color=TXT, ha="center", transform=a.transAxes)
-a.text(0.5, 0.4, "só muda COMO passo e altura\nsão escolhidos: para minimizar\na soma dos erros ao quadrado",
-       fontsize=12, ha="center", color=CINZA, transform=a.transAxes)
+circulo(a, "4. Cada ângulo aponta para um único lugar")
+for deg, cor in [(30, AZUL), (110, LARANJA), (200, ROXO), (320, VERM)]:
+    rad = np.radians(deg)
+    x, y = np.cos(rad), np.sin(rad)
+    a.scatter([x], [y], s=90, color=cor, zorder=6, edgecolor="white", lw=1.5)
+    a.text(1.18 * x, 1.18 * y, f"{deg}°", fontsize=10, weight="bold", color=cor, ha="center", va="center")
+a.text(0, -1.3, "esse ponto vira 'seno e cosseno'\nna próxima aula", fontsize=10, color=TXT,
+       ha="center", style="italic")
 
-fig.suptitle("Aula 11 — Projeção e mínimos quadrados", fontsize=18, weight="bold", color=TXT)
+fig.suptitle("Aula 11 — Ângulos, círculo e π", fontsize=18, weight="bold", color=TXT)
 fig.tight_layout(rect=[0, 0, 1, 0.955])
-saida = Path(__file__).resolve().parent.parent / "aulas" / "11-projecao-e-minimos-quadrados" / "figuras.png"
+saida = Path(__file__).resolve().parent.parent / "aulas" / "11-angulos-circulo-e-pi" / "figuras.png"
 fig.savefig(saida, dpi=150, facecolor="white")
 print(f"Salvo em: {saida}")
