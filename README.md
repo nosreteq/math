@@ -17,10 +17,10 @@ soltando uma frase no meio do caminho e nenhuma fórmula caindo do céu.
 |---|------|---------|--------|
 | 01 | [O que é uma função](aulas/01-o-que-e-uma-funcao/) | A máquina de números, a notação `f(x)`, a regra de ouro e o primeiro gráfico | ✅ pronta |
 | 02 | [Desenhar números no papel](aulas/02-desenhar-numeros-no-papel/) | As duas réguas, números negativos, o passo da escada e a receita de qualquer reta | ✅ pronta |
-| 03 | Ângulos e o círculo | O que é girar, a volta completa, medir giro | 🔜 |
-| 04 | Seno e cosseno | A altura e a sombra de um ponto girando | 🔜 |
-| 05 | Ondas | Amplitude, frequência e fase | 🔜 |
-| 06 | Setas e tabelas de números | Vetores e matrizes | 🔜 |
+| 03 | [Ângulos e o círculo](aulas/03-angulos-e-o-circulo/) | O que é girar, a volta completa, medir giro | ✅ pronta |
+| 04 | [Seno e cosseno](aulas/04-seno-e-cosseno/) | A altura e a sombra de um ponto girando | ✅ pronta |
+| 05 | [Ondas](aulas/05-ondas/) | Amplitude, frequência e fase | ✅ pronta |
+| 06 | [Setas e tabelas de números](aulas/06-setas-e-tabelas-de-numeros/) | Vetores e matrizes | ✅ pronta |
 
 O roteiro completo, com o que entra em cada aula, está em **[PLANO.md](PLANO.md)**.
 
@@ -57,15 +57,21 @@ math/
 │   │   ├── notas.md                    o texto da aula, para ler ou imprimir
 │   │   └── figuras.png                 versão estática das ilustrações
 │   │
-│   └── 02-desenhar-numeros-no-papel/
-│       ├── index.html
-│       ├── notas.md
-│       └── figuras.png
+│   ├── 02-desenhar-numeros-no-papel/
+│   ├── 03-angulos-e-o-circulo/
+│   ├── 04-seno-e-cosseno/
+│   ├── 05-ondas/
+│   └── 06-setas-e-tabelas-de-numeros/
+│       (mesma estrutura: index.html, notas.md, figuras.png)
 │
 └── scripts/
     ├── README.md
     ├── figuras_aula01.py               gera figuras.png da aula 1 (matplotlib)
-    └── figuras_aula02.py               gera figuras.png da aula 2
+    ├── figuras_aula02.py               gera figuras.png da aula 2
+    ├── figuras_aula03.py               gera figuras.png da aula 3
+    ├── figuras_aula04.py               gera figuras.png da aula 4
+    ├── figuras_aula05.py               gera figuras.png da aula 5
+    └── figuras_aula06.py               gera figuras.png da aula 6
 ```
 
 Cada aula tem três formas do mesmo conteúdo:
@@ -110,6 +116,10 @@ pip install matplotlib numpy
 cd scripts
 python3 figuras_aula01.py
 python3 figuras_aula02.py
+python3 figuras_aula03.py
+python3 figuras_aula04.py
+python3 figuras_aula05.py
+python3 figuras_aula06.py
 ```
 
 ---

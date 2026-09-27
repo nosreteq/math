@@ -55,7 +55,7 @@ a fábrica de retas · o desafio da reta misteriosa
 
 ---
 
-## Aula 4 — Seno e cosseno 🔜
+## Aula 4 — Seno e cosseno ✅
 
 **O obstáculo:** as duas palavras que mais assustam na matemática do ensino médio.
 
@@ -65,12 +65,12 @@ a fábrica de retas · o desafio da reta misteriosa
 - Os valores que vale a pena reconhecer de olho (0°, 90°, 180°, 270°)
 - A relação entre os dois num único desenho
 
-**Laboratórios previstos:** o círculo com a sombra e a altura marcadas ao vivo ·
+**Laboratórios:** o círculo com a sombra e a altura marcadas ao vivo ·
 a tabela que se preenche sozinha conforme o ponto gira
 
 ---
 
-## Aula 5 — Ondas 🔜
+## Aula 5 — Ondas ✅
 
 **O obstáculo:** entender que a onda não é outra coisa — é o giro visto de lado.
 
@@ -81,12 +81,12 @@ a tabela que se preenche sozinha conforme o ponto gira
 - Reencontro com a Aula 1: são as mesmas quatro transformações de sempre
 - Somar duas ondas
 
-**Laboratórios previstos:** círculo e onda lado a lado, sincronizados ·
+**Laboratórios:** círculo e onda lado a lado, sincronizados ·
 três sliders (altura, largura, atraso) · somador de ondas
 
 ---
 
-## Aula 6 — Setas e tabelas de números 🔜
+## Aula 6 — Setas e tabelas de números ✅
 
 **O obstáculo:** vetor e matriz parecem coisa de outro mundo, mas são só seta e tabela.
 
@@ -97,7 +97,7 @@ três sliders (altura, largura, atraso) · somador de ondas
 - Uma matriz é uma **tabela que move setas**: gira, estica, espelha
 - Onde isso aparece na vida real
 
-**Laboratórios previstos:** somador de setas arrastável · a tabela que transforma o desenho ·
+**Laboratórios:** somador de setas arrastável · produto escalar ao vivo ·
 gire a figura com uma matriz
 
 ---
