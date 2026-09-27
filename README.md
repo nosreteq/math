@@ -150,6 +150,21 @@ for n in 01 02 03 04 05 06 07 08 09 10 11 12; do python3 figuras_aula$n.py; done
 
 ---
 
+## Verificação automática
+
+`tests/verifica.js` abre cada aula num navegador de verdade e confere: 6 laboratórios e 6
+exercícios por aula, todos os controles nos extremos sem texto quebrado (`NaN`, `undefined`),
+resposta errada nunca pontua e gabarito sempre aceito, nenhum erro de JavaScript, nenhum link
+quebrado e nenhuma rolagem lateral no celular. Roda sozinho no GitHub a cada push que mexe nas
+aulas (`.github/workflows/verifica-aulas.yml`). Para rodar localmente:
+
+```bash
+npm install --no-save playwright && npx playwright install chromium
+node tests/verifica.js
+```
+
+---
+
 ## Licença
 
 MIT — veja [LICENSE](LICENSE). Use, copie, adapte e ensine alguém.

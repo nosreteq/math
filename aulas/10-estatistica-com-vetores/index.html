@@ -161,7 +161,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p>Arraste o controle e observe a nuvem de pontos ficar mais alinhada (correlação alta) ou mais espalhada (correlação baixa).</p>
 
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:150px">o quanto andam juntas:</label>
+    <label class="lab-l" for="slNuvem" style="min-width:150px">o quanto andam juntas:</label>
     <input type="range" id="slNuvem" min="0" max="100" step="5" value="80">
     <span class="sl-val" id="vNuvem">80%</span>
   </div>
@@ -188,7 +188,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p>Gire o vetor B e observe o ângulo — e a correlação — mudando juntos.</p>
 
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:120px;color:var(--verde)">girar vetor B:</label>
+    <label class="lab-l" for="slAngCorr" style="min-width:120px;color:var(--verde)">girar vetor B:</label>
     <input type="range" id="slAngCorr" min="0" max="180" step="5" value="30">
     <span class="sl-val" id="vAngCorr">30°</span>
   </div>
@@ -225,7 +225,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p>Multiplique todos os valores da lista B por um número — a nuvem muda de forma, mas a correlação (o cosseno) fica exatamente igual.</p>
 
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:150px">escala da lista B:</label>
+    <label class="lab-l" for="slEscalaCorr" style="min-width:150px">escala da lista B:</label>
     <input type="range" id="slEscalaCorr" min="0.5" max="3" step="0.5" value="1">
     <span class="sl-val" id="vEscalaCorr">1,0</span>
   </div>

@@ -208,17 +208,17 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p>Mexa nos três controles e observe a onda mudar de forma.</p>
 
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:170px;color:var(--verde)">altura (amplitude):</label>
+    <label class="lab-l" for="slAmp" style="min-width:170px;color:var(--verde)">altura (amplitude):</label>
     <input type="range" id="slAmp" min="0.2" max="1.8" step="0.1" value="1">
     <span class="sl-val" id="vAmp">1,0</span>
   </div>
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:170px;color:var(--azul)">largura (frequência):</label>
+    <label class="lab-l" for="slFreq" style="min-width:170px;color:var(--azul)">largura (frequência):</label>
     <input type="range" id="slFreq" min="1" max="4" step="1" value="1">
     <span class="sl-val" id="vFreq">1</span>
   </div>
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:170px;color:var(--roxo)">atraso (fase):</label>
+    <label class="lab-l" for="slFase" style="min-width:170px;color:var(--roxo)">atraso (fase):</label>
     <input type="range" id="slFase" min="-180" max="180" step="15" value="0">
     <span class="sl-val" id="vFase">0°</span>
   </div>
@@ -236,14 +236,15 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 </div>
 
 <!-- ============ 3 ============ -->
-<h2><span class="n">3</span> Reencontro com a Aula 1</h2>
+<h2><span class="n">3</span> Reencontro com as Aulas 1 e 2</h2>
 
-<p>Nada disso é novo de verdade — são as <strong>mesmas quatro transformações</strong> da máquina da Aula 1, só que aplicadas ao seno em vez de aplicadas a <span class="mono">x</span>:</p>
+<p>Nada disso é novo de verdade — são as mesmas contas que você já fazia com a máquina da Aula 1 e com a reta da Aula 2. Uma máquina pode ser mexida de <strong>quatro jeitos</strong>, e todos funcionam igualzinho na onda:</p>
 
 <ul>
   <li>Multiplicar a <strong>saída</strong> da onda inteira → estica para cima e para baixo (amplitude).</li>
   <li>Multiplicar a <strong>entrada</strong> (o ângulo) → aperta ou alarga (frequência).</li>
   <li>Somar algo na <strong>entrada</strong> → desloca para o lado (fase).</li>
+  <li>Somar algo na <strong>saída</strong> → sobe ou desce a onda inteira, como a altura de partida da Aula 2.</li>
 </ul>
 
 <div class="idiota">
@@ -259,7 +260,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p>Mude a frequência e conte quantos ciclos completos cabem na mesma largura de tela.</p>
 
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:110px;color:var(--azul)">frequência:</label>
+    <label class="lab-l" for="slContaOnda" style="min-width:110px;color:var(--azul)">frequência:</label>
     <input type="range" id="slContaOnda" min="1" max="6" step="1" value="1">
     <span class="sl-val" id="vContaOnda">1</span>
   </div>
@@ -284,12 +285,12 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p>A onda verde é fixa (<span class="mono">seno(x)</span>). Ajuste a onda azul e observe a onda roxa — a soma das duas.</p>
 
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:170px;color:var(--azul)">altura da onda azul:</label>
+    <label class="lab-l" for="slAmp2" style="min-width:170px;color:var(--azul)">altura da onda azul:</label>
     <input type="range" id="slAmp2" min="0.2" max="1.8" step="0.1" value="0.6">
     <span class="sl-val" id="vAmp2">0,6</span>
   </div>
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:170px;color:var(--azul)">largura da onda azul:</label>
+    <label class="lab-l" for="slFreq2" style="min-width:170px;color:var(--azul)">largura da onda azul:</label>
     <input type="range" id="slFreq2" min="1" max="4" step="1" value="2">
     <span class="sl-val" id="vFreq2">2</span>
   </div>
@@ -314,12 +315,12 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   </div>
 
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:170px;color:var(--verde)">altura (amplitude):</label>
+    <label class="lab-l" for="slAmpAlvo" style="min-width:170px;color:var(--verde)">altura (amplitude):</label>
     <input type="range" id="slAmpAlvo" min="0.2" max="1.8" step="0.1" value="1">
     <span class="sl-val" id="vAmpAlvo">1,0</span>
   </div>
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:170px;color:var(--azul)">largura (frequência):</label>
+    <label class="lab-l" for="slFreqAlvo" style="min-width:170px;color:var(--azul)">largura (frequência):</label>
     <input type="range" id="slFreqAlvo" min="1" max="4" step="1" value="1">
     <span class="sl-val" id="vFreqAlvo">1</span>
   </div>
@@ -339,7 +340,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p>Aumente a velocidade e veja a onda correr — quanto mais rápido, mais aguda seria a nota se isso fosse som.</p>
 
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:110px">velocidade:</label>
+    <label class="lab-l" for="slVelOnda" style="min-width:110px">velocidade:</label>
     <input type="range" id="slVelOnda" min="0" max="10" step="1" value="4">
     <span class="sl-val" id="vVelOnda">4</span>
   </div>
@@ -359,7 +360,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
     <li><strong>Amplitude</strong>: multiplica a onda inteira, estica para cima/baixo.</li>
     <li><strong>Frequência</strong>: multiplica o ângulo, aperta ou alarga a onda (mais voltas no mesmo espaço).</li>
     <li><strong>Fase</strong>: soma no ângulo, desloca a onda para o lado (adianta ou atrasa).</li>
-    <li>São as mesmas transformações da Aula 1 — só que aplicadas ao seno.</li>
+    <li>São os mesmos quatro jeitos de mexer numa máquina (Aulas 1 e 2) — só que aplicados ao seno.</li>
     <li>Somar duas ondas soma as alturas <strong>ponto a ponto</strong>.</li>
   </ul>
 </div>
