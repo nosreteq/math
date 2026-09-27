@@ -1,14 +1,19 @@
 # Plano do curso
 
 O destino é conseguir ler e usar **trigonometria** (seno, cosseno, ondas) e **álgebra linear**
-(vetores, matrizes) partindo apenas das quatro operações. O caminho é curto de propósito: seis
-aulas, cada uma resolvendo exatamente um obstáculo.
+(vetores, matrizes) partindo apenas das quatro operações — e depois usar isso tudo de verdade em
+**sistemas de equações, sinais, estatística e regressão**. O curso é dividido em níveis; dentro de
+cada nível, cada aula resolve exatamente um obstáculo.
 
-Nenhuma aula usa nada que não tenha sido apresentado numa aula anterior.
+Nenhuma aula usa nada que não tenha sido apresentado numa aula anterior — nem entre níveis.
 
 ---
 
-## Aula 1 — O que é uma função ✅
+## Nível 1 — Básico ✅
+
+Das quatro operações até trigonometria e álgebra linear. Seis aulas, sem pular nenhum degrau.
+
+### Aula 1 — O que é uma função ✅
 
 **O obstáculo:** o símbolo `f(x)` assusta mais do que a ideia por trás dele.
 
@@ -22,9 +27,7 @@ Nenhuma aula usa nada que não tenha sido apresentado numa aula anterior.
 **Laboratórios:** a máquina animada · a fórmula clicável · o slider do `x` · a ordem das contas ·
 confiável × quebrada · o gráfico nascendo ponto a ponto
 
----
-
-## Aula 2 — Desenhar números no papel ✅
+### Aula 2 — Desenhar números no papel ✅
 
 **O obstáculo:** sem saber marcar um ponto, nenhum gráfico faz sentido.
 
@@ -39,9 +42,7 @@ confiável × quebrada · o gráfico nascendo ponto a ponto
 **Laboratórios:** encontre o ponto (com o caminho animado) · leia o ponto · o elevador dos negativos ·
 sobe, desce ou fica deitada? · compare duas retas · a fábrica de retas (com o desafio da reta misteriosa)
 
----
-
-## Aula 3 — Ângulos e o círculo ✅
+### Aula 3 — Ângulos e o círculo ✅
 
 **O obstáculo:** girar é uma ideia diferente de andar em linha reta, e precisa de unidade própria.
 
@@ -54,9 +55,7 @@ sobe, desce ou fica deitada? · compare duas retas · a fábrica de retas (com o
 **Laboratórios:** o ponteiro que gira · o relógio de ângulos · soma de ângulos ·
 ângulos negativos e voltas extras · o transferidor interativo (arrastável) · adivinhe o ângulo
 
----
-
-## Aula 4 — Seno e cosseno ✅
+### Aula 4 — Seno e cosseno ✅
 
 **O obstáculo:** as duas palavras que mais assustam na matemática do ensino médio.
 
@@ -70,9 +69,7 @@ sobe, desce ou fica deitada? · compare duas retas · a fábrica de retas (com o
 simetria do círculo · a tabela que se preenche sozinha conforme o ponto gira ·
 adivinhe o valor · ache o ângulo certo
 
----
-
-## Aula 5 — Ondas ✅
+### Aula 5 — Ondas ✅
 
 **O obstáculo:** entender que a onda não é outra coisa — é o giro visto de lado.
 
@@ -86,9 +83,7 @@ adivinhe o valor · ache o ângulo certo
 **Laboratórios:** círculo e onda lado a lado, sincronizados · três sliders (altura, largura, atraso) ·
 quantas ondas cabem? · somador de ondas · reconheça a onda · onda ao vivo
 
----
-
-## Aula 6 — Setas e tabelas de números ✅
+### Aula 6 — Setas e tabelas de números ✅
 
 **O obstáculo:** vetor e matriz parecem coisa de outro mundo, mas são só seta e tabela.
 
@@ -104,11 +99,73 @@ produto escalar ao vivo · paralelas ou não? · gire a figura com uma matriz
 
 ---
 
-## Depois do curso
+## Nível 2 — Intermediário 🔜
 
-Com as seis aulas fechadas, os assuntos que passam a ficar ao alcance:
+Com seno, cosseno, ondas, vetores e matrizes na mão, dá para resolver problemas de verdade: achar
+onde duas retas se cruzam, decompor um som, medir o quanto duas coisas andam juntas, e ajustar uma
+reta a pontos que nunca ficam perfeitamente alinhados. Quatro aulas, cada uma reencontrando algo do
+Nível 1 e levando um degrau adiante.
 
-- Sistemas de equações e o que significa "resolver" um
-- Decomposição de sinais em ondas (a ideia por trás de Fourier)
-- Estatística com vetores: correlação como ângulo entre duas séries
-- Projeção e mínimos quadrados — ou seja, regressão
+### Aula 7 — Sistemas de equações 🔜
+
+**O obstáculo:** "resolver" duas equações ao mesmo tempo parece mágica, mas é só achar onde duas
+retas se cruzam.
+
+- Duas retas, um papel só (reencontro com a Aula 2)
+- O que significa "resolver": o único ponto que serve para as duas receitas ao mesmo tempo
+- Sistema com uma solução, sem solução (retas paralelas) e com infinitas soluções (a mesma reta)
+- Resolver por substituição: juntar as duas receitas numa só
+- O mesmo truque funciona com mais réguas — um gostinho do que vem depois
+
+**Laboratórios previstos:** duas retas arrastáveis buscando o cruzamento · classifique o sistema
+(única, nenhuma ou infinitas soluções) · resolva por substituição, passo a passo
+
+### Aula 8 — Decomposição de sinais em ondas 🔜
+
+**O obstáculo:** um som complicado parece impossível de entender, mas é só várias ondas simples
+somadas — e dá para desmontar a soma de volta.
+
+- Reencontro com a Aula 5: somar ondas simples dá uma onda complicada
+- A pergunta ao contrário: dada uma onda complicada, quais ondas simples a formam?
+- Cada "nota" tem sua própria amplitude e frequência
+- O espectro: um gráfico de "quanto tem de cada frequência" no sinal
+- Onde isso aparece: áudio, imagem, compressão — a ideia por trás de Fourier, sem a fórmula pesada
+
+**Laboratórios previstos:** monte uma onda complicada somando 2-3 ondas simples arrastáveis · o
+espectro revelado ao vivo · desafio: decomponha uma onda misteriosa ajustando os sliders certos
+
+### Aula 9 — Estatística com vetores 🔜
+
+**O obstáculo:** "correlação" parece um número místico, mas é só um produto escalar disfarçado.
+
+- Uma lista de números pareados vira um vetor
+- Duas listas relacionadas → dois vetores; o ângulo entre eles conta a história
+- Reencontro com a Aula 6: produto escalar e o que o sinal dele conta
+- Por que a correlação sempre vive entre −1 e 1 — reencontro com o cosseno da Aula 4
+- Correlação = o cosseno do ângulo entre os vetores (depois de centralizar os dados)
+
+**Laboratórios previstos:** nuvem de pontos arrastável com a correlação mudando ao vivo · dois
+vetores com ângulo e correlação lado a lado · adivinhe a correlação olhando o gráfico de dispersão
+
+### Aula 10 — Projeção e mínimos quadrados 🔜
+
+**O obstáculo:** "a reta que melhor se ajusta aos pontos" parece precisar de cálculo avançado, mas
+é geometria de sombra.
+
+- Reencontro com a Aula 4: projetar é jogar sombra
+- Projetar um vetor sobre outro: o pedacinho da seta que "cabe" naquela direção
+- Nem todo conjunto de pontos cabe numa reta perfeita — o erro é a distância que sobra
+- Mínimos quadrados: a reta que deixa a soma dos erros ao quadrado a menor possível
+- Reencontro com a Aula 2: a reta de regressão ainda é `passo · x + altura de partida`
+
+**Laboratórios previstos:** arraste pontos e veja a reta de regressão se ajustar ao vivo ·
+projeção de um vetor sobre outro (a sombra) · comparador de erro — mova a reta à mão e veja a soma
+dos erros subir ou descer
+
+---
+
+## Depois do Nível 2
+
+Ainda sem data nem conteúdo definido, mas são os assuntos que ficam ao alcance depois do Nível 2 —
+possíveis sementes para um futuro **Nível 3 — Avançado**: cálculo (taxa de variação e área sob a
+curva), números complexos, autovalores e autovetores, e probabilidade.
