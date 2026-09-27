@@ -41,6 +41,8 @@
       return Math.min(TOTAL_EX, itens.filter(function (id) { return /^ex\d+$/.test(id); }).length);
     } catch (e) { return 0; }
   }
+  function niveis() { return CAT.filter(function (nv) { return !nv.eletiva; }); }
+  function rotulo(nv) { return nv.eletiva ? "ELETIVAS" : "NÍVEL " + nv.n; }
   function prontas(nv) { return nv.aulas.filter(function (a) { return a.slug; }); }
 
   // ---------- cabeçalho ----------
@@ -48,9 +50,14 @@
     $("niveis").innerHTML = CAT.map(function (nv) {
       var breve = !prontas(nv).length;
       return '<a href="#/nivel/' + nv.n + '"' + (breve ? ' class="breve"' : "")
-        + (ativo === nv.n ? ' aria-current="page"' : "") + '><span class="nn">Nível </span>' + nv.n + " · " + esc(nv.nome)
+        + (ativo === nv.n ? ' aria-current="page"' : "") + ">" + (nv.eletiva ? "" : '<span class="nn">Nível </span>' + nv.n + " · ") + esc(nv.nome)
         + (breve ? '<span class="mini">em breve</span>' : "") + "</a>";
     }).join("");
+    var at = $("niveis").querySelector('[aria-current="page"]');
+    if (at) { // só rola se a aba ativa estiver fora da faixa visível
+      var c = $("niveis").getBoundingClientRect(), r = at.getBoundingClientRect();
+      if (r.right > c.right || r.left < c.left) $("niveis").scrollLeft += r.right - c.right + 8;
+    }
   }
 
   function renderChips(nv, slugAtivo) {
@@ -96,18 +103,19 @@
   }
 
   function renderInicio() {
-    var niveisProntos = CAT.filter(function (nv) { return prontas(nv).length; }).length;
-    $("tag-contagem").textContent = niveisProntos + " níveis · " + ordem.length + " aulas";
+    var niveisProntos = niveis().filter(function (nv) { return prontas(nv).length; }).length;
+    var el = CAT.filter(function (nv) { return nv.eletiva; }).reduce(function (s, nv) { return s + prontas(nv).length; }, 0);
+    $("tag-contagem").textContent = niveisProntos + " níveis · " + (ordem.length - el) + " aulas" + (el ? " + " + el + " eletivas" : "");
     $("escolha").innerHTML = CAT.map(function (nv) {
       var pr = prontas(nv);
       if (!pr.length) {
         return '<a class="card breve" href="#/nivel/' + nv.n + '" style="cursor:pointer"><span class="estado">🔜</span>'
-          + '<span class="num">NÍVEL ' + nv.n + "</span><h3>" + esc(nv.nome) + "</h3><p>" + esc(nv.resumo) + '</p><p class="labs">em breve</p></a>';
+          + '<span class="num">' + rotulo(nv) + "</span><h3>" + esc(nv.nome) + "</h3><p>" + esc(nv.resumo) + '</p><p class="labs">em breve</p></a>';
       }
       var f = 0;
       pr.forEach(function (a) { f += feitos(a.slug); });
       var tot = pr.length * TOTAL_EX;
-      return '<a class="card" href="#/nivel/' + nv.n + '"><span class="num">NÍVEL ' + nv.n + "</span><h3>" + esc(nv.nome) + "</h3>"
+      return '<a class="card" href="#/nivel/' + nv.n + '"><span class="num">' + rotulo(nv) + "</span><h3>" + esc(nv.nome) + "</h3>"
         + "<p>" + esc(nv.resumo) + '</p><p class="labs">📘 ' + pr.length + " aulas · ✏️ " + f + " de " + tot + " exercícios</p>"
         + '<div class="barra"><i style="width:' + (f / tot * 100) + '%"></i></div></a>';
     }).join("");
@@ -118,7 +126,7 @@
     var f = 0;
     pr.forEach(function (a) { f += feitos(a.slug); });
     var tot = pr.length * TOTAL_EX;
-    var h = '<p class="rotulo">NÍVEL ' + nv.n + " DE " + CAT.length + "</p>"
+    var h = '<p class="rotulo">' + (nv.eletiva ? "ELETIVAS · MÓDULOS INDEPENDENTES" : "NÍVEL " + nv.n + " DE " + niveis().length) + "</p>"
       + "<h1>" + esc(nv.nome) + ' <span class="badge' + (pr.length ? "" : " breve") + '">' + esc(nv.estado) + "</span></h1>"
       + '<p class="resumo">' + esc(nv.resumo) + "</p>";
     if (pr.length) {
@@ -197,7 +205,7 @@
       $("passo").hidden = true;
       renderNivel(nv);
       mostrar("v-nivel");
-      document.title = "Nível " + nv.n + " — " + nv.nome + " · Matemática do Zero";
+      document.title = (nv.eletiva ? "" : "Nível " + nv.n + " — ") + nv.nome + " · Matemática do Zero";
       window.scrollTo(0, 0);
       return;
     }

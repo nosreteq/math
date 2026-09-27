@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eletiva 4 — Topologia de borracha: Möbius e V − A + F | Matemática do Zero</title>
+<style>
+:root{
+  --papel:#f6f2e9; --papel2:#fffdf7; --tinta:#1b1b1b; --cinza:#6b7280;
+  --azul:#2563eb; --azulc:#dbeafe; --verm:#dc2626; --vermc:#fee2e2;
+  --verde:#059669; --verdec:#d1fae5; --amar:#fde68a; --laranja:#d97706;
+  --roxo:#7c3aed; --linha:#c9c1ae;
+  --mao:'Comic Sans MS','Comic Neue','Chalkboard SE','Bradley Hand','Marker Felt','Segoe Print','Ink Free',cursive;
+  --corpo:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--corpo);font-size:17px;line-height:1.65}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 90px}
+
+header{background:var(--tinta);color:var(--papel2);padding:34px 22px 30px;margin-bottom:34px;border-bottom:6px solid var(--laranja)}
+header .inner{max-width:820px;margin:0 auto}
+.serie{font-family:var(--mao);font-size:15px;letter-spacing:.5px;color:var(--amar);margin:0 0 6px}
+header h1{margin:0;font-size:40px;line-height:1.1;letter-spacing:-.5px}
+header .sub{margin:12px 0 0;color:#cfc9bb;font-size:17px;max-width:620px}
+.aula-num{display:inline-block;background:var(--laranja);color:#fff;font-weight:700;padding:3px 13px;border-radius:20px;font-size:14px;margin-bottom:14px;letter-spacing:.5px}
+.voltou{background:#3a3a3a;border-left:5px solid var(--amar);padding:12px 18px;margin:18px 0 0;font-size:15.5px;color:#e6e0d2;border-radius:0 8px 8px 0}
+
+h2{font-size:29px;margin:52px 0 6px;line-height:1.2;border-bottom:3px solid var(--tinta);padding-bottom:8px}
+h2 .n{color:var(--laranja);font-family:var(--mao);font-size:24px;margin-right:8px}
+h3{font-size:21px;margin:32px 0 8px}
+p{margin:14px 0}
+.grande{font-size:20px}
+.centro{text-align:center}
+code,.mono{font-family:'Consolas','Monaco',monospace;background:#eae4d6;padding:2px 7px;border-radius:4px;font-size:.95em}
+
+.guru{display:flex;gap:18px;align-items:flex-start;margin:34px 0;background:linear-gradient(#efe9db,#e8e1d0);border-left:6px solid var(--roxo);padding:20px 22px;border-radius:4px}
+.guru svg{flex:0 0 92px}
+.guru .fala{position:relative;background:#fff;border:2px solid var(--tinta);border-radius:16px;padding:14px 18px;font-family:var(--mao);font-size:16.5px;line-height:1.55}
+.guru .fala:before{content:"";position:absolute;left:-11px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:var(--tinta)}
+.guru .fala:after{content:"";position:absolute;left:-8px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:#fff}
+.guru .quem{font-family:var(--mao);font-size:13px;color:var(--roxo);text-align:center;margin-top:4px;font-weight:700}
+
+.idiota{background:#e7eefc;border:3px solid var(--azul);border-radius:10px;padding:6px 24px 20px;margin:34px 0}
+.idiota .tit{font-family:var(--mao);font-size:20px;font-weight:700;color:#fff;background:var(--azul);display:inline-block;padding:5px 16px;border-radius:0 0 10px 10px;margin:0 0 8px}
+.idiota .q{font-weight:700;margin:16px 0 4px}
+.idiota .q:before{content:"P: ";color:var(--azul);font-weight:800}
+.idiota .a{margin:0 0 6px}
+.idiota .a:before{content:"R: ";color:var(--verm);font-weight:800}
+
+.cuidado{background:var(--vermc);border:3px dashed var(--verm);border-radius:10px;padding:16px 20px;margin:30px 0}
+.cuidado .tit{font-family:var(--mao);font-weight:700;color:var(--verm);font-size:19px;margin-bottom:2px}
+
+.pontos{background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:8px 26px 22px;margin:44px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.pontos .tit{font-family:var(--mao);font-size:22px;font-weight:700;background:var(--amar);display:inline-block;padding:6px 18px;border:3px solid var(--tinta);border-radius:8px;transform:rotate(-1.5deg);margin:-22px 0 10px}
+.pontos ul{padding-left:22px;margin:8px 0}
+.pontos li{margin:9px 0}
+
+.sticky{background:var(--amar);padding:16px 20px;font-family:var(--mao);font-size:16px;transform:rotate(-1.2deg);box-shadow:3px 4px 9px rgba(0,0,0,.16);margin:30px auto;max-width:540px;border-radius:2px}
+.rabisco{font-family:var(--mao);color:var(--laranja);font-size:15.5px;line-height:1.4}
+
+.lab{background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:8px 24px 26px;margin:34px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.lab .tit{font-family:var(--mao);font-size:19px;font-weight:700;background:var(--verde);color:#fff;display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;border:3px solid var(--tinta)}
+.controles{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
+button{font-family:var(--corpo);font-size:16px;font-weight:700;cursor:pointer;background:var(--azul);color:#fff;border:3px solid var(--tinta);border-radius:9px;padding:9px 18px;box-shadow:3px 3px 0 var(--tinta);transition:.09s}
+button:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--tinta)}
+button:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--tinta)}
+button.sec{background:#fff;color:var(--tinta)}
+button.on{background:var(--verde)}
+button:disabled{opacity:.5;cursor:not-allowed;box-shadow:none;transform:none}
+.alt:focus-visible{outline:3px solid var(--laranja);outline-offset:2px}
+input[type=number]{font-family:var(--corpo);font-size:18px;font-weight:700;width:92px;padding:8px 10px;border:3px solid var(--tinta);border-radius:9px;background:#fff;text-align:center}
+input:focus{outline:3px solid var(--amar)}
+input[type=range]{width:100%;max-width:280px;accent-color:var(--azul);height:26px;vertical-align:middle}
+label.lab-l{font-weight:700;font-size:15px}
+.sl-linha{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0}
+.sl-val{font-family:var(--mao);font-size:22px;font-weight:700;min-width:52px;text-align:center;background:var(--amar);border:2px solid var(--tinta);border-radius:8px;padding:1px 8px}
+
+.tela{background:#fff;border:2px solid var(--linha);border-radius:10px;padding:6px}
+.tela svg{width:100%;height:auto;display:block;max-width:400px;margin:0 auto}
+
+.ex{background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:8px 24px 24px;margin:30px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13);position:relative}
+.ex .tit{font-family:var(--mao);font-size:19px;font-weight:700;background:var(--laranja);color:#fff;display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;border:3px solid var(--tinta)}
+.alt{display:block;background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:12px 16px;margin:9px 0;cursor:pointer;font-size:16.5px;transition:.12s;font-weight:600}
+.alt:hover{background:var(--amar)}
+.alt.certa{background:var(--verdec);border-color:var(--verde)}
+.alt.errada{background:var(--vermc);border-color:var(--verm)}
+.fb{margin-top:14px;font-family:var(--mao);font-size:17px;min-height:0;padding:0;border-radius:9px;overflow:hidden;transition:.2s}
+.fb.mostra{padding:12px 16px;min-height:24px}
+.fb.ok{background:var(--verdec);border:3px solid var(--verde);color:#065f46}
+.fb.no{background:var(--vermc);border:3px solid var(--verm);color:#991b1b}
+@keyframes chacoalha{0%,100%{transform:translateX(0)}15%{transform:translateX(-10px)}30%{transform:translateX(10px)}45%{transform:translateX(-7px)}60%{transform:translateX(7px)}75%{transform:translateX(-3px)}}
+.chacoalha{animation:chacoalha .5s}
+@keyframes pulsa{0%{transform:scale(1)}45%{transform:scale(1.11)}100%{transform:scale(1)}}
+.pulsa{animation:pulsa .45s}
+.selo{position:absolute;right:16px;top:14px;font-size:34px;opacity:0;transform:scale(.2) rotate(-25deg);transition:.4s cubic-bezier(.34,1.7,.5,1)}
+.selo.ver{opacity:1;transform:scale(1) rotate(-12deg)}
+.dica{font-size:14.5px;color:var(--cinza);margin-top:10px;font-style:italic}
+
+.placar{background:var(--tinta);color:var(--papel2);border-radius:14px;padding:26px 28px;margin:44px 0 0;text-align:center}
+.placar .n{font-size:52px;font-weight:800;font-family:var(--mao);color:var(--amar);line-height:1}
+.barra{height:20px;background:#3a3a3a;border-radius:12px;overflow:hidden;margin:16px auto;max-width:420px}
+.barra i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--verde),var(--amar));transition:.6s}
+.conf{position:fixed;top:-20px;width:11px;height:16px;z-index:99;pointer-events:none;border-radius:2px}
+@keyframes cai{to{transform:translateY(105vh) rotate(720deg);opacity:.1}}
+
+footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:var(--cinza);font-size:15px;text-align:center}
+@media(max-width:620px){header h1{font-size:30px}h2{font-size:24px}.guru{flex-direction:column;align-items:center}.guru svg{flex:0 0 auto}}
+</style>
+<link rel="stylesheet" href="../../assets/pecas.css">
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <p class="serie">✏️ MATEMÁTICA DO ZERO — eletivas</p>
+    <span class="aula-num">ELETIVA 4 de 10 · AULA 34</span>
+    <h1>Topologia de borracha: Möbius e V − A + F</h1>
+    <p class="sub">Esqueça medidas, ângulos e retas. Se tudo fosse de borracha, o que ainda daria para distinguir? A resposta é a topologia — a geometria dos buracos.</p>
+    <div class="voltou"><strong>Você já sabe:</strong> figuras planas e sólidos (Aula 12), girar e desenhar em três dimensões (Aula 17) e contar com cuidado (Aula 6). Hoje você vai contar vértices, arestas e faces — e descobrir que o resultado não depende da forma.</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<p class="grande">Para um topólogo, uma xícara e uma rosquinha são <strong>a mesma coisa</strong>: amassando a massinha da xícara sem rasgar nem colar, dá para chegar na rosquinha — o furo da alça vira o furo do meio. Já uma bola e uma rosquinha são diferentes: para abrir o furo, seria preciso rasgar. A <strong>topologia</strong> estuda o que sobrevive a qualquer esticada.</p>
+
+<div class="cerebro">
+  <div class="tit">🧠 Poder do cérebro</div>
+  <p>Conte, num cubo, os vértices (V), as arestas (A) e as faces (F). Calcule <span class="mono">V − A + F</span>. Agora faça o mesmo numa pirâmide de base quadrada. Palpite: o que acontece em qualquer poliedro sem buracos?</p>
+  <details><summary>Ver a resposta</summary><p>Cubo: 8 − 12 + 6 = 2. Pirâmide: 5 − 8 + 5 = 2. Em <strong>todo</strong> poliedro sem buracos dá 2 — é a fórmula de Euler (1758). O número não liga para tamanho, ângulos nem número de lados: só para a forma "de borracha". Numa rosquinha, dá 0.</p></details>
+</div>
+
+<!-- ============ 1 ============ -->
+<h2><span class="n">1</span> Iguais para quem é de borracha</h2>
+
+<p>Duas formas são <strong>topologicamente iguais</strong> quando uma vira a outra esticando, entortando e amassando — mas sem rasgar e sem colar pedaços. Comprimento, ângulo e reta deixam de importar. O que sobra são coisas como o <strong>número de buracos</strong>.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: o alfabeto de borracha</div>
+  <p>Clique numa letra: acendem todas as que a borracha consegue transformar nela (contando os buracos).</p>
+  <div class="tela"><svg id="svg1" role="img" aria-label="Alfabeto agrupado por número de buracos"></svg></div>
+  <p class="rabisco centro" id="txt1"></p>
+</div>
+
+<!-- ============ 2 ============ -->
+<h2><span class="n">2</span> A fórmula de Euler: V − A + F = 2</h2>
+
+<p>Em qualquer poliedro "sem buraco" (que dá para inflar até virar uma bola), vértices menos arestas mais faces dá sempre 2. A razão é topológica: amassar o poliedro não muda a conta, e toda bola dá 2.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: conte V, A e F</div>
+  <p>Escolha o sólido e gire para ver os vértices e as arestas escondidos.</p>
+  <div class="controles">
+    <button id="bs0">tetraedro</button>
+    <button id="bs1" class="sec">cubo</button>
+    <button id="bs2" class="sec">octaedro</button>
+    <button id="bs3" class="sec">dodecaedro</button>
+    <button id="bs4" class="sec">icosaedro</button>
+    <button id="bs5" class="sec">prisma</button>
+    <button id="bs6" class="sec">pirâmide</button>
+  </div>
+  <div class="sl-linha"><label class="lab-l" for="slG2" style="min-width:90px">girar:</label><input type="range" id="slG2" min="0" max="360" step="5" value="30"><span class="sl-val" id="vG2">30°</span></div>
+  <div class="tela" style="max-width:340px;margin:0 auto"><svg id="svg2" role="img" aria-label="Poliedro em arame girando"></svg></div>
+  <p class="rabisco centro" id="txt2"></p>
+</div>
+
+<!-- ============ 3 ============ -->
+<h2><span class="n">3</span> A rosquinha achatada</h2>
+
+<p>Pegue um quadrado e cole a borda de cima na de baixo: vira um cano. Cole agora a boca esquerda do cano na direita: vira uma <strong>rosquinha</strong> (o <strong>toro</strong>). Dá para estudar o toro sem sair do papel: é o quadrado com a regra "sair por um lado é entrar pelo oposto" — como no Pac-Man. Quadricule e conte V − A + F.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: V − A + F no toro</div>
+  <p>As setas iguais indicam as bordas coladas. Mude o quadriculado e compare com o mesmo quadriculado sem colar.</p>
+  <div class="sl-linha"><label class="lab-l" for="slN3" style="min-width:110px">colunas:</label><input type="range" id="slN3" min="1" max="8" step="1" value="4"><span class="sl-val" id="vN3">4</span></div>
+  <div class="sl-linha"><label class="lab-l" for="slM3" style="min-width:110px">linhas:</label><input type="range" id="slM3" min="1" max="6" step="1" value="3"><span class="sl-val" id="vM3">3</span></div>
+  <div class="tela" style="max-width:360px;margin:0 auto"><svg id="svg3" role="img" aria-label="Toro achatado quadriculado com bordas coladas"></svg></div>
+  <p class="rabisco centro" id="txt3"></p>
+</div>
+
+<div class="guru">
+  <svg viewBox="0 0 100 118" width="92">
+    <ellipse cx="50" cy="112" rx="34" ry="6" fill="#00000018"/>
+    <path d="M50 60 L20 108 L80 108 Z" fill="#7c3aed" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="50" cy="34" r="20" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M30 36 q20 46 40 0 q-6 34 -20 34 q-14 0 -20 -34" fill="#e5e7eb" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M40 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M52 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M30 22 q20 -12 40 0" fill="none" stroke="#1b1b1b" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="24" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="76" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+  </svg>
+  <div>
+        <div class="fala">Quando você não pode medir nada, sobra o essencial. A topologia joga fora comprimentos, ângulos e retas — e descobre que um buraco é mais teimoso que qualquer medida. Pergunte-se sempre: o que continua verdade se tudo for de borracha?</div>
+    <div class="quem">— o Guru</div>
+  </div>
+</div>
+
+<!-- ============ 4 ============ -->
+<h2><span class="n">4</span> A faixa de Möbius: um lado só</h2>
+
+<p>Pegue uma tira de papel, dê <strong>meia volta</strong> numa ponta e cole. Parece uma pulseira comum, mas não é: uma formiga andando pelo meio volta ao início <strong>do outro lado</strong> do papel, sem nunca cruzar a borda. A faixa de Möbius tem um lado só e uma borda só.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: a formiga na faixa</div>
+  <p>Escolha quantas meias-voltas a tira leva e faça a formiga andar. Azul e laranja são as duas faces que você está vendo.</p>
+  <div class="sl-linha"><label class="lab-l" for="slK4" style="min-width:130px">meias-voltas:</label><input type="range" id="slK4" min="0" max="3" step="1" value="1"><span class="sl-val" id="vK4">1</span></div>
+  <div class="sl-linha"><label class="lab-l" for="slT4" style="min-width:130px">formiga andou:</label><input type="range" id="slT4" min="0" max="720" step="10" value="120"><span class="sl-val" id="vT4">120°</span></div>
+  <div class="tela"><svg id="svg4" role="img" aria-label="Faixa com meias-voltas e uma formiga andando"></svg></div>
+  <p class="rabisco centro" id="txt4"></p>
+</div>
+
+<!-- ============ 5 ============ -->
+<h2><span class="n">5</span> Dentro ou fora?</h2>
+
+<p>Toda curva fechada que não se cruza divide o plano em <strong>dentro</strong> e <strong>fora</strong> (o <strong>teorema da curva de Jordan</strong>: óbvio de enunciar, difícil de provar). E há um truque topológico para saber de que lado um ponto está: puxe uma semirreta dele até longe e conte quantas vezes ela cruza a curva. Ímpar: dentro. Par: fora. Cada cruzamento troca o lado.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: o labirinto de Jordan</div>
+  <p>Arraste o ponto preto pelo labirinto. A semirreta vai até a borda direita; os cruzamentos são contados.</p>
+  <div class="tela" style="max-width:380px;margin:0 auto"><svg id="svg5" role="img" aria-label="Curva fechada em forma de labirinto e ponto arrastável"></svg></div>
+  <p class="rabisco centro" id="txt5"></p>
+</div>
+
+<div class="porque">
+  <div class="tit">✅ Por que é verdade? Três casas e três serviços não se ligam sem cruzar</div>
+  <ol>
+    <li>O desafio clássico: ligar 3 casas a água, luz e gás (9 canos) numa folha, sem cruzar canos. Suponha que desse.</li>
+    <li>Teríamos V = 6 e A = 9. A fórmula de Euler para desenhos no plano dá <span class="mono">F = 2 − V + A = 5</span> regiões.</li>
+    <li>Cada região é cercada por pelo menos 4 canos (um caminho fechado sempre alterna casa, serviço, casa, serviço). Somando em volta de todas: pelo menos <span class="mono">4 · 5 = 20</span> — mas cada cano é contado no máximo 2 vezes (um de cada lado): <span class="mono">2 · 9 = 18</span>.</li>
+    <li>20 ≤ 18 é absurdo. Logo, é impossível (Aula 30: prova por absurdo). ∎ Num toro, porém, dá — a rosquinha tem "espaço" a mais.</li>
+  </ol>
+</div>
+
+<!-- ============ 6 ============ -->
+<h2><span class="n">6</span> Contar buracos com uma fórmula</h2>
+
+<p>A conta <span class="mono">χ = V − A + F</span> se chama <strong>característica de Euler</strong> e só depende de quantos buracos (alças) a superfície tem, o <strong>gênero</strong> g:</p>
+
+<p class="centro" style="font-size:20px;font-weight:800">χ = 2 − 2g</p>
+
+<p>Bola: 2. Rosquinha: 0. Rosquinha de dois furos: −2. Qualquer malha de triângulos ou quadrados desenhada na superfície dá o mesmo número — por isso ele "enxerga" os buracos sem precisar ver a forma.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: o gênero e a característica</div>
+  <p>Escolha quantos buracos a superfície tem.</p>
+  <div class="sl-linha"><label class="lab-l" for="slG6" style="min-width:110px">buracos g:</label><input type="range" id="slG6" min="0" max="4" step="1" value="1"><span class="sl-val" id="vG6">1</span></div>
+  <div class="tela"><svg id="svg6" role="img" aria-label="Superfície com g buracos"></svg></div>
+  <p class="rabisco centro" id="txt6"></p>
+</div>
+
+<div class="cuidado">
+  <div class="tit">⚠️ Cuidado — "sem rasgar e sem colar" é a regra inteira</div>
+  <p style="margin:6px 0 0">A topologia deixa esticar à vontade, mas cortar e colar de volta pode mudar tudo: cortando a rosquinha, ela vira um cano, e colando de novo com uma meia-volta, vira outra coisa. E a fórmula V − A + F = 2 vale para poliedros <strong>sem buracos</strong>: uma moldura de quadro (com furo) dá 0, e quem esquece isso "prova" absurdos.</p>
+</div>
+
+<div class="idiota">
+  <div class="tit">Não existe pergunta idiota</div>
+  <p class="q">Isso tem alguma utilidade?</p>
+  <p class="a">Muita. Topologia descreve o DNA que se enrola e desenrola, a forma do universo, o formato de nuvens de dados (a "análise topológica de dados") e rendeu o Nobel de Física de 2016, sobre materiais cujas propriedades dependem de invariantes topológicos.</p>
+  <p class="q">E se eu cortar a faixa de Möbius ao meio, pelo meio?</p>
+  <p class="a">Experimente com papel: em vez de duas faixas, sai uma só, duas vezes mais comprida e com duas voltas completas. Cortando a um terço da borda, saem duas faixas entrelaçadas. A intuição falha; a topologia acerta.</p>
+</div>
+
+<div class="pontos">
+  <div class="tit">Pontos importantes</div>
+  <ul>
+    <li>Topologia: esticar e entortar vale; <strong>rasgar e colar</strong>, não. Xícara = rosquinha.</li>
+    <li>Poliedro sem buracos: <strong>V − A + F = 2</strong> (Euler).</li>
+    <li>Toro = quadrado com lados opostos colados; lá, V − A + F = 0.</li>
+    <li>Faixa de Möbius: um lado só e uma borda só.</li>
+    <li>Curva de Jordan: cruzamentos ímpares = dentro. <strong>χ = 2 − 2g</strong> conta os buracos.</li>
+  </ul>
+</div>
+
+<!-- ============ exercicios ============ -->
+<h2><span class="n">✏️</span> Afie o lápis</h2>
+<p>Seis exercícios. Erre à vontade — a correção explica o porquê.</p>
+
+<div class="ex" id="ex1">
+  <div class="tit">Exercício 1</div>
+  <div class="selo">✅</div>
+  <p>Por que, para a topologia, uma xícara com alça e uma rosquinha são a mesma coisa?</p>
+  <div class="alts" data-r="2">
+    <div class="alt" data-i="0">Porque as duas são redondas.</div>
+    <div class="alt" data-i="1">Porque têm o mesmo volume.</div>
+    <div class="alt" data-i="2">Porque uma vira a outra esticando, sem rasgar nem colar: as duas têm um buraco.</div>
+    <div class="alt" data-i="3">Não são: a xícara tem fundo.</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex2">
+  <div class="tit">Exercício 2</div>
+  <div class="selo">✅</div>
+  <p>Um poliedro sem buracos tem 12 vértices e 30 arestas. Quantas faces ele tem?</p>
+  <p><input type="number" step="any" data-r="20" aria-label="Resposta do exercício 2"></p>
+  <button class="check" data-ex="ex2">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex3">
+  <div class="tit">Exercício 3</div>
+  <div class="selo">✅</div>
+  <p>Quantos lados tem uma faixa de Möbius?</p>
+  <p><input type="number" step="any" data-r="1" aria-label="Resposta do exercício 3"></p>
+  <button class="check" data-ex="ex3">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex4">
+  <div class="tit">Exercício 4</div>
+  <div class="selo">✅</div>
+  <p>Uma semirreta saindo de um ponto cruza uma curva fechada (que não se cruza) 5 vezes. Onde está o ponto?</p>
+  <div class="alts" data-r="0">
+    <div class="alt" data-i="0">Dentro da curva.</div>
+    <div class="alt" data-i="1">Fora da curva.</div>
+    <div class="alt" data-i="2">Em cima da curva.</div>
+    <div class="alt" data-i="3">Não dá para saber.</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex5">
+  <div class="tit">Exercício 5 — o desafio</div>
+  <div class="selo">🏆</div>
+  <p>Uma superfície tem 3 buracos (como um pretzel). Quanto vale a sua característica de Euler <span class="mono">χ = V − A + F</span>?</p>
+  <p><input type="number" step="any" data-r="-4" aria-label="Resposta do exercício 5"></p>
+  <button class="check" data-ex="ex5">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex6">
+  <div class="tit">Exercício 6 — quem faz o quê?</div>
+  <div class="selo">✅</div>
+  <p>Ligue cada ideia ao que ela quer dizer.</p>
+  <table class="ligar">
+    <tr><td>deformação topológica</td><td><select data-r="0" aria-label="deformação topológica"><option value="">escolha...</option><option value="0">esticar sem rasgar nem colar</option><option value="1">superfície de um lado só</option><option value="2">V − A + F</option><option value="3">número de buracos</option></select></td></tr>
+    <tr><td>faixa de Möbius</td><td><select data-r="1" aria-label="faixa de Möbius"><option value="">escolha...</option><option value="0">esticar sem rasgar nem colar</option><option value="1">superfície de um lado só</option><option value="2">V − A + F</option><option value="3">número de buracos</option></select></td></tr>
+    <tr><td>característica de Euler</td><td><select data-r="2" aria-label="característica de Euler"><option value="">escolha...</option><option value="0">esticar sem rasgar nem colar</option><option value="1">superfície de um lado só</option><option value="2">V − A + F</option><option value="3">número de buracos</option></select></td></tr>
+    <tr><td>gênero</td><td><select data-r="3" aria-label="gênero"><option value="">escolha...</option><option value="0">esticar sem rasgar nem colar</option><option value="1">superfície de um lado só</option><option value="2">V − A + F</option><option value="3">número de buracos</option></select></td></tr>
+  </table>
+  <button class="check" data-ex="ex6">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="placar" id="placar">
+  <p style="margin:0 0 4px;font-family:var(--mao);font-size:19px">Seu placar</p>
+  <div class="n"><span id="pn">0</span> / 6</div>
+  <div class="barra"><i id="pbar"></i></div>
+  <p id="pmsg" style="margin:0;color:#cfc9bb">Resolva os exercícios acima e acompanhe aqui.</p>
+</div>
+
+<footer>
+  Matemática do Zero · Eletiva 4 — Topologia de borracha: Möbius e V − A + F<br>
+  <strong>Pré-requisitos:</strong> Aulas 6, 12 e 17. <strong>Próxima eletiva:</strong> Curvas e superfícies: curvatura.
+</footer>
+
+</div>
+
+<script src="../../assets/progresso.js"></script>
+<script src="../../assets/auth.js"></script>
+<script src="../../assets/auth-ui.js"></script>
+<script src="../../assets/catalogo.js"></script>
+<script src="../../assets/menu.js"></script>
+<script>
+(function(){
+"use strict";
+var AULA_ID = "34-topologia-de-borracha";
+var NS="http://www.w3.org/2000/svg";
+function $(id){ return document.getElementById(id); }
+function num(v,d){
+  if(d===undefined) d=2;
+  var p=Math.pow(10,d), r=Math.round(v*p)/p;
+  if(r===0) r=0;
+  return String(r).replace(".",",").replace("-","−");
+}
+function milhar(v){
+  var s=Math.round(v).toString(), neg=s.charAt(0)==="-"; if(neg) s=s.slice(1);
+  var out=""; while(s.length>3){ out="."+s.slice(-3)+out; s=s.slice(0,-3); }
+  return (neg?"−":"")+s+out;
+}
+function el(tag,attrs,pai){
+  var e=document.createElementNS(NS,tag);
+  for(var k in attrs) e.setAttribute(k,attrs[k]);
+  if(pai) pai.appendChild(e);
+  return e;
+}
+function limpa(g){ while(g.firstChild) g.removeChild(g.firstChild); }
+/* plano cartesiano: grade, eixos e conversao de coordenadas */
+function plano(svg,o){
+  /* ox/oy: desenha o plano numa regiao de um svg maior (sem mexer no viewBox) */
+  var w=o.w||400, h=o.h||300, ox=o.ox||0, oy=o.oy||0, regiao=("ox" in o)||("oy" in o);
+  if(!regiao) svg.setAttribute("viewBox","0 0 "+w+" "+h);
+  var P={w:w,h:h,o:o};
+  P.X=function(x){ return ox+(x-o.xmin)/(o.xmax-o.xmin)*w; };
+  P.Y=function(y){ return oy+h-(y-o.ymin)/(o.ymax-o.ymin)*h; };
+  P.xDe=function(px){ return o.xmin+(px-ox)/w*(o.xmax-o.xmin); };
+  var g=el("g",{},svg), px=o.px||1, py=o.py||1, i, eps=1e-9;
+  for(i=Math.ceil(o.xmin/px)*px;i<=o.xmax+eps;i+=px) el("line",{x1:P.X(i),y1:oy,x2:P.X(i),y2:oy+h,stroke:"#ece7da","stroke-width":1},g);
+  for(i=Math.ceil(o.ymin/py)*py;i<=o.ymax+eps;i+=py) el("line",{x1:ox,y1:P.Y(i),x2:ox+w,y2:P.Y(i),stroke:"#ece7da","stroke-width":1},g);
+  if(o.ymin<=0&&o.ymax>=0) el("line",{x1:ox,y1:P.Y(0),x2:ox+w,y2:P.Y(0),stroke:"#1b1b1b","stroke-width":1.6},g);
+  if(o.xmin<=0&&o.xmax>=0) el("line",{x1:P.X(0),y1:oy,x2:P.X(0),y2:oy+h,stroke:"#1b1b1b","stroke-width":1.6},g);
+  if(o.rotulos){
+    var lx=o.rotX||px, ly=o.rotY||py, y0=(o.ymin<=0&&o.ymax>=0)?P.Y(0):oy+h, x0=(o.xmin<=0&&o.xmax>=0)?P.X(0):ox;
+    var dx=(o.xmax-o.xmin)*0.03, dy=(o.ymax-o.ymin)*0.04;
+    for(i=Math.ceil(o.xmin/lx)*lx;i<=o.xmax+eps;i+=lx) if(Math.abs(i)>eps&&i>o.xmin+dx&&i<o.xmax-dx) el("text",{x:P.X(i),y:Math.min(oy+h-3,y0+14),"font-size":11,fill:"#6b7280","text-anchor":"middle"},g).textContent=num(i);
+    for(i=Math.ceil(o.ymin/ly)*ly;i<=o.ymax+eps;i+=ly) if(Math.abs(i)>eps&&i>o.ymin+dy&&i<o.ymax-dy) el("text",{x:x0-4<ox+14?x0+4:x0-4,y:P.Y(i)+4,"font-size":11,fill:"#6b7280","text-anchor":x0-4<ox+14?"start":"end"},g).textContent=num(i);
+  }
+  P.camada=el("g",{},svg);
+  if(regiao){
+    /* numa regiao, o que passa da borda e cortado para nao invadir o vizinho */
+    plano.n=(plano.n||0)+1;
+    var id="corte"+plano.n+"_"+Math.floor(Math.random()*1e6);
+    var cp=el("clipPath",{id:id},svg);
+    el("rect",{x:ox,y:oy,width:w,height:h},cp);
+    P.camada.setAttribute("clip-path","url(#"+id+")");
+  }
+  /* caminho de uma funcao, amostrada; valores fora da tela sao cortados */
+  P.d=function(f,a,b,n){
+    a=(a===undefined)?o.xmin:a; b=(b===undefined)?o.xmax:b; n=n||240;
+    var s="", novo=true, lim=(o.ymax-o.ymin)*3;
+    for(var k=0;k<=n;k++){
+      var x=a+(b-a)*k/n, y=f(x);
+      if(!isFinite(y)){ novo=true; continue; }
+      y=Math.max(o.ymin-lim,Math.min(o.ymax+lim,y));
+      s+=(novo?"M":"L")+P.X(x).toFixed(1)+" "+P.Y(y).toFixed(1)+" "; novo=false;
+    }
+    return s||"M0 0";
+  };
+  return P;
+}
+/* arrastar uma alca dentro de um svg; cb recebe coordenadas do viewBox */
+function arrasta(svg,alca,cb){
+  var ativo=false;
+  function pos(ev){
+    var r=svg.getBoundingClientRect(), vb=svg.viewBox.baseVal;
+    cb((ev.clientX-r.left)/r.width*vb.width,(ev.clientY-r.top)/r.height*vb.height);
+  }
+  alca.addEventListener("pointerdown",function(ev){ ativo=true; ev.preventDefault(); pos(ev); });
+  svg.addEventListener("pointermove",function(ev){ if(ativo) pos(ev); });
+  window.addEventListener("pointerup",function(){ ativo=false; });
+}
+/* texto de receita sem "+ -": termos [[coef, "x²"], [coef, "x"], [coef, ""]] */
+function receita(termos){
+  var s="";
+  termos.forEach(function(t){
+    var c=t[0], v=t[1];
+    if(Math.abs(c)<1e-9) return;
+    var a=Math.abs(c), cs=(a===1&&v)?"":num(a);
+    if(s==="") s=(c<0?"−":"")+cs+v;
+    else s+=(c<0?" − ":" + ")+cs+v;
+  });
+  return s||"0";
+}
+/* potencia com expoente inteiro em sobrescrito (2¹⁰); com virgula fica 2^0,5 */
+function pot(b,n){
+  var t=num(n,1);
+  if(t.indexOf(",")!==-1) return b+"^"+t;
+  var m={"0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹","−":"⁻"};
+  return b+t.split("").map(function(c){return m[c]||c;}).join("");
+}
+
+function yDe(P,py){ var o=P.o; return o.ymin+(P.h-py)/P.h*(o.ymax-o.ymin); }
+
+/* ---------- lab 1: alfabeto ---------- */
+var BUR={A:1,B:2,D:1,O:1,P:1,Q:1,R:1};
+var svg1=$("svg1"); svg1.setAttribute("viewBox","0 0 468 150");
+var sel1="O";
+function pinta1(){
+  limpa(svg1);
+  var cl=BUR[sel1]||0, CORES=["#93c5fd","#fde68a","#f9a8d4"];
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(function(L,i){
+    var col=i%13, lin=Math.floor(i/13), x=8+col*35, y=8+lin*66, b=BUR[L]||0, mesmo=b===cl;
+    var g=el("g",{style:"cursor:pointer"},svg1);
+    el("rect",{x:x,y:y,width:31,height:58,rx:7,fill:mesmo?CORES[b]:"#f3f0e8",stroke:L===sel1?"#1b1b1b":"none","stroke-width":2.5},g);
+    el("text",{x:x+15.5,y:y+40,"font-size":30,"font-weight":800,"font-family":"Arial, sans-serif","text-anchor":"middle",fill:mesmo?"#1b1b1b":"#b8b2a4"},g).textContent=L;
+    g.addEventListener("click",function(){ sel1=L; pinta1(); });
+  });
+  var grupo="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").filter(function(L){ return (BUR[L]||0)===cl; }).join(" ");
+  $("txt1").textContent=sel1+" tem "+cl+(cl===1?" buraco":" buracos")+" → mesma família: "+grupo+". (Um topólogo rigoroso ainda separaria, por exemplo, o T do I: o cruzamento do T não some esticando.)";
+}
+pinta1();
+
+/* ---------- lab 2: poliedros ---------- */
+var FI=(1+Math.sqrt(5))/2, IF=1/FI;
+function sinais(p){ var out=[[]]; p.forEach(function(c){ var n=[]; out.forEach(function(o){ if(c===0) n.push(o.concat([0])); else { n.push(o.concat([c])); n.push(o.concat([-c])); } }); out=n; }); return out; }
+function ciclos(p){ return [p,[p[1],p[2],p[0]],[p[2],p[0],p[1]]]; }
+var SOL=[
+  {nome:"tetraedro", V:[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]], F:4},
+  {nome:"cubo", V:sinais([1,1,1]), F:6},
+  {nome:"octaedro", V:[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]].map(function(v){return v.map(function(c){return c*1.5;});}), F:8},
+  {nome:"dodecaedro", V:sinais([1,1,1]).concat([].concat.apply([],ciclos([0,IF,FI]).map(sinais))), F:12},
+  {nome:"icosaedro", V:[].concat.apply([],ciclos([0,1,FI]).map(sinais)), F:20},
+  {nome:"prisma triangular", V:[0,1,2].map(function(k){ var t=2*Math.PI*k/3; return [1.1547*Math.cos(t),-1,1.1547*Math.sin(t)]; }).concat([0,1,2].map(function(k){ var t=2*Math.PI*k/3; return [1.1547*Math.cos(t),1,1.1547*Math.sin(t)]; })), F:5},
+  {nome:"pirâmide de base quadrada", V:[[1,-0.7,1],[1,-0.7,-1],[-1,-0.7,1],[-1,-0.7,-1],[0,-0.7+Math.SQRT2,0]], F:5}
+];
+SOL.forEach(function(s){
+  var min=Infinity, E=[], i, j;
+  for(i=0;i<s.V.length;i++) for(j=i+1;j<s.V.length;j++){ var d=Math.hypot(s.V[i][0]-s.V[j][0],s.V[i][1]-s.V[j][1],s.V[i][2]-s.V[j][2]); if(d<min-1e-6) min=d; }
+  for(i=0;i<s.V.length;i++) for(j=i+1;j<s.V.length;j++){ var d2=Math.hypot(s.V[i][0]-s.V[j][0],s.V[i][1]-s.V[j][1],s.V[i][2]-s.V[j][2]); if(d2<min+1e-6) E.push([i,j]); }
+  s.E=E;
+});
+var sol2=0, svg2=$("svg2"); svg2.setAttribute("viewBox","0 0 340 320");
+function proj(v,a){ var x=v[0]*Math.cos(a)+v[2]*Math.sin(a), z=-v[0]*Math.sin(a)+v[2]*Math.cos(a), t=0.45, y=v[1]*Math.cos(t)-z*Math.sin(t), zz=v[1]*Math.sin(t)+z*Math.cos(t); return [170+x*80,165-y*80,zz]; }
+function pinta2(){
+  var g=parseInt($("slG2").value,10), s=SOL[sol2], a=g*Math.PI/180;
+  $("vG2").textContent=g+"°";
+  limpa(svg2);
+  var P=s.V.map(function(v){ return proj(v,a); }), zs=P.map(function(p){return p[2];}), zmin=Math.min.apply(null,zs), zmax=Math.max.apply(null,zs);
+  function prof(z){ return zmax-zmin<1e-9?1:(z-zmin)/(zmax-zmin); }
+  s.E.slice().sort(function(e,f){ return (P[e[0]][2]+P[e[1]][2])-(P[f[0]][2]+P[f[1]][2]); }).forEach(function(e){
+    var q=prof((P[e[0]][2]+P[e[1]][2])/2);
+    el("line",{x1:P[e[0]][0],y1:P[e[0]][1],x2:P[e[1]][0],y2:P[e[1]][1],stroke:"var(--azul)","stroke-width":1.5+2.5*q,opacity:0.3+0.7*q},svg2);
+  });
+  P.forEach(function(p){ el("circle",{cx:p[0],cy:p[1],r:3+3*prof(p[2]),fill:"var(--verm)",opacity:0.4+0.6*prof(p[2])},svg2); });
+  var V=s.V.length, A=s.E.length;
+  $("txt2").textContent=s.nome+": V = "+V+", A = "+A+", F = "+s.F+" → V − A + F = "+V+" − "+A+" + "+s.F+" = "+(V-A+s.F);
+}
+[0,1,2,3,4,5,6].forEach(function(i){ $("bs"+i).addEventListener("click",function(){ sol2=i; [0,1,2,3,4,5,6].forEach(function(j){ $("bs"+j).className=j===i?"":"sec"; }); pinta2(); }); });
+$("slG2").addEventListener("input",pinta2); pinta2();
+
+/* ---------- lab 3: toro achatado ---------- */
+var svg3=$("svg3"); svg3.setAttribute("viewBox","0 0 360 300");
+function setaBorda(x1,y1,x2,y2,cor,dupla){
+  el("line",{x1:x1,y1:y1,x2:x2,y2:y2,stroke:cor,"stroke-width":4},svg3);
+  var mx=(x1+x2)/2, my=(y1+y2)/2, dx=Math.sign(x2-x1), dy=Math.sign(y2-y1);
+  [0].concat(dupla?[14]:[]).forEach(function(o){ var cx=mx+dx*o, cy=my+dy*o; el("path",{d:"M"+(cx+dx*7)+" "+(cy+dy*7)+" L"+(cx-dx*6-dy*7)+" "+(cy-dy*6-dx*7)+" L"+(cx-dx*6+dy*7)+" "+(cy-dy*6+dx*7)+" Z",fill:cor},svg3); });
+}
+function pinta3(){
+  var n=parseInt($("slN3").value,10), m=parseInt($("slM3").value,10);
+  $("vN3").textContent=n; $("vM3").textContent=m;
+  limpa(svg3);
+  var x0=40, y0=30, W=280, H=230;
+  el("rect",{x:x0,y:y0,width:W,height:H,fill:"#eef2ff"},svg3);
+  for(var i=1;i<n;i++) el("line",{x1:x0+W*i/n,y1:y0,x2:x0+W*i/n,y2:y0+H,stroke:"#94a3b8","stroke-width":1.5},svg3);
+  for(i=1;i<m;i++) el("line",{x1:x0,y1:y0+H*i/m,x2:x0+W,y2:y0+H*i/m,stroke:"#94a3b8","stroke-width":1.5},svg3);
+  setaBorda(x0,y0,x0+W,y0,"var(--verm)",false); setaBorda(x0,y0+H,x0+W,y0+H,"var(--verm)",false);
+  setaBorda(x0,y0+H,x0,y0,"var(--azul)",true); setaBorda(x0+W,y0+H,x0+W,y0,"var(--azul)",true);
+  for(i=0;i<n;i++) for(var j=0;j<m;j++) el("circle",{cx:x0+W*i/n,cy:y0+H*j/m,r:4,fill:"#1b1b1b"},svg3);
+  var V=n*m, A=2*n*m, F=n*m, Vp=(n+1)*(m+1), Ap=n*(m+1)+m*(n+1);
+  $("txt3").textContent="colado (toro): V = "+V+", A = "+A+", F = "+F+" → V − A + F = "+(V-A+F)+" · sem colar (quadrado): V = "+Vp+", A = "+Ap+", F = "+F+" → "+(Vp-Ap+F)+". Colar as bordas identifica pontos e arestas e muda a conta.";
+}
+$("slN3").addEventListener("input",pinta3); $("slM3").addEventListener("input",pinta3); pinta3();
+
+/* ---------- lab 4: Mobius ---------- */
+var svg4=$("svg4"); svg4.setAttribute("viewBox","0 0 460 260");
+function faixa(k,th,s){ var R=1.6, w=Math.cos(k*th/2), h=Math.sin(k*th/2); return [(R+s*w)*Math.cos(th),(R+s*w)*Math.sin(th),s*h]; }
+function vista(p){ var t=0.85, y=p[1]*Math.cos(t)-p[2]*Math.sin(t), z=p[1]*Math.sin(t)+p[2]*Math.cos(t); return [230+p[0]*100,130+y*100,z]; }
+function normal(k,th){ var e=1e-4, a=faixa(k,th,0), b=faixa(k,th+e,0), c=faixa(k,th,e), u=[b[0]-a[0],b[1]-a[1],b[2]-a[2]], v=[c[0]-a[0],c[1]-a[1],c[2]-a[2]]; var n=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]], L=Math.hypot(n[0],n[1],n[2]); return [n[0]/L,n[1]/L,n[2]/L]; }
+function pinta4(){
+  var k=parseInt($("slK4").value,10), T=parseInt($("slT4").value,10);
+  $("vK4").textContent=k; $("vT4").textContent=T+"°";
+  limpa(svg4);
+  var N=140, W=0.6, quads=[];
+  for(var i=0;i<N;i++){
+    var a=2*Math.PI*i/N, b=2*Math.PI*(i+1)/N;
+    var P=[faixa(k,a,-W),faixa(k,b,-W),faixa(k,b,W),faixa(k,a,W)].map(vista);
+    /* face voltada para quem olha: sinal da area na tela */
+    var ar=0; for(var j=0;j<4;j++){ var p=P[j], q=P[(j+1)%4]; ar+=p[0]*q[1]-q[0]*p[1]; }
+    quads.push({P:P,z:(P[0][2]+P[1][2]+P[2][2]+P[3][2])/4,frente:ar>0});
+  }
+  quads.sort(function(x,y){ return y.z-x.z; }).forEach(function(q){
+    el("polygon",{points:q.P.map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1);}).join(" "),fill:q.frente?"#93c5fd":"#fdba74",stroke:q.frente?"#60a5fa":"#fb923c","stroke-width":0.6},svg4);
+  });
+  /* a formiga: anda pelo meio, um pouco acima da superficie, do lado da normal que ela carrega */
+  var th=T*Math.PI/180, n=normal(k,th), base=faixa(k,th,0), pe=[base[0]+0.12*n[0],base[1]+0.12*n[1],base[2]+0.12*n[2]], cab=[base[0]+0.3*n[0],base[1]+0.3*n[1],base[2]+0.3*n[2]];
+  var A=vista(pe), C=vista(cab);
+  el("line",{x1:A[0],y1:A[1],x2:C[0],y2:C[1],stroke:"#1b1b1b","stroke-width":3},svg4);
+  el("circle",{cx:A[0],cy:A[1],r:6,fill:"var(--verm)",stroke:"#1b1b1b","stroke-width":1.5},svg4);
+  var impar=k%2===1, n0=normal(k,0), mesmo=n[0]*n0[0]+n[1]*n0[1]+n[2]*n0[2];
+  var voltas=Math.floor(T/360);
+  $("txt4").textContent=(impar?"faixa de Möbius: 1 lado e 1 borda":"faixa comum: 2 lados e 2 bordas")+" · a formiga (vermelha, com a antena apontando para o lado em que está) andou "+T+"°"+(T%360===0&&T>0?": voltou ao ponto de partida "+(mesmo>0?"do mesmo lado.":"do OUTRO lado do papel — sem cruzar a borda!"):"");
+}
+$("slK4").addEventListener("input",pinta4); $("slT4").addEventListener("input",pinta4); pinta4();
+
+/* ---------- lab 5: Jordan ---------- */
+var LAB=[[1,1],[9,1],[9,9],[3,9],[3,4],[6,4],[6,6],[5,6],[5,5],[4,5],[4,8],[8,8],[8,2],[2,2],[2,9.5],[1,9.5]];
+var svg5=$("svg5"), pt5=[8.5,5.3], P5;
+function cruza(p){ var c=0, xs=[]; for(var i=0;i<LAB.length;i++){ var a=LAB[i], b=LAB[(i+1)%LAB.length]; if((a[1]>p[1])!==(b[1]>p[1])){ var x=a[0]+(p[1]-a[1])/(b[1]-a[1])*(b[0]-a[0]); if(x>p[0]){ c++; xs.push(x); } } } return {c:c,xs:xs}; }
+function pinta5(){
+  limpa(svg5);
+  P5=plano(svg5,{w:380,h:380,xmin:0,xmax:10.5,ymin:0,ymax:10.5,px:1,py:1,rotulos:false});
+  var r=cruza(pt5), dentro=r.c%2===1;
+  el("polygon",{points:LAB.map(function(q){return P5.X(q[0])+","+P5.Y(q[1]);}).join(" "),fill:"#fef3c7",stroke:"#1b1b1b","stroke-width":3},P5.camada);
+  el("line",{x1:P5.X(pt5[0]),y1:P5.Y(pt5[1]),x2:P5.X(10.5),y2:P5.Y(pt5[1]),stroke:"var(--roxo)","stroke-width":2.5,"stroke-dasharray":"7 4"},P5.camada);
+  r.xs.forEach(function(x){ el("circle",{cx:P5.X(x),cy:P5.Y(pt5[1]),r:6,fill:"var(--roxo)"},P5.camada); });
+  var a=el("circle",{cx:P5.X(pt5[0]),cy:P5.Y(pt5[1]),r:11,fill:dentro?"var(--verde)":"var(--verm)",stroke:"#1b1b1b","stroke-width":2.5,style:"cursor:grab"},P5.camada);
+  arrasta(svg5,a,function(px,py){ pt5=[Math.max(0.2,Math.min(10.3,P5.xDe(px))),Math.max(0.2,Math.min(10.3,yDe(P5,py)))]; if(Math.abs(pt5[1]-Math.round(pt5[1]))<0.02) pt5[1]+=0.05; pinta5(); });
+  $("txt5").textContent="a semirreta cruza a curva "+r.c+(r.c===1?" vez":" vezes")+" → "+(r.c%2?"ímpar: o ponto está DENTRO (verde).":"par: o ponto está FORA (vermelho).")+" A região de dentro é a amarela — note que não é fácil ver isso a olho no meio do labirinto.";
+}
+pinta5();
+
+/* ---------- lab 6: genero ---------- */
+var svg6=$("svg6"); svg6.setAttribute("viewBox","0 0 460 200");
+function pinta6(){
+  var g=parseInt($("slG6").value,10);
+  $("vG6").textContent=g;
+  limpa(svg6);
+  var larg=Math.max(160,90+g*95);
+  el("ellipse",{cx:230,cy:100,rx:larg/2,ry:70,fill:"#c7d2fe",stroke:"#4338ca","stroke-width":3},svg6);
+  el("ellipse",{cx:230,cy:122,rx:larg/2-12,ry:38,fill:"none",stroke:"#a5b4fc","stroke-width":1.5},svg6);
+  for(var i=0;i<g;i++){
+    var cx=230-(g-1)*47.5+i*95;
+    el("path",{d:"M"+(cx-32)+" 96 Q"+cx+" 124 "+(cx+32)+" 96",fill:"#fff",stroke:"#4338ca","stroke-width":3},svg6);
+    el("path",{d:"M"+(cx-24)+" 104 Q"+cx+" 84 "+(cx+24)+" 104",fill:"none",stroke:"#4338ca","stroke-width":3},svg6);
+  }
+  var nomes=["esfera (bola, cubo, qualquer poliedro sem furo)","toro (rosquinha, xícara, moldura)","bitoro (rosquinha de dois furos, óculos)","tritoro (pretzel)","superfície de gênero 4"];
+  $("txt6").textContent=nomes[g]+" · χ = 2 − 2 · "+g+" = "+(2-2*g)+" — qualquer malha desenhada nela dá V − A + F = "+(2-2*g)+".";
+}
+$("slG6").addEventListener("input",pinta6); pinta6();
+/* ---------- exercicios ---------- */
+var feitos={}, TOTAL=6;
+function confete(){
+  var cores=["#fde68a","#2563eb","#dc2626","#059669","#7c3aed","#d97706"];
+  for(var i=0;i<40;i++){
+    (function(i){
+      var d=document.createElement("div");
+      d.className="conf"; d.style.left=(Math.random()*100)+"vw";
+      d.style.background=cores[i%cores.length];
+      d.style.animation="cai "+(1.9+Math.random()*1.5)+"s linear forwards";
+      d.style.animationDelay=(Math.random()*.5)+"s";
+      document.body.appendChild(d);
+      setTimeout(function(){d.remove();},4200);
+    })(i);
+  }
+}
+function marca(id,ok){
+  if(ok&&!feitos[id]){
+    feitos[id]=true;
+    if(window.Progresso) Progresso.marcar(AULA_ID,id);
+    var n=Object.keys(feitos).length;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Você fechou a Eletiva 4. 🎉🍩</strong> Buracos, a fórmula de Euler, Möbius e Jordan. Próxima eletiva: curvatura."; confete(); }
+    else msg.textContent="Boa! Faltam "+(TOTAL-n)+".";
+    document.querySelector("#"+id+" .selo").classList.add("ver");
+  }
+}
+function restauraProgresso(){
+  if(!window.Progresso) return;
+  Progresso.carregar(AULA_ID).then(function(itens){
+    itens.forEach(function(id){
+      if(!feitos[id] && document.getElementById(id)){
+        feitos[id]=true;
+        document.querySelector("#"+id+" .selo").classList.add("ver");
+      }
+    });
+    var n=Object.keys(feitos).length;
+    if(n===0) return;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    msg.textContent = n===TOTAL
+      ? "Você já tinha concluído esta aula. 🎉"
+      : "Progresso salvo: "+n+"/"+TOTAL+". Faltam "+(TOTAL-n)+".";
+  });
+}
+function fb(box,ok,txt){
+  var f=box.querySelector(".fb");
+  f.className="fb mostra "+(ok?"ok":"no"); f.innerHTML=txt;
+  box.classList.remove("chacoalha");
+  if(!ok){ void box.offsetWidth; box.classList.add("chacoalha"); }
+}
+var explica={
+ "ex2": {
+  "ok": "Isso: V − A + F = 2 → 12 − 30 + F = 2 → F = 20. É o icosaedro.",
+  "no": "Use V − A + F = 2: 12 − 30 + F = 2, então F = 2 − 12 + 30 = 20."
+ },
+ "ex3": {
+  "ok": "Exato: um lado só. A formiga chega ao 'outro lado' sem cruzar a borda.",
+  "no": "A faixa de Möbius tem 1 lado: andando pelo meio, você volta ao ponto de partida do lado oposto do papel, sem cruzar a borda."
+ },
+ "ex5": {
+  "ok": "Perfeito: χ = 2 − 2 · 3 = −4.",
+  "no": "Use χ = 2 − 2g com g = 3 buracos: 2 − 6 = −4."
+ },
+ "ex6": {
+  "ok": "Tudo certo! Borracha, um lado só, a conta de Euler e os buracos.",
+  "no": "Quase. Deformação topológica = esticar sem rasgar nem colar; Möbius = superfície de um lado só; característica de Euler = V − A + F; gênero = número de buracos."
+ }
+};
+document.querySelectorAll("button.check").forEach(function(b){
+  b.addEventListener("click",function(){
+    var box=document.getElementById(b.dataset.ex);
+    var ins=box.querySelectorAll("input[data-r],select[data-r]"), tudoOk=true, vazio=false;
+    ins.forEach(function(inp){
+      if(inp.value===""){vazio=true;return;}
+      var ok=Math.abs(parseFloat(inp.value)-parseFloat(inp.dataset.r)) < 0.001;
+      inp.style.borderColor=ok?"#059669":"#dc2626";
+      inp.style.background=ok?"#d1fae5":"#fee2e2";
+      if(!ok) tudoOk=false;
+    });
+    if(vazio){ fb(box,false,"Preencha o campo antes de conferir. 🙂"); return; }
+    fb(box,tudoOk,(tudoOk?"✔ ":"✘ ")+(tudoOk?explica[b.dataset.ex].ok:explica[b.dataset.ex].no));
+    marca(b.dataset.ex,tudoOk);
+  });
+});
+var expAlt={
+ "ex1": [
+  "Redondo é medida de forma; a topologia nem liga para isso (um cubo é igual a uma bola).",
+  "Volume é medida, e medidas não importam na topologia.",
+  "Isso! Amassando a xícara, a alça vira o anel da rosquinha; o número de buracos (1) nunca muda.",
+  "O fundo da xícara é só massinha amassada: some esticando."
+ ],
+ "ex4": [
+  "Isso! Cada cruzamento troca entre dentro e fora; começando de fora (lá longe) e cruzando 5 vezes, termina dentro.",
+  "Um número par de cruzamentos é que indicaria fora.",
+  "Se estivesse em cima da curva, a contagem nem faria sentido.",
+  "Dá para saber, sim: é justamente a regra da paridade."
+ ]
+};
+document.querySelectorAll(".alts").forEach(function(grupo){
+  var box=grupo.closest(".ex"), certa=parseInt(grupo.dataset.r,10);
+  grupo.querySelectorAll(".alt").forEach(function(alt){
+    alt.setAttribute("tabindex","0");
+    alt.setAttribute("role","button");
+    alt.setAttribute("aria-label","Alternativa "+alt.textContent.trim());
+    function escolhe(){
+      var i=parseInt(alt.dataset.i,10), ok=(i===certa);
+      grupo.querySelectorAll(".alt").forEach(function(a){a.classList.remove("certa","errada");});
+      alt.classList.add(ok?"certa":"errada");
+      if(ok) alt.classList.add("pulsa");
+      fb(box,ok,(ok?"✔ ":"✘ ")+expAlt[box.id][i]);
+      marca(box.id,ok);
+    }
+    alt.addEventListener("click",escolhe);
+    alt.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();escolhe();}});
+  });
+});
+
+restauraProgresso();
+
+})();
+</script>
+</body>
+</html>

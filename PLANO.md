@@ -1,7 +1,8 @@
 # Plano do curso
 
-> **Estado:** ✅ reestruturação concluída (fases 1 a 7) — as **30 aulas** estão publicadas na ordem
-> abaixo, com as peças novas da metodologia. Falta só a fase 8 (eletivas). A coluna **Estado** das
+> **Estado:** ✅ fases 1 a 8 concluídas — as **30 aulas** da trilha e as **10 eletivas** estão
+> publicadas, com as peças novas da metodologia. Próxima etapa: a fase 9, **testes unitários em todas
+> as aulas** ([veja o plano](#fase-9--testes-unitários-em-todas-as-aulas)). A coluna **Estado** das
 > tabelas registra de onde cada aula veio na [migração](#migração-das-18-aulas-publicadas).
 
 ## Objetivo
@@ -37,7 +38,7 @@ Três regras valem para as 30 aulas:
 | **3 — Ensino Médio** | Ensino Médio | 13–18 | entender o comportamento das funções clássicas (quadrática, exponencial, trigonométricas), usar vetores e matrizes e girar com números complexos |
 | **4 — Superior I** | Faculdade: cálculo e dados | 19–24 | derivar, integrar, medir incerteza com a curva normal e extrair padrões de dados (correlação, regressão, Fourier) |
 | **5 — Superior II** | Faculdade: matemática aplicada e computacional | 25–30 | modelar sistemas que mudam no tempo, otimizar, trabalhar com acaso ao longo do tempo e demonstrar um resultado |
-| **Eletivas** | Aprofundamento | — | seguir para áreas específicas (criptografia, grafos, topologia, ...) |
+| **Eletivas** | Aprofundamento | 31–40 | seguir para áreas específicas: criptografia, grafos, grupos, topologia, curvatura, séries, EDPs, fractais, cálculo estocástico e métodos numéricos |
 
 Nas tabelas abaixo, o **Estado** registra de onde veio cada aula (todas já publicadas):
 
@@ -529,21 +530,156 @@ da indução · tente escrever √2 como fração · a sequência de Collatz
 
 ## Eletivas
 
-Módulos independentes para depois do Nível 5 (ou em paralelo, quando os pré-requisitos já foram
-vistos). Mesma anatomia de aula. Ficam como sementes até o Nível 5 estar pronto.
+Módulos independentes, numerados de 31 a 40, para depois do Nível 5 — ou antes, assim que os
+pré-requisitos de cada um estiverem feitos. Mesma anatomia de aula (6 laboratórios, 6 exercícios com
+desafio e Quem faz o quê?, Poder do cérebro, Por que é verdade?, Guru, Cuidado, Não existe pergunta
+idiota). No curso, aparecem numa aba própria, "Eletivas"; o cabeçalho de cada uma diz "ELETIVA N de 10".
 
-| Eletiva | Pré-requisitos | Área da trilha |
-|---|---|---|
-| Aritmética do relógio e criptografia RSA | 1, 14 | Teoria dos números |
-| Grafos: caminhos, redes e rotas | 17, 27 | Otimização combinatória e grafos |
-| Simetrias: o que é um grupo | 15, 17, 18 | Álgebra abstrata |
-| Topologia de borracha: Möbius e V − A + F | 12 | Topologia |
-| Curvas e superfícies: curvatura | 17, 19 | Geometria diferencial |
-| Séries de Taylor: trocar uma curva por potências | 19 | Análise |
-| Calor e ondas: equações diferenciais parciais | 24, 28 | EDP |
-| Fractais e dimensão | 14, 17 | Geometria (fractais) |
-| Cálculo estocástico: a integral do acaso | 20, 29 | Probabilidade avançada |
-| Métodos numéricos: Newton, erro e estabilidade | 19, 28 | Análise numérica |
+| Eletiva | Aula | Pré-requisitos | Área da trilha |
+|---|---|---|---|
+| 1. Aritmética do relógio e criptografia RSA | 31 | 1, 4, 14, 30 | Teoria dos números |
+| 2. Grafos: caminhos, redes e rotas | 32 | 6, 17, 27, 30 | Otimização combinatória e grafos |
+| 3. Simetrias: o que é um grupo | 33 | 6, 15, 17, 18 | Álgebra abstrata |
+| 4. Topologia de borracha: Möbius e V − A + F | 34 | 6, 12, 17 | Topologia |
+| 5. Curvas e superfícies: curvatura | 35 | 11, 15, 17, 19, 20 | Geometria diferencial |
+| 6. Séries de Taylor: trocar uma curva por potências | 36 | 13, 14, 15, 18, 19 | Análise |
+| 7. Calor e ondas: equações diferenciais parciais | 37 | 16, 19, 24, 28 | EDP |
+| 8. Fractais e dimensão | 38 | 12, 14, 17, 18, 23 | Geometria (fractais) |
+| 9. Cálculo estocástico: a integral do acaso | 39 | 20, 21, 28, 29 | Probabilidade avançada |
+| 10. Métodos numéricos: Newton, erro e estabilidade | 40 | 13, 19, 27, 28 | Análise numérica |
+
+### Eletiva 1 (Aula 31) — Aritmética do relógio e criptografia RSA ✅
+
+**O obstáculo:** como trocar mensagens secretas com quem você nunca combinou senha nenhuma.
+
+- Aritmética modular: somar e multiplicar ficando com o resto
+- Inverso no relógio existe quando mdc(a, n) = 1 (reencontro com a Aula 1)
+- Potências andam em ciclos; pequeno teorema de Fermat, com demonstração
+- Cifra de César e a quebra por frequência de letras
+- RSA completo: n = p · q, φ, e, d; trancar e abrir
+- Por que é seguro: multiplicar é fácil, fatorar é difícil
+
+**Laboratórios:** o relógio de n horas · a tabuada do relógio · o passeio das potências · cifre e
+quebre a cifra de César · monte o seu RSA · multiplicar × fatorar
+
+### Eletiva 2 (Aula 32) — Grafos: caminhos, redes e rotas ✅
+
+**O obstáculo:** mapas, redes e rotas parecem problemas sem forma matemática.
+
+- Vértices, arestas e grau; soma dos graus = 2 × arestas
+- Pontes de Königsberg e a regra de Euler dos vértices ímpares (com demonstração)
+- Matriz de adjacência: Aᵏ conta caminhos (reencontro com a Aula 17)
+- Caminho mais curto (Dijkstra) e árvore geradora mínima (Kruskal)
+- Coloração e o teorema das quatro cores
+
+**Laboratórios:** as pontes de Königsberg · a casinha sem tirar o lápis · potências da matriz contam
+caminhos · Dijkstra passo a passo · Kruskal liga as cidades · pinte a roda
+
+### Eletiva 3 (Aula 33) — Simetrias: o que é um grupo ✅
+
+**O obstáculo:** álgebra abstrata parece uma coleção de definições sem desenho.
+
+- As 6 simetrias do triângulo (contagem com demonstração)
+- Composição e a tabela de Cayley; a ordem importa
+- As quatro regras de grupo e contraexemplos
+- Grupos cíclicos e geradores (mdc de novo); raízes da unidade (reencontro com a Aula 18)
+- Rosáceas: grupos cíclico Cₙ e diedral Dₙ
+
+**Laboratórios:** gire e espelhe o triângulo · a tabela de Cayley do triângulo · é grupo ou não é? ·
+quem gera o grupo? · as raízes da unidade · monte uma rosácea
+
+### Eletiva 4 (Aula 34) — Topologia de borracha: Möbius e V − A + F ✅
+
+**O obstáculo:** topologia soa abstrata demais; começa com massinha.
+
+- Igualdade topológica: esticar sem rasgar nem colar
+- Fórmula de Euler V − A + F = 2 nos poliedros
+- O toro como quadrado colado; χ = 0
+- Faixa de Möbius: um lado só
+- Curva de Jordan e a regra da paridade; 3 casas e 3 serviços (demonstração)
+- Característica de Euler χ = 2 − 2g
+
+**Laboratórios:** o alfabeto de borracha · conte V, A e F · V − A + F no toro · a formiga na faixa ·
+o labirinto de Jordan · o gênero e a característica
+
+### Eletiva 5 (Aula 35) — Curvas e superfícies: curvatura ✅
+
+**O obstáculo:** geometria diferencial parece exigir anos de cálculo; começa com um volante.
+
+- Círculo osculador e κ = 1/R
+- Curvatura com sinal ao longo de uma pista
+- Teorema da rotação das tangentes: 360°
+- Curvaturas principais e curvatura de Gauss
+- Triângulos esféricos e o excesso angular
+- Por que todo mapa-múndi distorce (demonstração); a projeção de Mercator
+
+**Laboratórios:** o círculo que beija a curva · o volante na pista · quanto a direção girou? · monte
+a superfície · o triângulo polo–equador · o círculo que incha no mapa
+
+### Eletiva 6 (Aula 36) — Séries de Taylor: trocar uma curva por potências ✅
+
+**O obstáculo:** não se sabe como uma calculadora acha seno ou eˣ.
+
+- Polinômio de Taylor e o k! (com demonstração)
+- Séries de eˣ, sen x e do número e
+- Série geométrica e raio de convergência
+- Mudança de centro (ln x)
+- e^(ix) = cos x + i sen x pelas séries
+
+**Laboratórios:** imitando eˣ · polinômios que ondulam · somando 1/k! · converge ou explode? · o
+logaritmo em volta de a · a espiral de Euler
+
+### Eletiva 7 (Aula 37) — Calor e ondas: equações diferenciais parciais ✅
+
+**O obstáculo:** equações com derivadas em várias variáveis parecem inalcançáveis.
+
+- Equação do calor como "média dos vizinhos" (com demonstração)
+- Estabilidade: r ≤ 1/2
+- Solução de Fourier: cada seno decai no seu ritmo
+- Equação da onda, d'Alembert e reflexões
+- Modos normais e a série harmônica
+
+**Laboratórios:** a barra que esfria · estável ou instável? · cada seno encolhe no seu ritmo ·
+belisque a corda · o pulso que se divide · os modos normais
+
+### Eletiva 8 (Aula 38) — Fractais e dimensão ✅
+
+**O obstáculo:** formas "irregulares" como litorais parecem fora do alcance da geometria.
+
+- Floco de Koch: perímetro infinito, área finita (com demonstração)
+- Jogo do caos e o triângulo de Sierpinski
+- Dimensão de autossemelhança D = log N / log(1/r)
+- Contagem de caixas e a reta log-log (reencontro com a Aula 23)
+- Conjunto de Mandelbrot e órbitas de z² + c
+
+**Laboratórios:** o floco de neve de Koch · o jogo do caos · calcule a dimensão · contagem de caixas
+na curva de Koch · o conjunto de Mandelbrot · siga a órbita de c
+
+### Eletiva 9 (Aula 39) — Cálculo estocástico: a integral do acaso ✅
+
+**O obstáculo:** o browniano não tem derivada; como fazer cálculo com ele?
+
+- Integral de Itô: avaliar no começo do passo
+- Variação quadrática: (dW)² = dt (com demonstração)
+- Lema de Itô: d(W²) = 2W dW + dt
+- Movimento browniano geométrico: média × mediana
+- Monte Carlo e o preço de uma opção (Black–Scholes), com os limites do modelo
+
+**Laboratórios:** soma pela esquerda × soma pela direita · somando os quadrados dos passos ·
+conferindo o lema de Itô · preços simulados · 4.000 futuros de um ano · Monte Carlo × Black–Scholes
+
+### Eletiva 10 (Aula 40) — Métodos numéricos: Newton, erro e estabilidade ✅
+
+**O obstáculo:** o computador não "resolve" equações: chuta, corrige e erra.
+
+- Bisseção e método de Newton; convergência quadrática (com demonstração)
+- Onde Newton falha: ciclos e tangentes deitadas
+- Arredondamento de ponto flutuante e o h ótimo da derivada numérica
+- Cancelamento catastrófico e fórmulas estáveis
+- Euler explícito × implícito: estabilidade
+
+**Laboratórios:** a bisseção acha √2 · siga a tangente · onde Newton se perde · o h ótimo da
+derivada · duas fórmulas para a mesma raiz · o passo que explode
 
 ---
 
@@ -661,7 +797,56 @@ conferida contra ela.
 6. ✅ **Nível 5** — Aulas 25 a 30.
 7. ✅ **Peças novas** — Poder do cérebro, Por que é verdade?, Conversa ao pé da lareira e o exercício
    Quem faz o quê? (onde cada uma entra: tabela da metodologia).
-8. ⏳ **Eletivas** — próxima etapa.
+8. ✅ **Eletivas** — as 10, numeradas de 31 a 40, com aba própria no curso.
+9. ⏳ **Testes unitários em todas as aulas** — próxima etapa; plano detalhado logo abaixo.
+
+---
+
+## Fase 9 — testes unitários em todas as aulas
+
+**Por quê.** O `tests/verifica.js` é um teste de ponta a ponta: abre cada aula num navegador e confere
+que nada quebra (texto `NaN`, erro de JavaScript, gabarito aceito, resposta errada recusada, links,
+celular). Ele **não** confere se a matemática mostrada está certa. Um laboratório pode exibir um
+número errado, uma fórmula pode ter o sinal trocado, e a suíte continua verde. Exemplo real, pego na
+revisão visual da Eletiva 9: uma variável da aula (`NS`) sobrescreveu o namespace SVG do código comum
+e **todos** os gráficos ficaram invisíveis, com os testes passando. (Esse caso específico já virou
+uma checagem no `verifica.js`; a fase 9 cobre a classe inteira de erros "roda, mas calcula errado".)
+
+**Como (sem quebrar "cada aula é um arquivo que funciona offline").**
+
+1. **Separar a matemática do desenho.** As funções puras hoje repetidas dentro das aulas passam a
+   morar em módulos compartilhados em `assets/matematica/`, carregados por `<script src>` (funcionam
+   em `file://`) e exportados também para o Node (padrão UMD, sem build):
+   - `numeros.js`: `mdc`, `ehPrimo`, `fatores`, `potmod`, `inverso`, frações, arredondamento;
+   - `algebra.js`: raízes do 2º grau (forma estável), sistemas 2×2, determinante, inversa, autovalores 2×2 e Jacobi;
+   - `calculo.js`: derivada numérica, somas de Riemann, Euler (explícito e implícito), Runge–Kutta, Newton, bisseção, séries de Taylor;
+   - `estatistica.js`: média, mediana, desvio, covariância, correlação, regressão, Φ (normal acumulada), geradores pseudoaleatórios com semente;
+   - `grafos.js`: Dijkstra, Kruskal, potências da matriz de adjacência;
+   - `formato.js`: `num` e `milhar` (vírgula decimal, sinal "−", milhar com ponto).
+   O código de desenho (SVG) continua dentro de cada aula.
+2. **Testes com `node --test`** (nativo do Node, sem dependências), um arquivo por módulo em
+   `tests/unit/`, mais um `tests/unit/aulas.test.js` que percorre as 40 aulas.
+3. **O que cada teste cobre:**
+   - **valores conhecidos** — `potmod(3, 4, 5) = 1`; Dijkstra A → H = 16 e Kruskal = 26 no mapa da
+     Eletiva 2; κ de um círculo = 1/R; `(1 + h)^n` de Euler; Φ(1,96) ≈ 0,975; Black–Scholes contra
+     valores de referência publicados; Σ 1/k! → e;
+   - **propriedades** — `mdc(a, b)` divide a e b; `a · inverso(a) ≡ 1`; Runge–Kutta com erro caindo
+     ~16× ao dividir o passo por 2; bisseção sempre dentro do intervalo; Newton com convergência
+     quadrática perto da raiz; `Aᵏ` contando caminhos;
+   - **exercícios** — para cada aula: todo `.ex` tem gabarito (`data-r`) e explicação (`explica`/`expAlt`)
+     para cada alternativa; e, onde o enunciado é uma conta, o gabarito é **recalculado** pelo módulo
+     (ex.: 2 · 7 = 14 na soma dos graus; d = 7 no RSA do exercício 5 da Eletiva 1);
+   - **formatação** — casos de borda de `num`/`milhar` (−0, arredondamento de ,5, números enormes);
+   - **figuras** — os 40 scripts de `scripts/` rodam sem erro e sem avisos (`pytest` simples).
+4. **CI:** um segundo job no workflow, "Testes unitários", rodando em menos de 30 s, com relatório de
+   cobertura (`node --test --experimental-test-coverage`). Meta: toda função que produz um número
+   mostrado ao aluno tem pelo menos um teste; cobertura ≥ 90% em `assets/matematica/`.
+5. **Ordem:** eletivas e Nível 5 primeiro (mais contas numéricas, maior risco), depois Níveis 4, 3,
+   2 e 1.
+6. **Regra daqui em diante:** aula nova ou alterada só entra com os testes dos seus cálculos.
+
+**Pronto quando:** as 40 aulas usam os módulos compartilhados, os dois jobs de CI estão verdes e a
+meta de cobertura foi atingida.
 
 ---
 

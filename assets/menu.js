@@ -83,7 +83,7 @@
     var base = "../../index.html";
     barra.innerHTML = '<div class="in">'
       + '<span class="trilha"><a class="marca" href="' + base + '#/">✏️ Matemática do Zero</a>'
-      + ' <span class="sep">›</span> <a href="' + base + "#/nivel/" + atual.nivel.n + '">Nível ' + atual.nivel.n + " · " + esc(atual.nivel.nome) + "</a>"
+      + ' <span class="sep">›</span> <a href="' + base + "#/nivel/" + atual.nivel.n + '">' + (atual.nivel.eletiva ? "" : "Nível " + atual.nivel.n + " · ") + esc(atual.nivel.nome) + "</a>"
       + ' <span class="sep">›</span> Aula ' + atual.aula.n + "</span>"
       + '<span class="acoes">'
       + (ant ? '<a href="../' + ant.aula.slug + '/index.html" title="Aula ' + ant.aula.n + " — " + esc(ant.aula.titulo) + '">◀ Aula ' + ant.aula.n + "</a>" : "")
