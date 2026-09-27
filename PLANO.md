@@ -36,8 +36,8 @@ confiável × quebrada · o gráfico nascendo ponto a ponto
 - O número solto levanta a linha e marca onde ela cruza a régua em pé
 - A receita geral: `f(x) = passo · x + altura de partida`
 
-**Laboratórios:** encontre o ponto (com o caminho animado) · o elevador dos negativos ·
-a fábrica de retas · o desafio da reta misteriosa
+**Laboratórios:** encontre o ponto (com o caminho animado) · leia o ponto · o elevador dos negativos ·
+sobe, desce ou fica deitada? · compare duas retas · a fábrica de retas (com o desafio da reta misteriosa)
 
 ---
 
@@ -51,7 +51,8 @@ a fábrica de retas · o desafio da reta misteriosa
 - Medir giro no sentido anti-horário, começando da direita
 - Onde o ponto para depois de girar tanto
 
-**Laboratórios:** o ponteiro que gira · o transferidor interativo (arrastável) · adivinhe o ângulo
+**Laboratórios:** o ponteiro que gira · o relógio de ângulos · soma de ângulos ·
+ângulos negativos e voltas extras · o transferidor interativo (arrastável) · adivinhe o ângulo
 
 ---
 
@@ -65,8 +66,9 @@ a fábrica de retas · o desafio da reta misteriosa
 - Os valores que vale a pena reconhecer de olho (0°, 90°, 180°, 270°)
 - A relação entre os dois num único desenho
 
-**Laboratórios:** o círculo com a sombra e a altura marcadas ao vivo ·
-a tabela que se preenche sozinha conforme o ponto gira
+**Laboratórios:** o círculo com a sombra e a altura marcadas ao vivo · corrida sombra vs altura ·
+simetria do círculo · a tabela que se preenche sozinha conforme o ponto gira ·
+adivinhe o valor · ache o ângulo certo
 
 ---
 
@@ -81,8 +83,8 @@ a tabela que se preenche sozinha conforme o ponto gira
 - Reencontro com a Aula 1: são as mesmas quatro transformações de sempre
 - Somar duas ondas
 
-**Laboratórios:** círculo e onda lado a lado, sincronizados ·
-três sliders (altura, largura, atraso) · somador de ondas
+**Laboratórios:** círculo e onda lado a lado, sincronizados · três sliders (altura, largura, atraso) ·
+quantas ondas cabem? · somador de ondas · reconheça a onda · onda ao vivo
 
 ---
 
@@ -97,8 +99,8 @@ três sliders (altura, largura, atraso) · somador de ondas
 - Uma matriz é uma **tabela que move setas**: gira, estica, espelha
 - Onde isso aparece na vida real
 
-**Laboratórios:** somador de setas arrastável · produto escalar ao vivo ·
-gire a figura com uma matriz
+**Laboratórios:** somador de setas arrastável · meça o tamanho da seta · multiplicar por um número ·
+produto escalar ao vivo · paralelas ou não? · gire a figura com uma matriz
 
 ---
 

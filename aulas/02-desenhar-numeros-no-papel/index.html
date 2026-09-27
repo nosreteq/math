@@ -192,6 +192,20 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p style="margin:6px 0 0"><strong>(3, 5) e (5, 3) são lugares diferentes.</strong> Aperte o botão "Trocar a ordem" ali em cima e veja os dois pontos aparecerem em cantos distintos. Trocar a ordem aqui é como trocar o número do prédio pelo número do apartamento.</p>
 </div>
 
+<div class="lab">
+  <div class="tit">🔧 Laboratório: leia o ponto</div>
+  <p>Agora ao contrário: clique em qualquer lugar do papel e leia o endereço dele.</p>
+  <div class="tela">
+    <svg viewBox="0 0 420 420" id="svgLeia" role="img" aria-label="Clique no papel quadriculado para ler as coordenadas do ponto" tabindex="0">
+      <g id="gradeLeia"></g>
+      <line x1="0" y1="210" x2="420" y2="210" stroke="#1b1b1b" stroke-width="3"/>
+      <line x1="210" y1="0" x2="210" y2="420" stroke="#1b1b1b" stroke-width="3"/>
+      <circle id="ptLeia" cx="210" cy="210" r="9" fill="#7c3aed" stroke="#fff" stroke-width="3" opacity="0"/>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtLeia">Clique em qualquer lugar do papel.</p>
+</div>
+
 <!-- ============ 2 ============ -->
 <h2><span class="n">2</span> Antes do zero a régua continua</h2>
 
@@ -258,6 +272,20 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <p>E não é sorte da DOBRAR. <strong>Qualquer</strong> máquina do tipo "multiplico por um número" dá uma linha reta. O que muda é a <strong>inclinação</strong> dela.</p>
 
+<div class="lab">
+  <div class="tit">🔧 Laboratório: sobe, desce ou fica deitada?</div>
+  <p>Antes de revelar, adivinhe o que a máquina faz com a reta.</p>
+  <div class="centro">
+    <p class="rabisco" id="flashTxt" style="font-size:19px">clique em "próxima" para começar</p>
+    <div class="controles" style="justify-content:center">
+      <button class="sec" data-chute="sobe">⬈ Sobe</button>
+      <button class="sec" data-chute="desce">⬊ Desce</button>
+      <button class="sec" data-chute="deitada">➡ Fica deitada</button>
+    </div>
+    <button id="flashProxima" style="margin-top:10px">▶ Próxima máquina</button>
+  </div>
+</div>
+
 <!-- ============ 4 ============ -->
 <h2><span class="n">4</span> O passo da escada</h2>
 
@@ -268,6 +296,33 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <p>Agora vem a parte bonita: <strong>o passo da escada é exatamente o número que multiplica.</strong> Se a máquina é <span class="mono">f(x) = 2 · x</span>, você anda 1 e sobe 2. Se é <span class="mono">f(x) = 5 · x</span>, você anda 1 e sobe 5.</p>
 
 <p>Os matemáticos chamam esse passo de <strong>inclinação</strong>. Mas "passo da escada" descreve melhor.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: compare duas retas</div>
+  <p>Ajuste o passo das duas retas e veja qual sobe mais rápido.</p>
+
+  <div class="sl-linha">
+    <label class="lab-l" style="min-width:120px;color:var(--azul)">passo da reta A:</label>
+    <input type="range" id="slCompA" min="-4" max="4" step="1" value="1">
+    <span class="sl-val" id="vCompA">1</span>
+  </div>
+  <div class="sl-linha">
+    <label class="lab-l" style="min-width:120px;color:var(--laranja)">passo da reta B:</label>
+    <input type="range" id="slCompB" min="-4" max="4" step="1" value="2">
+    <span class="sl-val" id="vCompB">2</span>
+  </div>
+
+  <div class="tela">
+    <svg viewBox="0 0 420 420" id="svgComp" role="img" aria-label="Duas retas sobrepostas para comparar o passo de cada uma">
+      <g id="gradeComp"></g>
+      <line x1="0" y1="210" x2="420" y2="210" stroke="#1b1b1b" stroke-width="3"/>
+      <line x1="210" y1="0" x2="210" y2="420" stroke="#1b1b1b" stroke-width="3"/>
+      <line id="retaCompA" x1="0" y1="210" x2="420" y2="210" stroke="var(--azul)" stroke-width="4"/>
+      <line id="retaCompB" x1="0" y1="210" x2="420" y2="210" stroke="var(--laranja)" stroke-width="4"/>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtComp">Passo A = 1 · Passo B = 2 → a reta B sobe mais rápido.</p>
+</div>
 
 <!-- ============ 5 ============ -->
 <h2><span class="n">5</span> E o número solto no fim?</h2>
@@ -479,6 +534,7 @@ function desenhaGrade(id,rotulos){
   }
 }
 desenhaGrade("gradeP",true); desenhaGrade("gradeR",true); desenhaGrade("gradeE",true);
+desenhaGrade("gradeLeia",true); desenhaGrade("gradeComp",true);
 
 /* ---------- lab 1: o ponto ---------- */
 var slX=document.getElementById("slX"), slY=document.getElementById("slY");
@@ -637,6 +693,68 @@ document.getElementById("btDesafio").addEventListener("click",function(){
   pintaReta();
 });
 pintaReta();
+
+/* ---------- lab: leia o ponto ---------- */
+var svgLeia=document.getElementById("svgLeia"), ptLeia=document.getElementById("ptLeia"), txtLeia=document.getElementById("txtLeia");
+function cliqueLeia(ev){
+  var rect=svgLeia.getBoundingClientRect();
+  var cx=ev.clientX!==undefined?ev.clientX:ev.touches[0].clientX;
+  var cy=ev.clientY!==undefined?ev.clientY:ev.touches[0].clientY;
+  var mx=(cx-rect.left)/rect.width*420, my=(cy-rect.top)/rect.height*420;
+  var gx=Math.round((mx-CX)/U), gy=Math.round((CY-my)/U);
+  gx=Math.max(-6,Math.min(6,gx)); gy=Math.max(-6,Math.min(6,gy));
+  ptLeia.setAttribute("cx",X(gx)); ptLeia.setAttribute("cy",Y(gy)); ptLeia.setAttribute("opacity",1);
+  txtLeia.innerHTML="Você clicou em <strong>("+gx+", "+gy+")</strong> — ando "+
+    (gx<0?Math.abs(gx)+" para a esquerda":gx+" para a direita")+" e "+
+    (gy<0?"desço "+Math.abs(gy):"subo "+gy)+".";
+}
+svgLeia.addEventListener("pointerdown",cliqueLeia);
+
+/* ---------- lab: sobe, desce ou deitada (flashcards) ---------- */
+var flashMaqs=[
+  {a:3,txt:"f(x) = 3 · x",r:"sobe"},
+  {a:-2,txt:"f(x) = −2 · x",r:"desce"},
+  {a:0,txt:"f(x) = 0 · x + 4",r:"deitada"},
+  {a:1,txt:"f(x) = 1 · x",r:"sobe"},
+  {a:-5,txt:"f(x) = −5 · x + 2",r:"desce"},
+  {a:0.5,txt:"f(x) = 0,5 · x − 1",r:"sobe"}
+];
+var flashAtual=null;
+function novaFlash(){
+  flashAtual=flashMaqs[Math.floor(Math.random()*flashMaqs.length)];
+  document.getElementById("flashTxt").textContent=flashAtual.txt+" — sobe, desce ou fica deitada?";
+}
+document.querySelectorAll("[data-chute]").forEach(function(b){
+  b.addEventListener("click",function(){
+    if(!flashAtual){ novaFlash(); return; }
+    var ok=b.dataset.chute===flashAtual.r;
+    document.getElementById("flashTxt").innerHTML = ok
+      ? "✔ Isso! "+flashAtual.txt+" realmente <strong>"+flashAtual.r+"</strong>."
+      : "✘ Não — "+flashAtual.txt+" na verdade <strong>"+flashAtual.r+"</strong>. Passo "+
+        (flashAtual.a>0?"positivo sobe.":flashAtual.a<0?"negativo desce.":"zero fica deitada.");
+  });
+});
+document.getElementById("flashProxima").addEventListener("click",novaFlash);
+
+/* ---------- lab: compare duas retas ---------- */
+var slCompA=document.getElementById("slCompA"), slCompB=document.getElementById("slCompB");
+var retaCompA=document.getElementById("retaCompA"), retaCompB=document.getElementById("retaCompB");
+function pintaComp(){
+  var a=parseInt(slCompA.value,10), b=parseInt(slCompB.value,10);
+  document.getElementById("vCompA").textContent=a;
+  document.getElementById("vCompB").textContent=b;
+  retaCompA.setAttribute("x1",X(-6)); retaCompA.setAttribute("y1",Y(a*-6));
+  retaCompA.setAttribute("x2",X(6));  retaCompA.setAttribute("y2",Y(a*6));
+  retaCompB.setAttribute("x1",X(-6)); retaCompB.setAttribute("y1",Y(b*-6));
+  retaCompB.setAttribute("x2",X(6));  retaCompB.setAttribute("y2",Y(b*6));
+  var t=document.getElementById("txtComp");
+  var quem = Math.abs(a)===Math.abs(b) ? "empate — os dois sobem (ou descem) no mesmo ritmo"
+    : Math.abs(a)>Math.abs(b) ? "a reta A sobe mais rápido" : "a reta B sobe mais rápido";
+  t.textContent="Passo A = "+a+" · Passo B = "+b+" → "+quem+".";
+}
+slCompA.addEventListener("input",pintaComp);
+slCompB.addEventListener("input",pintaComp);
+pintaComp();
 
 /* ---------- exercicios ---------- */
 var feitos={}, TOTAL=6;

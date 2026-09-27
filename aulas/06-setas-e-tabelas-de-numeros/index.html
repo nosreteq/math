@@ -178,6 +178,21 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   </div>
 </div>
 
+<div class="lab">
+  <div class="tit">🔧 Laboratório: meça o tamanho da seta</div>
+  <p>Arraste a ponta e veja o tamanho da seta sendo calculado ao vivo (o mesmo truque do triângulo retângulo).</p>
+  <div class="tela">
+    <svg viewBox="0 0 420 420" id="svgTam" class="arrastavel" role="img" aria-label="Vetor arrastável com o tamanho calculado ao vivo">
+      <g id="gradeTam"></g>
+      <line x1="0" y1="210" x2="420" y2="210" stroke="#1b1b1b" stroke-width="2"/>
+      <line x1="210" y1="0" x2="210" y2="420" stroke="#1b1b1b" stroke-width="2"/>
+      <line id="segTam" x1="210" y1="210" x2="330" y2="150" stroke="var(--roxo)" stroke-width="5" stroke-linecap="round"/>
+      <circle id="alcaTam" class="alca" cx="330" cy="150" r="13" fill="var(--roxo)" stroke="#fff" stroke-width="3"/>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtTam">v = (4, 2) · tamanho = √(4² + 2²) ≈ 4,47</p>
+</div>
+
 <!-- ============ 3 ============ -->
 <h2><span class="n">3</span> Multiplicar uma seta por um número</h2>
 
@@ -186,6 +201,27 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <div class="cuidado">
   <div class="tit">⚠️ Cuidado — número negativo inverte a seta</div>
   <p style="margin:6px 0 0">Multiplicar por um número negativo não só encolhe (ou estica): também <strong>vira a seta para o lado oposto</strong>. É a mesma ideia do "passo negativo" da Aula 2, agora aplicada a uma direção inteira.</p>
+</div>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: multiplicar por um número</div>
+  <p>Mexa no controle e veja a seta esticar, encolher ou virar para o lado oposto.</p>
+
+  <div class="sl-linha">
+    <label class="lab-l" style="min-width:80px">k =</label>
+    <input type="range" id="slEscalar" min="-3" max="3" step="0.5" value="1">
+    <span class="sl-val" id="vEscalar">1</span>
+  </div>
+
+  <div class="tela">
+    <svg viewBox="0 0 420 420" id="svgEscalar" role="img" aria-label="Vetor multiplicado por um número, esticando ou invertendo">
+      <line x1="0" y1="210" x2="420" y2="210" stroke="#1b1b1b" stroke-width="2"/>
+      <line x1="210" y1="0" x2="210" y2="420" stroke="#1b1b1b" stroke-width="2"/>
+      <line id="vetorBase" x1="210" y1="210" x2="270" y2="180" stroke="#9ca3af" stroke-width="3" stroke-dasharray="6 5"/>
+      <line id="vetorEscalar" x1="210" y1="210" x2="270" y2="180" stroke="var(--verde)" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtEscalar">v = (2, 1) · k = 1 · k·v = (2, 1)</p>
 </div>
 
 <!-- ============ 4 ============ -->
@@ -232,6 +268,19 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p class="a">Porque a conta soma dois produtos comuns — não sobra "direção" nenhuma no resultado, só uma quantidade. É por isso que ele é chamado de "escalar": um número puro, sem seta.</p>
   <p class="q">Onde isso aparece na vida real?</p>
   <p class="a">Trabalho em física (força vezes deslocamento na mesma direção), similaridade entre duas listas de números (usado em recomendação e busca), e até correlação estatística — que é basicamente "o ângulo" entre duas séries de dados.</p>
+</div>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: paralelas ou não?</div>
+  <p>Duas setas são <strong>paralelas</strong> quando uma é só a outra multiplicada por um número. Antes de revelar, adivinhe.</p>
+  <p class="rabisco centro" id="paraTxt" style="font-size:19px">clique em "próximo" para começar</p>
+  <div class="controles" style="justify-content:center">
+    <button class="sec" data-chute="sim">✔ Paralelas</button>
+    <button class="sec" data-chute="nao">✘ Não paralelas</button>
+  </div>
+  <div class="controles" style="justify-content:center">
+    <button id="paraProxima">▶ Próximo par</button>
+  </div>
 </div>
 
 <!-- ============ 5 ============ -->
@@ -394,7 +443,7 @@ function desenhaGrade(id){
     lh.setAttribute("stroke","#e6e1d4");lh.setAttribute("stroke-width",1.2);g.appendChild(lh);
   }
 }
-desenhaGrade("gradeSoma");
+desenhaGrade("gradeSoma"); desenhaGrade("gradeTam");
 
 /* ---------- lab 1: somador de setas arrastavel ---------- */
 var svgSoma=document.getElementById("svgSoma");
@@ -488,6 +537,63 @@ document.getElementById("btReset").addEventListener("click",function(){
   espH=1; espV=1; escala=1; slRot.value=0; pintaMatriz();
 });
 pintaMatriz();
+
+/* ---------- lab: meca o tamanho da seta ---------- */
+var svgTam=document.getElementById("svgTam"), segTam=document.getElementById("segTam"), alcaTam=document.getElementById("alcaTam"), txtTam=document.getElementById("txtTam");
+var vecTam={x:4,y:2};
+function pintaTam(){
+  segTam.setAttribute("x2",X(vecTam.x)); segTam.setAttribute("y2",Y(vecTam.y));
+  alcaTam.setAttribute("cx",X(vecTam.x)); alcaTam.setAttribute("cy",Y(vecTam.y));
+  var tam=Math.sqrt(vecTam.x*vecTam.x+vecTam.y*vecTam.y);
+  txtTam.textContent="v = ("+vecTam.x+", "+vecTam.y+") · tamanho = √("+vecTam.x+"² + "+vecTam.y+"²) ≈ "+tam.toFixed(2).replace(".",",");
+}
+var arrastandoTam=false;
+alcaTam.addEventListener("pointerdown",function(ev){ arrastandoTam=true; ev.preventDefault(); });
+svgTam.addEventListener("pointermove",function(ev){
+  if(!arrastandoTam) return;
+  vecTam=coordDoEvento(ev, svgTam);
+  pintaTam();
+});
+window.addEventListener("pointerup",function(){ arrastandoTam=false; });
+pintaTam();
+
+/* ---------- lab: multiplicar por um numero ---------- */
+var slEscalar=document.getElementById("slEscalar"), vetorEscalar=document.getElementById("vetorEscalar"), txtEscalar=document.getElementById("txtEscalar");
+var vecEscalarBase={x:2,y:1};
+function pintaEscalar(){
+  var k=parseFloat(slEscalar.value);
+  document.getElementById("vEscalar").textContent=k.toFixed(1).replace(".0","").replace(".",",");
+  var kx=vecEscalarBase.x*k, ky=vecEscalarBase.y*k;
+  vetorEscalar.setAttribute("x2",X(kx)); vetorEscalar.setAttribute("y2",Y(ky));
+  txtEscalar.textContent="v = ("+vecEscalarBase.x+", "+vecEscalarBase.y+") · k = "+k.toFixed(1).replace(".0","").replace(".",",")+" · k·v = ("+kx.toFixed(1).replace(".0","")+", "+ky.toFixed(1).replace(".0","")+")"+(k<0?" — direção invertida":"");
+}
+slEscalar.addEventListener("input",pintaEscalar);
+pintaEscalar();
+
+/* ---------- lab: paralelas ou nao ---------- */
+var paraPares=[
+  {a:[2,1], b:[4,2], r:"sim"},
+  {a:[1,3], b:[-2,-6], r:"sim"},
+  {a:[2,1], b:[1,2], r:"nao"},
+  {a:[3,0], b:[6,0], r:"sim"},
+  {a:[1,1], b:[1,-1], r:"nao"},
+  {a:[2,-4], b:[-1,2], r:"sim"}
+];
+var paraAtual=null;
+function novaPara(){
+  paraAtual=paraPares[Math.floor(Math.random()*paraPares.length)];
+  document.getElementById("paraTxt").textContent="v = ("+paraAtual.a[0]+", "+paraAtual.a[1]+") e w = ("+paraAtual.b[0]+", "+paraAtual.b[1]+") — são paralelas?";
+}
+document.querySelectorAll("[data-chute]").forEach(function(b){
+  b.addEventListener("click",function(){
+    if(!paraAtual){ novaPara(); return; }
+    var ok=b.dataset.chute===paraAtual.r;
+    document.getElementById("paraTxt").innerHTML = ok
+      ? "✔ Isso! v e w "+(paraAtual.r==="sim"?"são":"não são")+" paralelas."
+      : "✘ Não — v e w "+(paraAtual.r==="sim"?"são":"não são")+" paralelas.";
+  });
+});
+document.getElementById("paraProxima").addEventListener("click",novaPara);
 
 /* ---------- exercicios ---------- */
 var feitos={}, TOTAL=6;

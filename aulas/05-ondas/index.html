@@ -254,6 +254,26 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p class="a">Depende do sinal usado na conta, mas no laboratório: <strong>subtrair</strong> a fase do ângulo empurra a onda para a direita (atrasa — ela demora mais para começar a subir). Fase negativa faz o oposto: adianta.</p>
 </div>
 
+<div class="lab">
+  <div class="tit">🔧 Laboratório: quantas ondas cabem?</div>
+  <p>Mude a frequência e conte quantos ciclos completos cabem na mesma largura de tela.</p>
+
+  <div class="sl-linha">
+    <label class="lab-l" style="min-width:110px;color:var(--azul)">frequência:</label>
+    <input type="range" id="slContaOnda" min="1" max="6" step="1" value="1">
+    <span class="sl-val" id="vContaOnda">1</span>
+  </div>
+
+  <div class="tela">
+    <svg viewBox="0 0 380 160" id="svgContaOnda" role="img" aria-label="Onda mostrando quantos ciclos completos cabem no espaço">
+      <line x1="0" y1="80" x2="380" y2="80" stroke="#c9c1ae" stroke-width="1.5"/>
+      <polyline id="poliContaOnda" points="" fill="none" stroke="var(--azul)" stroke-width="4"/>
+      <g id="marcasContaOnda"></g>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtContaOnda">Frequência 1 → cabe 1 ciclo completo.</p>
+</div>
+
 <!-- ============ 4 ============ -->
 <h2><span class="n">4</span> Somar duas ondas</h2>
 
@@ -283,6 +303,53 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
     </svg>
   </div>
   <p class="rabisco centro">Tracejado verde: <span class="mono">seno(x)</span>. Tracejado azul: a onda ajustável. Linha roxa cheia: a soma das duas.</p>
+</div>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: reconheça a onda</div>
+  <p>A onda cinza tracejada é um alvo secreto. Ajuste amplitude e frequência até a onda azul cobrir a cinza.</p>
+
+  <div class="controles">
+    <button id="btNovaOndaAlvo">🎲 Nova onda misteriosa</button>
+  </div>
+
+  <div class="sl-linha">
+    <label class="lab-l" style="min-width:170px;color:var(--verde)">altura (amplitude):</label>
+    <input type="range" id="slAmpAlvo" min="0.2" max="1.8" step="0.1" value="1">
+    <span class="sl-val" id="vAmpAlvo">1,0</span>
+  </div>
+  <div class="sl-linha">
+    <label class="lab-l" style="min-width:170px;color:var(--azul)">largura (frequência):</label>
+    <input type="range" id="slFreqAlvo" min="1" max="4" step="1" value="1">
+    <span class="sl-val" id="vFreqAlvo">1</span>
+  </div>
+
+  <div class="tela">
+    <svg viewBox="0 0 380 220" id="svgOndaAlvo" role="img" aria-label="Ajuste a onda azul para cobrir a onda alvo tracejada">
+      <line x1="0" y1="110" x2="380" y2="110" stroke="#c9c1ae" stroke-width="1.5"/>
+      <polyline id="ondaAlvo" points="" fill="none" stroke="#9ca3af" stroke-width="3" stroke-dasharray="7 6"/>
+      <polyline id="ondaTentativa" points="" fill="none" stroke="var(--azul)" stroke-width="3.5"/>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtOndaAlvo">Clique em "Nova onda misteriosa" para começar.</p>
+</div>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: onda ao vivo</div>
+  <p>Aumente a velocidade e veja a onda correr — quanto mais rápido, mais aguda seria a nota se isso fosse som.</p>
+
+  <div class="sl-linha">
+    <label class="lab-l" style="min-width:110px">velocidade:</label>
+    <input type="range" id="slVelOnda" min="0" max="10" step="1" value="4">
+    <span class="sl-val" id="vVelOnda">4</span>
+  </div>
+
+  <div class="tela">
+    <svg viewBox="0 0 380 160" id="svgOndaViva" role="img" aria-label="Onda animada correndo em tempo real">
+      <line x1="0" y1="80" x2="380" y2="80" stroke="#c9c1ae" stroke-width="1.5"/>
+      <polyline id="poliOndaViva" points="" fill="none" stroke="var(--roxo)" stroke-width="4"/>
+    </svg>
+  </div>
 </div>
 
 <div class="pontos">
@@ -488,6 +555,87 @@ function pintaSoma(){
 slAmp2.addEventListener("input",pintaSoma);
 slFreq2.addEventListener("input",pintaSoma);
 pintaSoma();
+
+/* ---------- lab: quantas ondas cabem ---------- */
+var slContaOnda=document.getElementById("slContaOnda"), poliContaOnda=document.getElementById("poliContaOnda");
+var marcasContaOnda=document.getElementById("marcasContaOnda"), txtContaOnda=document.getElementById("txtContaOnda");
+function pintaContaOnda(){
+  var F=parseInt(slContaOnda.value,10);
+  document.getElementById("vContaOnda").textContent=F;
+  var pts=[];
+  for(var px=0; px<=380; px+=4){
+    var xdeg=(px/380)*360;
+    var y=seno(F*xdeg);
+    pts.push(px+","+(80-y*60));
+  }
+  poliContaOnda.setAttribute("points",pts.join(" "));
+  while(marcasContaOnda.firstChild) marcasContaOnda.removeChild(marcasContaOnda.firstChild);
+  for(var k=1;k<F;k++){
+    var mx=(k/F)*380;
+    var l=document.createElementNS("http://www.w3.org/2000/svg","line");
+    l.setAttribute("x1",mx); l.setAttribute("y1",20); l.setAttribute("x2",mx); l.setAttribute("y2",140);
+    l.setAttribute("stroke","#e6e1d4"); l.setAttribute("stroke-width",1.5); l.setAttribute("stroke-dasharray","3 3");
+    marcasContaOnda.appendChild(l);
+  }
+  txtContaOnda.textContent="Frequência "+F+" → cabe"+(F===1?" 1 ciclo completo.":" "+F+" ciclos completos.");
+}
+slContaOnda.addEventListener("input",pintaContaOnda);
+pintaContaOnda();
+
+/* ---------- lab: reconheça a onda ---------- */
+var slAmpAlvo=document.getElementById("slAmpAlvo"), slFreqAlvo=document.getElementById("slFreqAlvo");
+var ondaAlvo=document.getElementById("ondaAlvo"), ondaTentativa=document.getElementById("ondaTentativa"), txtOndaAlvo=document.getElementById("txtOndaAlvo");
+var alvoOndaA=1, alvoOndaF=1;
+function desenhaOnda(el,A,F){
+  var pts=[];
+  for(var px=0; px<=380; px+=4){
+    var xdeg=(px/380)*360;
+    var y=A*seno(F*xdeg);
+    pts.push(px+","+(110-y*55));
+  }
+  el.setAttribute("points",pts.join(" "));
+}
+function pintaOndaAlvo(){
+  var A=parseFloat(slAmpAlvo.value), F=parseInt(slFreqAlvo.value,10);
+  document.getElementById("vAmpAlvo").textContent=A.toFixed(1).replace(".",",");
+  document.getElementById("vFreqAlvo").textContent=F;
+  desenhaOnda(ondaTentativa,A,F);
+  var perto = Math.abs(A-alvoOndaA)<0.15 && F===alvoOndaF;
+  if(perto) txtOndaAlvo.innerHTML="🎉 <strong>Acertou!</strong> A onda misteriosa era amplitude "+alvoOndaA.toFixed(1).replace(".",",")+" e frequência "+alvoOndaF+".";
+}
+document.getElementById("btNovaOndaAlvo").addEventListener("click",function(){
+  var amps=[0.4,0.6,0.8,1.0,1.2,1.4,1.6];
+  alvoOndaA=amps[Math.floor(Math.random()*amps.length)];
+  alvoOndaF=Math.floor(Math.random()*4)+1;
+  desenhaOnda(ondaAlvo,alvoOndaA,alvoOndaF);
+  txtOndaAlvo.textContent="Ajuste os dois controles até a onda azul cobrir a cinza tracejada.";
+});
+slAmpAlvo.addEventListener("input",pintaOndaAlvo);
+slFreqAlvo.addEventListener("input",pintaOndaAlvo);
+pintaOndaAlvo();
+
+/* ---------- lab: onda ao vivo ---------- */
+var slVelOnda=document.getElementById("slVelOnda"), poliOndaViva=document.getElementById("poliOndaViva");
+var faseViva=0, timerViva=null;
+function pintaOndaViva(){
+  var pts=[];
+  for(var px=0; px<=380; px+=4){
+    var xdeg=(px/380)*360;
+    var y=seno(xdeg+faseViva);
+    pts.push(px+","+(80-y*60));
+  }
+  poliOndaViva.setAttribute("points",pts.join(" "));
+}
+function reiniciaTimerViva(){
+  clearInterval(timerViva);
+  var vel=parseInt(slVelOnda.value,10);
+  document.getElementById("vVelOnda").textContent=vel;
+  if(vel===0) return;
+  timerViva=setInterval(function(){ faseViva=(faseViva+vel*2)%360; pintaOndaViva(); },30);
+}
+slVelOnda.addEventListener("input",reiniciaTimerViva);
+pintaOndaViva();
+reiniciaTimerViva();
 
 /* ---------- exercicios ---------- */
 var feitos={}, TOTAL=6;
