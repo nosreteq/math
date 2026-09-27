@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aula 9 — Estatística com vetores | Matemática do Zero</title>
+<style>
+:root{
+  --papel:#f6f2e9; --papel2:#fffdf7; --tinta:#1b1b1b; --cinza:#6b7280;
+  --azul:#2563eb; --azulc:#dbeafe; --verm:#dc2626; --vermc:#fee2e2;
+  --verde:#059669; --verdec:#d1fae5; --amar:#fde68a; --laranja:#d97706;
+  --roxo:#7c3aed; --linha:#c9c1ae;
+  --mao:'Comic Sans MS','Comic Neue','Chalkboard SE','Bradley Hand','Marker Felt','Segoe Print','Ink Free',cursive;
+  --corpo:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--corpo);font-size:17px;line-height:1.65}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 90px}
+
+header{background:var(--tinta);color:var(--papel2);padding:34px 22px 30px;margin-bottom:34px;border-bottom:6px solid var(--laranja)}
+header .inner{max-width:820px;margin:0 auto}
+.serie{font-family:var(--mao);font-size:15px;letter-spacing:.5px;color:var(--amar);margin:0 0 6px}
+header h1{margin:0;font-size:40px;line-height:1.1;letter-spacing:-.5px}
+header .sub{margin:12px 0 0;color:#cfc9bb;font-size:17px;max-width:620px}
+.aula-num{display:inline-block;background:var(--laranja);color:#fff;font-weight:700;padding:3px 13px;border-radius:20px;font-size:14px;margin-bottom:14px;letter-spacing:.5px}
+.voltou{background:#3a3a3a;border-left:5px solid var(--amar);padding:12px 18px;margin:18px 0 0;font-size:15.5px;color:#e6e0d2;border-radius:0 8px 8px 0}
+
+h2{font-size:29px;margin:52px 0 6px;line-height:1.2;border-bottom:3px solid var(--tinta);padding-bottom:8px}
+h2 .n{color:var(--laranja);font-family:var(--mao);font-size:24px;margin-right:8px}
+h3{font-size:21px;margin:32px 0 8px}
+p{margin:14px 0}
+.grande{font-size:20px}
+.centro{text-align:center}
+code,.mono{font-family:'Consolas','Monaco',monospace;background:#eae4d6;padding:2px 7px;border-radius:4px;font-size:.95em}
+
+.guru{display:flex;gap:18px;align-items:flex-start;margin:34px 0;background:linear-gradient(#efe9db,#e8e1d0);border-left:6px solid var(--roxo);padding:20px 22px;border-radius:4px}
+.guru svg{flex:0 0 92px}
+.guru .fala{position:relative;background:#fff;border:2px solid var(--tinta);border-radius:16px;padding:14px 18px;font-family:var(--mao);font-size:16.5px;line-height:1.55}
+.guru .fala:before{content:"";position:absolute;left:-11px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:var(--tinta)}
+.guru .fala:after{content:"";position:absolute;left:-8px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:#fff}
+.guru .quem{font-family:var(--mao);font-size:13px;color:var(--roxo);text-align:center;margin-top:4px;font-weight:700}
+
+.idiota{background:#e7eefc;border:3px solid var(--azul);border-radius:10px;padding:6px 24px 20px;margin:34px 0}
+.idiota .tit{font-family:var(--mao);font-size:20px;font-weight:700;color:#fff;background:var(--azul);display:inline-block;padding:5px 16px;border-radius:0 0 10px 10px;margin:0 0 8px}
+.idiota .q{font-weight:700;margin:16px 0 4px}
+.idiota .q:before{content:"P: ";color:var(--azul);font-weight:800}
+.idiota .a{margin:0 0 6px}
+.idiota .a:before{content:"R: ";color:var(--verm);font-weight:800}
+
+.cuidado{background:var(--vermc);border:3px dashed var(--verm);border-radius:10px;padding:16px 20px;margin:30px 0}
+.cuidado .tit{font-family:var(--mao);font-weight:700;color:var(--verm);font-size:19px;margin-bottom:2px}
+
+.pontos{background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:8px 26px 22px;margin:44px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.pontos .tit{font-family:var(--mao);font-size:22px;font-weight:700;background:var(--amar);display:inline-block;padding:6px 18px;border:3px solid var(--tinta);border-radius:8px;transform:rotate(-1.5deg);margin:-22px 0 10px}
+.pontos ul{padding-left:22px;margin:8px 0}
+.pontos li{margin:9px 0}
+
+.sticky{background:var(--amar);padding:16px 20px;font-family:var(--mao);font-size:16px;transform:rotate(-1.2deg);box-shadow:3px 4px 9px rgba(0,0,0,.16);margin:30px auto;max-width:560px;border-radius:2px}
+.rabisco{font-family:var(--mao);color:var(--laranja);font-size:15.5px;line-height:1.4}
+
+.lab{background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:8px 24px 26px;margin:34px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.lab .tit{font-family:var(--mao);font-size:19px;font-weight:700;background:var(--verde);color:#fff;display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;border:3px solid var(--tinta)}
+.controles{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
+button{font-family:var(--corpo);font-size:16px;font-weight:700;cursor:pointer;background:var(--azul);color:#fff;border:3px solid var(--tinta);border-radius:9px;padding:9px 18px;box-shadow:3px 3px 0 var(--tinta);transition:.09s}
+button:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--tinta)}
+button:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--tinta)}
+button.sec{background:#fff;color:var(--tinta)}
+button.on{background:var(--verde)}
+button:disabled{opacity:.5;cursor:not-allowed;box-shadow:none;transform:none}
+.alt:focus-visible{outline:3px solid var(--laranja);outline-offset:2px}
+input[type=number]{font-family:var(--corpo);font-size:18px;font-weight:700;width:92px;padding:8px 10px;border:3px solid var(--tinta);border-radius:9px;background:#fff;text-align:center}
+input:focus{outline:3px solid var(--amar)}
+input[type=range]{width:100%;max-width:240px;accent-color:var(--azul);height:26px;vertical-align:middle}
+label.lab-l{font-weight:700;font-size:15px}
+.sl-linha{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0}
+.sl-val{font-family:var(--mao);font-size:22px;font-weight:700;min-width:60px;text-align:center;background:var(--amar);border:2px solid var(--tinta);border-radius:8px;padding:1px 8px}
+
+.tela{background:#fff;border:2px solid var(--linha);border-radius:10px;padding:6px}
+.tela svg{width:100%;height:auto;display:block;max-width:400px;margin:0 auto;touch-action:none}
+
+.ex{background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:8px 24px 24px;margin:30px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13);position:relative}
+.ex .tit{font-family:var(--mao);font-size:19px;font-weight:700;background:var(--laranja);color:#fff;display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;border:3px solid var(--tinta)}
+.alt{display:block;background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:12px 16px;margin:9px 0;cursor:pointer;font-size:16.5px;transition:.12s;font-weight:600}
+.alt:hover{background:var(--amar)}
+.alt.certa{background:var(--verdec);border-color:var(--verde)}
+.alt.errada{background:var(--vermc);border-color:var(--verm)}
+.fb{margin-top:14px;font-family:var(--mao);font-size:17px;min-height:0;padding:0;border-radius:9px;overflow:hidden;transition:.2s}
+.fb.mostra{padding:12px 16px;min-height:24px}
+.fb.ok{background:var(--verdec);border:3px solid var(--verde);color:#065f46}
+.fb.no{background:var(--vermc);border:3px solid var(--verm);color:#991b1b}
+@keyframes chacoalha{0%,100%{transform:translateX(0)}15%{transform:translateX(-10px)}30%{transform:translateX(10px)}45%{transform:translateX(-7px)}60%{transform:translateX(7px)}75%{transform:translateX(-3px)}}
+.chacoalha{animation:chacoalha .5s}
+@keyframes pulsa{0%{transform:scale(1)}45%{transform:scale(1.11)}100%{transform:scale(1)}}
+.pulsa{animation:pulsa .45s}
+.selo{position:absolute;right:16px;top:14px;font-size:34px;opacity:0;transform:scale(.2) rotate(-25deg);transition:.4s cubic-bezier(.34,1.7,.5,1)}
+.selo.ver{opacity:1;transform:scale(1) rotate(-12deg)}
+.dica{font-size:14.5px;color:var(--cinza);margin-top:10px;font-style:italic}
+
+.placar{background:var(--tinta);color:var(--papel2);border-radius:14px;padding:26px 28px;margin:44px 0 0;text-align:center}
+.placar .n{font-size:52px;font-weight:800;font-family:var(--mao);color:var(--amar);line-height:1}
+.barra{height:20px;background:#3a3a3a;border-radius:12px;overflow:hidden;margin:16px auto;max-width:420px}
+.barra i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--verde),var(--amar));transition:.6s}
+.conf{position:fixed;top:-20px;width:11px;height:16px;z-index:99;pointer-events:none;border-radius:2px}
+@keyframes cai{to{transform:translateY(105vh) rotate(720deg);opacity:.1}}
+
+footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:var(--cinza);font-size:15px;text-align:center}
+@media(max-width:620px){header h1{font-size:30px}h2{font-size:24px}.guru{flex-direction:column;align-items:center}.guru svg{flex:0 0 auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <p class="serie">✏️ MATEMÁTICA DO ZERO — nível 2, intermediário</p>
+    <span class="aula-num">AULA 9 de 10</span>
+    <h1>Estatística com vetores</h1>
+    <p class="sub">Onde "correlação" para de soar místico: é só o produto escalar de sempre, disfarçado.</p>
+    <div class="voltou"><strong>No nível 1:</strong> vetor é uma seta (Aula 6), e o produto escalar conta uma história sobre o ângulo entre duas setas.</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<p class="grande">Duas listas de números relacionadas — altura e peso de várias pessoas, horas de estudo e nota da prova — escondem um vetor dentro de cada uma. E o ângulo entre esses dois vetores já tem nome: <strong>correlação</strong>.</p>
+
+<!-- ============ 1 ============ -->
+<h2><span class="n">1</span> Uma lista de números é um vetor</h2>
+
+<p>Lembra que na Aula 6 um vetor era uma seta com várias coordenadas? Uma <strong>lista de números pareados</strong> — por exemplo, a nota de 5 provas — também pode ser vista como um vetor de 5 coordenadas. Não dá mais para desenhar a seta no papel (5 dimensões não cabem numa folha), mas a ideia continua a mesma.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: monte o vetor a partir da lista</div>
+  <p>Clique em "nova lista" e veja cada número virar uma barra — as coordenadas do vetor.</p>
+  <div class="controles">
+    <button id="btNovaLista">🎲 Nova lista de notas</button>
+  </div>
+  <div class="tela" style="max-width:320px;margin:0 auto">
+    <svg viewBox="0 0 300 140" id="svgLista" role="img" aria-label="Barras representando os números de uma lista como coordenadas de um vetor">
+      <line x1="15" y1="120" x2="285" y2="120" stroke="#1b1b1b" stroke-width="2"/>
+      <g id="barrasLista"></g>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtLista">v = (6, 8, 7, 9, 5) — um vetor de 5 coordenadas.</p>
+</div>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: nuvem de pontos com correlação ao vivo</div>
+  <p>Arraste o controle e observe a nuvem de pontos ficar mais alinhada (correlação alta) ou mais espalhada (correlação baixa).</p>
+
+  <div class="sl-linha">
+    <label class="lab-l" style="min-width:150px">o quanto andam juntas:</label>
+    <input type="range" id="slNuvem" min="0" max="100" step="5" value="80">
+    <span class="sl-val" id="vNuvem">80%</span>
+  </div>
+
+  <div class="tela">
+    <svg viewBox="0 0 380 260" id="svgNuvem" role="img" aria-label="Nuvem de pontos com correlação ajustável">
+      <line x1="30" y1="230" x2="360" y2="230" stroke="#1b1b1b" stroke-width="2"/>
+      <line x1="30" y1="20" x2="30" y2="230" stroke="#1b1b1b" stroke-width="2"/>
+      <g id="pontosNuvem"></g>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtNuvem">Correlação alta: os pontos quase formam uma reta.</p>
+</div>
+
+<!-- ============ 2 ============ -->
+<h2><span class="n">2</span> Duas listas, dois vetores, um ângulo</h2>
+
+<p>Se eu tenho duas listas relacionadas — quanto cada pessoa estudou e a nota que tirou —, cada lista vira um vetor. O <strong>ângulo entre esses dois vetores</strong> conta o quanto elas "andam juntas".</p>
+
+<div class="sticky">Vetores apontando quase para o mesmo lado → as listas sobem e descem juntas. Vetores apontando para lados opostos → quando uma sobe, a outra desce.</div>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: dois vetores, ângulo e correlação</div>
+  <p>Gire o vetor B e observe o ângulo — e a correlação — mudando juntos.</p>
+
+  <div class="sl-linha">
+    <label class="lab-l" style="min-width:120px;color:var(--verde)">girar vetor B:</label>
+    <input type="range" id="slAngCorr" min="0" max="180" step="5" value="30">
+    <span class="sl-val" id="vAngCorr">30°</span>
+  </div>
+
+  <div class="tela">
+    <svg viewBox="0 0 420 420" id="svgCorr" role="img" aria-label="Dois vetores e o ângulo entre eles, ligado à correlação">
+      <line x1="0" y1="210" x2="420" y2="210" stroke="#1b1b1b" stroke-width="2"/>
+      <line x1="210" y1="0" x2="210" y2="420" stroke="#1b1b1b" stroke-width="2"/>
+      <path id="arcoCorr" d="" fill="none" stroke="#9ca3af" stroke-width="2"/>
+      <line x1="210" y1="210" x2="330" y2="210" stroke="var(--azul)" stroke-width="5" stroke-linecap="round"/>
+      <line id="vetorCorrB" x1="210" y1="210" x2="330" y2="210" stroke="var(--verde)" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtCorr">Ângulo de 30° → correlação ≈ 0,87 (forte e positiva).</p>
+</div>
+
+<!-- ============ 3 ============ -->
+<h2><span class="n">3</span> Reencontro com o produto escalar</h2>
+
+<p>A correlação usa exatamente a mesma conta da Aula 6, só que com um ajuste: primeiro, cada lista é <strong>centralizada</strong> (subtrai-se a média de cada uma dela mesma), e depois se calcula o produto escalar entre elas — dividido pelos tamanhos das duas setas.</p>
+
+<p class="centro" style="font-size:20px;font-weight:800">correlação = cosseno do ângulo entre os vetores (depois de centralizar)</p>
+
+<div class="idiota">
+  <div class="tit">Não existe pergunta idiota</div>
+  <p class="q">Por que a correlação sempre vive entre −1 e 1?</p>
+  <p class="a">Porque ela é, literalmente, um cosseno — e você já viu na Aula 4 que cosseno nunca passa de 1 nem fica abaixo de −1. Correlação 1 quer dizer ângulo 0° (andam perfeitamente juntas). Correlação −1 quer dizer ângulo 180° (andam perfeitamente opostas).</p>
+  <p class="q">Correlação alta prova que uma coisa causa a outra?</p>
+  <p class="a">Não! Duas coisas podem "andar juntas" sem que uma cause a outra — pode haver uma terceira causa escondida, ou pode ser coincidência. Correlação mede só o "andam juntas", nunca o "por quê".</p>
+</div>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: a escala não muda a correlação</div>
+  <p>Multiplique todos os valores da lista B por um número — a nuvem muda de forma, mas a correlação (o cosseno) fica exatamente igual.</p>
+
+  <div class="sl-linha">
+    <label class="lab-l" style="min-width:150px">escala da lista B:</label>
+    <input type="range" id="slEscalaCorr" min="0.5" max="3" step="0.5" value="1">
+    <span class="sl-val" id="vEscalaCorr">1,0</span>
+  </div>
+
+  <div class="tela">
+    <svg viewBox="0 0 380 220" id="svgEscalaCorr" role="img" aria-label="Nuvem de pontos reescalada, com a correlação inalterada">
+      <line x1="30" y1="190" x2="360" y2="190" stroke="#1b1b1b" stroke-width="2"/>
+      <line x1="30" y1="20" x2="30" y2="190" stroke="#1b1b1b" stroke-width="2"/>
+      <g id="pontosEscalaCorr"></g>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtEscalaCorr">Correlação continua ≈ 0,90, escale o quanto quiser.</p>
+</div>
+
+<!-- ============ 4 ============ -->
+<h2><span class="n">4</span> Lendo o valor da correlação</h2>
+
+<p>Alguns valores de referência para ler um número de correlação:</p>
+
+<ul>
+  <li><strong>perto de 1:</strong> forte e positiva — quando uma sobe, a outra sobe junto.</li>
+  <li><strong>perto de 0:</strong> praticamente nenhuma relação linear.</li>
+  <li><strong>perto de −1:</strong> forte e negativa — quando uma sobe, a outra desce.</li>
+</ul>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: positiva, negativa ou nula?</div>
+  <p>Para cada par de variáveis do dia a dia, adivinhe o sinal esperado da correlação.</p>
+  <p class="rabisco centro" id="sinalTxt" style="font-size:18px">clique em "próximo" para começar</p>
+  <div class="controles" style="justify-content:center">
+    <button class="sec" data-sinal-chute="positiva">Positiva</button>
+    <button class="sec" data-sinal-chute="negativa">Negativa</button>
+    <button class="sec" data-sinal-chute="nula">Nula</button>
+  </div>
+  <div class="controles" style="justify-content:center">
+    <button id="sinalProxima">▶ Próximo par</button>
+  </div>
+</div>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: adivinhe a correlação</div>
+  <p>Olhe a nuvem de pontos e escreva um palpite (entre −1 e 1) antes de revelar.</p>
+  <div class="controles">
+    <button id="btNovaAdivinha">🎲 Nova nuvem</button>
+  </div>
+  <div class="tela" style="max-width:280px;margin:0 auto">
+    <svg viewBox="0 0 260 200" id="svgAdivinha" role="img" aria-label="Nuvem de pontos para adivinhar a correlação">
+      <line x1="20" y1="180" x2="250" y2="180" stroke="#1b1b1b" stroke-width="2"/>
+      <line x1="20" y1="10" x2="20" y2="180" stroke="#1b1b1b" stroke-width="2"/>
+      <g id="pontosAdivinha"></g>
+    </svg>
+  </div>
+  <p class="centro">palpite: <input type="number" id="palpiteCorr" step="0.1"> <button class="sec" id="btRevelarCorr">👁 Revelar</button></p>
+  <p class="rabisco centro" id="txtAdivinha">Clique em "Nova nuvem" para começar.</p>
+</div>
+
+<div class="pontos">
+  <div class="tit">Pontos importantes</div>
+  <ul>
+    <li>Uma lista de números pareados vira um <strong>vetor</strong>.</li>
+    <li>Duas listas relacionadas → dois vetores; o <strong>ângulo</strong> entre eles conta a história.</li>
+    <li><strong>Correlação = cosseno do ângulo</strong> entre os vetores centralizados.</li>
+    <li>Vive sempre entre <strong>−1 e 1</strong> — porque é literalmente um cosseno.</li>
+    <li><strong>Perto de 1:</strong> andam juntas. <strong>Perto de 0:</strong> sem relação linear. <strong>Perto de −1:</strong> andam opostas.</li>
+    <li>Correlação não é prova de causa — só mede o "andam juntas".</li>
+  </ul>
+</div>
+
+<!-- ============ exercicios ============ -->
+<h2><span class="n">✏️</span> Afie o lápis</h2>
+<p>Seis exercícios. Erre à vontade — a correção explica o porquê.</p>
+
+<div class="ex" id="ex1">
+  <div class="tit">Exercício 1</div>
+  <div class="selo">✅</div>
+  <p>A correlação entre duas listas é, na essência, o quê?</p>
+  <div class="alts" data-r="2">
+    <div class="alt" data-i="0">A soma das duas listas.</div>
+    <div class="alt" data-i="1">O tamanho médio dos números da lista.</div>
+    <div class="alt" data-i="2">O cosseno do ângulo entre os dois vetores (depois de centralizar).</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex2">
+  <div class="tit">Exercício 2</div>
+  <div class="selo">✅</div>
+  <p>Por que a correlação nunca passa de 1?</p>
+  <div class="alts" data-r="1">
+    <div class="alt" data-i="0">Porque é uma regra arbitrária, sem motivo matemático.</div>
+    <div class="alt" data-i="1">Porque ela é um cosseno, e cosseno nunca passa de 1.</div>
+    <div class="alt" data-i="2">Porque as listas nunca podem ter mais de um valor.</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex3">
+  <div class="tit">Exercício 3</div>
+  <div class="selo">✅</div>
+  <p>Duas listas têm correlação <strong>−1</strong>. O que isso quer dizer sobre o ângulo entre os vetores?</p>
+  <p><input type="number" data-r="180"></p>
+  <button class="check" data-ex="ex3">Conferir</button>
+  <div class="fb"></div>
+  <p class="dica">Dica: cosseno de qual ângulo vale −1?</p>
+</div>
+
+<div class="ex" id="ex4">
+  <div class="tit">Exercício 4</div>
+  <div class="selo">✅</div>
+  <p>Duas variáveis têm correlação alta. Isso prova que uma <strong>causa</strong> a outra?</p>
+  <div class="alts" data-r="1">
+    <div class="alt" data-i="0">Sim — correlação alta é prova de causa.</div>
+    <div class="alt" data-i="1">Não — correlação só mostra que andam juntas, não o motivo.</div>
+    <div class="alt" data-i="2">Só prova causa se a correlação for negativa.</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex5">
+  <div class="tit">Exercício 5 — o desafio</div>
+  <div class="selo">🏆</div>
+  <p>O ângulo entre dois vetores de dados é <strong>0°</strong>. Qual é a correlação entre eles?</p>
+  <p><input type="number" data-r="1"></p>
+  <button class="check" data-ex="ex5">Conferir</button>
+  <div class="fb"></div>
+  <p class="dica">Dica: cosseno de 0° (Aula 4).</p>
+</div>
+
+<div class="ex" id="ex6">
+  <div class="tit">Exercício 6</div>
+  <div class="selo">✅</div>
+  <p>Uma nuvem de pontos parece completamente espalhada, sem formar reta nenhuma. A correlação está mais perto de:</p>
+  <div class="alts" data-r="1">
+    <div class="alt" data-i="0">1</div>
+    <div class="alt" data-i="1">0</div>
+    <div class="alt" data-i="2">−1</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="placar" id="placar">
+  <p style="margin:0 0 4px;font-family:var(--mao);font-size:19px">Seu placar</p>
+  <div class="n"><span id="pn">0</span> / 6</div>
+  <div class="barra"><i id="pbar"></i></div>
+  <p id="pmsg" style="margin:0;color:#cfc9bb">Resolva os exercícios acima e acompanhe aqui.</p>
+</div>
+
+<footer>
+  Matemática do Zero · Aula 9 — Estatística com vetores<br>
+  <strong>Próxima aula:</strong> projeção e mínimos quadrados — a regressão como geometria de sombra.
+</footer>
+
+</div>
+
+<script src="../../assets/progresso.js"></script>
+<script src="../../assets/auth.js"></script>
+<script src="../../assets/auth-ui.js"></script>
+<script src="../../assets/menu.js"></script>
+<script>
+(function(){
+"use strict";
+var AULA_ID = "09-estatistica-com-vetores";
+var NS="http://www.w3.org/2000/svg";
+
+function cosseno(deg){ return Math.cos(deg*Math.PI/180); }
+function fmt(v){ return (Math.round(v*100)/100).toFixed(2).replace("-0.00","0.00"); }
+
+/* ---------- lab: monte o vetor a partir da lista ---------- */
+var barrasLista=document.getElementById("barrasLista"), txtLista=document.getElementById("txtLista");
+var listasExemplo=[[6,8,7,9,5],[3,5,9,8,7],[10,9,8,7,6],[4,6,5,9,10]];
+function pintaLista(lista){
+  while(barrasLista.firstChild) barrasLista.removeChild(barrasLista.firstChild);
+  var largura=300/lista.length;
+  lista.forEach(function(v,i){
+    var alt=v*9;
+    var r=document.createElementNS(NS,"rect");
+    r.setAttribute("x", i*largura+largura*0.2);
+    r.setAttribute("y", 120-alt);
+    r.setAttribute("width", largura*0.6);
+    r.setAttribute("height", alt);
+    r.setAttribute("fill","var(--roxo)");
+    barrasLista.appendChild(r);
+    var t=document.createElementNS(NS,"text");
+    t.setAttribute("x", i*largura+largura*0.5);
+    t.setAttribute("y", 134);
+    t.setAttribute("text-anchor","middle");
+    t.setAttribute("font-size",11);
+    t.setAttribute("fill","#6b7280");
+    t.textContent=v;
+    barrasLista.appendChild(t);
+  });
+  txtLista.textContent="v = ("+lista.join(", ")+") — um vetor de "+lista.length+" coordenadas.";
+}
+document.getElementById("btNovaLista").addEventListener("click",function(){
+  pintaLista(listasExemplo[Math.floor(Math.random()*listasExemplo.length)]);
+});
+pintaLista(listasExemplo[0]);
+
+/* ---------- lab: a escala nao muda a correlacao ---------- */
+var slEscalaCorr=document.getElementById("slEscalaCorr"), pontosEscalaCorr=document.getElementById("pontosEscalaCorr"), txtEscalaCorr=document.getElementById("txtEscalaCorr");
+var seedEscala=[];
+for(var j=0;j<24;j++){ seedEscala.push({x:Math.random(), ruido:(Math.random()-0.5)}); }
+function pintaEscalaCorr(){
+  var k=parseFloat(slEscalaCorr.value);
+  document.getElementById("vEscalaCorr").textContent=k.toFixed(1).replace(".",",");
+  while(pontosEscalaCorr.firstChild) pontosEscalaCorr.removeChild(pontosEscalaCorr.firstChild);
+  var maxY=0;
+  var ys=seedEscala.map(function(p){ var y=(1-p.x)*0.9 + p.ruido*0.15; return y*k; });
+  maxY=Math.max.apply(null, ys.concat([1*k]));
+  seedEscala.forEach(function(p,idx){
+    var px=30+p.x*320;
+    var py=190-(ys[idx]/maxY)*160;
+    var c=document.createElementNS(NS,"circle");
+    c.setAttribute("cx",px); c.setAttribute("cy",py); c.setAttribute("r",5);
+    c.setAttribute("fill","var(--azul)"); c.setAttribute("opacity",0.75);
+    pontosEscalaCorr.appendChild(c);
+  });
+  txtEscalaCorr.textContent="Escala "+k.toFixed(1).replace(".",",")+"× — correlação continua ≈ 0,90, não muda com a escala.";
+}
+slEscalaCorr.addEventListener("input",pintaEscalaCorr);
+pintaEscalaCorr();
+
+/* ---------- lab: positiva, negativa ou nula ---------- */
+var sinalPares=[
+  {txt:"horas de estudo e nota da prova", r:"positiva"},
+  {txt:"velocidade do carro e tempo para chegar", r:"negativa"},
+  {txt:"número do sapato e nota na prova de matemática", r:"nula"},
+  {txt:"temperatura do dia e venda de sorvete", r:"positiva"},
+  {txt:"idade do carro e valor de revenda", r:"negativa"},
+  {txt:"cor da caneta usada e nota da prova", r:"nula"}
+];
+var sinalAtual=null;
+function novoSinal(){
+  sinalAtual=sinalPares[Math.floor(Math.random()*sinalPares.length)];
+  document.getElementById("sinalTxt").textContent=sinalAtual.txt+" — a correlação esperada é...?";
+}
+document.querySelectorAll("[data-sinal-chute]").forEach(function(b){
+  b.addEventListener("click",function(){
+    if(!sinalAtual){ novoSinal(); return; }
+    var ok=b.dataset.sinalChute===sinalAtual.r;
+    document.getElementById("sinalTxt").innerHTML = ok
+      ? "✔ Isso! Era <strong>"+sinalAtual.r+"</strong>."
+      : "✘ Não — o esperado é <strong>"+sinalAtual.r+"</strong>.";
+  });
+});
+document.getElementById("sinalProxima").addEventListener("click",novoSinal);
+
+/* ---------- lab: nuvem de pontos com correlacao ao vivo ---------- */
+var slNuvem=document.getElementById("slNuvem"), pontosNuvem=document.getElementById("pontosNuvem"), txtNuvem=document.getElementById("txtNuvem");
+var seedNuvem=[];
+for(var i=0;i<28;i++){ seedNuvem.push({x:Math.random(), ruido:(Math.random()-0.5)}); }
+function pintaNuvem(){
+  var forca=parseInt(slNuvem.value,10)/100;
+  document.getElementById("vNuvem").textContent=(forca*100)+"%";
+  while(pontosNuvem.firstChild) pontosNuvem.removeChild(pontosNuvem.firstChild);
+  seedNuvem.forEach(function(p){
+    var px=30+p.x*320;
+    var yBase=1-p.x;
+    var y=yBase*forca + p.ruido*(1-forca)*1.4 + p.ruido*0.15;
+    y=Math.max(0,Math.min(1,y));
+    var py=230-y*200;
+    var c=document.createElementNS(NS,"circle");
+    c.setAttribute("cx",px); c.setAttribute("cy",py); c.setAttribute("r",5);
+    c.setAttribute("fill","var(--azul)"); c.setAttribute("opacity",0.75);
+    pontosNuvem.appendChild(c);
+  });
+  txtNuvem.textContent = forca>0.7 ? "Correlação alta: os pontos quase formam uma reta."
+    : forca>0.3 ? "Correlação moderada: dá para notar uma tendência."
+    : "Correlação baixa: nuvem espalhada, sem tendência clara.";
+}
+slNuvem.addEventListener("input",pintaNuvem);
+pintaNuvem();
+
+/* ---------- lab: dois vetores, angulo e correlacao ---------- */
+var slAngCorr=document.getElementById("slAngCorr"), vetorCorrB=document.getElementById("vetorCorrB"), arcoCorr=document.getElementById("arcoCorr"), txtCorr=document.getElementById("txtCorr");
+function pintaCorr(){
+  var deg=parseInt(slAngCorr.value,10);
+  document.getElementById("vAngCorr").textContent=deg+"°";
+  var rad=deg*Math.PI/180, bx=120*Math.cos(rad), by=120*Math.sin(rad);
+  vetorCorrB.setAttribute("x2",210+bx); vetorCorrB.setAttribute("y2",210-by);
+  var big=deg>180?1:0;
+  var p0={x:210+40,y:210}, p1={x:210+40*Math.cos(rad),y:210-40*Math.sin(rad)};
+  arcoCorr.setAttribute("d","M "+p0.x+" "+p0.y+" A 40 40 0 "+big+" 0 "+p1.x+" "+p1.y);
+  var corr=cosseno(deg);
+  var natureza = corr>0.5 ? "forte e positiva" : corr>-0.5 ? "fraca ou nula" : "forte e negativa";
+  txtCorr.textContent="Ângulo de "+deg+"° → correlação ≈ "+fmt(corr)+" ("+natureza+").";
+}
+slAngCorr.addEventListener("input",pintaCorr);
+pintaCorr();
+
+/* ---------- lab: adivinhe a correlacao ---------- */
+var pontosAdivinha=document.getElementById("pontosAdivinha"), txtAdivinha=document.getElementById("txtAdivinha");
+var palpiteCorr=document.getElementById("palpiteCorr"), alvoCorr=null;
+function novaAdivinha(){
+  alvoCorr=Math.round((Math.random()*2-1)*10)/10;
+  var forca=Math.abs(alvoCorr), sinal=alvoCorr<0?-1:1;
+  while(pontosAdivinha.firstChild) pontosAdivinha.removeChild(pontosAdivinha.firstChild);
+  for(var i=0;i<24;i++){
+    var x=Math.random();
+    var yBase = sinal>0 ? (1-x) : x;
+    var ruido=(Math.random()-0.5);
+    var y=yBase*forca + ruido*(1-forca)*1.4 + ruido*0.15;
+    y=Math.max(0,Math.min(1,y));
+    var px=20+x*220, py=180-y*160;
+    var c=document.createElementNS(NS,"circle");
+    c.setAttribute("cx",px); c.setAttribute("cy",py); c.setAttribute("r",4.5);
+    c.setAttribute("fill","var(--roxo)"); c.setAttribute("opacity",0.75);
+    pontosAdivinha.appendChild(c);
+  }
+  palpiteCorr.value="";
+  txtAdivinha.textContent="Que correlação (entre −1 e 1) essa nuvem sugere?";
+}
+document.getElementById("btNovaAdivinha").addEventListener("click",novaAdivinha);
+document.getElementById("btRevelarCorr").addEventListener("click",function(){
+  if(alvoCorr===null){ txtAdivinha.textContent="Clique primeiro em \"Nova nuvem\"."; return; }
+  var p=parseFloat(palpiteCorr.value);
+  if(isNaN(p)){ txtAdivinha.textContent="Escreva um palpite antes de revelar."; return; }
+  var ok=Math.abs(p-alvoCorr)<=0.3;
+  txtAdivinha.innerHTML = ok
+    ? "🎉 <strong>Perto!</strong> A correlação real era "+alvoCorr+"."
+    : "A correlação real era <strong>"+alvoCorr+"</strong>. Clique em Nova nuvem para tentar outra.";
+});
+
+/* ---------- exercicios ---------- */
+var feitos={}, TOTAL=6;
+function confete(){
+  var cores=["#fde68a","#2563eb","#dc2626","#059669","#7c3aed","#d97706"];
+  for(var i=0;i<40;i++){
+    (function(i){
+      var d=document.createElement("div");
+      d.className="conf"; d.style.left=(Math.random()*100)+"vw";
+      d.style.background=cores[i%cores.length];
+      d.style.animation="cai "+(1.9+Math.random()*1.5)+"s linear forwards";
+      d.style.animationDelay=(Math.random()*.5)+"s";
+      document.body.appendChild(d);
+      setTimeout(function(){d.remove();},4200);
+    })(i);
+  }
+}
+function marca(id,ok){
+  if(ok&&!feitos[id]){
+    feitos[id]=true;
+    if(window.Progresso) Progresso.marcar(AULA_ID,id);
+    var n=Object.keys(feitos).length;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Aula 9 fechada. 🎉</strong> Correlação dominada. Falta só a última: regressão."; confete(); }
+    else msg.textContent="Boa! Faltam "+(TOTAL-n)+".";
+    document.querySelector("#"+id+" .selo").classList.add("ver");
+  }
+}
+function restauraProgresso(){
+  if(!window.Progresso) return;
+  Progresso.carregar(AULA_ID).then(function(itens){
+    itens.forEach(function(id){
+      if(!feitos[id] && document.getElementById(id)){
+        feitos[id]=true;
+        document.querySelector("#"+id+" .selo").classList.add("ver");
+      }
+    });
+    var n=Object.keys(feitos).length;
+    if(n===0) return;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    msg.textContent = n===TOTAL
+      ? "Você já tinha concluído esta aula. 🎉"
+      : "Progresso salvo: "+n+"/"+TOTAL+". Faltam "+(TOTAL-n)+".";
+  });
+}
+function fb(box,ok,txt){
+  var f=box.querySelector(".fb");
+  f.className="fb mostra "+(ok?"ok":"no"); f.innerHTML=txt;
+  box.classList.remove("chacoalha");
+  if(!ok){ void box.offsetWidth; box.classList.add("chacoalha"); }
+}
+var explica={
+  ex3:{ok:"Isso! Cosseno de 180° = −1.",no:"Cosseno de <strong>180°</strong> vale −1 — vetores apontando para lados opostos."},
+  ex5:{ok:"Isso! Cosseno de 0° = 1.",no:"Cosseno de 0° vale <strong>1</strong> — vetores apontando para o mesmo lado."}
+};
+document.querySelectorAll("button.check").forEach(function(b){
+  b.addEventListener("click",function(){
+    var box=document.getElementById(b.dataset.ex);
+    var ins=box.querySelectorAll("input[data-r]"), tudoOk=true, vazio=false;
+    ins.forEach(function(inp){
+      if(inp.value===""){vazio=true;return;}
+      var ok=Math.abs(parseFloat(inp.value)-parseFloat(inp.dataset.r)) < 0.001;
+      inp.style.borderColor=ok?"#059669":"#dc2626";
+      inp.style.background=ok?"#d1fae5":"#fee2e2";
+      if(!ok) tudoOk=false;
+    });
+    if(vazio){ fb(box,false,"Preencha o campo antes de conferir. 🙂"); return; }
+    fb(box,tudoOk,(tudoOk?"✔ ":"✘ ")+(tudoOk?explica[b.dataset.ex].ok:explica[b.dataset.ex].no));
+    marca(b.dataset.ex,tudoOk);
+  });
+});
+var expAlt={
+  ex1:["A soma não diz nada sobre o quanto as listas se relacionam.",
+       "Tamanho médio é a média, não tem a ver com relação entre duas listas.",
+       "Isso! Correlação é o cosseno do ângulo entre os vetores centralizados."],
+  ex2:["Não é arbitrário — tem uma razão matemática exata por trás.",
+       "Isso! Correlação é um cosseno, e cosseno vive entre −1 e 1.",
+       "Listas podem ter quantos valores forem necessários — isso não limita a correlação."],
+  ex4:["Correlação nunca prova causa sozinha — pode haver outra explicação.",
+       "Isso! Correlação mostra que andam juntas, não o motivo.",
+       "O sinal da correlação não muda essa regra — nem negativa prova causa."],
+  ex6:["Correlação 1 significa nuvem quase perfeitamente alinhada, não espalhada.",
+       "Isso! Nuvem espalhada sem tendência é sinal de correlação perto de 0.",
+       "Correlação −1 também formaria uma reta (descendente), não uma nuvem espalhada."]
+};
+document.querySelectorAll(".alts").forEach(function(grupo){
+  var box=grupo.closest(".ex"), certa=parseInt(grupo.dataset.r,10);
+  grupo.querySelectorAll(".alt").forEach(function(alt){
+    alt.setAttribute("tabindex","0");
+    alt.setAttribute("role","button");
+    alt.setAttribute("aria-label","Alternativa "+alt.textContent.trim());
+    function escolhe(){
+      var i=parseInt(alt.dataset.i,10), ok=(i===certa);
+      grupo.querySelectorAll(".alt").forEach(function(a){a.classList.remove("certa","errada");});
+      alt.classList.add(ok?"certa":"errada");
+      if(ok) alt.classList.add("pulsa");
+      fb(box,ok,(ok?"✔ ":"✘ ")+expAlt[box.id][i]);
+      marca(box.id,ok);
+    }
+    alt.addEventListener("click",escolhe);
+    alt.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();escolhe();}});
+  });
+});
+
+restauraProgresso();
+
+})();
+</script>
+</body>
+</html>

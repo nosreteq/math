@@ -99,14 +99,14 @@ produto escalar ao vivo · paralelas ou não? · gire a figura com uma matriz
 
 ---
 
-## Nível 2 — Intermediário 🔜
+## Nível 2 — Intermediário ✅
 
 Com seno, cosseno, ondas, vetores e matrizes na mão, dá para resolver problemas de verdade: achar
 onde duas retas se cruzam, decompor um som, medir o quanto duas coisas andam juntas, e ajustar uma
 reta a pontos que nunca ficam perfeitamente alinhados. Quatro aulas, cada uma reencontrando algo do
 Nível 1 e levando um degrau adiante.
 
-### Aula 7 — Sistemas de equações 🔜
+### Aula 7 — Sistemas de equações ✅
 
 **O obstáculo:** "resolver" duas equações ao mesmo tempo parece mágica, mas é só achar onde duas
 retas se cruzam.
@@ -117,10 +117,11 @@ retas se cruzam.
 - Resolver por substituição: juntar as duas receitas numa só
 - O mesmo truque funciona com mais réguas — um gostinho do que vem depois
 
-**Laboratórios previstos:** duas retas arrastáveis buscando o cruzamento · classifique o sistema
-(única, nenhuma ou infinitas soluções) · resolva por substituição, passo a passo
+**Laboratórios:** duas retas buscando o cruzamento · retas paralelas nunca se tocam ·
+classifique o sistema · resolva por substituição, passo a passo · ache o cruzamento no desenho ·
+monte o sistema para um alvo
 
-### Aula 8 — Decomposição de sinais em ondas 🔜
+### Aula 8 — Decomposição de sinais em ondas ✅
 
 **O obstáculo:** um som complicado parece impossível de entender, mas é só várias ondas simples
 somadas — e dá para desmontar a soma de volta.
@@ -131,10 +132,10 @@ somadas — e dá para desmontar a soma de volta.
 - O espectro: um gráfico de "quanto tem de cada frequência" no sinal
 - Onde isso aparece: áudio, imagem, compressão — a ideia por trás de Fourier, sem a fórmula pesada
 
-**Laboratórios previstos:** monte uma onda complicada somando 2-3 ondas simples arrastáveis · o
-espectro revelado ao vivo · desafio: decomponha uma onda misteriosa ajustando os sliders certos
+**Laboratórios:** monte uma onda complicada · reconheça a frequência · compare duas notas ·
+o espectro revelado · decomponha a onda misteriosa · o acorde ao vivo
 
-### Aula 9 — Estatística com vetores 🔜
+### Aula 9 — Estatística com vetores ✅
 
 **O obstáculo:** "correlação" parece um número místico, mas é só um produto escalar disfarçado.
 
@@ -144,10 +145,11 @@ espectro revelado ao vivo · desafio: decomponha uma onda misteriosa ajustando o
 - Por que a correlação sempre vive entre −1 e 1 — reencontro com o cosseno da Aula 4
 - Correlação = o cosseno do ângulo entre os vetores (depois de centralizar os dados)
 
-**Laboratórios previstos:** nuvem de pontos arrastável com a correlação mudando ao vivo · dois
-vetores com ângulo e correlação lado a lado · adivinhe a correlação olhando o gráfico de dispersão
+**Laboratórios:** monte o vetor a partir da lista · nuvem de pontos com correlação ao vivo ·
+dois vetores, ângulo e correlação · a escala não muda a correlação · positiva, negativa ou nula? ·
+adivinhe a correlação
 
-### Aula 10 — Projeção e mínimos quadrados 🔜
+### Aula 10 — Projeção e mínimos quadrados ✅
 
 **O obstáculo:** "a reta que melhor se ajusta aos pontos" parece precisar de cálculo avançado, mas
 é geometria de sombra.
@@ -158,9 +160,9 @@ vetores com ângulo e correlação lado a lado · adivinhe a correlação olhand
 - Mínimos quadrados: a reta que deixa a soma dos erros ao quadrado a menor possível
 - Reencontro com a Aula 2: a reta de regressão ainda é `passo · x + altura de partida`
 
-**Laboratórios previstos:** arraste pontos e veja a reta de regressão se ajustar ao vivo ·
-projeção de um vetor sobre outro (a sombra) · comparador de erro — mova a reta à mão e veja a soma
-dos erros subir ou descer
+**Laboratórios:** projeção de um vetor sobre outro · monte a projeção passo a passo ·
+erro grande ou pequeno? · reta de regressão se ajustando ao vivo · comparador de erro ·
+estique o vetor, a projeção também estica
 
 ---
 
