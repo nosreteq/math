@@ -222,6 +222,24 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p class="a">Praticamente qualquer sinal que se repete pode ser escrito como uma soma de ondas simples — às vezes precisando de muitas, muitas frequências. A ideia continua a mesma: cada uma com sua própria altura, todas somadas.</p>
 </div>
 
+<div class="guru">
+  <svg viewBox="0 0 100 118" width="92">
+    <ellipse cx="50" cy="112" rx="34" ry="6" fill="#00000018"/>
+    <path d="M50 60 L20 108 L80 108 Z" fill="#7c3aed" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="50" cy="34" r="20" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M30 36 q20 46 40 0 q-6 34 -20 34 q-14 0 -20 -34" fill="#e5e7eb" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M40 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M52 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M30 22 q20 -12 40 0" fill="none" stroke="#1b1b1b" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="24" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="76" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+  </svg>
+  <div>
+        <div class="fala">Uma onda complicada é só várias ondas simples falando ao mesmo tempo. Para ouvir cada uma você não precisa de mágica: basta perguntar a cada nota "quanto de você tem aqui dentro?" — e a projeção responde, uma de cada vez.</div>
+    <div class="quem">— o Guru</div>
+  </div>
+</div>
+
 <!-- ============ 4 ============ -->
 <h2><span class="n">4</span> Desmontando de volta</h2>
 
@@ -230,6 +248,11 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <p>Na Aula 11 você projetou uma seta sobre outra para saber "quanto dela aponta naquela direção". Aqui é a mesma coisa: trate o sinal e cada onda simples como <strong>vetores</strong> (listas com a altura em cada instante, como na Aula 10). A <strong>projeção do sinal sobre <span class="mono">seno(2x)</span></strong> diz exatamente quanto de <span class="mono">seno(2x)</span> existe dentro dele.</p>
 
 <div class="sticky">O truque que faz funcionar: ondas simples de frequências diferentes são <strong>perpendiculares</strong> entre si — o produto escalar entre elas dá zero. Então, ao projetar sobre uma, as outras "somem" da conta e sobra só a altura daquela nota.</div>
+
+<div class="cuidado">
+  <div class="tit">⚠️ Cuidado — só funciona com voltas completas</div>
+  <p style="margin:6px 0 0">As ondas de frequências diferentes só são perpendiculares se você olhar um trecho em que <strong>todas dão voltas inteiras</strong> (aqui, de 0 até 360°). Corte o sinal no meio de uma volta e o produto escalar entre elas deixa de ser zero: uma nota "vaza" para dentro da outra e as alturas lidas saem erradas. Em áudio de verdade, isso tem até nome — vazamento espectral.</p>
+</div>
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: projete o sinal em cada onda</div>

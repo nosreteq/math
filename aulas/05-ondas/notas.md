@@ -42,6 +42,11 @@ São os mesmos **quatro jeitos de mexer numa máquina** das Aulas 1 e 2, aplicad
 
 ---
 
+> ⚠️ O sinal da fase engana: `seno(x − 90°)` empurra a onda para a **direita** (atrasada) e
+> `seno(x + 90°)` para a esquerda (adiantada).
+
+---
+
 ## Somar duas ondas
 
 Se duas ondas acontecem no mesmo lugar, elas se somam ponto a ponto. Onde as duas sobem juntas, o

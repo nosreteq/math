@@ -61,6 +61,15 @@ diferenças ao quadrado: os negativos não cancelam os positivos.
 
 ---
 
+**Não existe pergunta idiota**
+
+- *√36 não poderia ser −6?* (−6)² = 36 também, mas `√` foi combinado para dar a positiva — é o
+  lado do quadrado. A negativa volta na Aula 13.
+- *E √−4?* Com os números conhecidos, não existe: nenhum quadrado é negativo. A Aula 18 responde.
+- *Pitágoras vale para qualquer triângulo?* Só com ângulo reto.
+
+---
+
 ## Pontos importantes
 
 - **Potência:** `5² = 5 · 5`, `2³ = 2 · 2 · 2`.

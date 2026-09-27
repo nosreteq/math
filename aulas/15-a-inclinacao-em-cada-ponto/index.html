@@ -192,12 +192,12 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: o gráfico da inclinação</div>
-  <p>Em cima, a curva e a reta que encosta. Embaixo, a inclinação medida em cada ponto — a derivada sendo desenhada.</p>
+  <p>Em cima, a curva e a reta que encosta. Embaixo, a inclinação medida em cada ponto — a derivada sendo desenhada. No botão do seno o ângulo está em <strong>radianos</strong>, uma medida nova: a seção 5, logo abaixo, explica o que é e por que ela muda tudo.</p>
   <div class="controles">
     <button class="sec on" data-f4="0">x²</button>
     <button class="sec" data-f4="1">x³</button>
     <button class="sec" data-f4="2">eˣ</button>
-    <button class="sec" data-f4="3">seno</button>
+    <button class="sec" data-f4="3">seno (radianos)</button>
   </div>
   <div class="sl-linha"><label class="lab-l" for="slX4" style="min-width:60px">ponto x:</label><input type="range" id="slX4" min="-3" max="3" step="0.1" value="1"><span class="sl-val" id="vX4">1</span></div>
   <div class="tela"><svg id="svg4" role="img" aria-label="Curva com a tangente e, abaixo, o gráfico da inclinação"></svg></div>
@@ -247,7 +247,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <!-- ============ 6 ============ -->
 <h2><span class="n">6</span> Onde a inclinação é zero: topos e fundos</h2>
 
-<p>No vértice da parábola (Aula 13), a reta que encosta fica <strong>deitada</strong>: passo zero. Isso vale para qualquer curva lisa — no alto de um morro e no fundo de um vale a inclinação é zero. Então, para achar o melhor valor, basta procurar onde <span class="mono">f′(x) = 0</span>.</p>
+<p>No vértice da parábola (Aula 13), a reta que encosta fica <strong>deitada</strong>: passo zero. Isso vale para qualquer curva lisa — no alto de um morro e no fundo de um vale a inclinação é zero. Então, para achar o melhor valor, os <strong>candidatos</strong> são os pontos onde <span class="mono">f′(x) = 0</span> — e cada candidato ainda precisa ser conferido (veja o cuidado logo abaixo do laboratório).</p>
 
 <p>Com a horta da Aula 13: área <span class="mono">x · (10 − x) = 10x − x²</span>, derivada <span class="mono">10 − 2x</span>, que zera em <span class="mono">x = 5</span>. O mesmo 5 que você caçou com o slider — agora sem chutar.</p>
 
@@ -259,6 +259,11 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p class="rabisco centro" id="txt6"></p>
 </div>
 
+<div class="cuidado">
+  <div class="tit">⚠️ Cuidado — inclinação zero não garante topo nem fundo</div>
+  <p style="margin:6px 0 0">Volte ao laboratório do gráfico da inclinação, escolha <span class="mono">x³</span> e pare em x = 0: a inclinação é <span class="mono">3 · 0² = 0</span>, a reta que encosta fica deitada... e a curva continua <strong>subindo dos dois lados</strong>. É só um patamar, como um degrau de escada rolante. Para ter certeza, olhe o sinal da inclinação um pouco antes e um pouco depois: de <strong>+ para −</strong> é topo, de <strong>− para +</strong> é fundo, <strong>sem troca</strong> não é nenhum dos dois. No laboratório acima: em x = −1 ela vai de + para − (morro); em x = 1, de − para + (vale).</p>
+</div>
+
 <div class="pontos">
   <div class="tit">Pontos importantes</div>
   <ul>
@@ -268,7 +273,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
     <li>A <strong>derivada</strong> <span class="mono">f′(x)</span> é a máquina "x → inclinação": <span class="mono">x² → 2x</span>, <span class="mono">x³ → 3x²</span>, <span class="mono">eˣ → eˣ</span>.</li>
     <li><strong>Radianos</strong>: ângulo medido em raios de arco. <span class="mono">360° = 2π</span>, com <span class="mono">π ≈ 3,14</span>.</li>
     <li>Em radianos, a inclinação do seno é o cosseno.</li>
-    <li>Topo e fundo de uma curva lisa: onde <span class="mono">f′(x) = 0</span>.</li>
+    <li>Todo topo ou fundo no meio de uma curva lisa tem <span class="mono">f′(x) = 0</span> — mas nem todo <span class="mono">f′(x) = 0</span> é topo ou fundo: confira se a inclinação troca de sinal.</li>
   </ul>
 </div>
 
