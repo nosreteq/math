@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eletiva 8 — Fractais e dimensão | Matemática do Zero</title>
+<style>
+:root{
+  --papel:#f6f2e9; --papel2:#fffdf7; --tinta:#1b1b1b; --cinza:#6b7280;
+  --azul:#2563eb; --azulc:#dbeafe; --verm:#dc2626; --vermc:#fee2e2;
+  --verde:#059669; --verdec:#d1fae5; --amar:#fde68a; --laranja:#d97706;
+  --roxo:#7c3aed; --linha:#c9c1ae;
+  --mao:'Comic Sans MS','Comic Neue','Chalkboard SE','Bradley Hand','Marker Felt','Segoe Print','Ink Free',cursive;
+  --corpo:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--corpo);font-size:17px;line-height:1.65}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 90px}
+
+header{background:var(--tinta);color:var(--papel2);padding:34px 22px 30px;margin-bottom:34px;border-bottom:6px solid var(--laranja)}
+header .inner{max-width:820px;margin:0 auto}
+.serie{font-family:var(--mao);font-size:15px;letter-spacing:.5px;color:var(--amar);margin:0 0 6px}
+header h1{margin:0;font-size:40px;line-height:1.1;letter-spacing:-.5px}
+header .sub{margin:12px 0 0;color:#cfc9bb;font-size:17px;max-width:620px}
+.aula-num{display:inline-block;background:var(--laranja);color:#fff;font-weight:700;padding:3px 13px;border-radius:20px;font-size:14px;margin-bottom:14px;letter-spacing:.5px}
+.voltou{background:#3a3a3a;border-left:5px solid var(--amar);padding:12px 18px;margin:18px 0 0;font-size:15.5px;color:#e6e0d2;border-radius:0 8px 8px 0}
+
+h2{font-size:29px;margin:52px 0 6px;line-height:1.2;border-bottom:3px solid var(--tinta);padding-bottom:8px}
+h2 .n{color:var(--laranja);font-family:var(--mao);font-size:24px;margin-right:8px}
+h3{font-size:21px;margin:32px 0 8px}
+p{margin:14px 0}
+.grande{font-size:20px}
+.centro{text-align:center}
+code,.mono{font-family:'Consolas','Monaco',monospace;background:#eae4d6;padding:2px 7px;border-radius:4px;font-size:.95em}
+
+.guru{display:flex;gap:18px;align-items:flex-start;margin:34px 0;background:linear-gradient(#efe9db,#e8e1d0);border-left:6px solid var(--roxo);padding:20px 22px;border-radius:4px}
+.guru svg{flex:0 0 92px}
+.guru .fala{position:relative;background:#fff;border:2px solid var(--tinta);border-radius:16px;padding:14px 18px;font-family:var(--mao);font-size:16.5px;line-height:1.55}
+.guru .fala:before{content:"";position:absolute;left:-11px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:var(--tinta)}
+.guru .fala:after{content:"";position:absolute;left:-8px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:#fff}
+.guru .quem{font-family:var(--mao);font-size:13px;color:var(--roxo);text-align:center;margin-top:4px;font-weight:700}
+
+.idiota{background:#e7eefc;border:3px solid var(--azul);border-radius:10px;padding:6px 24px 20px;margin:34px 0}
+.idiota .tit{font-family:var(--mao);font-size:20px;font-weight:700;color:#fff;background:var(--azul);display:inline-block;padding:5px 16px;border-radius:0 0 10px 10px;margin:0 0 8px}
+.idiota .q{font-weight:700;margin:16px 0 4px}
+.idiota .q:before{content:"P: ";color:var(--azul);font-weight:800}
+.idiota .a{margin:0 0 6px}
+.idiota .a:before{content:"R: ";color:var(--verm);font-weight:800}
+
+.cuidado{background:var(--vermc);border:3px dashed var(--verm);border-radius:10px;padding:16px 20px;margin:30px 0}
+.cuidado .tit{font-family:var(--mao);font-weight:700;color:var(--verm);font-size:19px;margin-bottom:2px}
+
+.pontos{background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:8px 26px 22px;margin:44px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.pontos .tit{font-family:var(--mao);font-size:22px;font-weight:700;background:var(--amar);display:inline-block;padding:6px 18px;border:3px solid var(--tinta);border-radius:8px;transform:rotate(-1.5deg);margin:-22px 0 10px}
+.pontos ul{padding-left:22px;margin:8px 0}
+.pontos li{margin:9px 0}
+
+.sticky{background:var(--amar);padding:16px 20px;font-family:var(--mao);font-size:16px;transform:rotate(-1.2deg);box-shadow:3px 4px 9px rgba(0,0,0,.16);margin:30px auto;max-width:540px;border-radius:2px}
+.rabisco{font-family:var(--mao);color:var(--laranja);font-size:15.5px;line-height:1.4}
+
+.lab{background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:8px 24px 26px;margin:34px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.lab .tit{font-family:var(--mao);font-size:19px;font-weight:700;background:var(--verde);color:#fff;display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;border:3px solid var(--tinta)}
+.controles{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
+button{font-family:var(--corpo);font-size:16px;font-weight:700;cursor:pointer;background:var(--azul);color:#fff;border:3px solid var(--tinta);border-radius:9px;padding:9px 18px;box-shadow:3px 3px 0 var(--tinta);transition:.09s}
+button:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--tinta)}
+button:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--tinta)}
+button.sec{background:#fff;color:var(--tinta)}
+button.on{background:var(--verde)}
+button:disabled{opacity:.5;cursor:not-allowed;box-shadow:none;transform:none}
+.alt:focus-visible{outline:3px solid var(--laranja);outline-offset:2px}
+input[type=number]{font-family:var(--corpo);font-size:18px;font-weight:700;width:92px;padding:8px 10px;border:3px solid var(--tinta);border-radius:9px;background:#fff;text-align:center}
+input:focus{outline:3px solid var(--amar)}
+input[type=range]{width:100%;max-width:280px;accent-color:var(--azul);height:26px;vertical-align:middle}
+label.lab-l{font-weight:700;font-size:15px}
+.sl-linha{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0}
+.sl-val{font-family:var(--mao);font-size:22px;font-weight:700;min-width:52px;text-align:center;background:var(--amar);border:2px solid var(--tinta);border-radius:8px;padding:1px 8px}
+
+.tela{background:#fff;border:2px solid var(--linha);border-radius:10px;padding:6px}
+.tela svg{width:100%;height:auto;display:block;max-width:400px;margin:0 auto}
+
+.ex{background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:8px 24px 24px;margin:30px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13);position:relative}
+.ex .tit{font-family:var(--mao);font-size:19px;font-weight:700;background:var(--laranja);color:#fff;display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;border:3px solid var(--tinta)}
+.alt{display:block;background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:12px 16px;margin:9px 0;cursor:pointer;font-size:16.5px;transition:.12s;font-weight:600}
+.alt:hover{background:var(--amar)}
+.alt.certa{background:var(--verdec);border-color:var(--verde)}
+.alt.errada{background:var(--vermc);border-color:var(--verm)}
+.fb{margin-top:14px;font-family:var(--mao);font-size:17px;min-height:0;padding:0;border-radius:9px;overflow:hidden;transition:.2s}
+.fb.mostra{padding:12px 16px;min-height:24px}
+.fb.ok{background:var(--verdec);border:3px solid var(--verde);color:#065f46}
+.fb.no{background:var(--vermc);border:3px solid var(--verm);color:#991b1b}
+@keyframes chacoalha{0%,100%{transform:translateX(0)}15%{transform:translateX(-10px)}30%{transform:translateX(10px)}45%{transform:translateX(-7px)}60%{transform:translateX(7px)}75%{transform:translateX(-3px)}}
+.chacoalha{animation:chacoalha .5s}
+@keyframes pulsa{0%{transform:scale(1)}45%{transform:scale(1.11)}100%{transform:scale(1)}}
+.pulsa{animation:pulsa .45s}
+.selo{position:absolute;right:16px;top:14px;font-size:34px;opacity:0;transform:scale(.2) rotate(-25deg);transition:.4s cubic-bezier(.34,1.7,.5,1)}
+.selo.ver{opacity:1;transform:scale(1) rotate(-12deg)}
+.dica{font-size:14.5px;color:var(--cinza);margin-top:10px;font-style:italic}
+
+.placar{background:var(--tinta);color:var(--papel2);border-radius:14px;padding:26px 28px;margin:44px 0 0;text-align:center}
+.placar .n{font-size:52px;font-weight:800;font-family:var(--mao);color:var(--amar);line-height:1}
+.barra{height:20px;background:#3a3a3a;border-radius:12px;overflow:hidden;margin:16px auto;max-width:420px}
+.barra i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--verde),var(--amar));transition:.6s}
+.conf{position:fixed;top:-20px;width:11px;height:16px;z-index:99;pointer-events:none;border-radius:2px}
+@keyframes cai{to{transform:translateY(105vh) rotate(720deg);opacity:.1}}
+
+footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:var(--cinza);font-size:15px;text-align:center}
+@media(max-width:620px){header h1{font-size:30px}h2{font-size:24px}.guru{flex-direction:column;align-items:center}.guru svg{flex:0 0 auto}}
+</style>
+<link rel="stylesheet" href="../../assets/pecas.css">
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <p class="serie">✏️ MATEMÁTICA DO ZERO — eletivas</p>
+    <span class="aula-num">ELETIVA 8 de 10 · AULA 38</span>
+    <h1>Fractais e dimensão</h1>
+    <p class="sub">Uma curva de comprimento infinito que cabe numa folha. Um triângulo cheio de buracos. Uma forma de dimensão 1,26. Os fractais quebram a geometria da escola — e descrevem costas, nuvens e árvores.</p>
+    <div class="voltou"><strong>Você já sabe:</strong> áreas (Aula 12), PG e logaritmos (Aula 14), transformações que encolhem e giram (Aula 17), números complexos (Aula 18) e o acaso (Aula 6). Hoje eles desenham formas infinitamente detalhadas.</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<p class="grande">Um <strong>fractal</strong> é uma forma que continua cheia de detalhe por mais que você dê zoom: cada pedacinho lembra o todo. A natureza está cheia deles — o litoral, a couve-flor, os raios, os pulmões. E para medi-los, a ideia de dimensão (1 para curvas, 2 para áreas) precisa ser reinventada: surgem dimensões "quebradas", como 1,26.</p>
+
+<div class="cerebro">
+  <div class="tit">🧠 Poder do cérebro</div>
+  <p>Qual o comprimento do litoral do Brasil? Pense: medindo com uma régua de 100 km, você pula as baías pequenas. Com uma de 1 km, entra nelas. Com uma de 1 metro, contorna cada pedra. O que acontece com o número conforme a régua diminui?</p>
+  <details><summary>Ver a resposta</summary><p>Ele cresce sem parar: a régua menor entra em reentrâncias que a maior pulava. O litoral não tem "um" comprimento — Mandelbrot mostrou em 1967 que a pergunta certa é <strong>como</strong> o comprimento cresce quando a régua encolhe. Essa taxa é a dimensão fractal.</p></details>
+</div>
+
+<!-- ============ 1 ============ -->
+<h2><span class="n">1</span> O floco de neve de Koch</h2>
+
+<p>Comece com um triângulo. Em cada lado, troque o terço do meio por uma "tenda" com dois lados do mesmo tamanho. Repita em todos os lados novos, para sempre. Cada passo multiplica o comprimento por <span class="mono">4/3</span>: depois de n passos, o perímetro é <span class="mono">3 · (4/3)ⁿ</span> — uma PG (Aula 14) que cresce sem limite. Mas a figura nunca sai de um círculo em volta do triângulo.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: o floco de neve de Koch</div>
+  <p>Aumente os passos e acompanhe o perímetro e a área.</p>
+  <div class="sl-linha"><label class="lab-l" for="slN1" style="min-width:90px">passos:</label><input type="range" id="slN1" min="0" max="6" step="1" value="3"><span class="sl-val" id="vN1">3</span></div>
+  <div class="tela" style="max-width:360px;margin:0 auto"><svg id="svg1" role="img" aria-label="Floco de neve de Koch"></svg></div>
+  <p class="rabisco centro" id="txt1"></p>
+</div>
+
+<div class="porque">
+  <div class="tit">✅ Por que é verdade? Perímetro infinito, área finita</div>
+  <ol>
+    <li><strong>Perímetro:</strong> cada lado vira 4 lados de 1/3 do tamanho, então o total é multiplicado por 4/3 a cada passo: <span class="mono">3, 4, 16/3, 64/9, ...</span> Uma PG de razão maior que 1 cresce sem limite.</li>
+    <li><strong>Área:</strong> no passo n, colam-se <span class="mono">3 · 4ⁿ⁻¹</span> triângulos novos, cada um com área <span class="mono">(1/9)ⁿ</span> da original (lado 1/3 → área 1/9, Aula 12). O acréscimo total é <span class="mono">(1/3) · [1 + 4/9 + (4/9)² + ...]</span> vezes a área inicial.</li>
+    <li>A série geométrica de razão 4/9 (menor que 1) converge para <span class="mono">1/(1 − 4/9) = 9/5</span> (Eletiva 6 ou Aula 14). Acréscimo: <span class="mono">(1/3) · 9/5 = 3/5</span>. Área final: <span class="mono">8/5</span> da inicial — finita. ∎</li>
+  </ol>
+</div>
+
+<!-- ============ 2 ============ -->
+<h2><span class="n">2</span> O jogo do caos</h2>
+
+<p>Marque os três cantos de um triângulo e um ponto qualquer. Repita: sorteie um canto e pule para o <strong>ponto médio</strong> entre você e ele. Marque. Parece que vai sair uma nuvem de pontos sem graça. Sai o <strong>triângulo de Sierpinski</strong>, um triângulo feito de três cópias de si mesmo com metade do tamanho — e buracos em todas as escalas.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: o jogo do caos</div>
+  <p>Escolha quantos pulos dar. Cada ponto tem a cor do canto sorteado.</p>
+  <div class="sl-linha"><label class="lab-l" for="slN2" style="min-width:90px">pulos:</label><input type="range" id="slN2" min="0" max="6" step="1" value="3"><span class="sl-val" id="vN2">2.000</span></div>
+  <div class="tela" style="max-width:380px;margin:0 auto"><svg id="svg2" role="img" aria-label="Pontos do jogo do caos formando o triângulo de Sierpinski"></svg></div>
+  <p class="rabisco centro" id="txt2"></p>
+</div>
+
+<!-- ============ 3 ============ -->
+<h2><span class="n">3</span> Dimensão por autossemelhança</h2>
+
+<p>Divida um segmento em 3 partes: saem 3 cópias com 1/3 do tamanho. Um quadrado: 9 cópias (3²). Um cubo: 27 (3³). O expoente é a dimensão: <span class="mono">N = (1/r)ᴰ</span>, com N cópias de tamanho r. Usando o logaritmo (Aula 14) para tirar o expoente:</p>
+
+<p class="centro" style="font-size:20px;font-weight:800">D = log N / log(1/r)</p>
+
+<p>A curva de Koch: 4 cópias de 1/3 → <span class="mono">D = log 4 / log 3 ≈ 1,26</span>. Mais que uma linha, menos que uma área.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: calcule a dimensão</div>
+  <p>Cada forma é feita de N cópias dela mesma, reduzidas pelo fator r.</p>
+  <div class="controles">
+    <button id="bd0">segmento</button>
+    <button id="bd1" class="sec">quadrado</button>
+    <button id="bd2" class="sec">Cantor</button>
+    <button id="bd3" class="sec">Koch</button>
+    <button id="bd4" class="sec">Sierpinski</button>
+    <button id="bd5" class="sec">tapete</button>
+  </div>
+  <div class="tela"><svg id="svg3" role="img" aria-label="Forma dividida em cópias reduzidas"></svg></div>
+  <p class="rabisco centro" id="txt3"></p>
+</div>
+
+<div class="guru">
+  <svg viewBox="0 0 100 118" width="92">
+    <ellipse cx="50" cy="112" rx="34" ry="6" fill="#00000018"/>
+    <path d="M50 60 L20 108 L80 108 Z" fill="#7c3aed" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="50" cy="34" r="20" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M30 36 q20 46 40 0 q-6 34 -20 34 q-14 0 -20 -34" fill="#e5e7eb" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M40 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M52 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M30 22 q20 -12 40 0" fill="none" stroke="#1b1b1b" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="24" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="76" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+  </svg>
+  <div>
+        <div class="fala">Nuvens não são esferas, montanhas não são cones, e o raio não anda em linha reta. Mandelbrot passou a vida olhando para o que a geometria da escola chamava de 'irregular' — e achou ordem ali. Quando algo parece bagunçado demais para a matemática, talvez a matemática é que ainda não foi inventada.</div>
+    <div class="quem">— o Guru</div>
+  </div>
+</div>
+
+<!-- ============ 4 ============ -->
+<h2><span class="n">4</span> Contando caixas</h2>
+
+<p>E quando a forma não é feita de cópias perfeitas, como um litoral? Cubra-a com uma grade de quadradinhos de lado s e conte quantos N(s) ela toca. Para uma curva comum, N cresce como <span class="mono">1/s</span>; para uma área, como <span class="mono">1/s²</span>. Para um fractal, como <span class="mono">(1/s)ᴰ</span>. Num gráfico de log N contra log(1/s), os pontos formam uma reta — e a inclinação é a dimensão (a reta dos mínimos quadrados da Aula 23).</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: contagem de caixas na curva de Koch</div>
+  <p>Diminua as caixas. À direita, cada tamanho vira um ponto; a inclinação estima D.</p>
+  <div class="sl-linha"><label class="lab-l" for="slK4" style="min-width:110px">caixas por lado:</label><input type="range" id="slK4" min="0" max="5" step="1" value="3"><span class="sl-val" id="vK4">32</span></div>
+  <div class="tela"><svg id="svg4" role="img" aria-label="Curva de Koch coberta por caixas e o gráfico log-log"></svg></div>
+  <p class="rabisco centro" id="txt4"></p>
+</div>
+
+<!-- ============ 5 ============ -->
+<h2><span class="n">5</span> O conjunto de Mandelbrot</h2>
+
+<p>Escolha um número complexo c (Aula 18). Comece em <span class="mono">z = 0</span> e repita <span class="mono">z → z² + c</span>. Ou z fica preso perto da origem para sempre, ou foge para o infinito (e, se passar de 2 em tamanho, foge com certeza). O <strong>conjunto de Mandelbrot</strong> é a coleção dos c que ficam presos. A regra cabe numa linha; a fronteira é infinitamente complicada.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: o conjunto de Mandelbrot</div>
+  <p>Preto: c que não fugiu dentro do número de tentativas. As cores dizem quão depressa os outros fugiram.</p>
+  <div class="sl-linha"><label class="lab-l" for="slI5" style="min-width:110px">tentativas:</label><input type="range" id="slI5" min="3" max="60" step="1" value="20"><span class="sl-val" id="vI5">20</span></div>
+  <div class="tela"><svg id="svg5" role="img" aria-label="Imagem do conjunto de Mandelbrot"></svg></div>
+  <p class="rabisco centro" id="txt5"></p>
+</div>
+
+<!-- ============ 6 ============ -->
+<h2><span class="n">6</span> A órbita de um ponto</h2>
+
+<p>Cada pixel da imagem acima esconde uma história: a sequência <span class="mono">0, c, c² + c, ...</span> Para c = −1 ela pula entre 0 e −1 para sempre (preso). Para c = 1, dispara: 0, 1, 2, 5, 26... Perto da fronteira, a órbita dá centenas de voltas antes de decidir — é aí que mora o detalhe infinito.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: siga a órbita de c</div>
+  <p>Escolha c. Os pontos ligados são z₀, z₁, z₂, ... A sombra ao fundo é o conjunto de Mandelbrot.</p>
+  <div class="sl-linha"><label class="lab-l" for="slR6" style="min-width:110px">c, parte real:</label><input type="range" id="slR6" min="-2" max="0.6" step="0.01" value="-0.12"><span class="sl-val" id="vR6">−0,12</span></div>
+  <div class="sl-linha"><label class="lab-l" for="slM6" style="min-width:110px">c, parte imag.:</label><input type="range" id="slM6" min="-1.2" max="1.2" step="0.01" value="0.75"><span class="sl-val" id="vM6">0,75</span></div>
+  <div class="tela" style="max-width:380px;margin:0 auto"><svg id="svg6" role="img" aria-label="Órbita de z ao quadrado mais c no plano complexo"></svg></div>
+  <p class="rabisco centro" id="txt6"></p>
+</div>
+
+<div class="cuidado">
+  <div class="tit">⚠️ Cuidado — "dimensão 1,26" não quer dizer "um pedaço e um quarto"</div>
+  <p style="margin:6px 0 0">A dimensão fractal mede <strong>como a quantidade cresce com o zoom</strong>, não um tamanho. E os fractais da natureza só são autossemelhantes numa faixa de escalas: o litoral de verdade para de ter detalhe no tamanho dos grãos de areia. Na contagem de caixas, use só a faixa de tamanhos em que os pontos formam de fato uma reta.</p>
+</div>
+
+<div class="idiota">
+  <div class="tit">Não existe pergunta idiota</div>
+  <p class="q">Para que servem fractais além de fazer figuras bonitas?</p>
+  <p class="a">Antenas de celular em forma de fractal captam muitas frequências num espaço pequeno; a compressão de imagens, a geração de montanhas e nuvens em filmes e games, e a análise de batimentos cardíacos e de mercados usam ideias fractais.</p>
+  <p class="q">O conjunto de Mandelbrot é mesmo infinitamente detalhado?</p>
+  <p class="a">É: provou-se que a sua fronteira tem dimensão 2 — tão enrugada quanto uma curva pode ser. Por mais que se dê zoom, aparecem espirais, cavalos-marinhos e cópias em miniatura do conjunto inteiro.</p>
+</div>
+
+<div class="pontos">
+  <div class="tit">Pontos importantes</div>
+  <ul>
+    <li><strong>Fractal</strong>: detalhe em todas as escalas; cada parte lembra o todo (autossemelhança).</li>
+    <li>Koch: perímetro <span class="mono">3 · (4/3)ⁿ → ∞</span>, área finita (8/5 da inicial).</li>
+    <li>Dimensão de autossemelhança: <span class="mono">D = log N / log(1/r)</span>. Koch ≈ 1,26; Sierpinski ≈ 1,585.</li>
+    <li>Contagem de caixas: inclinação de log N contra log(1/s).</li>
+    <li>Mandelbrot: os c em que <span class="mono">z → z² + c</span>, a partir de 0, não foge.</li>
+  </ul>
+</div>
+
+<!-- ============ exercicios ============ -->
+<h2><span class="n">✏️</span> Afie o lápis</h2>
+<p>Seis exercícios. Erre à vontade — a correção explica o porquê.</p>
+
+<div class="ex" id="ex1">
+  <div class="tit">Exercício 1</div>
+  <div class="selo">✅</div>
+  <p>O floco de Koch começa com um triângulo de lados 1 (perímetro 3). Qual é o perímetro depois de 1 passo?</p>
+  <p><input type="number" step="any" data-r="4" aria-label="Resposta do exercício 1"></p>
+  <button class="check" data-ex="ex1">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex2">
+  <div class="tit">Exercício 2</div>
+  <div class="selo">✅</div>
+  <p>Dividindo o lado de um quadrado por 3, ele vira 9 quadradinhos. Pela fórmula <span class="mono">D = log N / log(1/r)</span>, qual é a dimensão do quadrado?</p>
+  <p><input type="number" step="any" data-r="2" aria-label="Resposta do exercício 2"></p>
+  <button class="check" data-ex="ex2">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex3">
+  <div class="tit">Exercício 3</div>
+  <div class="selo">✅</div>
+  <p>O triângulo de Sierpinski é feito de 3 cópias com metade do tamanho. A dimensão dele fica...</p>
+  <div class="alts" data-r="1">
+    <div class="alt" data-i="0">Exatamente 2, porque é um triângulo.</div>
+    <div class="alt" data-i="1">Entre 1 e 2: log 3 / log 2 ≈ 1,585.</div>
+    <div class="alt" data-i="2">Exatamente 1,5, porque 3/2 = 1,5.</div>
+    <div class="alt" data-i="3">Zero, porque ele é quase só buraco.</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex4">
+  <div class="tit">Exercício 4</div>
+  <div class="selo">✅</div>
+  <p>O número c = 0 pertence ao conjunto de Mandelbrot?</p>
+  <div class="alts" data-r="0">
+    <div class="alt" data-i="0">Sim: z → z² + 0 a partir de 0 fica em 0 para sempre.</div>
+    <div class="alt" data-i="1">Não: ele foge para o infinito.</div>
+    <div class="alt" data-i="2">Não dá para saber sem computador.</div>
+    <div class="alt" data-i="3">Só se fizermos infinitas contas.</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex5">
+  <div class="tit">Exercício 5 — o desafio</div>
+  <div class="selo">🏆</div>
+  <p>O conjunto de Cantor: tire o terço do meio de um segmento, depois o terço do meio de cada pedaço, para sempre. Sobram 2 cópias com 1/3 do tamanho. Qual é a dimensão? (Use log 2 ≈ 0,3010 e log 3 ≈ 0,4771; responda com 4 casas.)</p>
+  <p><input type="number" step="any" data-r="0.6309" aria-label="Resposta do exercício 5"></p>
+  <button class="check" data-ex="ex5">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex6">
+  <div class="tit">Exercício 6 — quem faz o quê?</div>
+  <div class="selo">✅</div>
+  <p>Ligue cada ideia ao que ela quer dizer.</p>
+  <table class="ligar">
+    <tr><td>autossemelhança</td><td><select data-r="0" aria-label="autossemelhança"><option value="">escolha...</option><option value="0">cada pedaço é cópia reduzida do todo</option><option value="1">log N / log(1/r)</option><option value="2">os c em que z² + c não foge</option><option value="3">pontos ao acaso que desenham um fractal</option></select></td></tr>
+    <tr><td>dimensão fractal</td><td><select data-r="1" aria-label="dimensão fractal"><option value="">escolha...</option><option value="0">cada pedaço é cópia reduzida do todo</option><option value="1">log N / log(1/r)</option><option value="2">os c em que z² + c não foge</option><option value="3">pontos ao acaso que desenham um fractal</option></select></td></tr>
+    <tr><td>conjunto de Mandelbrot</td><td><select data-r="2" aria-label="conjunto de Mandelbrot"><option value="">escolha...</option><option value="0">cada pedaço é cópia reduzida do todo</option><option value="1">log N / log(1/r)</option><option value="2">os c em que z² + c não foge</option><option value="3">pontos ao acaso que desenham um fractal</option></select></td></tr>
+    <tr><td>jogo do caos</td><td><select data-r="3" aria-label="jogo do caos"><option value="">escolha...</option><option value="0">cada pedaço é cópia reduzida do todo</option><option value="1">log N / log(1/r)</option><option value="2">os c em que z² + c não foge</option><option value="3">pontos ao acaso que desenham um fractal</option></select></td></tr>
+  </table>
+  <button class="check" data-ex="ex6">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="placar" id="placar">
+  <p style="margin:0 0 4px;font-family:var(--mao);font-size:19px">Seu placar</p>
+  <div class="n"><span id="pn">0</span> / 6</div>
+  <div class="barra"><i id="pbar"></i></div>
+  <p id="pmsg" style="margin:0;color:#cfc9bb">Resolva os exercícios acima e acompanhe aqui.</p>
+</div>
+
+<footer>
+  Matemática do Zero · Eletiva 8 — Fractais e dimensão<br>
+  <strong>Pré-requisitos:</strong> Aulas 12, 14, 17, 18 e 23. <strong>Próxima eletiva:</strong> Cálculo estocástico.
+</footer>
+
+</div>
+
+<script src="../../assets/progresso.js"></script>
+<script src="../../assets/auth.js"></script>
+<script src="../../assets/auth-ui.js"></script>
+<script src="../../assets/catalogo.js"></script>
+<script src="../../assets/menu.js"></script>
+<script>
+(function(){
+"use strict";
+var AULA_ID = "38-fractais-e-dimensao";
+var NS="http://www.w3.org/2000/svg";
+function $(id){ return document.getElementById(id); }
+function num(v,d){
+  if(d===undefined) d=2;
+  var p=Math.pow(10,d), r=Math.round(v*p)/p;
+  if(r===0) r=0;
+  return String(r).replace(".",",").replace("-","−");
+}
+function milhar(v){
+  var s=Math.round(v).toString(), neg=s.charAt(0)==="-"; if(neg) s=s.slice(1);
+  var out=""; while(s.length>3){ out="."+s.slice(-3)+out; s=s.slice(0,-3); }
+  return (neg?"−":"")+s+out;
+}
+function el(tag,attrs,pai){
+  var e=document.createElementNS(NS,tag);
+  for(var k in attrs) e.setAttribute(k,attrs[k]);
+  if(pai) pai.appendChild(e);
+  return e;
+}
+function limpa(g){ while(g.firstChild) g.removeChild(g.firstChild); }
+/* plano cartesiano: grade, eixos e conversao de coordenadas */
+function plano(svg,o){
+  /* ox/oy: desenha o plano numa regiao de um svg maior (sem mexer no viewBox) */
+  var w=o.w||400, h=o.h||300, ox=o.ox||0, oy=o.oy||0, regiao=("ox" in o)||("oy" in o);
+  if(!regiao) svg.setAttribute("viewBox","0 0 "+w+" "+h);
+  var P={w:w,h:h,o:o};
+  P.X=function(x){ return ox+(x-o.xmin)/(o.xmax-o.xmin)*w; };
+  P.Y=function(y){ return oy+h-(y-o.ymin)/(o.ymax-o.ymin)*h; };
+  P.xDe=function(px){ return o.xmin+(px-ox)/w*(o.xmax-o.xmin); };
+  var g=el("g",{},svg), px=o.px||1, py=o.py||1, i, eps=1e-9;
+  for(i=Math.ceil(o.xmin/px)*px;i<=o.xmax+eps;i+=px) el("line",{x1:P.X(i),y1:oy,x2:P.X(i),y2:oy+h,stroke:"#ece7da","stroke-width":1},g);
+  for(i=Math.ceil(o.ymin/py)*py;i<=o.ymax+eps;i+=py) el("line",{x1:ox,y1:P.Y(i),x2:ox+w,y2:P.Y(i),stroke:"#ece7da","stroke-width":1},g);
+  if(o.ymin<=0&&o.ymax>=0) el("line",{x1:ox,y1:P.Y(0),x2:ox+w,y2:P.Y(0),stroke:"#1b1b1b","stroke-width":1.6},g);
+  if(o.xmin<=0&&o.xmax>=0) el("line",{x1:P.X(0),y1:oy,x2:P.X(0),y2:oy+h,stroke:"#1b1b1b","stroke-width":1.6},g);
+  if(o.rotulos){
+    var lx=o.rotX||px, ly=o.rotY||py, y0=(o.ymin<=0&&o.ymax>=0)?P.Y(0):oy+h, x0=(o.xmin<=0&&o.xmax>=0)?P.X(0):ox;
+    var dx=(o.xmax-o.xmin)*0.03, dy=(o.ymax-o.ymin)*0.04;
+    for(i=Math.ceil(o.xmin/lx)*lx;i<=o.xmax+eps;i+=lx) if(Math.abs(i)>eps&&i>o.xmin+dx&&i<o.xmax-dx) el("text",{x:P.X(i),y:Math.min(oy+h-3,y0+14),"font-size":11,fill:"#6b7280","text-anchor":"middle"},g).textContent=num(i);
+    for(i=Math.ceil(o.ymin/ly)*ly;i<=o.ymax+eps;i+=ly) if(Math.abs(i)>eps&&i>o.ymin+dy&&i<o.ymax-dy) el("text",{x:x0-4<ox+14?x0+4:x0-4,y:P.Y(i)+4,"font-size":11,fill:"#6b7280","text-anchor":x0-4<ox+14?"start":"end"},g).textContent=num(i);
+  }
+  P.camada=el("g",{},svg);
+  if(regiao){
+    /* numa regiao, o que passa da borda e cortado para nao invadir o vizinho */
+    plano.n=(plano.n||0)+1;
+    var id="corte"+plano.n+"_"+Math.floor(Math.random()*1e6);
+    var cp=el("clipPath",{id:id},svg);
+    el("rect",{x:ox,y:oy,width:w,height:h},cp);
+    P.camada.setAttribute("clip-path","url(#"+id+")");
+  }
+  /* caminho de uma funcao, amostrada; valores fora da tela sao cortados */
+  P.d=function(f,a,b,n){
+    a=(a===undefined)?o.xmin:a; b=(b===undefined)?o.xmax:b; n=n||240;
+    var s="", novo=true, lim=(o.ymax-o.ymin)*3;
+    for(var k=0;k<=n;k++){
+      var x=a+(b-a)*k/n, y=f(x);
+      if(!isFinite(y)){ novo=true; continue; }
+      y=Math.max(o.ymin-lim,Math.min(o.ymax+lim,y));
+      s+=(novo?"M":"L")+P.X(x).toFixed(1)+" "+P.Y(y).toFixed(1)+" "; novo=false;
+    }
+    return s||"M0 0";
+  };
+  return P;
+}
+/* arrastar uma alca dentro de um svg; cb recebe coordenadas do viewBox */
+function arrasta(svg,alca,cb){
+  var ativo=false;
+  function pos(ev){
+    var r=svg.getBoundingClientRect(), vb=svg.viewBox.baseVal;
+    cb((ev.clientX-r.left)/r.width*vb.width,(ev.clientY-r.top)/r.height*vb.height);
+  }
+  alca.addEventListener("pointerdown",function(ev){ ativo=true; ev.preventDefault(); pos(ev); });
+  svg.addEventListener("pointermove",function(ev){ if(ativo) pos(ev); });
+  window.addEventListener("pointerup",function(){ ativo=false; });
+}
+/* texto de receita sem "+ -": termos [[coef, "x²"], [coef, "x"], [coef, ""]] */
+function receita(termos){
+  var s="";
+  termos.forEach(function(t){
+    var c=t[0], v=t[1];
+    if(Math.abs(c)<1e-9) return;
+    var a=Math.abs(c), cs=(a===1&&v)?"":num(a);
+    if(s==="") s=(c<0?"−":"")+cs+v;
+    else s+=(c<0?" − ":" + ")+cs+v;
+  });
+  return s||"0";
+}
+/* potencia com expoente inteiro em sobrescrito (2¹⁰); com virgula fica 2^0,5 */
+function pot(b,n){
+  var t=num(n,1);
+  if(t.indexOf(",")!==-1) return b+"^"+t;
+  var m={"0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹","−":"⁻"};
+  return b+t.split("").map(function(c){return m[c]||c;}).join("");
+}
+
+function gerador(sem){ var s=sem; return function(){ s=(s*1103515245+12345)%2147483648; return s/2147483648; }; }
+/* curva de Koch de a ate b, n passos: lista de pontos */
+function koch(a,b,n){
+  if(n===0) return [a,b];
+  var dx=(b[0]-a[0])/3, dy=(b[1]-a[1])/3, p1=[a[0]+dx,a[1]+dy], p3=[a[0]+2*dx,a[1]+2*dy];
+  var c=Math.cos(-Math.PI/3), s=Math.sin(-Math.PI/3), p2=[p1[0]+dx*c-dy*s,p1[1]+dx*s+dy*c];
+  var out=[], segs=[[a,p1],[p1,p2],[p2,p3],[p3,b]];
+  segs.forEach(function(sg,i){ var q=koch(sg[0],sg[1],n-1); out=out.concat(i?q.slice(1):q); });
+  return out;
+}
+function caminho(pts,X,Y){ return pts.map(function(p,i){ return (i?"L":"M")+X(p[0]).toFixed(1)+" "+Y(p[1]).toFixed(1); }).join(" "); }
+
+/* ---------- lab 1: Koch ---------- */
+var svg1=$("svg1"); svg1.setAttribute("viewBox","0 0 360 360");
+function pinta1(){
+  var n=parseInt($("slN1").value,10);
+  $("vN1").textContent=n;
+  limpa(svg1);
+  var R=1, V=[0,1,2].map(function(k){ var t=Math.PI/2+2*Math.PI*k/3; return [R*Math.cos(t),R*Math.sin(t)]; });
+  /* sentido anti-horario: com a rotacao de -60 graus, as tendas apontam para fora */
+  var pts=[]; for(var k=0;k<3;k++){ var q=koch(V[k],V[(k+1)%3],n); pts=pts.concat(k?q.slice(1):q); }
+  function X(x){ return 180+x*135; } function Y(y){ return 190-y*135; }
+  el("circle",{cx:180,cy:190,r:135*1.0,fill:"none",stroke:"#d1d5db","stroke-width":1.5,"stroke-dasharray":"5 4"},svg1);
+  el("path",{d:caminho(pts,X,Y)+"Z",fill:"#dbeafe",stroke:"var(--azul)","stroke-width":n>4?1:1.8},svg1);
+  var per=3*Math.pow(4/3,n), area=1+(1/3)*(1-Math.pow(4/9,n))/(1-4/9);
+  $("txt1").textContent="passo "+n+": "+(3*Math.pow(4,n))+" lados · perímetro "+num(per,3)+" (vezes o do triângulo: "+num(per/3,3)+") · área "+num(area,4)+" vezes a do triângulo (limite: 1,6). O círculo tracejado nunca é ultrapassado.";
+}
+$("slN1").addEventListener("input",pinta1); pinta1();
+
+/* ---------- lab 2: jogo do caos ---------- */
+var QTD2=[0,100,500,2000,6000,15000,30000], svg2=$("svg2"); svg2.setAttribute("viewBox","0 0 380 340");
+function pinta2(){
+  var N=QTD2[parseInt($("slN2").value,10)];
+  $("vN2").textContent=milhar(N);
+  limpa(svg2);
+  var C=[[190,12],[12,322],[368,322]], CORES=["#dc2626","#2563eb","#059669"], r=gerador(42), p=[150,200], d=["","",""];
+  C.forEach(function(c,i){ el("circle",{cx:c[0],cy:c[1],r:7,fill:CORES[i]},svg2); });
+  for(var k=0;k<N;k++){ var i=Math.floor(r()*3); p=[(p[0]+C[i][0])/2,(p[1]+C[i][1])/2]; if(k>10) d[i]+="M"+p[0].toFixed(1)+" "+p[1].toFixed(1)+"h1.3"; }
+  d.forEach(function(s,i){ if(s) el("path",{d:s,stroke:CORES[i],"stroke-width":1.3,fill:"none"},svg2); });
+  $("txt2").textContent=N?milhar(N)+" pulos ao acaso — e aparece o triângulo de Sierpinski: 3 cópias dele mesmo com metade do tamanho, com buracos em todas as escalas.":"Nenhum pulo ainda: só os três cantos.";
+}
+$("slN2").addEventListener("input",pinta2); pinta2();
+
+/* ---------- lab 3: dimensao ---------- */
+var svg3=$("svg3"), f3=0; svg3.setAttribute("viewBox","0 0 460 230");
+var FORMAS=[
+  {nome:"segmento", N:3, inv:3},
+  {nome:"quadrado", N:9, inv:3},
+  {nome:"conjunto de Cantor", N:2, inv:3},
+  {nome:"curva de Koch", N:4, inv:3},
+  {nome:"triângulo de Sierpinski", N:3, inv:2},
+  {nome:"tapete de Sierpinski", N:8, inv:3}
+];
+var PAL=["#93c5fd","#fca5a5","#86efac","#fde68a","#c4b5fd","#f9a8d4","#a5f3fc","#fdba74","#d9f99d"];
+function pinta3(){
+  limpa(svg3);
+  var F=FORMAS[f3], i, j, n;
+  if(f3===0){ for(i=0;i<3;i++) el("line",{x1:40+i*127,y1:115,x2:40+(i+1)*127-6,y2:115,stroke:PAL[i],"stroke-width":10,"stroke-linecap":"round"},svg3); }
+  if(f3===1){ for(i=0;i<3;i++) for(j=0;j<3;j++) el("rect",{x:160+i*48,y:20+j*48,width:46,height:46,fill:PAL[i*3+j],stroke:"#1b1b1b"},svg3); }
+  if(f3===2){ var niv=[[[20,440]]]; for(n=1;n<6;n++){ var nv=[]; niv[n-1].forEach(function(s){ var t=(s[1]-s[0])/3; nv.push([s[0],s[0]+t]); nv.push([s[1]-t,s[1]]); }); niv.push(nv); }
+    niv.forEach(function(L,k){ L.forEach(function(s,m){ el("rect",{x:s[0],y:20+k*36,width:Math.max(0.8,s[1]-s[0]),height:18,fill:k===1?PAL[m]:"#1e40af"},svg3); }); }); }
+  if(f3===3){ var q=[[20,0],[160,0],[230,-121],[300,0],[440,0]];
+    for(i=0;i<4;i++){ var sub=koch(q[i],q[i+1],3); el("path",{d:caminho(sub,function(x){return x;},function(y){return 185+y*1.4;}),fill:"none",stroke:["#2563eb","#dc2626","#059669","#d97706"][i],"stroke-width":2},svg3); } }
+  if(f3===4){ function tri(a,b,c,k,cor){ if(k===0){ el("polygon",{points:[a,b,c].map(function(p){return p.join(",");}).join(" "),fill:cor},svg3); return; } var ab=[(a[0]+b[0])/2,(a[1]+b[1])/2], bc=[(b[0]+c[0])/2,(b[1]+c[1])/2], ca=[(c[0]+a[0])/2,(c[1]+a[1])/2]; tri(a,ab,ca,k-1,cor); tri(ab,b,bc,k-1,cor); tri(ca,bc,c,k-1,cor); }
+    var A=[230,10],B=[110,218],C=[350,218], AB=[170,114], BC=[230,218], CA=[290,114];
+    tri(A,AB,CA,4,"#dc2626"); tri(AB,B,BC,4,"#2563eb"); tri(CA,BC,C,4,"#059669"); }
+  if(f3===5){ function tap(x,y,s,k,cor){ if(k===0){ el("rect",{x:x,y:y,width:s,height:s,fill:cor},svg3); return; } var t=s/3; for(var a=0;a<3;a++) for(var b=0;b<3;b++) if(!(a===1&&b===1)) tap(x+a*t,y+b*t,t,k-1,cor); }
+    var m=0; for(i=0;i<3;i++) for(j=0;j<3;j++) if(!(i===1&&j===1)) tap(149+i*54,11+j*54,54,2,PAL[m++]); }
+  var D=Math.log(F.N)/Math.log(F.inv);
+  $("txt3").textContent=F.nome+": N = "+F.N+" cópias, cada uma com r = 1/"+F.inv+" do tamanho → D = log "+F.N+" / log "+F.inv+" = "+num(D,4)+(Math.abs(D-Math.round(D))<1e-9?" (dimensão inteira: forma comum)":" (dimensão fracionária: fractal)");
+}
+[0,1,2,3,4,5].forEach(function(i){ $("bd"+i).addEventListener("click",function(){ f3=i; [0,1,2,3,4,5].forEach(function(j){ $("bd"+j).className=j===i?"":"sec"; }); pinta3(); }); });
+pinta3();
+
+/* ---------- lab 4: contagem de caixas ---------- */
+var KS4=[4,8,16,32,64,128], svg4=$("svg4"); svg4.setAttribute("viewBox","0 0 470 250");
+var CURVA4=koch([0,0],[1,0],7), CONT4=KS4.map(function(k){ var vis={}; for(var i=0;i<CURVA4.length-1;i++){ for(var t=0;t<=1;t+=0.5){ var x=CURVA4[i][0]*(1-t)+CURVA4[i+1][0]*t, y=-CURVA4[i][1]*(1-t)-CURVA4[i+1][1]*t; vis[Math.min(k-1,Math.floor(x*k))+","+Math.min(k-1,Math.floor(y*k))]=1; } } return Object.keys(vis); });
+function pinta4(){
+  var ix=parseInt($("slK4").value,10), k=KS4[ix], caixas=CONT4[ix];
+  $("vK4").textContent=k;
+  limpa(svg4);
+  var ox=8, oy=8, S=230;
+  el("rect",{x:ox,y:oy,width:S,height:S,fill:"#fff",stroke:"#d6d0c2"},svg4);
+  caixas.forEach(function(c){ var p=c.split(","); el("rect",{x:ox+(+p[0])*S/k,y:oy+S-((+p[1])+1)*S/k-S*0.35,width:S/k,height:S/k,fill:"rgba(245,158,11,.45)",stroke:k<=32?"#d97706":"none","stroke-width":0.6},svg4); });
+  el("path",{d:caminho(CURVA4.filter(function(p,i){return i%4===0||i===CURVA4.length-1;}),function(x){return ox+x*S;},function(y){return oy+S-(-y)*S-S*0.35;}),fill:"none",stroke:"var(--azul)","stroke-width":1.2},svg4);
+  /* grafico log-log */
+  var G=plano(svg4,{ox:262,oy:10,w:200,h:228,xmin:0,xmax:5.4,ymin:0,ymax:8,px:1,py:1,rotulos:false});
+  var xs=[], ys=[];
+  for(var i=0;i<=ix;i++){ var lx=Math.log(KS4[i]), ly=Math.log(CONT4[i].length); xs.push(lx); ys.push(ly); el("circle",{cx:G.X(lx),cy:G.Y(ly),r:5,fill:"var(--verm)"},G.camada); }
+  var inc=null;
+  if(xs.length>1){ var mx=xs.reduce(function(a,b){return a+b;})/xs.length, my=ys.reduce(function(a,b){return a+b;})/ys.length, sxy=0, sxx=0; for(i=0;i<xs.length;i++){ sxy+=(xs[i]-mx)*(ys[i]-my); sxx+=(xs[i]-mx)*(xs[i]-mx); } inc=sxy/sxx; var b=my-inc*mx; el("path",{d:G.d(function(x){return inc*x+b;},0,5.4,2),fill:"none",stroke:"var(--roxo)","stroke-width":2,"stroke-dasharray":"6 4"},G.camada); }
+  el("text",{x:268,y:24,"font-size":11,fill:"#6b7280"},svg4).textContent="log N (caixas tocadas)";
+  el("text",{x:460,y:232,"font-size":11,fill:"#6b7280","text-anchor":"end"},svg4).textContent="log(1/s)";
+  $("txt4").textContent="caixas de lado 1/"+k+": a curva toca "+caixas.length+" delas"+(inc!==null?" · inclinação da reta ≈ "+num(inc,3)+" (o valor exato é log 4 / log 3 ≈ 1,262)":" · diminua as caixas para ter mais pontos no gráfico");
+}
+$("slK4").addEventListener("input",pinta4); pinta4();
+
+/* ---------- lab 5: Mandelbrot ---------- */
+var svg5=$("svg5"); svg5.setAttribute("viewBox","0 0 450 300");
+function fuga(cr,ci,max){ var x=0,y=0; for(var k=0;k<max;k++){ var nx=x*x-y*y+cr; y=2*x*y+ci; x=nx; if(x*x+y*y>4) return k; } return -1; }
+function pinta5(){
+  var M=parseInt($("slI5").value,10), W=150, H=100, dentro=0;
+  $("vI5").textContent=M;
+  limpa(svg5);
+  var cor={};
+  for(var j=0;j<H;j++) for(var i=0;i<W;i++){
+    var cr=-2.25+3*i/W, ci=-1+2*j/H, k=fuga(cr,ci,M), c=k<0?"#111827":"hsl("+Math.round(220-200*k/M)+",80%,"+Math.round(92-45*Math.sqrt(k/M))+"%)";
+    if(k<0) dentro++;
+    (cor[c]=cor[c]||[]).push("M"+(i*3)+" "+(j*3)+"h3v3h-3z");
+  }
+  Object.keys(cor).forEach(function(c){ el("path",{d:cor[c].join(""),fill:c},svg5); });
+  $("txt5").textContent="com "+M+" tentativas: "+num(dentro/(W*H)*100,1)+"% dos pontos ainda não fugiram. Mais tentativas deixam a fronteira mais fina: pontos que pareciam presos acabam fugindo.";
+}
+$("slI5").addEventListener("input",pinta5); pinta5();
+
+/* ---------- lab 6: orbita ---------- */
+var svg6=$("svg6");
+function pinta6(){
+  var cr=Math.round(parseFloat($("slR6").value)*100)/100, ci=Math.round(parseFloat($("slM6").value)*100)/100;
+  $("vR6").textContent=num(cr,2); $("vM6").textContent=num(ci,2);
+  limpa(svg6);
+  var P=plano(svg6,{w:380,h:360,xmin:-2.3,xmax:1.5,ymin:-1.8,ymax:1.8,px:0.5,py:0.5,rotulos:true,rotX:1,rotY:1});
+  var d=""; for(var j=0;j<72;j++) for(var i=0;i<76;i++){ var x=-2.3+3.8*i/76, y=-1.8+3.6*j/72; if(fuga(x,y,40)<0) d+="M"+P.X(x).toFixed(1)+" "+P.Y(y).toFixed(1)+"h5v5h-5z"; }
+  el("path",{d:d,fill:"#e5e7eb"},P.camada);
+  el("circle",{cx:P.X(0),cy:P.Y(0),r:P.X(2)-P.X(0),fill:"none",stroke:"#fca5a5","stroke-width":1.5,"stroke-dasharray":"5 4"},P.camada);
+  var z=[0,0], orb=[[0,0]], fugiu=-1;
+  for(var k=0;k<60;k++){ z=[z[0]*z[0]-z[1]*z[1]+cr,2*z[0]*z[1]+ci]; orb.push(z); if(z[0]*z[0]+z[1]*z[1]>4){ fugiu=k+1; break; } }
+  var dd=orb.map(function(q,i){ var x=Math.max(-2.3,Math.min(1.5,q[0])), y=Math.max(-1.8,Math.min(1.8,q[1])); return (i?"L":"M")+P.X(x).toFixed(1)+" "+P.Y(y).toFixed(1); }).join(" ");
+  el("path",{d:dd,fill:"none",stroke:"var(--roxo)","stroke-width":1.5,opacity:.8},P.camada);
+  orb.forEach(function(q,i){ if(Math.abs(q[0])<2.3&&Math.abs(q[1])<1.8) el("circle",{cx:P.X(q[0]),cy:P.Y(q[1]),r:i===0?4:3,fill:i===0?"#1b1b1b":"var(--roxo)"},P.camada); });
+  el("circle",{cx:P.X(cr),cy:P.Y(ci),r:7,fill:"var(--verm)",stroke:"#1b1b1b","stroke-width":1.5},P.camada);
+  $("txt6").textContent="c = "+num(cr,2)+(ci<0?" − ":" + ")+num(Math.abs(ci),2)+"i (ponto vermelho) · "+(fugiu>0?"a órbita passou do círculo de raio 2 (tracejado) no passo "+fugiu+": c está FORA do conjunto.":"depois de 60 passos a órbita continua presa: c parece estar DENTRO do conjunto.");
+}
+$("slR6").addEventListener("input",pinta6); $("slM6").addEventListener("input",pinta6); pinta6();
+/* ---------- exercicios ---------- */
+var feitos={}, TOTAL=6;
+function confete(){
+  var cores=["#fde68a","#2563eb","#dc2626","#059669","#7c3aed","#d97706"];
+  for(var i=0;i<40;i++){
+    (function(i){
+      var d=document.createElement("div");
+      d.className="conf"; d.style.left=(Math.random()*100)+"vw";
+      d.style.background=cores[i%cores.length];
+      d.style.animation="cai "+(1.9+Math.random()*1.5)+"s linear forwards";
+      d.style.animationDelay=(Math.random()*.5)+"s";
+      document.body.appendChild(d);
+      setTimeout(function(){d.remove();},4200);
+    })(i);
+  }
+}
+function marca(id,ok){
+  if(ok&&!feitos[id]){
+    feitos[id]=true;
+    if(window.Progresso) Progresso.marcar(AULA_ID,id);
+    var n=Object.keys(feitos).length;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Você fechou a Eletiva 8. 🎉❄️</strong> Koch, Sierpinski, dimensão 1,26 e o conjunto de Mandelbrot. Próxima eletiva: cálculo estocástico."; confete(); }
+    else msg.textContent="Boa! Faltam "+(TOTAL-n)+".";
+    document.querySelector("#"+id+" .selo").classList.add("ver");
+  }
+}
+function restauraProgresso(){
+  if(!window.Progresso) return;
+  Progresso.carregar(AULA_ID).then(function(itens){
+    itens.forEach(function(id){
+      if(!feitos[id] && document.getElementById(id)){
+        feitos[id]=true;
+        document.querySelector("#"+id+" .selo").classList.add("ver");
+      }
+    });
+    var n=Object.keys(feitos).length;
+    if(n===0) return;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    msg.textContent = n===TOTAL
+      ? "Você já tinha concluído esta aula. 🎉"
+      : "Progresso salvo: "+n+"/"+TOTAL+". Faltam "+(TOTAL-n)+".";
+  });
+}
+function fb(box,ok,txt){
+  var f=box.querySelector(".fb");
+  f.className="fb mostra "+(ok?"ok":"no"); f.innerHTML=txt;
+  box.classList.remove("chacoalha");
+  if(!ok){ void box.offsetWidth; box.classList.add("chacoalha"); }
+}
+var explica={
+ "ex1": {
+  "ok": "Isso: cada lado vira 4 pedaços de 1/3, e 3 · 4/3 = 4.",
+  "no": "Cada um dos 3 lados vira 4 segmentos de 1/3: comprimento 4/3 por lado. Total: 3 · 4/3 = 4."
+ },
+ "ex2": {
+  "ok": "Exato: log 9 / log 3 = 2 (porque 9 = 3²).",
+  "no": "N = 9 cópias, 1/r = 3: D = log 9 / log 3 = 2, já que 9 = 3²."
+ },
+ "ex5": {
+  "ok": "Perfeito: log 2 / log 3 = 0,3010 / 0,4771 ≈ 0,6309. Mais que um punhado de pontos (0), menos que uma linha (1).",
+  "no": "N = 2 e 1/r = 3: D = log 2 / log 3 = 0,3010 / 0,4771 ≈ 0,6309."
+ },
+ "ex6": {
+  "ok": "Tudo certo! Autossemelhança, dimensão, Mandelbrot e o caos que desenha.",
+  "no": "Quase. Autossemelhança = cada pedaço é cópia reduzida do todo; dimensão fractal = log N / log(1/r); conjunto de Mandelbrot = os c em que z² + c não foge; jogo do caos = pontos ao acaso que desenham um fractal."
+ }
+};
+document.querySelectorAll("button.check").forEach(function(b){
+  b.addEventListener("click",function(){
+    var box=document.getElementById(b.dataset.ex);
+    var ins=box.querySelectorAll("input[data-r],select[data-r]"), tudoOk=true, vazio=false;
+    ins.forEach(function(inp){
+      if(inp.value===""){vazio=true;return;}
+      var ok=Math.abs(parseFloat(inp.value)-parseFloat(inp.dataset.r)) < 0.001;
+      inp.style.borderColor=ok?"#059669":"#dc2626";
+      inp.style.background=ok?"#d1fae5":"#fee2e2";
+      if(!ok) tudoOk=false;
+    });
+    if(vazio){ fb(box,false,"Preencha o campo antes de conferir. 🙂"); return; }
+    fb(box,tudoOk,(tudoOk?"✔ ":"✘ ")+(tudoOk?explica[b.dataset.ex].ok:explica[b.dataset.ex].no));
+    marca(b.dataset.ex,tudoOk);
+  });
+});
+var expAlt={
+ "ex3": [
+  "Os buracos em todas as escalas tiram área demais: a área dele é zero, então não é 2.",
+  "Isso! N = 3 e 1/r = 2: log 3 / log 2 ≈ 1,585. Mais que uma curva, menos que uma área.",
+  "A fórmula usa logaritmos, não a divisão 3/2.",
+  "Ele tem área zero, mas ainda é bem mais que um punhado de pontos: a dimensão é maior que 1."
+ ],
+ "ex4": [
+  "Isso! 0² + 0 = 0, sempre. A órbita nunca sai do lugar: c = 0 está dentro (é o centro do 'coração').",
+  "Com c = 0 a conta dá sempre 0: nada foge.",
+  "Dá para fazer de cabeça: 0² + 0 = 0.",
+  "Aqui a órbita é constante; basta um passo para ver o padrão."
+ ]
+};
+document.querySelectorAll(".alts").forEach(function(grupo){
+  var box=grupo.closest(".ex"), certa=parseInt(grupo.dataset.r,10);
+  grupo.querySelectorAll(".alt").forEach(function(alt){
+    alt.setAttribute("tabindex","0");
+    alt.setAttribute("role","button");
+    alt.setAttribute("aria-label","Alternativa "+alt.textContent.trim());
+    function escolhe(){
+      var i=parseInt(alt.dataset.i,10), ok=(i===certa);
+      grupo.querySelectorAll(".alt").forEach(function(a){a.classList.remove("certa","errada");});
+      alt.classList.add(ok?"certa":"errada");
+      if(ok) alt.classList.add("pulsa");
+      fb(box,ok,(ok?"✔ ":"✘ ")+expAlt[box.id][i]);
+      marca(box.id,ok);
+    }
+    alt.addEventListener("click",escolhe);
+    alt.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();escolhe();}});
+  });
+});
+
+restauraProgresso();
+
+})();
+</script>
+</body>
+</html>

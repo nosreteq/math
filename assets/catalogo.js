@@ -64,6 +64,22 @@ window.CATALOGO = [
       { n: 29, slug: "29-passeio-aleatorio", titulo: "Acaso no tempo: passeio aleatório", desc: "Uma moeda que anda: o √n do espalhamento e o movimento browniano." },
       { n: 30, slug: "30-pensar-como-matematico", titulo: "Pensar como matemático", desc: "Contraexemplo, demonstração, indução e os problemas que ninguém resolveu." }
     ]
+  },
+  {
+    n: 6, nome: "Eletivas", etapa: "Aprofundamento", estado: "completo", eletiva: true,
+    resumo: "Dez módulos independentes para seguir depois do Nível 5: criptografia, grafos, grupos, topologia, curvatura, séries, EDPs, fractais, cálculo estocástico e métodos numéricos.",
+    aulas: [
+      { n: 31, slug: "31-aritmetica-do-relogio-e-rsa", titulo: "Aritmética do relógio e criptografia RSA", desc: "Contas que dão a volta, o pequeno teorema de Fermat e o cadeado que qualquer um fecha e só você abre." },
+      { n: 32, slug: "32-grafos", titulo: "Grafos: caminhos, redes e rotas", desc: "Pontes de Königsberg, o caminho mais curto e a árvore mais barata." },
+      { n: 33, slug: "33-simetrias-e-grupos", titulo: "Simetrias: o que é um grupo", desc: "Girar e espelhar um triângulo: a tabela que contém toda a álgebra abstrata em miniatura." },
+      { n: 34, slug: "34-topologia-de-borracha", titulo: "Topologia de borracha: Möbius e V − A + F", desc: "O que sobra de uma forma quando ela pode esticar à vontade: buracos, lados e a fórmula de Euler." },
+      { n: 35, slug: "35-curvatura", titulo: "Curvas e superfícies: curvatura", desc: "O círculo que abraça a curva, por que a laranja não vira mapa e a soma dos ângulos de um triângulo na esfera." },
+      { n: 36, slug: "36-series-de-taylor", titulo: "Séries de Taylor: trocar uma curva por potências", desc: "Como a calculadora acha seno e eˣ: polinômios que imitam a curva cada vez melhor." },
+      { n: 37, slug: "37-calor-e-ondas-edp", titulo: "Calor e ondas: equações diferenciais parciais", desc: "Uma barra que esfria e uma corda que vibra: Euler aplicado em cada ponto ao mesmo tempo." },
+      { n: 38, slug: "38-fractais-e-dimensao", titulo: "Fractais e dimensão", desc: "Formas que se repetem em cada zoom e têm dimensão 1,26." },
+      { n: 39, slug: "39-calculo-estocastico", titulo: "Cálculo estocástico: a integral do acaso", desc: "Somar pedacinhos de browniano, o termo extra de Itô e o preço que passeia." },
+      { n: 40, slug: "40-metodos-numericos", titulo: "Métodos numéricos: Newton, erro e estabilidade", desc: "Achar raízes pela tangente, o erro do computador e quando uma conta explode." }
+    ]
   }
 ];
 

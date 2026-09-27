@@ -5,7 +5,7 @@ Um curso de matemática construído do chão para cima, para quem só sabe as qu
 faculdade** — frações e porcentagem, álgebra, geometria, trigonometria, álgebra linear, cálculo,
 probabilidade, números complexos e equações diferenciais — sem passar por nenhuma etapa no escuro.
 
-O curso segue a **ordem da escola** — Fundamental → Médio → Faculdade — em **5 níveis e 30 aulas**.
+O curso segue a **ordem da escola** — Fundamental → Médio → Faculdade — em **5 níveis e 30 aulas**, mais **10 eletivas** de aprofundamento.
 O roteiro completo, com o que entra em cada aula e de onde vem cada pré-requisito, está em
 **[PLANO.md](PLANO.md)**; a trilha de referência usada para montar a ordem está em
 [`trilha_de_aprendizado_em_matemativa.md`](trilha_de_aprendizado_em_matemativa.md).
@@ -76,6 +76,23 @@ usar nada que não tenha sido apresentado numa aula anterior — nem entre níve
 | 28 | [Equações diferenciais e o método de Euler](aulas/28-equacoes-diferenciais/) | Quando a regra fala da inclinação: campos de setinhas, molas e populações. |
 | 29 | [Acaso no tempo: passeio aleatório](aulas/29-passeio-aleatorio/) | Uma moeda que anda: o √n do espalhamento e o movimento browniano. |
 | 30 | [Pensar como matemático](aulas/30-pensar-como-matematico/) | Contraexemplo, demonstração, indução e os problemas que ninguém resolveu. |
+
+### Eletivas (aprofundamento, módulos independentes) ✅
+
+Depois do Nível 5 — ou antes, assim que os pré-requisitos de cada uma estiverem feitos.
+
+| # | Eletiva | Assunto |
+|---|------|---------|
+| 31 | [Aritmética do relógio e criptografia RSA](aulas/31-aritmetica-do-relogio-e-rsa/) | Contas que dão a volta, o pequeno teorema de Fermat e o cadeado que qualquer um fecha e só você abre. |
+| 32 | [Grafos: caminhos, redes e rotas](aulas/32-grafos/) | Pontes de Königsberg, o caminho mais curto e a árvore mais barata. |
+| 33 | [Simetrias: o que é um grupo](aulas/33-simetrias-e-grupos/) | Girar e espelhar um triângulo: a tabela que contém toda a álgebra abstrata em miniatura. |
+| 34 | [Topologia de borracha: Möbius e V − A + F](aulas/34-topologia-de-borracha/) | O que sobra de uma forma quando ela pode esticar à vontade: buracos, lados e a fórmula de Euler. |
+| 35 | [Curvas e superfícies: curvatura](aulas/35-curvatura/) | O círculo que abraça a curva, por que a laranja não vira mapa e a soma dos ângulos de um triângulo na esfera. |
+| 36 | [Séries de Taylor: trocar uma curva por potências](aulas/36-series-de-taylor/) | Como a calculadora acha seno e eˣ: polinômios que imitam a curva cada vez melhor. |
+| 37 | [Calor e ondas: equações diferenciais parciais](aulas/37-calor-e-ondas-edp/) | Uma barra que esfria e uma corda que vibra: Euler aplicado em cada ponto ao mesmo tempo. |
+| 38 | [Fractais e dimensão](aulas/38-fractais-e-dimensao/) | Formas que se repetem em cada zoom e têm dimensão 1,26. |
+| 39 | [Cálculo estocástico: a integral do acaso](aulas/39-calculo-estocastico/) | Somar pedacinhos de browniano, o termo extra de Itô e o preço que passeia. |
+| 40 | [Métodos numéricos: Newton, erro e estabilidade](aulas/40-metodos-numericos/) | Achar raízes pela tangente, o erro do computador e quando uma conta explode. |
 
 O roteiro completo, com o que entra em cada aula, está em **[PLANO.md](PLANO.md)**.
 
@@ -157,7 +174,17 @@ math/
 │   ├── 27-otimizacao-e-gradiente/              ]
 │   ├── 28-equacoes-diferenciais/               ]
 │   ├── 29-passeio-aleatorio/                   ]
-│   └── 30-pensar-como-matematico/              ]
+│   ├── 30-pensar-como-matematico/              ]
+│   ├── 31-aritmetica-do-relogio-e-rsa/         ] Eletivas
+│   ├── 32-grafos/                              ]
+│   ├── 33-simetrias-e-grupos/                  ]
+│   ├── 34-topologia-de-borracha/               ]
+│   ├── 35-curvatura/                           ]
+│   ├── 36-series-de-taylor/                    ]
+│   ├── 37-calor-e-ondas-edp/                   ]
+│   ├── 38-fractais-e-dimensao/                 ]
+│   ├── 39-calculo-estocastico/                 ]
+│   └── 40-metodos-numericos/                   ]
 │       (mesma estrutura: index.html, notas.md, figuras.png)
 │
 ├── assets/
@@ -169,7 +196,7 @@ math/
 │
 └── scripts/
     ├── README.md
-    └── figuras_aula01.py .. figuras_aula30.py    gera o figuras.png de cada aula (matplotlib)
+    └── figuras_aula01.py .. figuras_aula40.py    gera o figuras.png de cada aula (matplotlib)
 ```
 
 Cada aula tem três formas do mesmo conteúdo:
@@ -225,7 +252,8 @@ for f in figuras_aula*.py; do python3 "$f"; done
 
 `tests/verifica.js` abre cada aula num navegador de verdade e confere: 6 laboratórios e 6
 exercícios por aula, todos os controles nos extremos sem texto quebrado (`NaN`, `undefined`),
-resposta errada nunca pontua e gabarito sempre aceito, nenhum erro de JavaScript, nenhum link
+resposta errada nunca pontua e gabarito sempre aceito, nenhum erro de JavaScript, nenhum desenho
+invisível (elemento criado fora do namespace SVG), nenhum link
 quebrado e nenhuma rolagem lateral no celular. Na página inicial, confere as abas de nível, a
 troca de painel, a aula abrindo no quadro, anterior/próxima, o botão voltar do navegador e o
 progresso feito dentro da aula aparecendo no painel. Roda sozinho no GitHub a cada push que mexe nas

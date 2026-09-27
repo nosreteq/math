@@ -141,7 +141,9 @@ async function checaSPA(browser) {
       if (!(await p.locator(sel).count())) falha(slug, `falta a caixa "${nomeCx}"`);
     }
     const num = await p.locator('.aula-num').textContent().catch(() => '');
-    if (!new RegExp('^AULA ' + parseInt(slug, 10) + ' de 30 ').test((num || '').trim())) falha(slug, `cabeçalho "${(num || '').trim()}" não bate com a pasta`);
+    const nAula = parseInt(slug, 10);
+    const esperado = nAula > 30 ? '^ELETIVA ' + (nAula - 30) + ' de 10 ' : '^AULA ' + nAula + ' de 30 ';
+    if (!new RegExp(esperado).test((num || '').trim())) falha(slug, `cabeçalho "${(num || '').trim()}" não bate com a pasta`);
 
     const labs = await p.locator('div.lab').count();
     if (labs !== 6) falha(slug, `${labs} laboratórios (esperado 6)`);
@@ -155,6 +157,10 @@ async function checaSPA(browser) {
     for (const b of await p.locator('.lab button').all()) { try { await b.click({ timeout: 1500 }); } catch (e) {} }
     await p.waitForTimeout(3000);
     await textoQuebrado('após mexer nos labs');
+
+    // desenho que existe mas não aparece: elemento criado dentro de <svg> fora do namespace SVG
+    const foraNS = await p.evaluate(() => [...document.querySelectorAll('svg *')].filter(e => e.namespaceURI !== 'http://www.w3.org/2000/svg').length);
+    if (foraNS) falha(slug, `${foraNS} elementos dentro de <svg> fora do namespace SVG (ficam invisíveis)`);
 
     // exercícios: primeiro errado (não pode pontuar), depois certo (tem que pontuar)
     const ids = await p.locator('.ex').evaluateAll(els => els.map(e => e.id));

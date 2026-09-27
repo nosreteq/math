@@ -1,6 +1,6 @@
 # scripts
 
-Geradores das figuras estáticas (`figuras.png`) de cada uma das 30 aulas, em Python com matplotlib.
+Geradores das figuras estáticas (`figuras.png`) de cada uma das 40 aulas (30 da trilha e 10 eletivas), em Python com matplotlib.
 O número do script é o número da aula (`figuras_aula12.py` → `aulas/12-areas-volumes-e-pitagoras/`).
 
 As aulas em HTML **não dependem destes scripts** — os desenhos interativos são feitos em SVG puro,
@@ -18,10 +18,10 @@ pip install -r requirements.txt
 Você pode rodar os scripts a partir de qualquer pasta (da raiz ou de dentro de `scripts/`):
 
 ```bash
-# A partir da raiz do projeto, uma aula (NN = número da aula, de 01 a 30):
+# A partir da raiz do projeto, uma aula (NN = número da aula, de 01 a 40):
 python scripts/figuras_aula01.py
 
-# Todas as 30:
+# Todas as 40:
 for f in scripts/figuras_aula*.py; do python "$f"; done
 
 # Ou de dentro da pasta scripts:
