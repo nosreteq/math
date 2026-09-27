@@ -1,10 +1,10 @@
-# Aula 7 — Sistemas de equações
+# Aula 8 — Sistemas de equações
 
 > Estas são as notas em texto da aula. A versão interativa, com os laboratórios e os exercícios
 > que se corrigem sozinhos, está em [`index.html`](index.html).
 
-**No nível 1:** toda reta cabe na receita `f(x) = passo · x + altura de partida` (Aula 2) — é tudo
-o que você precisa para esta aula.
+**Você já sabe:** toda reta cabe na receita `f(x) = passo · x + altura de partida` (Aula 2), e na
+Aula 7 aprendeu a descobrir o x equilibrando a balança.
 
 ![Ilustrações da aula 7](figuras.png)
 
@@ -91,6 +91,5 @@ Cruzamento: (2, 5)
 
 ---
 
-**Aula anterior:** [Setas e tabelas de números](../06-setas-e-tabelas-de-numeros/)
-**Próxima aula:** decomposição de sinais em ondas — desmontando uma onda complicada de volta em
-ondas simples.
+**Aula anterior:** [Equações: a balança](../07-equacoes-a-balanca/)
+**Próxima aula:** [Potências, raízes e Pitágoras](../09-potencias-raizes-e-pitagoras/)

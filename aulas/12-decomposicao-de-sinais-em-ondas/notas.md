@@ -1,10 +1,10 @@
-# Aula 8 — Decomposição de sinais em ondas
+# Aula 12 — Decomposição de sinais em ondas
 
 > Estas são as notas em texto da aula. A versão interativa, com os laboratórios e os exercícios
 > que se corrigem sozinhos, está em [`index.html`](index.html).
 
-**No nível 1:** na Aula 5 você somou ondas simples e viu o resultado ficar complicado. Hoje a
-pergunta é ao contrário.
+**Você já sabe:** na Aula 5 você somou ondas simples; na Aula 11 aprendeu a projetar. Hoje as duas
+ideias se encontram.
 
 ![Ilustrações da aula 8](figuras.png)
 
@@ -38,7 +38,13 @@ daquela onda no sinal.
 ## Desmontando de volta
 
 Dada só a onda complicada, decompor é descobrir quais alturas, para quais frequências, reproduzem
-o sinal. A ideia visual já é metade do caminho: toda onda "cheia" esconde ondas simples dentro dela.
+o sinal. O jeito direto: trate sinal e ondas como vetores e **projete o sinal sobre cada onda**
+(Aula 11). A projeção sobre `seno(2x)` dá exatamente a altura dessa nota.
+
+> Funciona porque ondas de frequências diferentes são **perpendiculares** — o produto escalar entre
+> elas é zero. Ao projetar sobre uma, as outras somem da conta.
+
+A Transformada de Fourier faz isso para milhares de frequências: uma projeção por frequência.
 
 ---
 
@@ -64,7 +70,7 @@ o sinal. A ideia visual já é metade do caminho: toda onda "cheia" esconde onda
 
 **5.** Onda = seno(x) com amplitude 1 mais seno(2x) com amplitude 0,5. Qual barra é mais alta?
 
-**6.** Com uma única onda simples (sem soma), quantas barras tem o espectro?
+**6.** Qual o jeito direto de descobrir quanto de `seno(2x)` existe num sinal?
 
 <details>
 <summary>Respostas</summary>
@@ -74,11 +80,11 @@ o sinal. A ideia visual já é metade do caminho: toda onda "cheia" esconde onda
 3. **2** ondas simples diferentes.
 4. **Descarta com cuidado frequências pouco percebidas pelo ouvido**, economizando espaço.
 5. A barra da **frequência 1** — amplitude 1 é maior que 0,5.
-6. **1** barra só.
+6. **Projetar o sinal sobre `seno(2x)`** — o produto escalar isola a altura dessa nota.
 
 </details>
 
 ---
 
-**Aula anterior:** [Sistemas de equações](../07-sistemas-de-equacoes/)
-**Próxima aula:** estatística com vetores — correlação como ângulo entre duas listas de números.
+**Aula anterior:** [Projeção e mínimos quadrados](../11-projecao-e-minimos-quadrados/)
+Fim do Nível 2 — Intermediário! Veja o [roteiro completo](../../PLANO.md) para o Nível 3.

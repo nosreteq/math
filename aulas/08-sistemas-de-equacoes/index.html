@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aula 7 — Sistemas de equações | Matemática do Zero</title>
+<title>Aula 8 — Sistemas de equações | Matemática do Zero</title>
 <style>
 :root{
   --papel:#f6f2e9; --papel2:#fffdf7; --tinta:#1b1b1b; --cinza:#6b7280;
@@ -113,10 +113,10 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <header>
   <div class="inner">
     <p class="serie">✏️ MATEMÁTICA DO ZERO — nível 2, intermediário</p>
-    <span class="aula-num">AULA 7 de 10</span>
+    <span class="aula-num">AULA 8 de 12 · NÍVEL 2</span>
     <h1>Sistemas de equações</h1>
     <p class="sub">Onde "resolver duas equações ao mesmo tempo" vira só achar onde duas retas se cruzam no papel.</p>
-    <div class="voltou"><strong>No nível 1:</strong> toda reta cabe na receita <span class="mono">f(x) = passo · x + altura de partida</span> (Aula 2) — é tudo o que você precisa para esta aula.</div>
+    <div class="voltou"><strong>Você já sabe:</strong> toda reta cabe na receita <span class="mono">f(x) = passo · x + altura de partida</span> (Aula 2), e na Aula 7 aprendeu a descobrir o x equilibrando a balança. É tudo o que esta aula precisa.</div>
   </div>
 </header>
 
@@ -231,7 +231,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <!-- ============ 4 ============ -->
 <h2><span class="n">4</span> Resolver por substituição</h2>
 
-<p>Já sabemos que o cruzamento é o ponto onde <span class="mono">f(x) = g(x)</span>. A ideia da substituição é <strong>juntar as duas receitas numa só equação</strong>, resolver para <span class="mono">x</span>, e depois usar qualquer uma das receitas para achar <span class="mono">y</span>.</p>
+<p>Já sabemos que o cruzamento é o ponto onde <span class="mono">f(x) = g(x)</span>. A ideia da substituição é <strong>juntar as duas receitas numa só equação</strong>, resolver para <span class="mono">x</span> com a balança da Aula 7, e depois usar qualquer uma das receitas para achar <span class="mono">y</span>.</p>
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: resolva por substituição, passo a passo</div>
@@ -409,8 +409,8 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 </div>
 
 <footer>
-  Matemática do Zero · Aula 7 — Sistemas de equações<br>
-  <strong>Próxima aula:</strong> decomposição de sinais em ondas — desmontando uma onda complicada de volta em ondas simples.
+  Matemática do Zero · Aula 8 — Sistemas de equações<br>
+  <strong>Próxima aula:</strong> potências, raízes e Pitágoras — o quadrado, o lado do quadrado e o triângulo retângulo.
 </footer>
 
 </div>
@@ -422,7 +422,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <script>
 (function(){
 "use strict";
-var AULA_ID = "07-sistemas-de-equacoes";
+var AULA_ID = "08-sistemas-de-equacoes";
 var NS="http://www.w3.org/2000/svg";
 var CX=210, CY=210, U=30;
 function X(x){return CX+x*U;}
@@ -616,7 +616,7 @@ function marca(id,ok){
     document.getElementById("pn").textContent=n;
     document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
     var msg=document.getElementById("pmsg");
-    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Aula 7 fechada. 🎉</strong> Sistemas resolvidos. Bora decompor ondas."; confete(); }
+    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Aula 8 fechada. 🎉</strong> Sistemas resolvidos. Bora para potências e Pitágoras."; confete(); }
     else msg.textContent="Boa! Faltam "+(TOTAL-n)+".";
     document.querySelector("#"+id+" .selo").classList.add("ver");
   }

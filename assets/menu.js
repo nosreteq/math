@@ -24,10 +24,12 @@
     {
       nome: "Nível 2 — Intermediário",
       aulas: [
-        { n: 7, slug: "07-sistemas-de-equacoes", titulo: "Sistemas de equações" },
-        { n: 8, slug: "08-decomposicao-de-sinais-em-ondas", titulo: "Decomposição de sinais em ondas" },
-        { n: 9, slug: "09-estatistica-com-vetores", titulo: "Estatística com vetores" },
-        { n: 10, slug: "10-projecao-e-minimos-quadrados", titulo: "Projeção e mínimos quadrados" }
+        { n: 7, slug: "07-equacoes-a-balanca", titulo: "Equações: a balança" },
+        { n: 8, slug: "08-sistemas-de-equacoes", titulo: "Sistemas de equações" },
+        { n: 9, slug: "09-potencias-raizes-e-pitagoras", titulo: "Potências, raízes e Pitágoras" },
+        { n: 10, slug: "10-estatistica-com-vetores", titulo: "Estatística com vetores" },
+        { n: 11, slug: "11-projecao-e-minimos-quadrados", titulo: "Projeção e mínimos quadrados" },
+        { n: 12, slug: "12-decomposicao-de-sinais-em-ondas", titulo: "Decomposição de sinais em ondas" }
       ]
     }
   ];

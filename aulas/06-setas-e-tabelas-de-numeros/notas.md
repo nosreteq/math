@@ -108,5 +108,5 @@ perspectiva, e que está por trás de qualquer efeito visual que gira, estica ou
 
 **Aula anterior:** [Ondas](../05-ondas/)
 
-Fim do curso principal! Veja o [roteiro completo](../../PLANO.md) para os assuntos que ficam ao
-alcance a partir daqui.
+Fim do Nível 1 — Básico!
+**Próxima aula:** [Equações: a balança](../07-equacoes-a-balanca/)
