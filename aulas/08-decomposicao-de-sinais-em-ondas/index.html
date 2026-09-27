@@ -479,20 +479,21 @@ pintaCompNotas();
 /* ---------- lab: decomponha a onda misteriosa ---------- */
 var slDecomp1=document.getElementById("slDecomp1"), slDecomp2=document.getElementById("slDecomp2");
 var ondaMisterio=document.getElementById("ondaMisterio"), ondaDecompTentativa=document.getElementById("ondaDecompTentativa"), txtDecomp=document.getElementById("txtDecomp");
-var alvoDecomp1=0.5, alvoDecomp2=0.5;
+var alvoDecomp1=0.5, alvoDecomp2=0.5, alvoDecompAtivo=false;
 function pintaDecomp(){
   var a1=parseFloat(slDecomp1.value), a2=parseFloat(slDecomp2.value);
   document.getElementById("vDecomp1").textContent=fmt1(a1);
   document.getElementById("vDecomp2").textContent=fmt1(a2);
   ondaDecompTentativa.setAttribute("points", ondaSomaPontos([{freq:1,amp:a1},{freq:2,amp:a2}]));
   var perto=Math.abs(a1-alvoDecomp1)<0.15 && Math.abs(a2-alvoDecomp2)<0.15;
-  if(perto) txtDecomp.innerHTML="🎉 <strong>Decompôs certo!</strong> A onda misteriosa era freq. 1 = "+fmt1(alvoDecomp1)+" e freq. 2 = "+fmt1(alvoDecomp2)+".";
+  if(perto && alvoDecompAtivo) txtDecomp.innerHTML="🎉 <strong>Decompôs certo!</strong> A onda misteriosa era freq. 1 = "+fmt1(alvoDecomp1)+" e freq. 2 = "+fmt1(alvoDecomp2)+".";
 }
 document.getElementById("btNovaMisterio").addEventListener("click",function(){
   var opcoes=[0.3,0.5,0.7,0.9,1.1,1.3];
   alvoDecomp1=opcoes[Math.floor(Math.random()*opcoes.length)];
   alvoDecomp2=opcoes[Math.floor(Math.random()*opcoes.length)];
   ondaMisterio.setAttribute("points", ondaSomaPontos([{freq:1,amp:alvoDecomp1},{freq:2,amp:alvoDecomp2}]));
+  alvoDecompAtivo=true;
   txtDecomp.textContent="Ajuste as duas alturas até a onda roxa cobrir a cinza tracejada.";
 });
 slDecomp1.addEventListener("input",pintaDecomp);

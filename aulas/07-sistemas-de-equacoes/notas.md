@@ -75,7 +75,7 @@ Cruzamento: (2, 5)
 
 **5.** Resolva `f(x) = 2x` e `g(x) = x + 4` — qual o valor de y no cruzamento?
 
-**6.** Duas retas se cruzam em `(1, 3)`. Leia esse ponto no gráfico.
+**6.** As retas `f(x) = x + 2` e `g(x) = −x + 4` se cruzam onde? (Na versão interativa, leia o ponto no desenho.)
 
 <details>
 <summary>Respostas</summary>

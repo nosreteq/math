@@ -140,6 +140,8 @@ Ela é uma função?
 
 **5.** Uma máquina misteriosa fez isto: 1 → 4, 2 → 7, 3 → 10. Qual é a receita dela?
 
+**6.** O que quer dizer `g(5) = 12`?
+
 <details>
 <summary>Respostas</summary>
 
@@ -148,6 +150,7 @@ Ela é uma função?
 3. **Não.** O mesmo número que entrou deu duas respostas diferentes, o que quebra a regra de ouro.
 4. Sai **10**.
 5. `f(x) = 3 · x + 1`. A saída pula de 3 em 3 (4 → 7 → 10), então multiplica por 3. E 3 · 1 = 3, falta 1 para chegar no 4 — daí o + 1.
+6. **Joguei o 5 na máquina g e saiu o 12.** Os parênteses não são multiplicação — são a boca da máquina.
 
 </details>
 

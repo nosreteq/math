@@ -586,7 +586,7 @@ pintaContaOnda();
 /* ---------- lab: reconheça a onda ---------- */
 var slAmpAlvo=document.getElementById("slAmpAlvo"), slFreqAlvo=document.getElementById("slFreqAlvo");
 var ondaAlvo=document.getElementById("ondaAlvo"), ondaTentativa=document.getElementById("ondaTentativa"), txtOndaAlvo=document.getElementById("txtOndaAlvo");
-var alvoOndaA=1, alvoOndaF=1;
+var alvoOndaA=1, alvoOndaF=1, alvoOndaAtivo=false;
 function desenhaOnda(el,A,F){
   var pts=[];
   for(var px=0; px<=380; px+=4){
@@ -602,13 +602,14 @@ function pintaOndaAlvo(){
   document.getElementById("vFreqAlvo").textContent=F;
   desenhaOnda(ondaTentativa,A,F);
   var perto = Math.abs(A-alvoOndaA)<0.15 && F===alvoOndaF;
-  if(perto) txtOndaAlvo.innerHTML="🎉 <strong>Acertou!</strong> A onda misteriosa era amplitude "+alvoOndaA.toFixed(1).replace(".",",")+" e frequência "+alvoOndaF+".";
+  if(perto && alvoOndaAtivo) txtOndaAlvo.innerHTML="🎉 <strong>Acertou!</strong> A onda misteriosa era amplitude "+alvoOndaA.toFixed(1).replace(".",",")+" e frequência "+alvoOndaF+".";
 }
 document.getElementById("btNovaOndaAlvo").addEventListener("click",function(){
   var amps=[0.4,0.6,0.8,1.0,1.2,1.4,1.6];
   alvoOndaA=amps[Math.floor(Math.random()*amps.length)];
   alvoOndaF=Math.floor(Math.random()*4)+1;
   desenhaOnda(ondaAlvo,alvoOndaA,alvoOndaF);
+  alvoOndaAtivo=true;
   txtOndaAlvo.textContent="Ajuste os dois controles até a onda azul cobrir a cinza tracejada.";
 });
 slAmpAlvo.addEventListener("input",pintaOndaAlvo);
