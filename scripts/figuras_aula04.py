@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import FancyArrowPatch
+from matplotlib.patches import Rectangle, Polygon
 
 AZUL, VERM, VERDE, LARANJA, ROXO, CINZA, TXT = ("#2563eb", "#dc2626", "#059669",
                                                  "#d97706", "#7c3aed", "#9ca3af", "#111827")
@@ -13,64 +13,60 @@ AZUL, VERM, VERDE, LARANJA, ROXO, CINZA, TXT = ("#2563eb", "#dc2626", "#059669",
 fig, ax = plt.subplots(2, 2, figsize=(13, 10))
 fig.patch.set_facecolor("white")
 
-
-def circulo(a, titulo):
-    a.set_xlim(-1.35, 1.35); a.set_ylim(-1.35, 1.35)
-    a.set_aspect("equal")
-    a.axis("off")
-    a.set_title(titulo, fontsize=13.5, weight="bold", color=TXT, pad=10)
-    c = plt.Circle((0, 0), 1, fill=False, color=CINZA, lw=1.5)
-    a.add_patch(c)
-    a.plot([-1.25, 1.25], [0, 0], color="#e6e1d4", lw=1)
-    a.plot([0, 0], [-1.25, 1.25], color="#e6e1d4", lw=1)
-
-
-# ---------------- 1. sombra e altura -----------------------------------------
+# ---------------- 1. ao quadrado = quadrado ---------------------------------------
 a = ax[0, 0]
-circulo(a, "1. A sombra (cosseno) e a altura (seno)")
-deg = 40
-rad = np.radians(deg)
-x, y = np.cos(rad), np.sin(rad)
-a.plot([0, x], [0, y], color=AZUL, lw=2.5, ls="--")
-a.scatter([x], [y], s=100, color=AZUL, zorder=6, edgecolor="white", lw=1.5)
-a.plot([0, x], [0, 0], color=VERDE, lw=4, solid_capstyle="round")
-a.plot([x, x], [0, y], color=VERM, lw=4, solid_capstyle="round")
-a.text(x / 2, -0.14, "cosseno", fontsize=10.5, color=VERDE, weight="bold", ha="center")
-a.text(x + 0.08, y / 2, "seno", fontsize=10.5, color=VERM, weight="bold")
+a.set_title("1. 5² = 25: a área de um quadrado de lado 5", fontsize=13.5, weight="bold", color=TXT, pad=10)
+for i in range(5):
+    for j in range(5):
+        a.add_patch(Rectangle((j, i), 0.92, 0.92, facecolor="#dbeafe", edgecolor=AZUL, lw=1.2))
+a.set_xlim(-0.5, 5.5); a.set_ylim(-0.5, 5.5); a.set_aspect("equal"); a.axis("off")
 
-# ---------------- 2. sempre entre -1 e 1 --------------------------------------
+# ---------------- 2. raiz --------------------------------------------------------------
 a = ax[0, 1]
-circulo(a, "2. Preso na borda: sempre entre −1 e 1")
-for d, cor in [(20, AZUL), (100, LARANJA), (200, ROXO), (320, VERM)]:
-    r = np.radians(d)
-    a.scatter([np.cos(r)], [np.sin(r)], s=70, color=cor, zorder=6, edgecolor="white", lw=1.2)
-a.text(0, -1.3, "nenhum ponto sai do círculo de raio 1", fontsize=10.5, color=TXT, ha="center")
+a.set_title("2. Raiz: o lado de um quadrado de área dada", fontsize=13.5, weight="bold", color=TXT, pad=10)
+for area, x0, cor in [(4, 0, VERDE), (9, 2.6, AZUL), (2, 6.4, ROXO)]:
+    l = np.sqrt(area)
+    a.add_patch(Rectangle((x0, 0), l, l, facecolor=cor, alpha=0.2, edgecolor=cor, lw=2))
+    lbl = f"√{area} = {int(l)}" if l == int(l) else f"√{area} ≈ {l:.2f}".replace(".", ",")
+    a.text(x0 + l / 2, -0.5, lbl, ha="center", fontsize=11, color=cor, weight="bold")
+a.set_xlim(-0.5, 8.5); a.set_ylim(-1, 4); a.set_aspect("equal"); a.axis("off")
 
-# ---------------- 3. valores de olho ------------------------------------------
+# ---------------- 3. ao cubo = cubo ----------------------------------------------------------
 a = ax[1, 0]
-circulo(a, "3. Os quatro valores de olho")
-for d, txt in [(0, "(1, 0)"), (90, "(0, 1)"), (180, "(−1, 0)"), (270, "(0, −1)")]:
-    r = np.radians(d)
-    x, y = np.cos(r), np.sin(r)
-    a.scatter([x], [y], s=90, color=VERDE if d in (0, 180) else VERM, zorder=6, edgecolor="white", lw=1.5)
-    a.text(1.22 * np.cos(r), 1.22 * np.sin(r), f"{d}°\n{txt}", fontsize=9.5, weight="bold",
-           color=TXT, ha="center", va="center")
+a.set_title("3. 2³ = 8: o volume de um cubo de lado 2", fontsize=13.5, weight="bold", color=TXT, pad=10)
+ex, ey, ez = np.array([0.87, -0.5]), np.array([-0.87, -0.5]), np.array([0, 1])
 
-# ---------------- 4. o ponto e as duas coordenadas ----------------------------
+
+def cubinho(x, y, z):
+    o = x * ex + y * ey + z * ez
+    topo = [o + ez, o + ez + ex, o + ez + ex + ey, o + ez + ey]
+    frente = [o + ex, o + ex + ey, o + ex + ey + ez, o + ex + ez]
+    lado = [o + ey, o + ex + ey, o + ex + ey + ez, o + ey + ez]
+    for pts, cor in [(topo, "#bfdbfe"), (frente, "#93c5fd"), (lado, "#60a5fa")]:
+        a.add_patch(Polygon(pts, closed=True, facecolor=cor, edgecolor=AZUL, lw=1.5))
+
+
+# pinta de tras para a frente: z crescente, depois x e y crescentes
+for z in range(2):
+    for x in range(2):
+        for y in range(2):
+            cubinho(x, y, z)
+a.text(0, -2.6, "2 · 2 · 2 = 8 cubinhos", ha="center", fontsize=13, weight="bold", color=AZUL)
+a.set_xlim(-3, 3); a.set_ylim(-3, 3); a.set_aspect("equal"); a.axis("off")
+
+# ---------------- 4. x, x² e x³ ---------------------------------------------------------------
 a = ax[1, 1]
-circulo(a, "4. O ponto = (cosseno, seno)")
-deg = 130
-rad = np.radians(deg)
-x, y = np.cos(rad), np.sin(rad)
-a.add_patch(FancyArrowPatch((0, 0), (x, y), arrowstyle="-|>", mutation_scale=18, color=AZUL, lw=3))
-a.plot([0, x], [0, 0], color=VERDE, lw=3, ls=":")
-a.plot([x, x], [0, y], color=VERM, lw=3, ls=":")
-a.text(x, y + 0.12, f"({x:.2f}, {y:.2f})", fontsize=10.5, weight="bold", color=AZUL, ha="center")
-a.text(0, -1.3, "mesmo endereço de dois números da Aula 2", fontsize=10, color=TXT,
-       ha="center", style="italic")
+a.set_title("4. x, x² e x³: antes de 1 encolhem, depois disparam", fontsize=13.5, weight="bold", color=TXT, pad=10)
+x = np.linspace(0, 2, 200)
+for k, cor, rot in [(1, VERDE, "x"), (2, AZUL, "x²"), (3, VERM, "x³")]:
+    a.plot(x, x**k, color=cor, lw=3, label=rot)
+a.axvline(1, color=CINZA, ls="--", lw=1.5)
+a.set_xlim(0, 2); a.set_ylim(0, 5); a.grid(True, color="#ece7da"); a.legend(loc="upper left", fontsize=12)
+for s_ in a.spines.values():
+    s_.set_visible(False)
 
-fig.suptitle("Aula 4 — Seno e cosseno", fontsize=18, weight="bold", color=TXT)
+fig.suptitle("Aula 4 — Potências e raízes", fontsize=18, weight="bold", color=TXT)
 fig.tight_layout(rect=[0, 0, 1, 0.955])
-saida = Path(__file__).resolve().parent.parent / "aulas" / "04-seno-e-cosseno" / "figuras.png"
+saida = Path(__file__).resolve().parent.parent / "aulas" / "04-potencias-e-raizes" / "figuras.png"
 fig.savefig(saida, dpi=150, facecolor="white")
 print(f"Salvo em: {saida}")

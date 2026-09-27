@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aula 3 — Porcentagem, razão e regra de três | Matemática do Zero</title>
+<style>
+:root{
+  --papel:#f6f2e9; --papel2:#fffdf7; --tinta:#1b1b1b; --cinza:#6b7280;
+  --azul:#2563eb; --azulc:#dbeafe; --verm:#dc2626; --vermc:#fee2e2;
+  --verde:#059669; --verdec:#d1fae5; --amar:#fde68a; --laranja:#d97706;
+  --roxo:#7c3aed; --linha:#c9c1ae;
+  --mao:'Comic Sans MS','Comic Neue','Chalkboard SE','Bradley Hand','Marker Felt','Segoe Print','Ink Free',cursive;
+  --corpo:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--corpo);font-size:17px;line-height:1.65}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 90px}
+
+header{background:var(--tinta);color:var(--papel2);padding:34px 22px 30px;margin-bottom:34px;border-bottom:6px solid var(--laranja)}
+header .inner{max-width:820px;margin:0 auto}
+.serie{font-family:var(--mao);font-size:15px;letter-spacing:.5px;color:var(--amar);margin:0 0 6px}
+header h1{margin:0;font-size:40px;line-height:1.1;letter-spacing:-.5px}
+header .sub{margin:12px 0 0;color:#cfc9bb;font-size:17px;max-width:620px}
+.aula-num{display:inline-block;background:var(--laranja);color:#fff;font-weight:700;padding:3px 13px;border-radius:20px;font-size:14px;margin-bottom:14px;letter-spacing:.5px}
+.voltou{background:#3a3a3a;border-left:5px solid var(--amar);padding:12px 18px;margin:18px 0 0;font-size:15.5px;color:#e6e0d2;border-radius:0 8px 8px 0}
+
+h2{font-size:29px;margin:52px 0 6px;line-height:1.2;border-bottom:3px solid var(--tinta);padding-bottom:8px}
+h2 .n{color:var(--laranja);font-family:var(--mao);font-size:24px;margin-right:8px}
+h3{font-size:21px;margin:32px 0 8px}
+p{margin:14px 0}
+.grande{font-size:20px}
+.centro{text-align:center}
+code,.mono{font-family:'Consolas','Monaco',monospace;background:#eae4d6;padding:2px 7px;border-radius:4px;font-size:.95em}
+
+.guru{display:flex;gap:18px;align-items:flex-start;margin:34px 0;background:linear-gradient(#efe9db,#e8e1d0);border-left:6px solid var(--roxo);padding:20px 22px;border-radius:4px}
+.guru svg{flex:0 0 92px}
+.guru .fala{position:relative;background:#fff;border:2px solid var(--tinta);border-radius:16px;padding:14px 18px;font-family:var(--mao);font-size:16.5px;line-height:1.55}
+.guru .fala:before{content:"";position:absolute;left:-11px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:var(--tinta)}
+.guru .fala:after{content:"";position:absolute;left:-8px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:#fff}
+.guru .quem{font-family:var(--mao);font-size:13px;color:var(--roxo);text-align:center;margin-top:4px;font-weight:700}
+
+.idiota{background:#e7eefc;border:3px solid var(--azul);border-radius:10px;padding:6px 24px 20px;margin:34px 0}
+.idiota .tit{font-family:var(--mao);font-size:20px;font-weight:700;color:#fff;background:var(--azul);display:inline-block;padding:5px 16px;border-radius:0 0 10px 10px;margin:0 0 8px}
+.idiota .q{font-weight:700;margin:16px 0 4px}
+.idiota .q:before{content:"P: ";color:var(--azul);font-weight:800}
+.idiota .a{margin:0 0 6px}
+.idiota .a:before{content:"R: ";color:var(--verm);font-weight:800}
+
+.cuidado{background:var(--vermc);border:3px dashed var(--verm);border-radius:10px;padding:16px 20px;margin:30px 0}
+.cuidado .tit{font-family:var(--mao);font-weight:700;color:var(--verm);font-size:19px;margin-bottom:2px}
+
+.pontos{background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:8px 26px 22px;margin:44px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.pontos .tit{font-family:var(--mao);font-size:22px;font-weight:700;background:var(--amar);display:inline-block;padding:6px 18px;border:3px solid var(--tinta);border-radius:8px;transform:rotate(-1.5deg);margin:-22px 0 10px}
+.pontos ul{padding-left:22px;margin:8px 0}
+.pontos li{margin:9px 0}
+
+.sticky{background:var(--amar);padding:16px 20px;font-family:var(--mao);font-size:16px;transform:rotate(-1.2deg);box-shadow:3px 4px 9px rgba(0,0,0,.16);margin:30px auto;max-width:540px;border-radius:2px}
+.rabisco{font-family:var(--mao);color:var(--laranja);font-size:15.5px;line-height:1.4}
+
+.lab{background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:8px 24px 26px;margin:34px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.lab .tit{font-family:var(--mao);font-size:19px;font-weight:700;background:var(--verde);color:#fff;display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;border:3px solid var(--tinta)}
+.controles{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
+button{font-family:var(--corpo);font-size:16px;font-weight:700;cursor:pointer;background:var(--azul);color:#fff;border:3px solid var(--tinta);border-radius:9px;padding:9px 18px;box-shadow:3px 3px 0 var(--tinta);transition:.09s}
+button:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--tinta)}
+button:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--tinta)}
+button.sec{background:#fff;color:var(--tinta)}
+button.on{background:var(--verde)}
+button:disabled{opacity:.5;cursor:not-allowed;box-shadow:none;transform:none}
+.alt:focus-visible{outline:3px solid var(--laranja);outline-offset:2px}
+input[type=number]{font-family:var(--corpo);font-size:18px;font-weight:700;width:92px;padding:8px 10px;border:3px solid var(--tinta);border-radius:9px;background:#fff;text-align:center}
+input:focus{outline:3px solid var(--amar)}
+input[type=range]{width:100%;max-width:280px;accent-color:var(--azul);height:26px;vertical-align:middle}
+label.lab-l{font-weight:700;font-size:15px}
+.sl-linha{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0}
+.sl-val{font-family:var(--mao);font-size:22px;font-weight:700;min-width:52px;text-align:center;background:var(--amar);border:2px solid var(--tinta);border-radius:8px;padding:1px 8px}
+
+.tela{background:#fff;border:2px solid var(--linha);border-radius:10px;padding:6px}
+.tela svg{width:100%;height:auto;display:block;max-width:400px;margin:0 auto}
+
+.ex{background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:8px 24px 24px;margin:30px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13);position:relative}
+.ex .tit{font-family:var(--mao);font-size:19px;font-weight:700;background:var(--laranja);color:#fff;display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;border:3px solid var(--tinta)}
+.alt{display:block;background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:12px 16px;margin:9px 0;cursor:pointer;font-size:16.5px;transition:.12s;font-weight:600}
+.alt:hover{background:var(--amar)}
+.alt.certa{background:var(--verdec);border-color:var(--verde)}
+.alt.errada{background:var(--vermc);border-color:var(--verm)}
+.fb{margin-top:14px;font-family:var(--mao);font-size:17px;min-height:0;padding:0;border-radius:9px;overflow:hidden;transition:.2s}
+.fb.mostra{padding:12px 16px;min-height:24px}
+.fb.ok{background:var(--verdec);border:3px solid var(--verde);color:#065f46}
+.fb.no{background:var(--vermc);border:3px solid var(--verm);color:#991b1b}
+@keyframes chacoalha{0%,100%{transform:translateX(0)}15%{transform:translateX(-10px)}30%{transform:translateX(10px)}45%{transform:translateX(-7px)}60%{transform:translateX(7px)}75%{transform:translateX(-3px)}}
+.chacoalha{animation:chacoalha .5s}
+@keyframes pulsa{0%{transform:scale(1)}45%{transform:scale(1.11)}100%{transform:scale(1)}}
+.pulsa{animation:pulsa .45s}
+.selo{position:absolute;right:16px;top:14px;font-size:34px;opacity:0;transform:scale(.2) rotate(-25deg);transition:.4s cubic-bezier(.34,1.7,.5,1)}
+.selo.ver{opacity:1;transform:scale(1) rotate(-12deg)}
+.dica{font-size:14.5px;color:var(--cinza);margin-top:10px;font-style:italic}
+
+.placar{background:var(--tinta);color:var(--papel2);border-radius:14px;padding:26px 28px;margin:44px 0 0;text-align:center}
+.placar .n{font-size:52px;font-weight:800;font-family:var(--mao);color:var(--amar);line-height:1}
+.barra{height:20px;background:#3a3a3a;border-radius:12px;overflow:hidden;margin:16px auto;max-width:420px}
+.barra i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--verde),var(--amar));transition:.6s}
+.conf{position:fixed;top:-20px;width:11px;height:16px;z-index:99;pointer-events:none;border-radius:2px}
+@keyframes cai{to{transform:translateY(105vh) rotate(720deg);opacity:.1}}
+
+footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:var(--cinza);font-size:15px;text-align:center}
+@media(max-width:620px){header h1{font-size:30px}h2{font-size:24px}.guru{flex-direction:column;align-items:center}.guru svg{flex:0 0 auto}}
+</style>
+<link rel="stylesheet" href="../../assets/pecas.css">
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <p class="serie">✏️ MATEMÁTICA DO ZERO — nível 1, fundamentos</p>
+    <span class="aula-num">AULA 3 de 30 · NÍVEL 1</span>
+    <h1>Porcentagem, razão e regra de três</h1>
+    <p class="sub">Desconto na loja, receita de bolo, escala do mapa e juros no banco são a mesma conta: comparar por divisão.</p>
+    <div class="voltou"><strong>Você já sabe:</strong> frações e decimais (Aula 2) — fração é divisão, e decimal é fração de 10, 100, 1000. Hoje a fração de 100 ganha um nome famoso.</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<p class="grande">"Leve 3, pague 2." "Até 40% de desconto." "Rende 1% ao mês." "Escala 1:50.000." A vida adulta está cheia de números que não dizem <em>quanto</em>, e sim <strong>quanto em relação a outra coisa</strong>. Esta aula mostra que tudo isso é uma ideia só: a <strong>razão</strong>.</p>
+
+<div class="cerebro">
+  <div class="tit">🧠 Poder do cérebro</div>
+  <p>Numa turma, 12 de 30 alunos usam óculos. Em outra, 10 de 20. Em qual turma usar óculos é <strong>mais comum</strong>? A primeira tem mais gente de óculos... isso responde?</p>
+  <details><summary>Ver a resposta</summary><p>Não responde. Compare a <strong>fração</strong>: 12/30 = 0,4 (40%) e 10/20 = 0,5 (50%). Na segunda turma, metade usa óculos. Comparar quantidades de grupos de tamanhos diferentes pede uma razão — é o assunto desta aula.</p></details>
+</div>
+
+<!-- ============ 1 ============ -->
+<h2><span class="n">1</span> Razão e proporção: a receita que dobra</h2>
+
+<p>Uma receita pede <strong>2 xícaras de farinha para 1 de açúcar</strong>. Essa comparação é uma <strong>razão</strong>: 2 para 1, ou <span class="mono">2/1</span>. Para fazer o dobro do bolo, dobra tudo: 4 para 2 — outra razão, mas <strong>a mesma</strong>, porque <span class="mono">4/2 = 2/1</span>. Duas razões iguais formam uma <strong>proporção</strong> (são as frações equivalentes da Aula 2).</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: a receita que dobra</div>
+  <p>A receita original serve 4 pessoas. Mude o número de pessoas e veja os ingredientes crescerem juntos.</p>
+  <div class="sl-linha"><label class="lab-l" for="slP1" style="min-width:80px">pessoas:</label><input type="range" id="slP1" min="2" max="16" step="1" value="8"><span class="sl-val" id="vP1">8</span></div>
+  <div class="tela"><svg id="svg1" role="img" aria-label="Barras dos ingredientes da receita"></svg></div>
+  <p class="rabisco centro" id="txt1"></p>
+</div>
+
+<!-- ============ 2 ============ -->
+<h2><span class="n">2</span> Porcentagem: "por cem"</h2>
+
+<p><strong>Porcentagem</strong> é só uma fração com 100 embaixo: <span class="mono">35% = 35/100 = 0,35</span>. Para achar 35% de alguma coisa, multiplique por 0,35 — ou pense em 100 quadradinhos e pegue 35 deles.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: a barra de porcentagem</div>
+  <p>Escolha a porcentagem e o total. Cada quadradinho vale 1% do total.</p>
+  <div class="sl-linha"><label class="lab-l" for="slPc2" style="min-width:110px">porcentagem:</label><input type="range" id="slPc2" min="0" max="100" step="1" value="35"><span class="sl-val" id="vPc2">35%</span></div>
+  <div class="sl-linha"><label class="lab-l" for="slT2" style="min-width:110px">total:</label><input type="range" id="slT2" min="20" max="400" step="20" value="200"><span class="sl-val" id="vT2">200</span></div>
+  <div class="tela"><svg id="svg2" role="img" aria-label="Grade de 100 quadradinhos com a porcentagem pintada"></svg></div>
+  <p class="rabisco centro" id="txt2"></p>
+</div>
+
+<!-- ============ 3 ============ -->
+<h2><span class="n">3</span> Aumento e desconto: multiplicar por um número só</h2>
+
+<p>Aumentar 10% é ficar com 100% + 10% = 110% do valor: <strong>multiplicar por 1,1</strong>. Descontar 10% é ficar com 90%: <strong>multiplicar por 0,9</strong>. Esse truque (trocar "mais tantos por cento" por "vezes um número") vai virar os juros compostos da Aula 14.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: desconto × aumento</div>
+  <p>Um produto de R$ 100 sobe e depois desce. Ele volta ao preço original?</p>
+  <div class="sl-linha"><label class="lab-l" for="slAu3" style="min-width:90px">aumento:</label><input type="range" id="slAu3" min="0" max="50" step="5" value="10"><span class="sl-val" id="vAu3">10%</span></div>
+  <div class="sl-linha"><label class="lab-l" for="slDe3" style="min-width:90px">desconto:</label><input type="range" id="slDe3" min="0" max="50" step="5" value="10"><span class="sl-val" id="vDe3">10%</span></div>
+  <div class="tela"><svg id="svg3" role="img" aria-label="Três barras: preço original, depois do aumento e depois do desconto"></svg></div>
+  <p class="rabisco centro" id="txt3"></p>
+</div>
+
+<div class="cuidado">
+  <div class="tit">⚠️ Cuidado — porcentagem de quê?</div>
+  <p style="margin:6px 0 0">Subir 10% e depois descer 10% <strong>não volta</strong> ao preço: R$ 100 vira R$ 110 e depois R$ 99. O desconto de 10% foi calculado sobre R$ 110, não sobre R$ 100. Toda porcentagem é "de alguma coisa" — sempre pergunte <strong>de quê</strong>.</p>
+</div>
+
+<!-- ============ 4 ============ -->
+<h2><span class="n">4</span> Escala: o mapa é uma razão</h2>
+
+<p>Num mapa com escala <span class="mono">1:50.000</span>, cada 1 cm no papel vale 50.000 cm de verdade (500 m). É uma razão entre o desenho e o mundo. Plantas de casa, maquetes e miniaturas usam a mesma ideia.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: a escala do mapa</div>
+  <p>Escolha a escala e meça no mapa.</p>
+  <div class="sl-linha"><label class="lab-l" for="slE4" style="min-width:110px">escala 1 para:</label><input type="range" id="slE4" min="0" max="4" step="1" value="2"><span class="sl-val" id="vE4">10.000</span></div>
+  <div class="sl-linha"><label class="lab-l" for="slC4" style="min-width:110px">no mapa (cm):</label><input type="range" id="slC4" min="1" max="10" step="1" value="3"><span class="sl-val" id="vC4">3</span></div>
+  <div class="tela"><svg id="svg4" role="img" aria-label="Régua no mapa e a distância real"></svg></div>
+  <p class="rabisco centro" id="txt4"></p>
+</div>
+
+<div class="guru">
+  <svg viewBox="0 0 100 118" width="92">
+    <ellipse cx="50" cy="112" rx="34" ry="6" fill="#00000018"/>
+    <path d="M50 60 L20 108 L80 108 Z" fill="#7c3aed" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="50" cy="34" r="20" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M30 36 q20 46 40 0 q-6 34 -20 34 q-14 0 -20 -34" fill="#e5e7eb" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M40 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M52 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M30 22 q20 -12 40 0" fill="none" stroke="#1b1b1b" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="24" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="76" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+  </svg>
+  <div>
+        <div class="fala">Um número sozinho quase nunca diz muita coisa. '12 alunos de óculos' não é muito nem pouco até você perguntar 'de quantos?'. A razão é essa pergunta. Faça-a sempre — é o que separa quem entende um desconto de quem é enganado por ele.</div>
+    <div class="quem">— o Guru</div>
+  </div>
+</div>
+
+<!-- ============ 5 ============ -->
+<h2><span class="n">5</span> Regra de três: a proporção que falta um pedaço</h2>
+
+<p>"3 kg de arroz custam R$ 12. Quanto custam 5 kg?" Você conhece três números e quer o quarto. Como preço e peso andam juntos, a razão é a mesma: <span class="mono">12/3 = ?/5</span>. O jeito mais seguro é passar pelo <strong>1</strong>: 1 kg custa 12 ÷ 3 = R$ 4, então 5 kg custam 5 × 4 = R$ 20. Isso é a <strong>regra de três</strong>.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: regra de três ao vivo</div>
+  <p>Mude os números conhecidos e o pedido. O laboratório passa pelo 1 — e faz a mesma conta nas duas colunas.</p>
+  <div class="sl-linha"><label class="lab-l" for="slK5" style="min-width:120px">kg conhecidos:</label><input type="range" id="slK5" min="1" max="10" step="1" value="3"><span class="sl-val" id="vK5">3</span></div>
+  <div class="sl-linha"><label class="lab-l" for="slR5" style="min-width:120px">custam (R$):</label><input type="range" id="slR5" min="2" max="60" step="2" value="12"><span class="sl-val" id="vR5">12</span></div>
+  <div class="sl-linha"><label class="lab-l" for="slQ5" style="min-width:120px">quero (kg):</label><input type="range" id="slQ5" min="1" max="20" step="1" value="5"><span class="sl-val" id="vQ5">5</span></div>
+  <div class="tela"><svg id="svg5" role="img" aria-label="Tabela da regra de três"></svg></div>
+  <p class="rabisco centro" id="txt5"></p>
+</div>
+
+<!-- ============ 6 ============ -->
+<h2><span class="n">6</span> Direta ou inversa?</h2>
+
+<p>Nem toda relação anda junto. Mais quilos → mais caro: grandezas <strong>diretamente</strong> proporcionais (dobra uma, dobra a outra). Mais pedreiros → <em>menos</em> dias de obra: grandezas <strong>inversamente</strong> proporcionais (dobra uma, a outra cai pela metade). Na inversa, o que fica igual é o <strong>produto</strong>: 2 pedreiros × 12 dias = 24 "pedreiro-dias" de trabalho, com qualquer número de pedreiros.</p>
+
+<p>Quando entram três ou mais grandezas (máquinas, horas e peças), é a <strong>regra de três composta</strong>: resolva uma grandeza de cada vez, sempre perguntando "direta ou inversa?".</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: direta ou inversa?</div>
+  <p>Troque de situação e mova o slider. Repare no formato do gráfico.</p>
+  <div class="controles">
+    <button class="sec on" data-s6="0">arroz: kg × preço</button>
+    <button class="sec" data-s6="1">obra: pedreiros × dias</button>
+  </div>
+  <div class="sl-linha"><label class="lab-l" for="slX6" style="min-width:90px" id="rotX6">kg:</label><input type="range" id="slX6" min="1" max="12" step="1" value="2"><span class="sl-val" id="vX6">2</span></div>
+  <div class="tela"><svg id="svg6" role="img" aria-label="Gráfico de uma grandeza em função da outra"></svg></div>
+  <p class="rabisco centro" id="txt6"></p>
+</div>
+
+<div class="idiota">
+  <div class="tit">Não existe pergunta idiota</div>
+  <p class="q">Pode existir mais de 100%?</p>
+  <p class="a">Pode, quando se compara com um valor de referência: um preço que foi de R$ 50 para R$ 150 subiu 200% (aumentou 2 vezes o valor inicial). O que não passa de 100% é a <strong>parte de um todo</strong>: não dá para 120% dos alunos usarem óculos.</p>
+  <p class="q">Por que "por cento"?</p>
+  <p class="a">Do latim <em>per centum</em>, "por cem". O símbolo % é um "1/00" desenhado às pressas — um 1 sobre dois zeros.</p>
+</div>
+
+<div class="pontos">
+  <div class="tit">Pontos importantes</div>
+  <ul>
+    <li><strong>Razão</strong> compara por divisão (2 para 1). Razões iguais formam uma <strong>proporção</strong>.</li>
+    <li><strong>Porcentagem</strong> é fração de 100: <span class="mono">35% = 0,35</span>; 35% de 200 = 0,35 × 200 = 70.</li>
+    <li>Aumentar 10% = × 1,1; descontar 10% = × 0,9. Um depois do outro: × 0,99.</li>
+    <li>Escala é a razão entre o desenho e o real.</li>
+    <li><strong>Regra de três</strong>: passe pelo 1 (quanto vale uma unidade) e multiplique.</li>
+    <li>Direta: dobra e dobra (o quociente fica igual). Inversa: dobra e cai pela metade (o produto fica igual).</li>
+  </ul>
+</div>
+
+<!-- ============ exercicios ============ -->
+<h2><span class="n">✏️</span> Afie o lápis</h2>
+<p>Seis exercícios. Erre à vontade — a correção explica o porquê.</p>
+
+<div class="ex" id="ex1">
+  <div class="tit">Exercício 1</div>
+  <div class="selo">✅</div>
+  <p>Quanto é 20% de 150?</p>
+  <p><input type="number" data-r="30" aria-label="Resposta do exercício 1"></p>
+  <button class="check" data-ex="ex1">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex2">
+  <div class="tit">Exercício 2</div>
+  <div class="selo">✅</div>
+  <p>Uma receita para 4 pessoas usa 3 ovos. Quantos ovos para 12 pessoas?</p>
+  <p><input type="number" data-r="9" aria-label="Resposta do exercício 2"></p>
+  <button class="check" data-ex="ex2">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex3">
+  <div class="tit">Exercício 3</div>
+  <div class="selo">✅</div>
+  <p>Um produto de R$ 100 subiu 10% e depois teve 10% de desconto. Quanto custa agora?</p>
+  <div class="alts" data-r="1">
+    <div class="alt" data-i="0">R$ 100</div>
+    <div class="alt" data-i="1">R$ 99</div>
+    <div class="alt" data-i="2">R$ 101</div>
+    <div class="alt" data-i="3">R$ 90</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex4">
+  <div class="tit">Exercício 4</div>
+  <div class="selo">✅</div>
+  <p>5 cadernos custam R$ 30. Quanto custam 8 cadernos (em reais)?</p>
+  <p><input type="number" data-r="48" aria-label="Resposta do exercício 4"></p>
+  <button class="check" data-ex="ex4">Conferir</button>
+  <div class="fb"></div>
+  <p class="dica">Dica: quanto custa 1 caderno?</p>
+</div>
+
+<div class="ex" id="ex5">
+  <div class="tit">Exercício 5 — o desafio</div>
+  <div class="selo">🏆</div>
+  <p>2 máquinas iguais fazem 100 peças em 5 horas. Quantas peças 4 dessas máquinas fazem em 3 horas?</p>
+  <p><input type="number" data-r="120" aria-label="Resposta do exercício 5"></p>
+  <button class="check" data-ex="ex5">Conferir</button>
+  <div class="fb"></div>
+  <p class="dica">Dica: quanto 1 máquina faz em 1 hora?</p>
+</div>
+
+<div class="ex" id="ex6">
+  <div class="tit">Exercício 6 — quem faz o quê?</div>
+  <div class="selo">✅</div>
+  <p>Ligue cada expressão ao que ela quer dizer.</p>
+  <table class="ligar">
+    <tr><td>25%</td><td><select data-r="0" aria-label="25%"><option value="">escolha...</option><option value="0">um quarto do total</option><option value="1">1 cm no papel é 1 m de verdade</option><option value="2">uma dobra e a outra cai pela metade</option><option value="3">um é o dobro do outro</option></select></td></tr>
+    <tr><td>escala 1:100</td><td><select data-r="1" aria-label="escala 1:100"><option value="">escolha...</option><option value="0">um quarto do total</option><option value="1">1 cm no papel é 1 m de verdade</option><option value="2">uma dobra e a outra cai pela metade</option><option value="3">um é o dobro do outro</option></select></td></tr>
+    <tr><td>grandezas inversas</td><td><select data-r="2" aria-label="grandezas inversas"><option value="">escolha...</option><option value="0">um quarto do total</option><option value="1">1 cm no papel é 1 m de verdade</option><option value="2">uma dobra e a outra cai pela metade</option><option value="3">um é o dobro do outro</option></select></td></tr>
+    <tr><td>razão 2 para 1</td><td><select data-r="3" aria-label="razão 2 para 1"><option value="">escolha...</option><option value="0">um quarto do total</option><option value="1">1 cm no papel é 1 m de verdade</option><option value="2">uma dobra e a outra cai pela metade</option><option value="3">um é o dobro do outro</option></select></td></tr>
+  </table>
+  <button class="check" data-ex="ex6">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="placar" id="placar">
+  <p style="margin:0 0 4px;font-family:var(--mao);font-size:19px">Seu placar</p>
+  <div class="n"><span id="pn">0</span> / 6</div>
+  <div class="barra"><i id="pbar"></i></div>
+  <p id="pmsg" style="margin:0;color:#cfc9bb">Resolva os exercícios acima e acompanhe aqui.</p>
+</div>
+
+<footer>
+  Matemática do Zero · Aula 3 — Porcentagem, razão e regra de três<br>
+  <strong>Próxima aula:</strong> Potências e raízes.
+</footer>
+
+</div>
+
+<script src="../../assets/progresso.js"></script>
+<script src="../../assets/auth.js"></script>
+<script src="../../assets/auth-ui.js"></script>
+<script src="../../assets/catalogo.js"></script>
+<script src="../../assets/menu.js"></script>
+<script>
+(function(){
+"use strict";
+var AULA_ID = "03-porcentagem-razao-e-regra-de-tres";
+var NS="http://www.w3.org/2000/svg";
+function $(id){ return document.getElementById(id); }
+function num(v,d){
+  if(d===undefined) d=2;
+  var p=Math.pow(10,d), r=Math.round(v*p)/p;
+  if(r===0) r=0;
+  return String(r).replace(".",",").replace("-","−");
+}
+function milhar(v){
+  var s=Math.round(v).toString(), neg=s.charAt(0)==="-"; if(neg) s=s.slice(1);
+  var out=""; while(s.length>3){ out="."+s.slice(-3)+out; s=s.slice(0,-3); }
+  return (neg?"−":"")+s+out;
+}
+function el(tag,attrs,pai){
+  var e=document.createElementNS(NS,tag);
+  for(var k in attrs) e.setAttribute(k,attrs[k]);
+  if(pai) pai.appendChild(e);
+  return e;
+}
+function limpa(g){ while(g.firstChild) g.removeChild(g.firstChild); }
+/* plano cartesiano: grade, eixos e conversao de coordenadas */
+function plano(svg,o){
+  /* ox/oy: desenha o plano numa regiao de um svg maior (sem mexer no viewBox) */
+  var w=o.w||400, h=o.h||300, ox=o.ox||0, oy=o.oy||0, regiao=("ox" in o)||("oy" in o);
+  if(!regiao) svg.setAttribute("viewBox","0 0 "+w+" "+h);
+  var P={w:w,h:h,o:o};
+  P.X=function(x){ return ox+(x-o.xmin)/(o.xmax-o.xmin)*w; };
+  P.Y=function(y){ return oy+h-(y-o.ymin)/(o.ymax-o.ymin)*h; };
+  P.xDe=function(px){ return o.xmin+(px-ox)/w*(o.xmax-o.xmin); };
+  var g=el("g",{},svg), px=o.px||1, py=o.py||1, i, eps=1e-9;
+  for(i=Math.ceil(o.xmin/px)*px;i<=o.xmax+eps;i+=px) el("line",{x1:P.X(i),y1:oy,x2:P.X(i),y2:oy+h,stroke:"#ece7da","stroke-width":1},g);
+  for(i=Math.ceil(o.ymin/py)*py;i<=o.ymax+eps;i+=py) el("line",{x1:ox,y1:P.Y(i),x2:ox+w,y2:P.Y(i),stroke:"#ece7da","stroke-width":1},g);
+  if(o.ymin<=0&&o.ymax>=0) el("line",{x1:ox,y1:P.Y(0),x2:ox+w,y2:P.Y(0),stroke:"#1b1b1b","stroke-width":1.6},g);
+  if(o.xmin<=0&&o.xmax>=0) el("line",{x1:P.X(0),y1:oy,x2:P.X(0),y2:oy+h,stroke:"#1b1b1b","stroke-width":1.6},g);
+  if(o.rotulos){
+    var lx=o.rotX||px, ly=o.rotY||py, y0=(o.ymin<=0&&o.ymax>=0)?P.Y(0):oy+h, x0=(o.xmin<=0&&o.xmax>=0)?P.X(0):ox;
+    var dx=(o.xmax-o.xmin)*0.03, dy=(o.ymax-o.ymin)*0.04;
+    for(i=Math.ceil(o.xmin/lx)*lx;i<=o.xmax+eps;i+=lx) if(Math.abs(i)>eps&&i>o.xmin+dx&&i<o.xmax-dx) el("text",{x:P.X(i),y:Math.min(oy+h-3,y0+14),"font-size":11,fill:"#6b7280","text-anchor":"middle"},g).textContent=num(i);
+    for(i=Math.ceil(o.ymin/ly)*ly;i<=o.ymax+eps;i+=ly) if(Math.abs(i)>eps&&i>o.ymin+dy&&i<o.ymax-dy) el("text",{x:x0-4<ox+14?x0+4:x0-4,y:P.Y(i)+4,"font-size":11,fill:"#6b7280","text-anchor":x0-4<ox+14?"start":"end"},g).textContent=num(i);
+  }
+  P.camada=el("g",{},svg);
+  if(regiao){
+    /* numa regiao, o que passa da borda e cortado para nao invadir o vizinho */
+    plano.n=(plano.n||0)+1;
+    var id="corte"+plano.n+"_"+Math.floor(Math.random()*1e6);
+    var cp=el("clipPath",{id:id},svg);
+    el("rect",{x:ox,y:oy,width:w,height:h},cp);
+    P.camada.setAttribute("clip-path","url(#"+id+")");
+  }
+  /* caminho de uma funcao, amostrada; valores fora da tela sao cortados */
+  P.d=function(f,a,b,n){
+    a=(a===undefined)?o.xmin:a; b=(b===undefined)?o.xmax:b; n=n||240;
+    var s="", novo=true, lim=(o.ymax-o.ymin)*3;
+    for(var k=0;k<=n;k++){
+      var x=a+(b-a)*k/n, y=f(x);
+      if(!isFinite(y)){ novo=true; continue; }
+      y=Math.max(o.ymin-lim,Math.min(o.ymax+lim,y));
+      s+=(novo?"M":"L")+P.X(x).toFixed(1)+" "+P.Y(y).toFixed(1)+" "; novo=false;
+    }
+    return s||"M0 0";
+  };
+  return P;
+}
+/* arrastar uma alca dentro de um svg; cb recebe coordenadas do viewBox */
+function arrasta(svg,alca,cb){
+  var ativo=false;
+  function pos(ev){
+    var r=svg.getBoundingClientRect(), vb=svg.viewBox.baseVal;
+    cb((ev.clientX-r.left)/r.width*vb.width,(ev.clientY-r.top)/r.height*vb.height);
+  }
+  alca.addEventListener("pointerdown",function(ev){ ativo=true; ev.preventDefault(); pos(ev); });
+  svg.addEventListener("pointermove",function(ev){ if(ativo) pos(ev); });
+  window.addEventListener("pointerup",function(){ ativo=false; });
+}
+/* texto de receita sem "+ -": termos [[coef, "x²"], [coef, "x"], [coef, ""]] */
+function receita(termos){
+  var s="";
+  termos.forEach(function(t){
+    var c=t[0], v=t[1];
+    if(Math.abs(c)<1e-9) return;
+    var a=Math.abs(c), cs=(a===1&&v)?"":num(a);
+    if(s==="") s=(c<0?"−":"")+cs+v;
+    else s+=(c<0?" − ":" + ")+cs+v;
+  });
+  return s||"0";
+}
+/* potencia com expoente inteiro em sobrescrito (2¹⁰); com virgula fica 2^0,5 */
+function pot(b,n){
+  var t=num(n,1);
+  if(t.indexOf(",")!==-1) return b+"^"+t;
+  var m={"0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹","−":"⁻"};
+  return b+t.split("").map(function(c){return m[c]||c;}).join("");
+}
+
+function reais(v){ return "R$ "+num(v,2).replace(/,(\d)$/,",$10"); }
+
+/* ---------- lab 1: receita ---------- */
+var svg1=$("svg1"); svg1.setAttribute("viewBox","0 0 400 200");
+var ingr1=[["farinha (xícaras)",2,"#f59e0b"],["açúcar (xícaras)",1,"#ec4899"],["ovos",3,"#eab308"],["leite (xícaras)",1.5,"#60a5fa"]];
+function pinta1(){
+  var p=parseInt($("slP1").value,10), f=p/4;
+  $("vP1").textContent=p;
+  limpa(svg1);
+  ingr1.forEach(function(g,i){
+    var q=g[1]*f, y=16+i*46;
+    el("text",{x:10,y:y+14,"font-size":12.5,"font-weight":700,fill:"#1b1b1b"},svg1).textContent=g[0];
+    el("rect",{x:130,y:y,width:Math.max(2,q*20),height:22,rx:4,fill:g[2]},svg1);
+    el("text",{x:136+q*20,y:y+16,"font-size":13,"font-weight":800,fill:"#1b1b1b"},svg1).textContent=num(q,2);
+  });
+  $("txt1").textContent="para "+p+" pessoas: tudo × "+num(f,2)+" (= "+p+" ÷ 4) · farinha : açúcar = "+num(2*f,2)+" : "+num(f,2)+" = 2 : 1, a mesma razão de sempre";
+}
+$("slP1").addEventListener("input",pinta1); pinta1();
+
+/* ---------- lab 2: porcentagem ---------- */
+var svg2=$("svg2"); svg2.setAttribute("viewBox","0 0 400 250");
+function pinta2(){
+  var pc=parseInt($("slPc2").value,10), t=parseInt($("slT2").value,10), v=pc/100*t;
+  $("vPc2").textContent=pc+"%"; $("vT2").textContent=t;
+  limpa(svg2);
+  for(var i=0;i<100;i++){ var c=i%10, l=Math.floor(i/10); el("rect",{x:95+c*21,y:10+l*21,width:19,height:19,rx:2,fill:i<pc?"#7c3aed":"#ede9fe"},svg2); }
+  el("text",{x:200,y:242,"font-size":12,"text-anchor":"middle",fill:"#6b7280"},svg2).textContent="cada quadradinho = 1% de "+t+" = "+num(t/100,2);
+  $("txt2").textContent=pc+"% de "+t+" = "+pc+"/100 × "+t+" = "+num(pc/100,2)+" × "+t+" = "+num(v,2);
+}
+$("slPc2").addEventListener("input",pinta2); $("slT2").addEventListener("input",pinta2); pinta2();
+
+/* ---------- lab 3: aumento e desconto ---------- */
+var svg3=$("svg3"); svg3.setAttribute("viewBox","0 0 400 200");
+function pinta3(){
+  var a=parseInt($("slAu3").value,10), d=parseInt($("slDe3").value,10), p1=100*(1+a/100), p2=p1*(1-d/100);
+  $("vAu3").textContent=a+"%"; $("vDe3").textContent=d+"%";
+  limpa(svg3);
+  [["início",100,"#9ca3af"],["+"+a+"%",p1,"#ef4444"],["−"+d+"%",p2,"#059669"]].forEach(function(b,i){
+    var h=b[1]*1.1, x=50+i*115;
+    el("rect",{x:x,y:185-h,width:70,height:h,rx:5,fill:b[2]},svg3);
+    el("text",{x:x+35,y:180-h,"font-size":13,"font-weight":800,"text-anchor":"middle",fill:"#1b1b1b"},svg3).textContent=reais(b[1]);
+    el("text",{x:x+35,y:198,"font-size":11,"text-anchor":"middle",fill:"#6b7280"},svg3).textContent=b[0];
+  });
+  el("line",{x1:40,y1:185-110,x2:390,y2:185-110,stroke:"#1b1b1b","stroke-dasharray":"4 4"},svg3);
+  var dif=p2-100;
+  $("txt3").textContent="100 × "+num(1+a/100,2)+" × "+num(1-d/100,2)+" = "+reais(p2)+(Math.abs(dif)<1e-9?" — voltou ao preço original.":dif<0?" — ficou "+reais(-dif)+" mais barato que no começo.":" — ficou "+reais(dif)+" mais caro que no começo.");
+}
+$("slAu3").addEventListener("input",pinta3); $("slDe3").addEventListener("input",pinta3); pinta3();
+
+/* ---------- lab 4: escala ---------- */
+var escalas4=[1000,5000,10000,50000,100000], svg4=$("svg4"); svg4.setAttribute("viewBox","0 0 400 150");
+function pinta4(){
+  var e=escalas4[parseInt($("slE4").value,10)], c=parseInt($("slC4").value,10), real=c*e;
+  $("vE4").textContent=milhar(e); $("vC4").textContent=c;
+  limpa(svg4);
+  el("rect",{x:10,y:10,width:380,height:80,rx:8,fill:"#ecfccb",stroke:"#65a30d"},svg4);
+  el("circle",{cx:30,cy:50,r:7,fill:"var(--verm)"},svg4);
+  el("circle",{cx:30+c*34,cy:50,r:7,fill:"var(--azul)"},svg4);
+  el("line",{x1:30,y1:50,x2:30+c*34,y2:50,stroke:"#1b1b1b","stroke-width":2,"stroke-dasharray":"5 3"},svg4);
+  el("line",{x1:30,y1:112,x2:370,y2:112,stroke:"#1b1b1b","stroke-width":2},svg4);
+  for(var k=0;k<=10;k++){ el("line",{x1:30+k*34,y1:106,x2:30+k*34,y2:118,stroke:"#1b1b1b"},svg4); el("text",{x:30+k*34,y:134,"font-size":10.5,"text-anchor":"middle",fill:"#6b7280"},svg4).textContent=k; }
+  el("text",{x:370,y:148,"font-size":10.5,"text-anchor":"end",fill:"#6b7280"},svg4).textContent="cm no mapa";
+  var m=real/100, t=m>=1000?num(m/1000,2)+" km":milhar(m)+" m";
+  $("txt4").textContent="1:"+milhar(e)+" → "+c+" cm no mapa = "+c+" × "+milhar(e)+" = "+milhar(real)+" cm de verdade = "+t;
+}
+$("slE4").addEventListener("input",pinta4); $("slC4").addEventListener("input",pinta4); pinta4();
+
+/* ---------- lab 5: regra de tres ---------- */
+var svg5=$("svg5"); svg5.setAttribute("viewBox","0 0 400 170");
+function pinta5(){
+  var k=parseInt($("slK5").value,10), r=parseInt($("slR5").value,10), q=parseInt($("slQ5").value,10), u=r/k, res=u*q;
+  $("vK5").textContent=k; $("vR5").textContent=r; $("vQ5").textContent=q;
+  limpa(svg5);
+  var linhas=[[k+" kg",reais(r),"o que se sabe"],["1 kg",reais(u),"÷ "+k],[q+" kg",reais(res),"× "+q]];
+  linhas.forEach(function(l,i){
+    var y=20+i*48;
+    el("rect",{x:60,y:y,width:110,height:34,rx:6,fill:"#dbeafe",stroke:"var(--azul)"},svg5);
+    el("rect",{x:200,y:y,width:120,height:34,rx:6,fill:i===2?"#d1fae5":"#fef3c7",stroke:i===2?"var(--verde)":"var(--laranja)"},svg5);
+    el("text",{x:115,y:y+22,"font-size":14,"font-weight":800,"text-anchor":"middle"},svg5).textContent=l[0];
+    el("text",{x:260,y:y+22,"font-size":14,"font-weight":800,"text-anchor":"middle"},svg5).textContent=l[1];
+    if(i>0) el("text",{x:326,y:y-3,"font-size":10.5,fill:"var(--roxo)","font-weight":700},svg5).textContent=l[2];
+  });
+  $("txt5").textContent=k+" kg custam "+reais(r)+" → 1 kg custa "+reais(r)+" ÷ "+k+" = "+reais(u)+" → "+q+" kg custam "+q+" × "+reais(u)+" = "+reais(res);
+}
+["slK5","slR5","slQ5"].forEach(function(id){ $(id).addEventListener("input",pinta5); }); pinta5();
+
+/* ---------- lab 6: direta ou inversa ---------- */
+var s6=0, svg6=$("svg6");
+function pinta6(){
+  var x=parseInt($("slX6").value,10);
+  $("vX6").textContent=x;
+  limpa(svg6);
+  var P, f, y;
+  if(s6===0){
+    f=function(v){return 4*v;}; y=f(x);
+    P=plano(svg6,{w:400,h:260,xmin:-0.5,xmax:12.5,ymin:-3,ymax:52,px:1,py:4,rotulos:true,rotX:2,rotY:8});
+    $("rotX6").textContent="kg:";
+    $("txt6").textContent=x+" kg × R$ 4 = R$ "+y+" · preço ÷ kg = "+(y/x)+" sempre: direta (o gráfico é uma reta que sai do zero)";
+  } else {
+    f=function(v){return 24/v;}; y=f(x);
+    P=plano(svg6,{w:400,h:260,xmin:-0.5,xmax:12.5,ymin:-2,ymax:26,px:1,py:2,rotulos:true,rotX:2,rotY:4});
+    $("rotX6").textContent="pedreiros:";
+    $("txt6").textContent=x+" pedreiros → 24 ÷ "+x+" = "+num(y,2)+" dias · pedreiros × dias = "+num(x*y,2)+" sempre: inversa (dobra um, o outro cai pela metade)";
+  }
+  el("path",{d:P.d(f,s6===0?0:1,12),fill:"none",stroke:s6===0?"var(--azul)":"var(--verm)","stroke-width":3},P.camada);
+  el("line",{x1:P.X(x),y1:P.Y(0),x2:P.X(x),y2:P.Y(y),stroke:"#1b1b1b","stroke-dasharray":"4 3"},P.camada);
+  el("circle",{cx:P.X(x),cy:P.Y(y),r:7,fill:"var(--laranja)",stroke:"#1b1b1b","stroke-width":1.5},P.camada);
+}
+document.querySelectorAll("[data-s6]").forEach(function(b){ b.addEventListener("click",function(){
+  s6=parseInt(b.dataset.s6,10);
+  document.querySelectorAll("[data-s6]").forEach(function(o){ o.classList.toggle("on",o===b); });
+  pinta6();
+}); });
+$("slX6").addEventListener("input",pinta6); pinta6();
+
+/* ---------- exercicios ---------- */
+var feitos={}, TOTAL=6;
+function confete(){
+  var cores=["#fde68a","#2563eb","#dc2626","#059669","#7c3aed","#d97706"];
+  for(var i=0;i<40;i++){
+    (function(i){
+      var d=document.createElement("div");
+      d.className="conf"; d.style.left=(Math.random()*100)+"vw";
+      d.style.background=cores[i%cores.length];
+      d.style.animation="cai "+(1.9+Math.random()*1.5)+"s linear forwards";
+      d.style.animationDelay=(Math.random()*.5)+"s";
+      document.body.appendChild(d);
+      setTimeout(function(){d.remove();},4200);
+    })(i);
+  }
+}
+function marca(id,ok){
+  if(ok&&!feitos[id]){
+    feitos[id]=true;
+    if(window.Progresso) Progresso.marcar(AULA_ID,id);
+    var n=Object.keys(feitos).length;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Você fechou a Aula 3. 🎉</strong> Razões dominadas. Na próxima: potências e raízes."; confete(); }
+    else msg.textContent="Boa! Faltam "+(TOTAL-n)+".";
+    document.querySelector("#"+id+" .selo").classList.add("ver");
+  }
+}
+function restauraProgresso(){
+  if(!window.Progresso) return;
+  Progresso.carregar(AULA_ID).then(function(itens){
+    itens.forEach(function(id){
+      if(!feitos[id] && document.getElementById(id)){
+        feitos[id]=true;
+        document.querySelector("#"+id+" .selo").classList.add("ver");
+      }
+    });
+    var n=Object.keys(feitos).length;
+    if(n===0) return;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    msg.textContent = n===TOTAL
+      ? "Você já tinha concluído esta aula. 🎉"
+      : "Progresso salvo: "+n+"/"+TOTAL+". Faltam "+(TOTAL-n)+".";
+  });
+}
+function fb(box,ok,txt){
+  var f=box.querySelector(".fb");
+  f.className="fb mostra "+(ok?"ok":"no"); f.innerHTML=txt;
+  box.classList.remove("chacoalha");
+  if(!ok){ void box.offsetWidth; box.classList.add("chacoalha"); }
+}
+var explica={
+ "ex1": {
+  "ok": "Isso: 20% = 0,2 e 0,2 × 150 = 30. (Ou: 10% de 150 é 15; dobra, 30.)",
+  "no": "20% é 20/100 = 0,2. Multiplique: 0,2 × 150 = 30. Um atalho: 10% é só andar a vírgula (15); 20% é o dobro."
+ },
+ "ex2": {
+  "ok": "Exato: 12 pessoas é 3 vezes 4 pessoas, então 3 × 3 = 9 ovos.",
+  "no": "De 4 para 12 pessoas, a receita fica 3 vezes maior. Os ovos também: 3 × 3 = 9."
+ },
+ "ex4": {
+  "ok": "Perfeito: 1 caderno = 30 ÷ 5 = R$ 6; 8 cadernos = 8 × 6 = R$ 48.",
+  "no": "Passe pelo 1: um caderno custa 30 ÷ 5 = 6 reais. Oito cadernos: 8 × 6 = 48."
+ },
+ "ex5": {
+  "ok": "Isso! 1 máquina faz 100 ÷ 2 = 50 peças em 5 h, ou 10 por hora. 4 máquinas em 3 horas: 4 × 3 × 10 = 120.",
+  "no": "Passe pelo 1 nas duas grandezas: 1 máquina em 5 h faz 50 peças; em 1 h, 10 peças. Então 4 máquinas × 3 horas × 10 = 120 peças."
+ },
+ "ex6": {
+  "ok": "Tudo certo! Um quarto, a escala da planta, a inversa e o dobro.",
+  "no": "Quase. 25% = um quarto; 1:100 = 1 cm vale 100 cm (1 m); inversas = uma dobra e a outra cai pela metade; 2 para 1 = o dobro."
+ }
+};
+document.querySelectorAll("button.check").forEach(function(b){
+  b.addEventListener("click",function(){
+    var box=document.getElementById(b.dataset.ex);
+    var ins=box.querySelectorAll("input[data-r],select[data-r]"), tudoOk=true, vazio=false;
+    ins.forEach(function(inp){
+      if(inp.value===""){vazio=true;return;}
+      var ok=Math.abs(parseFloat(inp.value)-parseFloat(inp.dataset.r)) < 0.001;
+      inp.style.borderColor=ok?"#059669":"#dc2626";
+      inp.style.background=ok?"#d1fae5":"#fee2e2";
+      if(!ok) tudoOk=false;
+    });
+    if(vazio){ fb(box,false,"Preencha o campo antes de conferir. 🙂"); return; }
+    fb(box,tudoOk,(tudoOk?"✔ ":"✘ ")+(tudoOk?explica[b.dataset.ex].ok:explica[b.dataset.ex].no));
+    marca(b.dataset.ex,tudoOk);
+  });
+});
+var expAlt={
+ "ex3": [
+  "Parece, mas não volta: o desconto de 10% é calculado sobre R$ 110, e 10% de 110 é 11.",
+  "Isso! 100 × 1,1 = 110 e 110 × 0,9 = 99. O desconto foi sobre um valor maior.",
+  "Ficou mais barato, não mais caro: 100 × 1,1 × 0,9 = 99.",
+  "R$ 90 seria só o desconto sobre R$ 100, esquecendo o aumento."
+ ]
+};
+document.querySelectorAll(".alts").forEach(function(grupo){
+  var box=grupo.closest(".ex"), certa=parseInt(grupo.dataset.r,10);
+  grupo.querySelectorAll(".alt").forEach(function(alt){
+    alt.setAttribute("tabindex","0");
+    alt.setAttribute("role","button");
+    alt.setAttribute("aria-label","Alternativa "+alt.textContent.trim());
+    function escolhe(){
+      var i=parseInt(alt.dataset.i,10), ok=(i===certa);
+      grupo.querySelectorAll(".alt").forEach(function(a){a.classList.remove("certa","errada");});
+      alt.classList.add(ok?"certa":"errada");
+      if(ok) alt.classList.add("pulsa");
+      fb(box,ok,(ok?"✔ ":"✘ ")+expAlt[box.id][i]);
+      marca(box.id,ok);
+    }
+    alt.addEventListener("click",escolhe);
+    alt.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();escolhe();}});
+  });
+});
+
+restauraProgresso();
+
+})();
+</script>
+</body>
+</html>

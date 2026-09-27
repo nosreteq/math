@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aula 18 — Girar multiplicando | Matemática do Zero</title>
+<title>Aula 18 — Girar multiplicando: números complexos | Matemática do Zero</title>
 <style>
 :root{
   --papel:#f6f2e9; --papel2:#fffdf7; --tinta:#1b1b1b; --cinza:#6b7280;
@@ -107,22 +107,29 @@ label.lab-l{font-weight:700;font-size:15px}
 footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:var(--cinza);font-size:15px;text-align:center}
 @media(max-width:620px){header h1{font-size:30px}h2{font-size:24px}.guru{flex-direction:column;align-items:center}.guru svg{flex:0 0 auto}}
 </style>
+<link rel="stylesheet" href="../../assets/pecas.css">
 </head>
 <body>
 
 <header>
   <div class="inner">
-    <p class="serie">✏️ MATEMÁTICA DO ZERO — nível 3, avançado</p>
-    <span class="aula-num">AULA 18 de 18 · NÍVEL 3</span>
-    <h1>Girar multiplicando</h1>
+    <p class="serie">✏️ MATEMÁTICA DO ZERO — nível 3, ensino médio</p>
+    <span class="aula-num">AULA 18 de 30 · NÍVEL 3</span>
+    <h1>Girar multiplicando: números complexos</h1>
     <p class="sub">Números complexos: "a raiz de −1" parece uma invenção sem sentido, mas é só um jeito de escrever "gire 90°".</p>
-    <div class="voltou"><strong>Você já sabe:</strong> pontos no plano (Aula 2), ângulos (Aula 3), seno e cosseno (Aula 4), a matriz de rotação (Aula 6), ondas somadas (Aula 12), a parábola que não cruza o zero (Aula 13), o e (Aula 14) e radianos (Aula 15). Esta aula amarra tudo.</div>
+    <div class="voltou"><strong>Você já sabe:</strong> pontos no plano (Aula 9), ângulos (Aula 11), seno e cosseno (Aula 15), a matriz de rotação (Aula 17), a parábola que não cruza o zero (Aula 13), o e (Aula 14) e radianos (Aula 15). Esta aula amarra tudo.</div>
   </div>
 </header>
 
 <div class="wrap">
 
 <p class="grande">Na Aula 13 ficou uma pendência: <span class="mono">x² = −1</span> não tem solução, porque nenhum número ao quadrado dá negativo. Por séculos isso foi tratado como "impossível". Aí alguém teve uma ideia simples: e se o número que falta não estiver <strong>na reta</strong>, e sim <strong>fora dela</strong>?</p>
+
+<div class="cerebro">
+  <div class="tit">🧠 Poder do cérebro</div>
+  <p>Multiplicar por −1 vira um número para o outro lado da reta: um giro de 180°. Que número, usado duas vezes, faria esse giro em dois passos de 90°?</p>
+  <details><summary>Ver a resposta</summary><p>Um número i com i · i = −1. Nenhum número da reta faz isso — então ele precisa sair da reta, para o plano. É o número imaginário, e multiplicar por ele é girar.</p></details>
+</div>
 
 <!-- ============ 1 ============ -->
 <h2><span class="n">1</span> Multiplicar por −1 é girar meia volta</h2>
@@ -146,9 +153,9 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <!-- ============ 2 ============ -->
 <h2><span class="n">2</span> O plano complexo: um número é um ponto</h2>
 
-<p>Se i aponta "para cima", um número pode andar <span class="mono">a</span> para o lado e <span class="mono">b</span> para cima: <span class="mono">a + bi</span>. Isso é um <strong>número complexo</strong> — e é exatamente o ponto <span class="mono">(a, b)</span> da Aula 2. A régua deitada tem os números de sempre (parte <strong>real</strong>); a régua em pé tem os múltiplos de i (parte <strong>imaginária</strong> — nome antigo e injusto: ela é tão real quanto a outra).</p>
+<p>Se i aponta "para cima", um número pode andar <span class="mono">a</span> para o lado e <span class="mono">b</span> para cima: <span class="mono">a + bi</span>. Isso é um <strong>número complexo</strong> — e é exatamente o ponto <span class="mono">(a, b)</span> da Aula 9. A régua deitada tem os números de sempre (parte <strong>real</strong>); a régua em pé tem os múltiplos de i (parte <strong>imaginária</strong> — nome antigo e injusto: ela é tão real quanto a outra).</p>
 
-<p>Como toda seta, ele tem um <strong>tamanho</strong> (Pitágoras, Aula 9: <span class="mono">√(a² + b²)</span>) e um <strong>ângulo</strong> (Aula 3).</p>
+<p>Como toda seta, ele tem um <strong>tamanho</strong> (Pitágoras, Aula 12: <span class="mono">√(a² + b²)</span>) e um <strong>ângulo</strong> (Aula 11).</p>
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: o plano complexo</div>
@@ -166,7 +173,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <p class="centro" style="font-size:19px;font-weight:800">(a + bi) · (c + di) = (ac − bd) + (ad + bc)i</p>
 
-<p>Parece bagunça, mas o desenho é limpo: <strong>os tamanhos se multiplicam e os ângulos se somam</strong>. Exemplo: <span class="mono">(1 + i) · (1 + i) = 1 + 2i + i² = 2i</span>. O tamanho √2 vezes √2 deu 2; o ângulo 45° + 45° deu 90°. É a matriz de rotação da Aula 6 escrita como um número só.</p>
+<p>Parece bagunça, mas o desenho é limpo: <strong>os tamanhos se multiplicam e os ângulos se somam</strong>. Exemplo: <span class="mono">(1 + i) · (1 + i) = 1 + 2i + i² = 2i</span>. O tamanho √2 vezes √2 deu 2; o ângulo 45° + 45° deu 90°. É a matriz de rotação da Aula 17 escrita como um número só.</p>
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: girar e esticar</div>
@@ -221,7 +228,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <!-- ============ 5 ============ -->
 <h2><span class="n">5</span> A fórmula de Euler: o ponto girando</h2>
 
-<p>Na Aula 14, o e apareceu como <span class="mono">(1 + 1/n)ⁿ</span>: crescer um pouquinho, muitas vezes. Troque o "crescer" por "girar um pouquinho": <span class="mono">(1 + iθ/n)ⁿ</span>. Cada fator dá um giro minúsculo de tamanho quase 1; n deles juntos dão um giro de θ radianos, sem esticar. O resultado é o ponto do círculo da Aula 4:</p>
+<p>Na Aula 14, o e apareceu como <span class="mono">(1 + 1/n)ⁿ</span>: crescer um pouquinho, muitas vezes. Troque o "crescer" por "girar um pouquinho": <span class="mono">(1 + iθ/n)ⁿ</span>. Cada fator dá um giro minúsculo de tamanho quase 1; n deles juntos dão um giro de θ radianos, sem esticar. O resultado é o ponto do círculo da Aula 15:</p>
 
 <p class="centro" style="font-size:22px;font-weight:800">e^(iθ) = cos θ + i · sen θ</p>
 
@@ -242,19 +249,21 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 </div>
 
 <!-- ============ 6 ============ -->
-<h2><span class="n">6</span> Ondas como giros</h2>
+<h2><span class="n">6</span> As raízes que faltavam</h2>
 
-<p>Um ponto girando no círculo tem uma <strong>altura</strong> que sobe e desce: a onda seno da Aula 5. Agora junte setas girando, uma na ponta da outra, cada uma com sua velocidade: a altura da última ponta desenha a <strong>soma de ondas</strong> da Aula 12. É assim que a decomposição de Fourier é escrita de verdade: como uma soma de números <span class="mono">e^(iωt)</span> girando.</p>
+<p>De volta à pendência da Aula 13. A parábola <span class="mono">y = (x − 1)² + 4</span> nunca cruza o zero: na balança sobra <span class="mono">(x − 1)² = −4</span>, e nenhum número real ao quadrado dá negativo. Com os complexos, dá: <span class="mono">(2i)² = 4 · i² = −4</span>. Então <span class="mono">x − 1 = 2i</span> ou <span class="mono">x − 1 = −2i</span>:</p>
+
+<p class="centro" style="font-size:21px;font-weight:800">x = 1 + 2i &nbsp;&nbsp; ou &nbsp;&nbsp; x = 1 − 2i</p>
+
+<p>As duas raízes existem — só não moram na reta dos números reais: estão fora dela, uma acima e outra abaixo, espelhadas. Com os complexos, <strong>toda</strong> equação de polinômio tem todas as raízes que o grau promete (2 para o 2º grau, 3 para o 3º...). Esse é o <strong>Teorema Fundamental da Álgebra</strong>.</p>
 
 <div class="lab">
-  <div class="tit">🔧 Laboratório: ondas como giros</div>
-  <p>A seta grande dá 1 volta; a pequena, na ponta dela, gira mais rápido. A altura da ponta vira a onda à direita.</p>
-  <div class="sl-linha"><label class="lab-l" for="slF6" style="min-width:140px">voltas da pequena:</label><input type="range" id="slF6" min="2" max="5" step="1" value="3"><span class="sl-val" id="vF6">3</span></div>
-  <div class="sl-linha"><label class="lab-l" for="slA6" style="min-width:140px">tamanho da pequena:</label><input type="range" id="slA6" min="0" max="1" step="0.1" value="0.4"><span class="sl-val" id="vA6">0,4</span></div>
-  <div class="sl-linha"><label class="lab-l" for="slT6" style="min-width:140px">tempo:</label><input type="range" id="slT6" min="0" max="48" step="1" value="6"><span class="sl-val" id="vT6">1/8 volta</span></div>
-  <div class="controles"><button id="bt6">▶ Animar</button></div>
-  <div class="tela"><svg id="svg6" role="img" aria-label="Setas girando e a onda desenhada pela altura da ponta"></svg></div>
-  <p class="rabisco centro" id="txt6"></p>
+  <div class="tit">🔧 Laboratório: as raízes que faltavam</div>
+  <p>A parábola é <span class="mono">y = (x − h)² + k</span>. Suba o k acima de zero e veja as raízes saírem da reta e irem para o plano complexo.</p>
+  <div class="sl-linha"><label class="lab-l" for="slHr" style="min-width:40px">h:</label><input type="range" id="slHr" min="-2" max="2" step="0.5" value="1"><span class="sl-val" id="vHr">1</span></div>
+  <div class="sl-linha"><label class="lab-l" for="slKr" style="min-width:40px">k:</label><input type="range" id="slKr" min="-4" max="4" step="0.5" value="-1"><span class="sl-val" id="vKr">−1</span></div>
+  <div class="tela"><svg id="svgRz" role="img" aria-label="Parábola e o plano complexo com as duas raízes"></svg></div>
+  <p class="rabisco centro" id="txtRz"></p>
 </div>
 
 <div class="pontos">
@@ -262,10 +271,10 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <ul>
     <li><strong>i</strong> é o giro de 90°: <span class="mono">i² = −1</span>. As raízes de −1 são i e −i.</li>
     <li><span class="mono">a + bi</span> é o ponto <span class="mono">(a, b)</span>: tamanho <span class="mono">√(a² + b²)</span> e um ângulo.</li>
-    <li>Multiplicar complexos: <strong>tamanhos multiplicam, ângulos somam</strong> — a rotação da Aula 6 num número só.</li>
+    <li>Multiplicar complexos: <strong>tamanhos multiplicam, ângulos somam</strong> — a rotação da Aula 17 num número só.</li>
     <li><span class="mono">wⁿ</span>: tamanho <span class="mono">rⁿ</span>, ângulo <span class="mono">nθ</span> — espirais e círculos.</li>
     <li><strong>Euler:</strong> <span class="mono">e^(iθ) = cos θ + i sen θ</span> (θ em radianos); <span class="mono">e^(iπ) = −1</span>.</li>
-    <li>A altura de um ponto girando é uma onda; somar giros é somar ondas (Fourier).</li>
+    <li>Com os complexos, a parábola que não cruza o zero ganha suas duas raízes: <span class="mono">(x − 1)² = −4</span> dá <span class="mono">x = 1 ± 2i</span>.</li>
   </ul>
 </div>
 
@@ -303,15 +312,16 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 </div>
 
 <div class="ex" id="ex4">
-  <div class="tit">Exercício 4</div>
+  <div class="tit">Exercício 4 — quem faz o quê?</div>
   <div class="selo">✅</div>
-  <p>O que multiplicar por <span class="mono">i</span> faz com um número no plano?</p>
-  <div class="alts" data-r="1">
-    <div class="alt" data-i="0">Dobra o tamanho dele.</div>
-    <div class="alt" data-i="1">Gira 90° em volta do zero, sem mudar o tamanho.</div>
-    <div class="alt" data-i="2">Troca o sinal dele.</div>
-    <div class="alt" data-i="3">Não faz nada: i não existe.</div>
-  </div>
+  <p>Ligue cada peça dos complexos ao seu papel.</p>
+  <table class="ligar">
+    <tr><td>i</td><td><select data-r="0" aria-label="i"><option value="">escolha...</option><option value="0">o número cujo quadrado é −1</option><option value="1">girar 90° no plano</option><option value="2">a distância do ponto até a origem</option><option value="3">o ponto do círculo de raio 1 no ângulo θ</option></select></td></tr>
+    <tr><td>multiplicar por i</td><td><select data-r="1" aria-label="multiplicar por i"><option value="">escolha...</option><option value="0">o número cujo quadrado é −1</option><option value="1">girar 90° no plano</option><option value="2">a distância do ponto até a origem</option><option value="3">o ponto do círculo de raio 1 no ângulo θ</option></select></td></tr>
+    <tr><td>tamanho de a + bi</td><td><select data-r="2" aria-label="tamanho de a + bi"><option value="">escolha...</option><option value="0">o número cujo quadrado é −1</option><option value="1">girar 90° no plano</option><option value="2">a distância do ponto até a origem</option><option value="3">o ponto do círculo de raio 1 no ângulo θ</option></select></td></tr>
+    <tr><td>e^(iθ)</td><td><select data-r="3" aria-label="e^(iθ)"><option value="">escolha...</option><option value="0">o número cujo quadrado é −1</option><option value="1">girar 90° no plano</option><option value="2">a distância do ponto até a origem</option><option value="3">o ponto do círculo de raio 1 no ângulo θ</option></select></td></tr>
+  </table>
+  <button class="check" data-ex="ex4">Conferir</button>
   <div class="fb"></div>
 </div>
 
@@ -346,8 +356,8 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 </div>
 
 <footer>
-  Matemática do Zero · Aula 18 — Girar multiplicando<br>
-  <strong>Fim do Nível 3 — Avançado!</strong> Das quatro operações até cálculo, probabilidade e números complexos. O que vem depois está no <a href="../../PLANO.md" style="color:var(--azul)">roteiro do curso</a>.
+  Matemática do Zero · Aula 18 — Girar multiplicando: números complexos<br>
+  <strong>Fim do Nível 3 — Ensino Médio!</strong> <strong>Próxima aula:</strong> Limites e a derivada, abrindo o Nível 4.
 </footer>
 
 </div>
@@ -568,50 +578,6 @@ function pinta5(){
 }
 $("slT5").addEventListener("input",pinta5); $("slN5").addEventListener("input",pinta5); pinta5();
 
-/* ---------- lab 6: ondas como giros ---------- */
-var svg6=$("svg6"); svg6.setAttribute("viewBox","0 0 420 220");
-var anim6=null;
-function pinta6(){
-  var f=parseInt($("slF6").value,10), a=parseFloat($("slA6").value), k=parseInt($("slT6").value,10), t=k*2*Math.PI/48;
-  $("vF6").textContent=f; $("vA6").textContent=num(a,1);
-  var mdc=function(x,y){ return y?mdc(y,x%y):x; }, m=mdc(k,48)||48;
-  $("vT6").textContent=k===0?"0":k===48?"1 volta":(k/m)+"/"+(48/m)+" volta";
-  limpa(svg6);
-  var R=55, R2=R*a, c0=[80,110];
-  el("circle",{cx:c0[0],cy:c0[1],r:R,fill:"none",stroke:"#c9c1ae","stroke-width":1.5},svg6);
-  var p1=[c0[0]+R*Math.cos(t),c0[1]-R*Math.sin(t)];
-  if(a>0) el("circle",{cx:p1[0],cy:p1[1],r:R2,fill:"none",stroke:"#e6e0d2","stroke-width":1.5},svg6);
-  var p2=[p1[0]+R2*Math.cos(f*t),p1[1]-R2*Math.sin(f*t)];
-  el("line",{x1:c0[0],y1:c0[1],x2:p1[0],y2:p1[1],stroke:"var(--azul)","stroke-width":3.5,"stroke-linecap":"round"},svg6);
-  el("line",{x1:p1[0],y1:p1[1],x2:p2[0],y2:p2[1],stroke:"var(--verm)","stroke-width":3,"stroke-linecap":"round"},svg6);
-  el("circle",{cx:p2[0],cy:p2[1],r:5,fill:"var(--roxo)"},svg6);
-  var x0=165, larg=245;
-  el("line",{x1:x0,y1:c0[1],x2:x0+larg,y2:c0[1],stroke:"#1b1b1b","stroke-width":1.2},svg6);
-  var d="", dd="";
-  for(var j=0;j<=200;j++){
-    var tt=2*Math.PI*j/200, y=c0[1]-(R*Math.sin(tt)+R2*Math.sin(f*tt));
-    d+=(j?"L":"M")+(x0+larg*j/200).toFixed(1)+" "+y.toFixed(1)+" ";
-    if(tt<=t+1e-9) dd+=(j?"L":"M")+(x0+larg*j/200).toFixed(1)+" "+y.toFixed(1)+" ";
-  }
-  el("path",{d:d,fill:"none",stroke:"#d6d0c2","stroke-width":2},svg6);
-  if(dd) el("path",{d:dd,fill:"none",stroke:"var(--roxo)","stroke-width":3},svg6);
-  var xt=x0+larg*t/(2*Math.PI);
-  el("line",{x1:p2[0],y1:p2[1],x2:xt,y2:p2[1],stroke:"var(--roxo)","stroke-width":1,"stroke-dasharray":"3 3"},svg6);
-  el("circle",{cx:xt,cy:p2[1],r:5,fill:"var(--roxo)"},svg6);
-  var alt=Math.sin(t)+a*Math.sin(f*t);
-  $("txt6").textContent="altura = sen(t) + "+num(a,1)+" · sen("+f+"t) = "+num(alt)+" · a pequena dá "+f+" voltas enquanto a grande dá 1 — a mesma soma de ondas da Aula 12.";
-}
-function passo6(){
-  var s=$("slT6"), k=(parseInt(s.value,10)+1)%49;
-  s.value=k; pinta6();
-}
-$("bt6").addEventListener("click",function(){
-  if(anim6){ clearInterval(anim6); anim6=null; this.textContent="▶ Animar"; }
-  else { anim6=setInterval(passo6,90); this.textContent="⏸ Pausar"; }
-});
-["slF6","slA6","slT6"].forEach(function(id){ $(id).addEventListener("input",pinta6); });
-pinta6();
-
 /* ---------- exercicios ---------- */
 var feitos={}, TOTAL=6;
 function confete(){
@@ -636,7 +602,7 @@ function marca(id,ok){
     document.getElementById("pn").textContent=n;
     document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
     var msg=document.getElementById("pmsg");
-    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Você fechou a Aula 18 e o Nível 3 inteiro. 🎉🎓</strong> Das quatro operações até cálculo, probabilidade e números complexos — sem pular nenhum degrau."; confete(); }
+    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Você fechou a Aula 18 e o Nível 3 — Ensino Médio. 🎉🎉</strong> Os números que giram. Próxima: Limites e a derivada, abrindo o Nível 4."; confete(); }
     else msg.textContent="Boa! Faltam "+(TOTAL-n)+".";
     document.querySelector("#"+id+" .selo").classList.add("ver");
   }
@@ -667,12 +633,13 @@ function fb(box,ok,txt){
   if(!ok){ void box.offsetWidth; box.classList.add("chacoalha"); }
 }
 var explica={
+  ex4:{"ok": "Tudo certo! O i, o giro, o tamanho e o círculo.", "no": "Quase. i = número com i² = −1; multiplicar por i = girar 90°; tamanho = distância até a origem; e^(iθ) = ponto do círculo de raio 1 no ângulo θ."},
  "ex1": {
   "ok": "Isso: i é o giro de 90°; dois giros dão meia volta, e meia volta é multiplicar por −1.",
   "no": "Por definição, i² = −1: o giro de 90° feito duas vezes dá 180°, que é trocar o sinal."
  },
  "ex2": {
-  "ok": "Exato: √(3² + 4²) = √25 = 5. A seta (3, 4) da Aula 6 de novo.",
+  "ok": "Exato: √(3² + 4²) = √25 = 5. A seta (3, 4) da Aula 17 de novo.",
   "no": "3 + 4i é o ponto (3, 4). Tamanho = √(3² + 4²) = √(9 + 16) = √25 = 5."
  },
  "ex3": {
@@ -687,7 +654,7 @@ var explica={
 document.querySelectorAll("button.check").forEach(function(b){
   b.addEventListener("click",function(){
     var box=document.getElementById(b.dataset.ex);
-    var ins=box.querySelectorAll("input[data-r]"), tudoOk=true, vazio=false;
+    var ins=box.querySelectorAll("input[data-r],select[data-r]"), tudoOk=true, vazio=false;
     ins.forEach(function(inp){
       if(inp.value===""){vazio=true;return;}
       var ok=Math.abs(parseFloat(inp.value)-parseFloat(inp.dataset.r)) < 0.001;
@@ -735,6 +702,128 @@ document.querySelectorAll(".alts").forEach(function(grupo){
 
 restauraProgresso();
 
+})();
+</script>
+<script>
+(function(){
+"use strict";
+/* laboratorio da reestruturacao: as raizes que faltavam */
+var NS="http://www.w3.org/2000/svg";
+function $(id){ return document.getElementById(id); }
+function num(v,d){
+  if(d===undefined) d=2;
+  var p=Math.pow(10,d), r=Math.round(v*p)/p;
+  if(r===0) r=0;
+  return String(r).replace(".",",").replace("-","−");
+}
+function milhar(v){
+  var s=Math.round(v).toString(), neg=s.charAt(0)==="-"; if(neg) s=s.slice(1);
+  var out=""; while(s.length>3){ out="."+s.slice(-3)+out; s=s.slice(0,-3); }
+  return (neg?"−":"")+s+out;
+}
+function el(tag,attrs,pai){
+  var e=document.createElementNS(NS,tag);
+  for(var k in attrs) e.setAttribute(k,attrs[k]);
+  if(pai) pai.appendChild(e);
+  return e;
+}
+function limpa(g){ while(g.firstChild) g.removeChild(g.firstChild); }
+/* plano cartesiano: grade, eixos e conversao de coordenadas */
+function plano(svg,o){
+  /* ox/oy: desenha o plano numa regiao de um svg maior (sem mexer no viewBox) */
+  var w=o.w||400, h=o.h||300, ox=o.ox||0, oy=o.oy||0, regiao=("ox" in o)||("oy" in o);
+  if(!regiao) svg.setAttribute("viewBox","0 0 "+w+" "+h);
+  var P={w:w,h:h,o:o};
+  P.X=function(x){ return ox+(x-o.xmin)/(o.xmax-o.xmin)*w; };
+  P.Y=function(y){ return oy+h-(y-o.ymin)/(o.ymax-o.ymin)*h; };
+  P.xDe=function(px){ return o.xmin+(px-ox)/w*(o.xmax-o.xmin); };
+  var g=el("g",{},svg), px=o.px||1, py=o.py||1, i, eps=1e-9;
+  for(i=Math.ceil(o.xmin/px)*px;i<=o.xmax+eps;i+=px) el("line",{x1:P.X(i),y1:oy,x2:P.X(i),y2:oy+h,stroke:"#ece7da","stroke-width":1},g);
+  for(i=Math.ceil(o.ymin/py)*py;i<=o.ymax+eps;i+=py) el("line",{x1:ox,y1:P.Y(i),x2:ox+w,y2:P.Y(i),stroke:"#ece7da","stroke-width":1},g);
+  if(o.ymin<=0&&o.ymax>=0) el("line",{x1:ox,y1:P.Y(0),x2:ox+w,y2:P.Y(0),stroke:"#1b1b1b","stroke-width":1.6},g);
+  if(o.xmin<=0&&o.xmax>=0) el("line",{x1:P.X(0),y1:oy,x2:P.X(0),y2:oy+h,stroke:"#1b1b1b","stroke-width":1.6},g);
+  if(o.rotulos){
+    var lx=o.rotX||px, ly=o.rotY||py, y0=(o.ymin<=0&&o.ymax>=0)?P.Y(0):oy+h, x0=(o.xmin<=0&&o.xmax>=0)?P.X(0):ox;
+    var dx=(o.xmax-o.xmin)*0.03, dy=(o.ymax-o.ymin)*0.04;
+    for(i=Math.ceil(o.xmin/lx)*lx;i<=o.xmax+eps;i+=lx) if(Math.abs(i)>eps&&i>o.xmin+dx&&i<o.xmax-dx) el("text",{x:P.X(i),y:Math.min(oy+h-3,y0+14),"font-size":11,fill:"#6b7280","text-anchor":"middle"},g).textContent=num(i);
+    for(i=Math.ceil(o.ymin/ly)*ly;i<=o.ymax+eps;i+=ly) if(Math.abs(i)>eps&&i>o.ymin+dy&&i<o.ymax-dy) el("text",{x:x0-4<ox+14?x0+4:x0-4,y:P.Y(i)+4,"font-size":11,fill:"#6b7280","text-anchor":x0-4<ox+14?"start":"end"},g).textContent=num(i);
+  }
+  P.camada=el("g",{},svg);
+  if(regiao){
+    /* numa regiao, o que passa da borda e cortado para nao invadir o vizinho */
+    plano.n=(plano.n||0)+1;
+    var id="corte"+plano.n+"_"+Math.floor(Math.random()*1e6);
+    var cp=el("clipPath",{id:id},svg);
+    el("rect",{x:ox,y:oy,width:w,height:h},cp);
+    P.camada.setAttribute("clip-path","url(#"+id+")");
+  }
+  /* caminho de uma funcao, amostrada; valores fora da tela sao cortados */
+  P.d=function(f,a,b,n){
+    a=(a===undefined)?o.xmin:a; b=(b===undefined)?o.xmax:b; n=n||240;
+    var s="", novo=true, lim=(o.ymax-o.ymin)*3;
+    for(var k=0;k<=n;k++){
+      var x=a+(b-a)*k/n, y=f(x);
+      if(!isFinite(y)){ novo=true; continue; }
+      y=Math.max(o.ymin-lim,Math.min(o.ymax+lim,y));
+      s+=(novo?"M":"L")+P.X(x).toFixed(1)+" "+P.Y(y).toFixed(1)+" "; novo=false;
+    }
+    return s||"M0 0";
+  };
+  return P;
+}
+/* arrastar uma alca dentro de um svg; cb recebe coordenadas do viewBox */
+function arrasta(svg,alca,cb){
+  var ativo=false;
+  function pos(ev){
+    var r=svg.getBoundingClientRect(), vb=svg.viewBox.baseVal;
+    cb((ev.clientX-r.left)/r.width*vb.width,(ev.clientY-r.top)/r.height*vb.height);
+  }
+  alca.addEventListener("pointerdown",function(ev){ ativo=true; ev.preventDefault(); pos(ev); });
+  svg.addEventListener("pointermove",function(ev){ if(ativo) pos(ev); });
+  window.addEventListener("pointerup",function(){ ativo=false; });
+}
+/* texto de receita sem "+ -": termos [[coef, "x²"], [coef, "x"], [coef, ""]] */
+function receita(termos){
+  var s="";
+  termos.forEach(function(t){
+    var c=t[0], v=t[1];
+    if(Math.abs(c)<1e-9) return;
+    var a=Math.abs(c), cs=(a===1&&v)?"":num(a);
+    if(s==="") s=(c<0?"−":"")+cs+v;
+    else s+=(c<0?" − ":" + ")+cs+v;
+  });
+  return s||"0";
+}
+/* potencia com expoente inteiro em sobrescrito (2¹⁰); com virgula fica 2^0,5 */
+function pot(b,n){
+  var t=num(n,1);
+  if(t.indexOf(",")!==-1) return b+"^"+t;
+  var m={"0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹","−":"⁻"};
+  return b+t.split("").map(function(c){return m[c]||c;}).join("");
+}
+
+var svgR=$("svgRz"); svgR.setAttribute("viewBox","0 0 400 220");
+function pintaRz(){
+  var h=parseFloat($("slHr").value), k=parseFloat($("slKr").value);
+  $("vHr").textContent=num(h); $("vKr").textContent=num(k);
+  limpa(svgR);
+  var A=plano(svgR,{ox:0,oy:0,w:195,h:220,xmin:-4,xmax:4,ymin:-4.5,ymax:6,px:1,py:1,rotulos:false});
+  el("path",{d:A.d(function(x){return (x-h)*(x-h)+k;}),fill:"none",stroke:"var(--azul)","stroke-width":3},A.camada);
+  el("text",{x:6,y:14,"font-size":11,"font-weight":700,fill:"var(--azul)"},A.camada).textContent="a parábola";
+  var B=plano(svgR,{ox:205,oy:0,w:195,h:220,xmin:-4,xmax:4,ymin:-4,ymax:4,px:1,py:1,rotulos:false});
+  el("text",{x:211,y:14,"font-size":11,"font-weight":700,fill:"var(--roxo)"},B.camada).textContent="plano complexo";
+  el("text",{x:B.X(0)+4,y:28,"font-size":10,fill:"#6b7280"},B.camada).textContent="i";
+  var raizes, t;
+  if(k<0){ var r=Math.sqrt(-k); raizes=[[h-r,0],[h+r,0]]; t="k < 0: a parábola cruza o zero em x = "+num(h-r)+" e x = "+num(h+r)+" — duas raízes reais, em cima da reta."; }
+  else if(k===0){ raizes=[[h,0]]; t="k = 0: encosta no zero em x = "+num(h)+" — as duas raízes coincidem."; }
+  else { var q=Math.sqrt(k); raizes=[[h,q],[h,-q]]; t="k > 0: não cruza o zero, mas (x − "+num(h)+")² = −"+num(k)+" tem solução: x = "+num(h)+" ± "+num(q)+"i — fora da reta, espelhadas."; }
+  raizes.forEach(function(z){
+    el("circle",{cx:B.X(z[0]),cy:B.Y(z[1]),r:7,fill:"var(--verm)",stroke:"#fff","stroke-width":2},B.camada);
+    if(k<=0) el("circle",{cx:A.X(z[0]),cy:A.Y(0),r:6,fill:"var(--verm)",stroke:"#fff","stroke-width":2},A.camada);
+  });
+  $("txtRz").textContent=t;
+}
+$("slHr").addEventListener("input",pintaRz); $("slKr").addEventListener("input",pintaRz); pintaRz();
 })();
 </script>
 </body>

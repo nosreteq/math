@@ -63,8 +63,8 @@ async function checaSPA(browser) {
 
   // abre uma aula pelo painel: vira iframe abaixo do cabeçalho
   await clica('#niveis a[href="#/nivel/2"]', '#/nivel/2');
-  await clica('#painel-nivel a.card >> nth=0', '#/aula/07-equacoes-a-balanca');
-  if (!p.url().endsWith('#/aula/07-equacoes-a-balanca')) falha(nome, `card abriu ${p.url()}`);
+  await clica('#painel-nivel a.card >> nth=0', '#/aula/07-letras-no-lugar-de-numeros');
+  if (!p.url().endsWith('#/aula/07-letras-no-lugar-de-numeros')) falha(nome, `card abriu ${p.url()}`);
   const quadro = p.frameLocator('#quadro');
   await quadro.locator('.wrap').waitFor({ timeout: 5000 }).catch(() => falha(nome, 'aula não carregou no iframe'));
   if (await quadro.locator('.md0-barra').count()) falha(nome, 'barra da aula avulsa apareceu dentro do curso');
@@ -81,25 +81,30 @@ async function checaSPA(browser) {
   }
 
   // botão "próxima" do cabeçalho e o do fim da aula
-  await clica('#prox', '#/aula/08-sistemas-de-equacoes');
-  if (!p.url().endsWith('#/aula/08-sistemas-de-equacoes')) falha(nome, `"Próxima" levou a ${p.url()}`);
+  await clica('#prox', '#/aula/08-equacoes-e-inequacoes');
+  if (!p.url().endsWith('#/aula/08-equacoes-e-inequacoes')) falha(nome, `"Próxima" levou a ${p.url()}`);
   await quadro.locator('.md0-fim a.prox').click();
-  await p.waitForFunction(() => location.hash === '#/aula/09-potencias-raizes-e-pitagoras', null, { timeout: 3000 })
+  await p.waitForFunction(() => location.hash === '#/aula/09-o-plano-e-a-reta', null, { timeout: 3000 })
     .catch(() => falha(nome, 'botão "Próxima aula" do fim da aula não navegou o curso'));
   await p.goBack({ waitUntil: 'commit' });
-  await p.waitForFunction(() => location.hash === '#/aula/08-sistemas-de-equacoes', null, { timeout: 3000 })
+  await p.waitForFunction(() => location.hash === '#/aula/08-equacoes-e-inequacoes', null, { timeout: 3000 })
     .catch(() => falha(nome, 'voltar do navegador não voltou à aula anterior'));
 
   await clica('#niveis a[href="#/nivel/2"]', '#/nivel/2');
   const txt = await p.locator('#painel-nivel a.card >> nth=0').innerText();
   if (!txt.includes('1 de 6')) falha(nome, 'progresso feito no iframe não apareceu no card da aula');
 
+  // endereço da numeração antiga (18 aulas) redireciona para a aula nova
+  await p.goto(base + '#/aula/07-equacoes-a-balanca');
+  await p.waitForTimeout(200);
+  if (!p.url().endsWith('#/aula/08-equacoes-e-inequacoes')) falha(nome, `endereço antigo não redirecionou: ${p.url()}`);
+
   await p.goto(base + '#/rota/que-nao-existe');
   if (!(await visivel('#v-inicio'))) falha(nome, 'rota desconhecida não volta ao início');
 
   // celular: nenhuma visão rola para o lado
   await p.setViewportSize({ width: 375, height: 800 });
-  for (const r of ['#/', '#/nivel/1', '#/nivel/3', '#/aula/06-setas-e-tabelas-de-numeros', '#/aula/18-girar-multiplicando']) {
+  for (const r of ['#/', '#/nivel/1', '#/nivel/3', '#/aula/17-vetores-e-matrizes', '#/aula/18-girar-multiplicando']) {
     await p.goto(base + r);
     await p.waitForTimeout(300);
     const sobra = await p.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
@@ -131,6 +136,13 @@ async function checaSPA(browser) {
     };
     await textoQuebrado('carga');
 
+    // anatomia Head First: toda aula tem as caixas de conversa com o aluno
+    for (const [sel, nomeCx] of [['.guru', 'o Guru'], ['.idiota', 'Não existe pergunta idiota'], ['.cuidado', 'Cuidado'], ['.pontos', 'Pontos importantes']]) {
+      if (!(await p.locator(sel).count())) falha(slug, `falta a caixa "${nomeCx}"`);
+    }
+    const num = await p.locator('.aula-num').textContent().catch(() => '');
+    if (!new RegExp('^AULA ' + parseInt(slug, 10) + ' de 30 ').test((num || '').trim())) falha(slug, `cabeçalho "${(num || '').trim()}" não bate com a pasta`);
+
     const labs = await p.locator('div.lab').count();
     if (labs !== 6) falha(slug, `${labs} laboratórios (esperado 6)`);
 
@@ -156,10 +168,17 @@ async function checaSPA(browser) {
         await p.click(`#${id} .alt[data-i="${certa}"]`);
       } else {
         const ins = await p.locator(`#${id} input[data-r]`).all();
+        const sels = await p.locator(`#${id} select[data-r]`).all(); // "Quem faz o quê?"
         for (const i of ins) await i.fill('9999');
+        for (const sl of sels) {
+          const certo = await sl.getAttribute('data-r');
+          const vals = await sl.locator('option').evaluateAll(os => os.map(o => o.value).filter(v => v !== ''));
+          await sl.selectOption(vals.find(v => v !== certo));
+        }
         await p.click(`#${id} button.check`);
         if (!(await p.textContent(`#${id} .fb`)).trim().startsWith('✘')) falha(slug, `${id}: resposta errada sem feedback de erro`);
         for (const i of ins) await i.fill(await i.getAttribute('data-r'));
+        for (const sl of sels) await sl.selectOption(await sl.getAttribute('data-r'));
         await p.click(`#${id} button.check`);
       }
       if (!(await p.textContent(`#${id} .fb`)).trim().startsWith('✔')) falha(slug, `${id}: gabarito não aceito`);

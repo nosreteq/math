@@ -5,90 +5,91 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+from matplotlib.patches import Rectangle, Polygon, Circle, Wedge, FancyArrowPatch
 
-AZUL, VERM, VERDE, CINZA, TXT = "#2563eb", "#dc2626", "#059669", "#9ca3af", "#111827"
+AZUL, VERM, VERDE, LARANJA, ROXO, CINZA, TXT = ("#2563eb", "#dc2626", "#059669",
+                                                 "#d97706", "#7c3aed", "#9ca3af", "#111827")
 
-fig, ax = plt.subplots(2, 2, figsize=(13, 9.5))
+fig, ax = plt.subplots(2, 2, figsize=(13, 10))
 fig.patch.set_facecolor("white")
 
-# ---------------- 1. A maquina -------------------------------------------
-a = ax[0, 0]
-a.set_xlim(0, 10); a.set_ylim(0, 6); a.axis("off")
-a.set_title("1. A função é uma máquina", fontsize=14, weight="bold", color=TXT, pad=12)
 
-box = FancyBboxPatch((3.5, 2.1), 3.0, 1.9, boxstyle="round,pad=0.15",
-                     facecolor="#dbeafe", edgecolor=AZUL, lw=2.5)
-a.add_patch(box)
-a.text(5.0, 3.05, "DOBRAR", fontsize=17, weight="bold", ha="center", va="center", color=AZUL)
+def titulo(a, t):
+    a.set_title(t, fontsize=13.5, weight="bold", color=TXT, pad=10)
 
-a.add_patch(FancyArrowPatch((1.3, 3.05), (3.35, 3.05), arrowstyle="-|>",
-                            mutation_scale=26, color=TXT, lw=2.5))
-a.add_patch(FancyArrowPatch((6.65, 3.05), (8.7, 3.05), arrowstyle="-|>",
-                            mutation_scale=26, color=TXT, lw=2.5))
-a.text(0.9, 3.05, "3", fontsize=28, weight="bold", ha="center", va="center", color=VERDE)
-a.text(9.1, 3.05, "6", fontsize=28, weight="bold", ha="center", va="center", color=VERM)
-a.text(2.3, 3.6, "entra", fontsize=11, ha="center", color=TXT)
-a.text(7.7, 3.6, "sai", fontsize=11, ha="center", color=TXT)
 
-a.text(5.0, 1.1, "Põe um número, sai outro.\nO mesmo número que entra sempre dá a mesma resposta.",
-       fontsize=11.5, ha="center", va="center", color=TXT)
-
-# ---------------- 2. A tabela --------------------------------------------
-a = ax[0, 1]
-a.set_xlim(0, 10); a.set_ylim(0, 6); a.axis("off")
-a.set_title("2. Anotamos tudo numa tabela", fontsize=14, weight="bold", color=TXT, pad=12)
-
-entradas = [1, 2, 3, 4]
-x0, y0, dy = 3.0, 4.6, 0.72
-a.text(x0 + 0.6, y0 + 0.55, "entra", fontsize=12.5, weight="bold", ha="center", color=VERDE)
-a.text(x0 + 3.4, y0 + 0.55, "sai", fontsize=12.5, weight="bold", ha="center", color=VERM)
-a.plot([x0 - 0.4, x0 + 4.4], [y0 + 0.22, y0 + 0.22], color=TXT, lw=2)
-a.plot([x0 + 2.0, x0 + 2.0], [y0 + 0.45, y0 - dy * 3.6], color=CINZA, lw=1.5)
-
-for i, e in enumerate(entradas):
-    y = y0 - i * dy
-    a.text(x0 + 0.6, y, f"{e}", fontsize=15, ha="center", va="center", color=VERDE)
-    a.text(x0 + 2.0, y, "→", fontsize=12, ha="center", va="center", color=CINZA)
-    a.text(x0 + 3.4, y, f"{2*e}", fontsize=15, ha="center", va="center", color=VERM)
-
-a.text(5.0, 1.0, "Cada linha é uma pergunta e a resposta dela.",
-       fontsize=11.5, ha="center", va="center", color=TXT)
-
-# ---------------- 3. Pontos no papel quadriculado -------------------------
-def papel(a, titulo):
-    a.set_xlim(-0.6, 5.4); a.set_ylim(-0.9, 9.6)
-    a.set_xticks(range(0, 6)); a.set_yticks(range(0, 10, 2))
-    a.grid(True, alpha=0.35, lw=0.8)
-    a.axhline(0, color=TXT, lw=1.8); a.axvline(0, color=TXT, lw=1.8)
-    a.set_title(titulo, fontsize=14, weight="bold", color=TXT, pad=12)
-    a.set_xlabel("o número que entra", fontsize=10.5, color=VERDE)
-    a.set_ylabel("o número que sai", fontsize=10.5, color=VERM)
-    a.tick_params(labelsize=10)
+def eixos(a, t):
+    titulo(a, t)
+    a.axhline(0, color=TXT, lw=1)
+    a.axvline(0, color=TXT, lw=1)
+    a.grid(True, color="#ece7da")
     for s in a.spines.values():
-        s.set_color(CINZA)
+        s.set_visible(False)
 
+
+def seta(a, p, q, cor, lw=3):
+    a.add_patch(FancyArrowPatch(p, q, arrowstyle="-|>", mutation_scale=18, color=cor, lw=lw))
+
+
+rng = np.random.default_rng(7)
+
+# ---------------- 1. multiplos: pulos na reta ------------------------------------------------
+a = ax[0, 0]
+titulo(a, "1. Múltiplos de 3: pulos de 3 em 3 na reta")
+a.plot([0, 24], [0, 0], color=TXT, lw=1.5)
+for k in range(25):
+    a.plot([k, k], [-0.15, 0.15], color=TXT, lw=1)
+    if k % 3 == 0:
+        a.text(k, -0.55, str(k), ha="center", fontsize=11, weight="bold", color=AZUL)
+for k in range(0, 24, 3):
+    t = np.linspace(0, np.pi, 30)
+    a.plot(k + 1.5 - 1.5 * np.cos(t), 1.1 * np.sin(t), color=VERDE, lw=2.5)
+a.set_xlim(-1, 25); a.set_ylim(-1.5, 2.5); a.axis("off")
+
+# ---------------- 2. crivo --------------------------------------------------------------------
+a = ax[0, 1]
+titulo(a, "2. Crivo de Eratóstenes: os primos até 60")
+
+
+def primo(n):
+    return n > 1 and all(n % d for d in range(2, int(n**0.5) + 1))
+
+
+for n in range(1, 61):
+    lin, col = (n - 1) // 10, (n - 1) % 10
+    p = primo(n)
+    a.add_patch(Rectangle((col, -lin), 0.92, 0.92, facecolor="#bbf7d0" if p else "#f3f0e8",
+                          edgecolor=VERDE if p else "#d6d0c2", lw=1.5))
+    a.text(col + 0.46, -lin + 0.46, str(n), ha="center", va="center", fontsize=11,
+           weight="bold" if p else "normal", color=TXT if p else CINZA)
+a.set_xlim(-0.3, 10.2); a.set_ylim(-5.4, 1.2); a.set_aspect("equal"); a.axis("off")
+
+# ---------------- 3. arvore de fatores ----------------------------------------------------------
 a = ax[1, 0]
-papel(a, "3. Cada linha da tabela vira um ponto")
-for e in entradas:
-    a.plot([e, e], [0, 2 * e], color=VERDE, ls=":", lw=1.4, alpha=0.8)
-    a.plot([0, e], [2 * e, 2 * e], color=VERM, ls=":", lw=1.4, alpha=0.8)
-    a.scatter([e], [2 * e], s=130, color=AZUL, zorder=5, edgecolor="white", lw=1.5)
-a.annotate("ando 3 para a direita,\nsubo 6 para cima", xy=(3, 6), xytext=(0.35, 8.1),
-           fontsize=10.5, color=TXT,
-           arrowprops=dict(arrowstyle="->", color=TXT, lw=1.5))
+titulo(a, "3. Árvore de fatores: 60 = 2 · 2 · 3 · 5")
+nos = {"60": (0, 0), "2a": (-1.5, -1), "30": (1.5, -1), "2b": (0, -2), "15": (3, -2), "3": (1.8, -3), "5": (4.2, -3)}
+rot = {"2a": "2", "2b": "2"}
+for p, q in [("60", "2a"), ("60", "30"), ("30", "2b"), ("30", "15"), ("15", "3"), ("15", "5")]:
+    a.plot([nos[p][0], nos[q][0]], [nos[p][1], nos[q][1]], color=CINZA, lw=2, zorder=1)
+for k, (x, y) in nos.items():
+    txt = rot.get(k, k)
+    prim = txt in ("2", "3", "5")
+    a.add_patch(Circle((x, y), 0.38, facecolor="#bbf7d0" if prim else "#dbeafe", edgecolor=VERDE if prim else AZUL, lw=2, zorder=2))
+    a.text(x, y, txt, ha="center", va="center", fontsize=13, weight="bold", color=TXT, zorder=3)
+a.set_xlim(-3, 5.5); a.set_ylim(-3.8, 0.8); a.set_aspect("equal"); a.axis("off")
 
+# ---------------- 4. MDC com ladrilhos -----------------------------------------------------------
 a = ax[1, 1]
-papel(a, "4. Ligando os pontos: o desenho da máquina")
-xs = np.linspace(0, 5, 100)
-a.plot(xs, 2 * xs, color=AZUL, lw=3, zorder=3)
-a.scatter(entradas, [2 * e for e in entradas], s=130, color=AZUL,
-          zorder=5, edgecolor="white", lw=1.5)
-a.text(2.55, 1.1, "Esse desenho mostra\ntodas as respostas\nde uma vez só.",
-       fontsize=11, color=TXT)
+titulo(a, "4. MDC(12, 18) = 6: o maior ladrilho quadrado")
+for i in range(3):
+    for j in range(2):
+        a.add_patch(Rectangle((i * 6, j * 6), 6, 6, facecolor=["#dbeafe", "#fde68a"][(i + j) % 2], edgecolor=AZUL, lw=2))
+a.text(9, -1.3, "18", ha="center", fontsize=13, weight="bold", color=TXT)
+a.text(-1.3, 6, "12", ha="center", va="center", fontsize=13, weight="bold", color=TXT)
+a.set_xlim(-3, 20); a.set_ylim(-3, 14); a.set_aspect("equal"); a.axis("off")
 
-fig.suptitle("Aula 1 — O que é uma função", fontsize=18, weight="bold", color=TXT)
+fig.suptitle("Aula 1 — Múltiplos, divisores e primos", fontsize=18, weight="bold", color=TXT)
 fig.tight_layout(rect=[0, 0, 1, 0.955])
-saida = Path(__file__).resolve().parent.parent / "aulas" / "01-o-que-e-uma-funcao" / "figuras.png"
+saida = Path(__file__).resolve().parent.parent / "aulas" / "01-multiplos-divisores-e-primos" / "figuras.png"
 fig.savefig(saida, dpi=150, facecolor="white")
 print(f"Salvo em: {saida}")

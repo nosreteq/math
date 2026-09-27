@@ -107,16 +107,17 @@ label.lab-l{font-weight:700;font-size:15px}
 footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:var(--cinza);font-size:15px;text-align:center}
 @media(max-width:620px){header h1{font-size:30px}h2{font-size:24px}.guru{flex-direction:column;align-items:center}.guru svg{flex:0 0 auto}}
 </style>
+<link rel="stylesheet" href="../../assets/pecas.css">
 </head>
 <body>
 
 <header>
   <div class="inner">
-    <p class="serie">✏️ MATEMÁTICA DO ZERO — nível 3, avançado</p>
-    <span class="aula-num">AULA 14 de 18 · NÍVEL 3</span>
+    <p class="serie">✏️ MATEMÁTICA DO ZERO — nível 3, ensino médio</p>
+    <span class="aula-num">AULA 14 de 30 · NÍVEL 3</span>
     <h1>Crescimento que acelera</h1>
     <p class="sub">Exponenciais e logaritmos: somar sempre o mesmo contra multiplicar sempre pelo mesmo — e a pergunta de volta, "quantas vezes eu multipliquei?".</p>
-    <div class="voltou"><strong>Você já sabe:</strong> a reta e o passo da escada (Aula 2), potências e raízes (Aula 9) e a raiz como caminho de volta do quadrado. Hoje a potência ganha o x lá em cima.</div>
+    <div class="voltou"><strong>Você já sabe:</strong> a reta e o passo da escada (Aula 9), potências e raízes (Aula 4) e a raiz como caminho de volta do quadrado. Hoje a potência ganha o x lá em cima.</div>
   </div>
 </header>
 
@@ -124,12 +125,20 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <p class="grande">Duas propostas de mesada: <strong>R$ 100 a mais por semana</strong>, ou <strong>R$ 1 na primeira semana e o dobro a cada semana</strong>. A primeira parece imbatível. Na 12ª semana a segunda já passou — e depois disso a primeira nunca mais chega perto. Esta aula é sobre por quê.</p>
 
+<div class="cerebro">
+  <div class="tit">🧠 Poder do cérebro</div>
+  <p>Você prefere ganhar R$ 1.000 por dia durante 30 dias, ou 1 centavo no 1º dia, 2 no 2º, 4 no 3º, sempre dobrando, até o dia 30?</p>
+  <details><summary>Ver a resposta</summary><p>A segunda, de longe: só no dia 30 você recebe 2²⁹ centavos, mais de R$ 5 milhões; no total, mais de R$ 10 milhões contra R$ 30 mil. Somar sempre o mesmo perde para multiplicar sempre pelo mesmo.</p></details>
+</div>
+
 <!-- ============ 1 ============ -->
 <h2><span class="n">1</span> Somar sempre o mesmo × multiplicar sempre pelo mesmo</h2>
 
-<p>Somar sempre o mesmo valor é a reta da Aula 2: o passo da escada é fixo. Multiplicar sempre pelo mesmo fator é outra coisa: o passo <strong>cresce junto com o valor</strong>. Isso se chama crescimento <strong>exponencial</strong>, porque a conta é uma potência com o tempo no expoente:</p>
+<p>Somar sempre o mesmo valor é a reta da Aula 9: o passo da escada é fixo. Multiplicar sempre pelo mesmo fator é outra coisa: o passo <strong>cresce junto com o valor</strong>. Isso se chama crescimento <strong>exponencial</strong>, porque a conta é uma potência com o tempo no expoente:</p>
 
 <p class="centro" style="font-size:22px;font-weight:800">valor = início · fatorⁿ</p>
+
+<p>As listas de números que crescem assim têm nome. Somando sempre o mesmo (2, 5, 8, 11, ...): <strong>progressão aritmética</strong>, a PA da Aula 9. Multiplicando sempre pelo mesmo (1, 2, 4, 8, ...): <strong>progressão geométrica</strong>, a PG. No dinheiro, isso vira <strong>juros simples</strong> (rende sempre sobre o valor inicial: uma PA) e <strong>juros compostos</strong> (rende sobre o que já rendeu: multiplicar por 1,1 a cada ano, uma PG — o "aumento de 10%" da Aula 3, repetido).</p>
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: corrida soma × multiplicação</div>
@@ -139,6 +148,20 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <div class="sl-linha"><label class="lab-l" for="slPasso1" style="min-width:110px">passos:</label><input type="range" id="slPasso1" min="0" max="20" step="1" value="8"><span class="sl-val" id="vPasso1">8</span></div>
   <div class="tela"><svg id="svg1" role="img" aria-label="Pontos da soma e da multiplicação ao longo dos passos"></svg></div>
   <p class="rabisco centro" id="txt1"></p>
+</div>
+
+<h3>A soma de Gauss: somar uma PA sem somar</h3>
+
+<p>Conta a lenda que um professor mandou a turma somar 1 + 2 + 3 + ... + 100, para ganhar sossego. O menino Gauss respondeu em segundos: <strong>5.050</strong>.</p>
+
+<div class="porque">
+  <div class="tit">✅ Por que é verdade?</div>
+  <ol>
+    <li>Escreva a soma duas vezes, uma de trás para frente: 1 + 2 + ... + 100 e 100 + 99 + ... + 1.</li>
+    <li>Some as duas fileiras coluna por coluna: 1 + 100 = 101, 2 + 99 = 101, ... — são 100 colunas, todas valendo 101.</li>
+    <li>As duas fileiras juntas dão 100 · 101 = 10.100. Uma fileira só é metade: <strong>5.050</strong>.</li>
+    <li>Vale para qualquer PA: soma = (primeiro + último) · quantidade ÷ 2 — a média do primeiro e do último, vezes quantos são.</li>
+  </ol>
 </div>
 
 <!-- ============ 2 ============ -->
@@ -162,13 +185,13 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <!-- ============ 3 ============ -->
 <h2><span class="n">3</span> A escada das potências: zero, negativos e metades</h2>
 
-<p>Na Aula 9 o expoente dizia "quantas vezes multiplicar". Mas o que seria <span class="mono">2⁰</span>? Ou <span class="mono">2⁻¹</span>? Desça a escada: cada degrau para baixo <strong>divide por 2</strong>.</p>
+<p>Na Aula 4 o expoente dizia "quantas vezes multiplicar". Mas o que seria <span class="mono">2⁰</span>? Ou <span class="mono">2⁻¹</span>? Desça a escada: cada degrau para baixo <strong>divide por 2</strong>.</p>
 
 <div class="sticky"><span class="mono">2³ = 8 → 2² = 4 → 2¹ = 2 → 2⁰ = 1 → 2⁻¹ = ½ → 2⁻² = ¼</span><br>Expoente zero dá 1. Expoente negativo quer dizer "divida" em vez de "multiplique".</div>
 
-<p>Um detalhe de escrita: quando o expoente é comprido demais para caber pequeno lá em cima, ele vem depois de um chapeuzinho. <span class="mono">2^0,5</span> lê-se "2 elevado a 0,5" — é exatamente o mesmo que escrever o 0,5 pequenininho no alto do 2. Você vai ver esse <span class="mono">^</span> de novo no sino da Aula 17 e no giro da Aula 18.</p>
+<p>Um detalhe de escrita: quando o expoente é comprido demais para caber pequeno lá em cima, ele vem depois de um chapeuzinho. <span class="mono">2^0,5</span> lê-se "2 elevado a 0,5" — é exatamente o mesmo que escrever o 0,5 pequenininho no alto do 2. Você vai ver esse <span class="mono">^</span> de novo no sino da Aula 21 e no giro da Aula 18.</p>
 
-<p>E o meio-degrau? Somar expoentes é multiplicar (<span class="mono">2² · 2³ = 2⁵</span>, conte os 2). Então <span class="mono">2^0,5 · 2^0,5 = 2¹ = 2</span> — ou seja, <span class="mono">2^0,5</span> é o número que vezes ele mesmo dá 2: é <span class="mono">√2 ≈ 1,41</span>, a raiz da Aula 9.</p>
+<p>E o meio-degrau? Somar expoentes é multiplicar (<span class="mono">2² · 2³ = 2⁵</span>, conte os 2). Então <span class="mono">2^0,5 · 2^0,5 = 2¹ = 2</span> — ou seja, <span class="mono">2^0,5</span> é o número que vezes ele mesmo dá 2: é <span class="mono">√2 ≈ 1,41</span>, a raiz da Aula 4.</p>
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: a escada das potências</div>
@@ -243,7 +266,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <p class="centro" style="font-size:22px;font-weight:800">e ≈ 2,71828...</p>
 
-<p>O <strong>e</strong> é o resultado de crescer 100% "o tempo todo, sem parar". Ele vai reaparecer na derivada (Aula 15), no sino do acaso (Aula 17) e no giro dos números complexos (Aula 18).</p>
+<p>O <strong>e</strong> é o resultado de crescer 100% "o tempo todo, sem parar". Ele vai reaparecer na derivada (Aula 19), no sino do acaso (Aula 21) e no giro dos números complexos (Aula 18).</p>
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: de onde vem o e</div>
@@ -256,7 +279,8 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <div class="pontos">
   <div class="tit">Pontos importantes</div>
   <ul>
-    <li>Somar sempre o mesmo → <strong>reta</strong>. Multiplicar sempre pelo mesmo → <strong>exponencial</strong>: <span class="mono">início · fatorⁿ</span>.</li>
+    <li>Somar sempre o mesmo → <strong>reta</strong> (PA, juros simples). Multiplicar sempre pelo mesmo → <strong>exponencial</strong> (PG, juros compostos): <span class="mono">início · fatorⁿ</span>.</li>
+    <li>Soma de uma PA (Gauss): <span class="mono">(primeiro + último) · quantidade ÷ 2</span>.</li>
     <li>Toda exponencial com fator maior que 1 acaba passando qualquer reta.</li>
     <li><span class="mono">2⁰ = 1</span>, <span class="mono">2⁻¹ = ½</span>, <span class="mono">2^0,5 = √2</span>: expoente negativo divide, meio expoente é raiz.</li>
     <li>Somar expoentes = multiplicar: <span class="mono">2² · 2³ = 2⁵</span>.</li>
@@ -280,15 +304,16 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 </div>
 
 <div class="ex" id="ex2">
-  <div class="tit">Exercício 2</div>
+  <div class="tit">Exercício 2 — quem faz o quê?</div>
   <div class="selo">✅</div>
-  <p>Quanto vale <span class="mono">2⁻¹</span>?</p>
-  <div class="alts" data-r="1">
-    <div class="alt" data-i="0">−2</div>
-    <div class="alt" data-i="1">½ (meio)</div>
-    <div class="alt" data-i="2">−½</div>
-    <div class="alt" data-i="3">1</div>
-  </div>
+  <p>Ligue cada ideia ao seu papel.</p>
+  <table class="ligar">
+    <tr><td>PA</td><td><select data-r="0" aria-label="PA"><option value="">escolha...</option><option value="0">somar sempre o mesmo</option><option value="1">multiplicar sempre pelo mesmo</option><option value="2">o expoente que falta: quantas vezes multiplicar</option><option value="3">a base do crescimento contínuo, ≈ 2,718</option></select></td></tr>
+    <tr><td>PG</td><td><select data-r="1" aria-label="PG"><option value="">escolha...</option><option value="0">somar sempre o mesmo</option><option value="1">multiplicar sempre pelo mesmo</option><option value="2">o expoente que falta: quantas vezes multiplicar</option><option value="3">a base do crescimento contínuo, ≈ 2,718</option></select></td></tr>
+    <tr><td>logaritmo</td><td><select data-r="2" aria-label="logaritmo"><option value="">escolha...</option><option value="0">somar sempre o mesmo</option><option value="1">multiplicar sempre pelo mesmo</option><option value="2">o expoente que falta: quantas vezes multiplicar</option><option value="3">a base do crescimento contínuo, ≈ 2,718</option></select></td></tr>
+    <tr><td>o número e</td><td><select data-r="3" aria-label="o número e"><option value="">escolha...</option><option value="0">somar sempre o mesmo</option><option value="1">multiplicar sempre pelo mesmo</option><option value="2">o expoente que falta: quantas vezes multiplicar</option><option value="3">a base do crescimento contínuo, ≈ 2,718</option></select></td></tr>
+  </table>
+  <button class="check" data-ex="ex2">Conferir</button>
   <div class="fb"></div>
 </div>
 
@@ -343,7 +368,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <footer>
   Matemática do Zero · Aula 14 — Crescimento que acelera<br>
-  <strong>Próxima aula:</strong> a inclinação em cada ponto — a derivada (e os radianos).
+  <strong>Próxima aula:</strong> Trigonometria: seno, cosseno, tangente e radianos.
 </footer>
 
 </div>
@@ -624,7 +649,7 @@ function marca(id,ok){
     document.getElementById("pn").textContent=n;
     document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
     var msg=document.getElementById("pmsg");
-    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Você fechou a Aula 14. 🎉</strong> Exponencial domada. Na próxima, a inclinação de uma curva em cada ponto."; confete(); }
+    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Você fechou a Aula 14. 🎉</strong> Exponencial domada. Na próxima: Trigonometria: seno, cosseno, tangente e radianos."; confete(); }
     else msg.textContent="Boa! Faltam "+(TOTAL-n)+".";
     document.querySelector("#"+id+" .selo").classList.add("ver");
   }
@@ -655,6 +680,7 @@ function fb(box,ok,txt){
   if(!ok){ void box.offsetWidth; box.classList.add("chacoalha"); }
 }
 var explica={
+  ex2:{"ok": "Tudo certo! Somar, multiplicar, a pergunta de volta e o crescimento contínuo.", "no": "Quase. PA = somar sempre o mesmo; PG = multiplicar sempre pelo mesmo; logaritmo = o expoente que falta; e = a base do crescimento contínuo."},
  "ex1": {
   "ok": "Isso: 2 · 2 · 2 · 2 · 2 = 32.",
   "no": "2⁵ é multiplicar o 2 por ele mesmo cinco vezes: 2 · 2 = 4, · 2 = 8, · 2 = 16, · 2 = 32. (Não é 2 · 5 = 10.)"
@@ -675,7 +701,7 @@ var explica={
 document.querySelectorAll("button.check").forEach(function(b){
   b.addEventListener("click",function(){
     var box=document.getElementById(b.dataset.ex);
-    var ins=box.querySelectorAll("input[data-r]"), tudoOk=true, vazio=false;
+    var ins=box.querySelectorAll("input[data-r],select[data-r]"), tudoOk=true, vazio=false;
     ins.forEach(function(inp){
       if(inp.value===""){vazio=true;return;}
       var ok=Math.abs(parseFloat(inp.value)-parseFloat(inp.dataset.r)) < 0.001;

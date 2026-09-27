@@ -1,8 +1,8 @@
 # Plano do curso
 
-> **Estado:** em reestruturação. As 18 aulas publicadas continuam valendo e estão sendo
-> reorganizadas na ordem abaixo — veja [Migração](#migração-das-18-aulas-publicadas). Este
-> documento é a referência: toda aula nova ou adaptada segue o que está aqui.
+> **Estado:** ✅ reestruturação concluída (fases 1 a 7) — as **30 aulas** estão publicadas na ordem
+> abaixo, com as peças novas da metodologia. Falta só a fase 8 (eletivas). A coluna **Estado** das
+> tabelas registra de onde cada aula veio na [migração](#migração-das-18-aulas-publicadas).
 
 ## Objetivo
 
@@ -39,11 +39,11 @@ Três regras valem para as 30 aulas:
 | **5 — Superior II** | Faculdade: matemática aplicada e computacional | 25–30 | modelar sistemas que mudam no tempo, otimizar, trabalhar com acaso ao longo do tempo e demonstrar um resultado |
 | **Eletivas** | Aprofundamento | — | seguir para áreas específicas (criptografia, grafos, topologia, ...) |
 
-Nas tabelas abaixo, o **Estado** diz de onde vem cada aula:
+Nas tabelas abaixo, o **Estado** registra de onde veio cada aula (todas já publicadas):
 
-- ✅ **pronta** — já publicada; só muda de número e de referências.
-- ♻️ **adaptar** — já publicada; será dividida, ampliada ou juntada com outra.
-- 🆕 **nova** — ainda não existe.
+- ✅ **mantida** — já existia; mudou só de número e de referências.
+- ♻️ **adaptada** — já existia; foi dividida, ampliada ou juntada com outra.
+- 🆕 **nova** — escrita do zero na reestruturação.
 
 ---
 
@@ -65,15 +65,14 @@ e feito com as próprias mãos. Toda aula, em todos os níveis, tem:
 | **Placar** e progresso salvo | Motivação e retomada | sim |
 | **notas.md** e **figuras.png** | O mesmo conteúdo para ler, imprimir ou colar num caderno | sim |
 
-Peças que passam a entrar gradualmente (novas aulas já nascem com elas; as antigas recebem na
-migração):
+Peças que entraram na reestruturação:
 
 | Peça | Para quê | Onde |
 |---|---|---|
-| **🧠 Poder do cérebro** | Uma pergunta aberta *antes* da explicação: o aluno pensa primeiro | todas as aulas novas |
-| **Por que é verdade?** | Uma mini-demonstração visual (sem formalismo) de um fato da aula | a partir do Nível 2 |
+| **🧠 Poder do cérebro** | Uma pergunta aberta *antes* da explicação: o aluno pensa primeiro | todas as 30 aulas |
+| **Por que é verdade?** | Uma mini-demonstração visual (sem formalismo) de um fato da aula | nas aulas com uma demonstração-chave: 8, 11, 12, 14, 27, 28, 29 e 30 |
 | **Conversa ao pé da lareira** | Diálogo entre dois conceitos que se confundem | uma por nível (lista abaixo) |
-| **Quem faz o quê?** | Exercício de ligar colunas (novo tipo de exercício no motor das aulas) | a partir do Nível 2 |
+| **Quem faz o quê?** | Exercício de ligar colunas (novo tipo de exercício no motor das aulas) | todas as aulas a partir do Nível 2, e as 1, 2, 3 e 5 |
 
 **Conversas ao pé da lareira** (uma por nível): Média × Mediana (N1) · Equação × Função (N2) ·
 Seno × Cosseno (N3) · Derivada × Integral (N4) · Determinístico × Aleatório (N5).
@@ -117,8 +116,8 @@ chão de todo o resto: porcentagem, frações e negativos aparecem em todas as a
 - MMC: quando duas engrenagens voltam à posição inicial juntas
 - MDC: o maior ladrilho quadrado que cobre um retângulo sem cortar
 
-**Laboratórios:** pulos na reta · o crivo de Eratóstenes · a árvore de fatores · engrenagens
-(MMC) · ladrilhos (MDC) · semáforos que piscam juntos
+**Laboratórios:** pulos na reta · caixas de bombons · o crivo de Eratóstenes · a árvore de fatores ·
+engrenagens (MMC) · ladrilhos (MDC)
 
 ### Aula 2 — Pedaços e sinais: frações, decimais e negativos 🆕
 
@@ -132,7 +131,7 @@ próprias regras.
 - Somar e multiplicar com sinais: andar para trás; menos vezes menos dá mais
 
 **Laboratórios:** a pizza fatiada · frações equivalentes · soma de pedaços · a régua dos decimais ·
-o termômetro (negativos) · o saldo que entra e sai
+o termômetro · o saldo que entra e sai
 
 ### Aula 3 — Porcentagem, razão e regra de três 🆕
 
@@ -146,8 +145,8 @@ assuntos.
   ao preço original)
 - Regra de três simples e composta; grandezas diretas e inversas
 
-**Laboratórios:** a receita que dobra · a barra de porcentagem · desconto × aumento ·
-a escala do mapa · regra de três ao vivo · direta ou inversa?
+**Laboratórios:** a receita que dobra · a barra de porcentagem · desconto × aumento · a escala do
+mapa · regra de três ao vivo · direta ou inversa?
 
 ### Aula 4 — Potências e raízes ♻️
 
@@ -160,8 +159,8 @@ lado dele.
 - Quadrado nunca é negativo (reencontro com os sinais da Aula 2)
 - Notação científica: potências de 10 para números enormes e minúsculos
 
-**Laboratórios:** o quadrado cresce · o cubo cresce · ache o lado · ache a aresta ·
-quadrado nunca é negativo · a régua das potências de 10
+**Laboratórios:** o quadrado cresce · ache o lado · o cubo cresce · ache a aresta · quadrado nunca é
+negativo · a régua das potências de 10
 
 ### Aula 5 — Dados: média, mediana, moda e desvio ♻️
 
@@ -173,8 +172,8 @@ quadrado nunca é negativo · a régua das potências de 10
 - Desvio: o quanto a lista se espalha (usa quadrado e raiz da Aula 4)
 - **Conversa ao pé da lareira:** Média × Mediana
 
-**Laboratórios:** a gangorra da média · o do meio (mediana) · o salário do chefe (média ×
-mediana) · monte o histograma · centralize a lista · espalhado ou apertado?
+**Laboratórios:** a gangorra da média · o do meio · o salário do chefe · monte o histograma ·
+centralize a lista · espalhado ou apertado?
 
 ### Aula 6 — Contagem e chance ♻️
 
@@ -187,8 +186,8 @@ decoradas.
 - Repetir muitas vezes: a frequência se aproxima da probabilidade
 - A moeda não tem memória (falácia do apostador)
 
-**Laboratórios:** a árvore de roupas · ordenar a fila · a moeda repetida · o dado viciado? ·
-a média que gruda · duas moedas, quatro casos
+**Laboratórios:** a árvore de roupas · ordenar a fila · duas moedas, quatro casos · a moeda repetida
+· o dado viciado? · a média que gruda
 
 ---
 
@@ -220,8 +219,8 @@ começam as peças **Por que é verdade?** e **Quem faz o quê?**.
 - Cada teste vira um ponto; todos juntos formam o gráfico
 - **Conversa ao pé da lareira:** Equação × Função
 
-**Laboratórios:** a máquina animada · a fórmula clicável · o slider do x · a ordem das contas ·
-confiável × quebrada · o gráfico nascendo ponto a ponto
+**Laboratórios:** mexa na máquina · a fórmula clicável · troque o x por um número · a ordem das
+contas · confiável ou quebrada? · veja o gráfico nascer
 
 ### Aula 8 — Equações e inequações: a balança ♻️
 
@@ -233,8 +232,8 @@ confiável × quebrada · o gráfico nascendo ponto a ponto
 - Inequações: a balança que pende para um lado; o sinal que vira quando se multiplica por negativo
 - **Por que é verdade?** Por que multiplicar por −1 vira o sinal da desigualdade (reta numerada)
 
-**Laboratórios:** a balança equilibrada · desfazendo passos · abra os parênteses · a balança
-que pende · o sinal que vira · confira sua resposta
+**Laboratórios:** a balança em equilíbrio · a máquina ao contrário · x dos dois lados, passo a passo
+· abra os parênteses · a balança que pende · o sinal que vira
 
 ### Aula 9 — O plano e a reta ✅
 
@@ -258,8 +257,8 @@ infinitos cruzamentos; substituição.
 - **A área do círculo:** fatiar em gomos e rearrumar num quase-retângulo → `π · raio²`
 - **Por que é verdade?** A área do círculo pelos gomos
 
-**Laboratórios:** gire o ponteiro · a volta completa · onde o ponto para · desenrole o
-círculo (π) · os gomos viram retângulo · medidas de rodas
+**Laboratórios:** o ponteiro que gira · o relógio de ângulos · ângulos negativos e voltas extras · o
+transferidor interativo · desenrole o círculo · os gomos viram retângulo
 
 ### Aula 12 — Áreas, volumes e Pitágoras ♻️
 
@@ -271,8 +270,8 @@ círculo (π) · os gomos viram retângulo · medidas de rodas
 - Volume: área da base × altura (prisma, cilindro); cubo e esfera
 - Perímetro × área: a mesma cerca, áreas diferentes
 
-**Laboratórios:** o triângulo é meio retângulo · Pitágoras com quadrados · a prova dos quatro
-triângulos · empilhe a base (volume) · a lata de refrigerante · mesma cerca, outra área
+**Laboratórios:** o triângulo é meio retângulo · o paralelogramo que vira retângulo · Pitágoras com
+quadrados · a prova dos quatro triângulos · empilhe a base · a lata de refrigerante
 
 ---
 
@@ -300,8 +299,8 @@ primeira vez** (reencontrando a reta da Aula 9 e a máquina da Aula 7); a Aula 1
 passa a reencontrá-las. Zeros pela balança com a raiz de dois lados, Bhaskara como "arrumar e passar
 para o outro lado", o vértice como melhor valor, polinômios e o teste das diferenças.
 
-**Laboratórios:** a máquina que dobra · três sliders da parábola · ache onde ela cruza o zero ·
-caça ao vértice · somador de potências · reta ou curva?
+**Laboratórios:** a máquina que dobra · três sliders da parábola · ache onde ela cruza o zero · caça
+ao vértice · somador de potências · reta ou curva?
 
 ### Aula 14 — Crescimento que acelera ♻️
 
@@ -314,8 +313,8 @@ caça ao vértice · somador de potências · reta ou curva?
 - O logaritmo: "quantas vezes multipliquei?"; a régua logarítmica
 - O número e: `(1 + 1/n)ⁿ`
 
-**Laboratórios:** corrida PA × PG (juros simples × compostos) · a dobra do papel · a escada das
-potências · quantas dobras? (logaritmo) · a régua logarítmica · de onde vem o e
+**Laboratórios:** corrida soma × multiplicação · a dobra do papel · a escada das potências · quantas
+dobras? (o logaritmo) · a régua logarítmica · de onde vem o e
 
 ### Aula 15 — Trigonometria: seno, cosseno, tangente e radianos ♻️
 
@@ -328,8 +327,9 @@ potências · quantas dobras? (logaritmo) · a régua logarítmica · de onde ve
 - Radianos: o ângulo medido pelo arco (reencontro com o π da Aula 11)
 - **Conversa ao pé da lareira:** Seno × Cosseno
 
-**Laboratórios:** o ponto girando · sombra e altura · o triângulo retângulo · a tangente como
-inclinação · o círculo de raio 1 (cos² + sen²) · radianos: o ângulo medido pelo arco
+**Laboratórios:** o círculo com a sombra e a altura ao vivo · a tabela que se preenche sozinha ·
+simetria do círculo · o triângulo retângulo · o círculo de raio 1 · radianos, o ângulo medido pelo
+arco
 
 ### Aula 16 — Ondas ✅
 
@@ -348,8 +348,8 @@ em radianos (Aula 15).
 - Matriz é uma tabela que transforma setas: esticar, espelhar, girar
 - Sistema de equações como uma matriz (reencontro com a Aula 10)
 
-**Laboratórios:** some as setas · o tamanho da seta · a circunferência como distância fixa ·
-produto escalar e ângulo · gire a figura com uma matriz · o sistema como matriz
+**Laboratórios:** somador de setas arrastável · o tamanho da seta e a distância · multiplicar por um
+número · produto escalar ao vivo · gire a figura com uma matriz · o sistema como matriz
 
 ### Aula 18 — Números complexos ♻️
 
@@ -388,8 +388,8 @@ A matemática do movimento, da variação contínua e da extração de padrões 
 - Topos e fundos: candidatos em `f′(x) = 0`, conferidos pela troca de sinal
 - **Conversa ao pé da lareira:** Derivada × Integral (fecha na Aula 20)
 
-**Laboratórios:** a lupa que endireita a curva · saltos e bicos (continuidade) · dois pontos se
-aproximando · a reta que encosta · o gráfico da inclinação · caça ao topo
+**Laboratórios:** a lupa que endireita a curva · a reta que encosta · dois pontos se aproximando · o
+gráfico da inclinação · saltos e bicos · caça ao topo
 
 ### Aula 20 — A integral ♻️
 
@@ -398,7 +398,7 @@ Fundamental. Ganha **volumes por fatias** (o sólido de revolução como pilha d
 o volume da Aula 12).
 
 **Laboratórios:** fatie a curva · fatias mais finas · velocidade vira distância · o acumulado ao
-vivo · derivar o acumulado · a pilha de moedas (volume)
+vivo · derivar o acumulado · a pilha de moedas
 
 ### Aula 21 — A curva normal ♻️
 
@@ -456,9 +456,8 @@ tem certeza de que algo é verdade.
 - Autovetores: as setas que a matriz só estica, sem girar; o autovalor é o quanto
 - A rotação não tem autovetor real — seus autovalores são complexos (Aula 18)
 
-**Laboratórios:** o quadrado que vira paralelogramo (determinante) · achatar o plano · desfazer
-a transformação (inversa) · caça às setas que não giram · autovalores ao vivo · a rotação e os
-complexos
+**Laboratórios:** o quadrado que vira paralelogramo · achatar o plano · desfazer a transformação ·
+caça às setas que não giram · autovalores ao vivo · a rotação e os complexos
 
 ### Aula 26 — PCA: as direções principais dos dados 🆕
 
@@ -483,8 +482,8 @@ autovetores da covariância · de 2 dimensões para 1 · a imagem comprimida
 - Mínimos locais: o vale que não é o mais fundo
 - Reencontro com os mínimos quadrados (Aula 23): a mesma reta, achada descendo
 
-**Laboratórios:** a bolinha na curva · o mapa de curvas de nível · a seta do gradiente ·
-o tamanho do passo · presos num vale local · ajuste a reta descendo
+**Laboratórios:** a bolinha na curva · o mapa de curvas de nível · a seta do gradiente · o tamanho
+do passo · presos num vale local · ajuste a reta descendo
 
 ### Aula 28 — Equações diferenciais e o método de Euler 🆕
 
@@ -496,8 +495,8 @@ o tamanho do passo · presos num vale local · ajuste a reta descendo
 - A mola: `y″ = −y` devolve seno e cosseno (reencontro com as ondas)
 - Erro numérico: passos grandes enganam
 
-**Laboratórios:** o campo de setinhas · siga as setas (Euler) · crescimento e decaimento ·
-a mola que oscila · passo grande × passo pequeno · o predador e a presa
+**Laboratórios:** o campo de setinhas · siga as setas · crescimento e decaimento · a mola que oscila
+· passo grande × passo pequeno · o predador e a presa
 
 ### Aula 29 — Acaso no tempo: passeio aleatório e movimento browniano 🆕
 
@@ -509,8 +508,8 @@ a mola que oscila · passo grande × passo pequeno · o predador e a presa
 - Tendência + ruído: `dy = tendência · dt + ruído` (reencontro com Euler da Aula 28)
 - Aplicações e limites: difusão, preços, e por que o modelo subestima eventos extremos
 
-**Laboratórios:** a moeda que anda · mil caminhantes · o √n do espalhamento · do passeio ao
-browniano · tendência + ruído · caudas gordas de novo
+**Laboratórios:** a moeda que anda · mil caminhantes · o leque de caminhos · do passeio ao browniano
+· tendência + ruído · caudas gordas de novo
 
 ### Aula 30 — Pensar como matemático: lógica, demonstração e conjecturas 🆕
 
@@ -523,8 +522,8 @@ browniano · tendência + ruído · caudas gordas de novo
 - Por indução: o dominó que derruba todos
 - Conjecturas: problemas simples que ninguém resolveu (Collatz, primos gêmeos) — o que é pesquisa
 
-**Laboratórios:** verdadeiro, falso ou depende? · caça ao contraexemplo · a soma de Gauss ·
-o dominó da indução · √2 não é fração · a sequência de Collatz
+**Laboratórios:** verdadeiro, falso ou depende? · caça ao contraexemplo · a soma de Gauss · o dominó
+da indução · tente escrever √2 como fração · a sequência de Collatz
 
 ---
 
@@ -650,19 +649,19 @@ conferida contra ela.
 - **Testes:** `tests/verifica.js` passa a conferir também que toda aula tem Guru, Não existe pergunta
   idiota, Cuidado e Pontos importantes.
 
-**Fases** (cada uma é um PR com os testes verdes antes do merge):
+**Fases** (testes verdes antes de cada merge):
 
-1. **Plano** — este documento.
-2. **Reorganização** — renumerar, migrar pastas e progresso, dividir 9, 10 e 17, mover π, radianos,
+1. ✅ **Plano** — este documento.
+2. ✅ **Reorganização** — renumerar, migrar pastas e progresso, dividir 9, 10 e 17, mover π, radianos,
    parênteses e Fourier, reescrever "Você já sabe" e reencontros. Ao fim, as 18 aulas atuais estão
-   no lugar novo e o curso continua completo, com buracos só onde há 🆕.
-3. **Nível 1** — Aulas 1, 2 e 3 (novas) e a ampliação das 4, 5 e 6.
-4. **Nível 2** — ampliações das 7, 8, 11 e 12.
-5. **Níveis 3 e 4** — ampliações (tangente, PA/PG, continuidade, Pascal, volumes...).
-6. **Nível 5** — Aulas 25 a 30.
-7. **Peças novas** — Poder do cérebro, Por que é verdade?, Conversa ao pé da lareira e o exercício
-   Quem faz o quê? em todas as aulas.
-8. **Eletivas.**
+   no lugar novo e o curso continua completo.
+3. ✅ **Nível 1** — Aulas 1, 2 e 3 (novas) e a ampliação das 4, 5 e 6.
+4. ✅ **Nível 2** — ampliações das 7, 8, 11 e 12.
+5. ✅ **Níveis 3 e 4** — ampliações (tangente, PA/PG, continuidade, Pascal, volumes...).
+6. ✅ **Nível 5** — Aulas 25 a 30.
+7. ✅ **Peças novas** — Poder do cérebro, Por que é verdade?, Conversa ao pé da lareira e o exercício
+   Quem faz o quê? (onde cada uma entra: tabela da metodologia).
+8. ⏳ **Eletivas** — próxima etapa.
 
 ---
 
