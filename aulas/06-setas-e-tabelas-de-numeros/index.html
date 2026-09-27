@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aula 6 — Setas e tabelas de números | Matemática do Zero</title>
+<style>
+:root{
+  --papel:#f6f2e9; --papel2:#fffdf7; --tinta:#1b1b1b; --cinza:#6b7280;
+  --azul:#2563eb; --azulc:#dbeafe; --verm:#dc2626; --vermc:#fee2e2;
+  --verde:#059669; --verdec:#d1fae5; --amar:#fde68a; --laranja:#d97706;
+  --roxo:#7c3aed; --linha:#c9c1ae;
+  --mao:'Comic Sans MS','Comic Neue','Chalkboard SE','Bradley Hand','Marker Felt','Segoe Print','Ink Free',cursive;
+  --corpo:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--corpo);font-size:17px;line-height:1.65}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 90px}
+
+header{background:var(--tinta);color:var(--papel2);padding:34px 22px 30px;margin-bottom:34px;border-bottom:6px solid var(--laranja)}
+header .inner{max-width:820px;margin:0 auto}
+.serie{font-family:var(--mao);font-size:15px;letter-spacing:.5px;color:var(--amar);margin:0 0 6px}
+header h1{margin:0;font-size:40px;line-height:1.1;letter-spacing:-.5px}
+header .sub{margin:12px 0 0;color:#cfc9bb;font-size:17px;max-width:620px}
+.aula-num{display:inline-block;background:var(--laranja);color:#fff;font-weight:700;padding:3px 13px;border-radius:20px;font-size:14px;margin-bottom:14px;letter-spacing:.5px}
+.voltou{background:#3a3a3a;border-left:5px solid var(--amar);padding:12px 18px;margin:18px 0 0;font-size:15.5px;color:#e6e0d2;border-radius:0 8px 8px 0}
+
+h2{font-size:29px;margin:52px 0 6px;line-height:1.2;border-bottom:3px solid var(--tinta);padding-bottom:8px}
+h2 .n{color:var(--laranja);font-family:var(--mao);font-size:24px;margin-right:8px}
+h3{font-size:21px;margin:32px 0 8px}
+p{margin:14px 0}
+.grande{font-size:20px}
+.centro{text-align:center}
+code,.mono{font-family:'Consolas','Monaco',monospace;background:#eae4d6;padding:2px 7px;border-radius:4px;font-size:.95em}
+
+.guru{display:flex;gap:18px;align-items:flex-start;margin:34px 0;background:linear-gradient(#efe9db,#e8e1d0);border-left:6px solid var(--roxo);padding:20px 22px;border-radius:4px}
+.guru svg{flex:0 0 92px}
+.guru .fala{position:relative;background:#fff;border:2px solid var(--tinta);border-radius:16px;padding:14px 18px;font-family:var(--mao);font-size:16.5px;line-height:1.55}
+.guru .fala:before{content:"";position:absolute;left:-11px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:var(--tinta)}
+.guru .fala:after{content:"";position:absolute;left:-8px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:#fff}
+.guru .quem{font-family:var(--mao);font-size:13px;color:var(--roxo);text-align:center;margin-top:4px;font-weight:700}
+
+.idiota{background:#e7eefc;border:3px solid var(--azul);border-radius:10px;padding:6px 24px 20px;margin:34px 0}
+.idiota .tit{font-family:var(--mao);font-size:20px;font-weight:700;color:#fff;background:var(--azul);display:inline-block;padding:5px 16px;border-radius:0 0 10px 10px;margin:0 0 8px}
+.idiota .q{font-weight:700;margin:16px 0 4px}
+.idiota .q:before{content:"P: ";color:var(--azul);font-weight:800}
+.idiota .a{margin:0 0 6px}
+.idiota .a:before{content:"R: ";color:var(--verm);font-weight:800}
+
+.cuidado{background:var(--vermc);border:3px dashed var(--verm);border-radius:10px;padding:16px 20px;margin:30px 0}
+.cuidado .tit{font-family:var(--mao);font-weight:700;color:var(--verm);font-size:19px;margin-bottom:2px}
+
+.pontos{background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:8px 26px 22px;margin:44px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.pontos .tit{font-family:var(--mao);font-size:22px;font-weight:700;background:var(--amar);display:inline-block;padding:6px 18px;border:3px solid var(--tinta);border-radius:8px;transform:rotate(-1.5deg);margin:-22px 0 10px}
+.pontos ul{padding-left:22px;margin:8px 0}
+.pontos li{margin:9px 0}
+
+.sticky{background:var(--amar);padding:16px 20px;font-family:var(--mao);font-size:16px;transform:rotate(-1.2deg);box-shadow:3px 4px 9px rgba(0,0,0,.16);margin:30px auto;max-width:560px;border-radius:2px}
+.rabisco{font-family:var(--mao);color:var(--laranja);font-size:15.5px;line-height:1.4}
+
+.lab{background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:8px 24px 26px;margin:34px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.lab .tit{font-family:var(--mao);font-size:19px;font-weight:700;background:var(--verde);color:#fff;display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;border:3px solid var(--tinta)}
+.controles{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
+button{font-family:var(--corpo);font-size:16px;font-weight:700;cursor:pointer;background:var(--azul);color:#fff;border:3px solid var(--tinta);border-radius:9px;padding:9px 18px;box-shadow:3px 3px 0 var(--tinta);transition:.09s}
+button:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--tinta)}
+button:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--tinta)}
+button.sec{background:#fff;color:var(--tinta)}
+button.on{background:var(--verde)}
+button:disabled{opacity:.5;cursor:not-allowed;box-shadow:none;transform:none}
+.alt:focus-visible{outline:3px solid var(--laranja);outline-offset:2px}
+input[type=number]{font-family:var(--corpo);font-size:18px;font-weight:700;width:92px;padding:8px 10px;border:3px solid var(--tinta);border-radius:9px;background:#fff;text-align:center}
+input:focus{outline:3px solid var(--amar)}
+input[type=range]{width:100%;max-width:280px;accent-color:var(--azul);height:26px;vertical-align:middle}
+label.lab-l{font-weight:700;font-size:15px}
+.sl-linha{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0}
+.sl-val{font-family:var(--mao);font-size:22px;font-weight:700;min-width:56px;text-align:center;background:var(--amar);border:2px solid var(--tinta);border-radius:8px;padding:1px 8px}
+
+.tela{background:#fff;border:2px solid var(--linha);border-radius:10px;padding:6px}
+.tela svg{width:100%;height:auto;display:block;max-width:400px;margin:0 auto;touch-action:none}
+.tela svg.arrastavel .alca{cursor:grab}
+.tela svg.arrastavel .alca:active{cursor:grabbing}
+
+.eq{font-size:22px;font-weight:800;text-align:center;margin:14px 0 4px}
+.eq .a{color:var(--azul)} .eq .b{color:var(--verde)} .eq .c{color:var(--roxo)}
+
+.ex{background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:8px 24px 24px;margin:30px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13);position:relative}
+.ex .tit{font-family:var(--mao);font-size:19px;font-weight:700;background:var(--laranja);color:#fff;display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;border:3px solid var(--tinta)}
+.alt{display:block;background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:12px 16px;margin:9px 0;cursor:pointer;font-size:16.5px;transition:.12s;font-weight:600}
+.alt:hover{background:var(--amar)}
+.alt.certa{background:var(--verdec);border-color:var(--verde)}
+.alt.errada{background:var(--vermc);border-color:var(--verm)}
+.fb{margin-top:14px;font-family:var(--mao);font-size:17px;min-height:0;padding:0;border-radius:9px;overflow:hidden;transition:.2s}
+.fb.mostra{padding:12px 16px;min-height:24px}
+.fb.ok{background:var(--verdec);border:3px solid var(--verde);color:#065f46}
+.fb.no{background:var(--vermc);border:3px solid var(--verm);color:#991b1b}
+@keyframes chacoalha{0%,100%{transform:translateX(0)}15%{transform:translateX(-10px)}30%{transform:translateX(10px)}45%{transform:translateX(-7px)}60%{transform:translateX(7px)}75%{transform:translateX(-3px)}}
+.chacoalha{animation:chacoalha .5s}
+@keyframes pulsa{0%{transform:scale(1)}45%{transform:scale(1.11)}100%{transform:scale(1)}}
+.pulsa{animation:pulsa .45s}
+.selo{position:absolute;right:16px;top:14px;font-size:34px;opacity:0;transform:scale(.2) rotate(-25deg);transition:.4s cubic-bezier(.34,1.7,.5,1)}
+.selo.ver{opacity:1;transform:scale(1) rotate(-12deg)}
+.dica{font-size:14.5px;color:var(--cinza);margin-top:10px;font-style:italic}
+
+.placar{background:var(--tinta);color:var(--papel2);border-radius:14px;padding:26px 28px;margin:44px 0 0;text-align:center}
+.placar .n{font-size:52px;font-weight:800;font-family:var(--mao);color:var(--amar);line-height:1}
+.barra{height:20px;background:#3a3a3a;border-radius:12px;overflow:hidden;margin:16px auto;max-width:420px}
+.barra i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--verde),var(--amar));transition:.6s}
+.conf{position:fixed;top:-20px;width:11px;height:16px;z-index:99;pointer-events:none;border-radius:2px}
+@keyframes cai{to{transform:translateY(105vh) rotate(720deg);opacity:.1}}
+
+footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:var(--cinza);font-size:15px;text-align:center}
+@media(max-width:620px){header h1{font-size:30px}h2{font-size:24px}.guru{flex-direction:column;align-items:center}.guru svg{flex:0 0 auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <p class="serie">✏️ MATEMÁTICA DO ZERO — uma série para quem só sabe somar, subtrair, multiplicar e dividir</p>
+    <span class="aula-num">AULA 6 de 6 — a última!</span>
+    <h1>Setas e tabelas de números</h1>
+    <p class="sub">Onde vetor vira só uma seta, e matriz vira só uma tabela que move setas.</p>
+    <div class="voltou"><strong>Na aula passada:</strong> a onda é o giro do círculo desenrolado — amplitude estica, frequência aperta, fase desloca.</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<p class="grande">Última aula. Álgebra linear tem fama de assustadora, mas as duas peças centrais dela — vetor e matriz — são simples: uma é uma <strong>seta</strong>, a outra é uma <strong>tabela que move setas</strong>.</p>
+
+<!-- ============ 1 ============ -->
+<h2><span class="n">1</span> Um vetor é uma seta</h2>
+
+<p>Lá na Aula 2, um ponto era um endereço: <span class="mono">(3, 5)</span>. Hoje, em vez de só marcar o ponto, desenhamos uma <strong>seta</strong> saindo do zero até ele. Essa seta tem <strong>tamanho</strong> (o quão longa ela é) e <strong>direção</strong> (para onde ela aponta). É um vetor.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: somador de setas arrastável</div>
+  <p>Arraste as duas pontas coloridas. A seta cinza tracejada é o <strong>caminho somado</strong>: anda a seta azul, depois anda a seta verde a partir de onde ela parou.</p>
+
+  <div class="tela">
+    <svg viewBox="0 0 420 420" id="svgSoma" class="arrastavel" role="img" aria-label="Soma de dois vetores arrastáveis, ponta a ponta">
+      <g id="gradeSoma"></g>
+      <line x1="0" y1="210" x2="420" y2="210" stroke="#1b1b1b" stroke-width="2"/>
+      <line x1="210" y1="0" x2="210" y2="420" stroke="#1b1b1b" stroke-width="2"/>
+      <line id="segV" x1="210" y1="210" x2="270" y2="180" stroke="var(--azul)" stroke-width="5" stroke-linecap="round"/>
+      <line id="segW" x1="270" y1="180" x2="270" y2="180" stroke="var(--verde)" stroke-width="5" stroke-linecap="round" stroke-dasharray="0"/>
+      <line id="segSoma" x1="210" y1="210" x2="270" y2="180" stroke="#6b7280" stroke-width="3" stroke-dasharray="7 6"/>
+      <circle id="alcaV" class="alca" cx="270" cy="180" r="13" fill="var(--azul)" stroke="#fff" stroke-width="3"/>
+      <circle id="alcaW" class="alca" cx="330" cy="150" r="13" fill="var(--verde)" stroke="#fff" stroke-width="3"/>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtSoma">v = (2, 1) · w = (2, 1) · v + w = (4, 2)</p>
+</div>
+
+<!-- ============ 2 ============ -->
+<h2><span class="n">2</span> Somar setas é andar um caminho e depois o outro</h2>
+
+<p>Para somar duas setas: anda a primeira, e a partir de onde ela terminou, anda a segunda. A soma é a seta que vai direto do começo até o fim desse caminho — a linha cinza tracejada do laboratório.</p>
+
+<p>Nos números, é ainda mais simples: soma cada coordenada separadamente. <span class="mono">(2, 1) + (2, 1) = (4, 2)</span>.</p>
+
+<div class="guru">
+  <svg viewBox="0 0 100 118" width="92">
+    <ellipse cx="50" cy="112" rx="34" ry="6" fill="#00000018"/>
+    <path d="M50 60 L20 108 L80 108 Z" fill="#7c3aed" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="50" cy="34" r="20" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M30 36 q20 46 40 0 q-6 34 -20 34 q-14 0 -20 -34" fill="#e5e7eb" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M40 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M52 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M30 22 q20 -12 40 0" fill="none" stroke="#1b1b1b" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="24" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="76" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+  </svg>
+  <div>
+    <div class="fala">Andar 3 quarteirões para o norte e depois 2 para o leste te deixa no mesmo lugar que andar os 2 para o leste primeiro e os 3 para o norte depois. A ordem não importa — e é exatamente por isso que dá para desenhar a soma de dois jeitos e chegar no mesmo lugar.</div>
+    <div class="quem">— o Guru</div>
+  </div>
+</div>
+
+<!-- ============ 3 ============ -->
+<h2><span class="n">3</span> Multiplicar uma seta por um número</h2>
+
+<p>Multiplicar um vetor por um número estica ou encolhe a seta, mantendo a direção — do jeito exato que multiplicar <span class="mono">x</span> esticava a reta na Aula 2.</p>
+
+<div class="cuidado">
+  <div class="tit">⚠️ Cuidado — número negativo inverte a seta</div>
+  <p style="margin:6px 0 0">Multiplicar por um número negativo não só encolhe (ou estica): também <strong>vira a seta para o lado oposto</strong>. É a mesma ideia do "passo negativo" da Aula 2, agora aplicada a uma direção inteira.</p>
+</div>
+
+<!-- ============ 4 ============ -->
+<h2><span class="n">4</span> Produto escalar: o que o ângulo entre duas setas conta</h2>
+
+<p>Existe uma conta que combina duas setas e devolve <strong>um único número</strong> (não outra seta): o <strong>produto escalar</strong>. A receita: multiplica as primeiras coordenadas, multiplica as segundas, soma os dois resultados.</p>
+
+<p class="centro" style="font-size:22px;font-weight:800">v · w = (v₁ · w₁) + (v₂ · w₂)</p>
+
+<p>O sinal desse número conta uma história sobre o <strong>ângulo</strong> entre as duas setas:</p>
+
+<table style="border-collapse:collapse;margin:14px auto;font-size:16px">
+  <tr><th style="border:2px solid #1b1b1b;padding:8px 16px;background:#1b1b1b;color:#fffdf7">produto escalar</th><th style="border:2px solid #1b1b1b;padding:8px 16px;background:#1b1b1b;color:#fffdf7">ângulo entre as setas</th></tr>
+  <tr><td style="border:2px solid #1b1b1b;padding:8px 16px;text-align:center;color:var(--verde);font-weight:800">positivo</td><td style="border:2px solid #1b1b1b;padding:8px 16px;text-align:center">agudo — apontam para o mesmo lado, mais ou menos</td></tr>
+  <tr><td style="border:2px solid #1b1b1b;padding:8px 16px;text-align:center;font-weight:800">zero</td><td style="border:2px solid #1b1b1b;padding:8px 16px;text-align:center">reto — perpendiculares, 90°</td></tr>
+  <tr><td style="border:2px solid #1b1b1b;padding:8px 16px;text-align:center;color:var(--verm);font-weight:800">negativo</td><td style="border:2px solid #1b1b1b;padding:8px 16px;text-align:center">obtuso — apontam mais ou menos para lados opostos</td></tr>
+</table>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: produto escalar ao vivo</div>
+  <p>Gire a seta verde e observe o produto escalar mudar de sinal.</p>
+
+  <div class="sl-linha">
+    <label class="lab-l" style="min-width:120px;color:var(--verde)">girar a seta verde:</label>
+    <input type="range" id="slAngProd" min="0" max="360" step="5" value="60">
+    <span class="sl-val" id="vAngProd">60°</span>
+  </div>
+
+  <div class="tela">
+    <svg viewBox="0 0 420 420" id="svgProd" role="img" aria-label="Duas setas e o produto escalar entre elas">
+      <line x1="0" y1="210" x2="420" y2="210" stroke="#1b1b1b" stroke-width="2"/>
+      <line x1="210" y1="0" x2="210" y2="420" stroke="#1b1b1b" stroke-width="2"/>
+      <path id="arcoProd" d="" fill="none" stroke="#9ca3af" stroke-width="2"/>
+      <line x1="210" y1="210" x2="330" y2="210" stroke="var(--azul)" stroke-width="5" stroke-linecap="round"/>
+      <line id="setaProd" x1="210" y1="210" x2="330" y2="210" stroke="var(--verde)" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtProd">v = (120, 0) · w = (60, 104) · v · w = 7200 → ângulo agudo</p>
+</div>
+
+<div class="idiota">
+  <div class="tit">Não existe pergunta idiota</div>
+  <p class="q">Por que o produto escalar dá um número e não outra seta?</p>
+  <p class="a">Porque a conta soma dois produtos comuns — não sobra "direção" nenhuma no resultado, só uma quantidade. É por isso que ele é chamado de "escalar": um número puro, sem seta.</p>
+  <p class="q">Onde isso aparece na vida real?</p>
+  <p class="a">Trabalho em física (força vezes deslocamento na mesma direção), similaridade entre duas listas de números (usado em recomendação e busca), e até correlação estatística — que é basicamente "o ângulo" entre duas séries de dados.</p>
+</div>
+
+<!-- ============ 5 ============ -->
+<h2><span class="n">5</span> Matriz: uma tabela que move setas</h2>
+
+<p>Uma matriz é só uma <strong>tabelinha de números</strong> — 2 linhas, 2 colunas — que sabe transformar qualquer seta: girar, esticar ou espelhar. Você aplica ela numa seta e recebe outra seta como resposta.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: gire a figura com uma matriz</div>
+  <p>A matriz de rotação usa exatamente o seno e o cosseno da Aula 4. Gire o ângulo e veja o triângulo virar.</p>
+
+  <div class="sl-linha">
+    <label class="lab-l" style="min-width:120px;color:var(--roxo)">ângulo de giro:</label>
+    <input type="range" id="slRot" min="0" max="360" step="5" value="0">
+    <span class="sl-val" id="vRot">0°</span>
+  </div>
+
+  <div class="controles">
+    <button class="sec" id="btEspH">↔ Espelhar horizontal</button>
+    <button class="sec" id="btEspV">↕ Espelhar vertical</button>
+    <button class="sec" id="btEstica">⤢ Esticar 1,6×</button>
+    <button class="sec" id="btReset">↺ Reiniciar</button>
+  </div>
+
+  <div class="eq" id="eqMatriz">rotação( <span class="a">cosseno</span>, <span class="b">-seno</span> ; <span class="b">seno</span>, <span class="a">cosseno</span> )</div>
+
+  <div class="tela">
+    <svg viewBox="0 0 420 420" id="svgMatriz" role="img" aria-label="Triângulo original em cinza e transformado por uma matriz em azul">
+      <line x1="0" y1="210" x2="420" y2="210" stroke="#e6e1d4" stroke-width="1.5"/>
+      <line x1="210" y1="0" x2="210" y2="420" stroke="#e6e1d4" stroke-width="1.5"/>
+      <polygon id="figOriginal" points="" fill="rgba(156,163,175,.18)" stroke="#9ca3af" stroke-width="2" stroke-dasharray="6 5"/>
+      <polygon id="figTransf" points="" fill="rgba(37,99,235,.22)" stroke="var(--azul)" stroke-width="4"/>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtMatriz">Triângulo original em cinza tracejado; transformado em azul.</p>
+</div>
+
+<p>É a mesma matriz que os jogos usam para girar personagens na tela, que uma câmera usa para corrigir perspectiva, e que aparece por trás de qualquer efeito visual que gira, estica ou espelha uma imagem.</p>
+
+<div class="pontos">
+  <div class="tit">Pontos importantes</div>
+  <ul>
+    <li>Um <strong>vetor</strong> é uma seta: tem tamanho e direção.</li>
+    <li>Somar setas: anda uma, depois anda a outra a partir de onde a primeira parou.</li>
+    <li>Multiplicar uma seta por um número estica/encolhe; número negativo <strong>inverte</strong> a direção.</li>
+    <li><strong>Produto escalar</strong> <span class="mono">v · w = v₁w₁ + v₂w₂</span> devolve um número, não uma seta. Positivo = ângulo agudo, zero = reto, negativo = obtuso.</li>
+    <li>Uma <strong>matriz</strong> é uma tabela de números que transforma setas: gira, estica, espelha.</li>
+    <li>A matriz de rotação usa <strong>seno e cosseno</strong> — a Aula 4 volta aqui.</li>
+  </ul>
+</div>
+
+<!-- ============ exercicios ============ -->
+<h2><span class="n">✏️</span> Afie o lápis</h2>
+<p>Seis exercícios. Erre à vontade — a correção explica o porquê.</p>
+
+<div class="ex" id="ex1">
+  <div class="tit">Exercício 1</div>
+  <div class="selo">✅</div>
+  <p>O que é um vetor?</p>
+  <div class="alts" data-r="1">
+    <div class="alt" data-i="0">Um número sozinho, sem direção.</div>
+    <div class="alt" data-i="1">Uma seta: tem tamanho e direção.</div>
+    <div class="alt" data-i="2">Uma tabela de números 2 por 2.</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex2">
+  <div class="tit">Exercício 2</div>
+  <div class="selo">✅</div>
+  <p>Quanto vale <span class="mono">(1, 4) + (3, −2)</span> na primeira coordenada?</p>
+  <p><input type="number" data-r="4"></p>
+  <button class="check" data-ex="ex2">Conferir</button>
+  <div class="fb"></div>
+  <p class="dica">Dica: soma cada coordenada separadamente: 1 + 3.</p>
+</div>
+
+<div class="ex" id="ex3">
+  <div class="tit">Exercício 3</div>
+  <div class="selo">✅</div>
+  <p>Multiplicar um vetor por <strong>−2</strong> faz o quê com a seta?</p>
+  <div class="alts" data-r="2">
+    <div class="alt" data-i="0">Só encolhe, mantendo a direção.</div>
+    <div class="alt" data-i="1">Só estica, mantendo a direção.</div>
+    <div class="alt" data-i="2">Estica ao dobro do tamanho e inverte a direção.</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex4">
+  <div class="tit">Exercício 4</div>
+  <div class="selo">✅</div>
+  <p>Se o produto escalar entre duas setas é <strong>zero</strong>, o que isso diz sobre o ângulo entre elas?</p>
+  <div class="alts" data-r="1">
+    <div class="alt" data-i="0">É um ângulo agudo.</div>
+    <div class="alt" data-i="1">É um ângulo reto — as setas são perpendiculares.</div>
+    <div class="alt" data-i="2">É um ângulo obtuso.</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex5">
+  <div class="tit">Exercício 5 — o desafio</div>
+  <div class="selo">🏆</div>
+  <p>Calcule o produto escalar <span class="mono">(2, 3) · (4, −1)</span>.</p>
+  <p><input type="number" data-r="5"></p>
+  <button class="check" data-ex="ex5">Conferir</button>
+  <div class="fb"></div>
+  <p class="dica">Dica: (2 · 4) + (3 · −1) = 8 − 3.</p>
+</div>
+
+<div class="ex" id="ex6">
+  <div class="tit">Exercício 6</div>
+  <div class="selo">✅</div>
+  <p>Uma matriz é melhor descrita como:</p>
+  <div class="alts" data-r="1">
+    <div class="alt" data-i="0">Uma seta especial que nunca muda de direção.</div>
+    <div class="alt" data-i="1">Uma tabela de números que transforma setas — gira, estica ou espelha.</div>
+    <div class="alt" data-i="2">Um número único que representa um ângulo.</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="placar" id="placar">
+  <p style="margin:0 0 4px;font-family:var(--mao);font-size:19px">Seu placar</p>
+  <div class="n"><span id="pn">0</span> / 6</div>
+  <div class="barra"><i id="pbar"></i></div>
+  <p id="pmsg" style="margin:0;color:#cfc9bb">Resolva os exercícios acima e acompanhe aqui.</p>
+</div>
+
+<footer>
+  Matemática do Zero · Aula 6 — Setas e tabelas de números<br>
+  <strong>Fim do curso principal!</strong> Veja o <a href="../../PLANO.md" style="color:var(--azul)">roteiro completo</a> para os assuntos que ficam ao alcance a partir daqui.
+</footer>
+
+</div>
+
+<script src="../../assets/progresso.js"></script>
+<script src="../../assets/auth.js"></script>
+<script src="../../assets/auth-ui.js"></script>
+<script>
+(function(){
+"use strict";
+var AULA_ID = "06-setas-e-tabelas-de-numeros";
+var NS="http://www.w3.org/2000/svg";
+var CX=210, CY=210, U=30;
+function X(x){return CX+x*U;}
+function Y(y){return CY-y*U;}
+
+function desenhaGrade(id){
+  var g=document.getElementById(id);
+  if(!g) return;
+  for(var i=-6;i<=6;i++){
+    if(i===0) continue;
+    var lv=document.createElementNS(NS,"line");
+    lv.setAttribute("x1",X(i));lv.setAttribute("y1",0);lv.setAttribute("x2",X(i));lv.setAttribute("y2",420);
+    lv.setAttribute("stroke","#e6e1d4");lv.setAttribute("stroke-width",1.2);g.appendChild(lv);
+    var lh=document.createElementNS(NS,"line");
+    lh.setAttribute("x1",0);lh.setAttribute("y1",Y(i));lh.setAttribute("x2",420);lh.setAttribute("y2",Y(i));
+    lh.setAttribute("stroke","#e6e1d4");lh.setAttribute("stroke-width",1.2);g.appendChild(lh);
+  }
+}
+desenhaGrade("gradeSoma");
+
+/* ---------- lab 1: somador de setas arrastavel ---------- */
+var svgSoma=document.getElementById("svgSoma");
+var segV=document.getElementById("segV"), segW=document.getElementById("segW"), segSoma=document.getElementById("segSoma");
+var alcaV=document.getElementById("alcaV"), alcaW=document.getElementById("alcaW"), txtSoma=document.getElementById("txtSoma");
+var vVec={x:2,y:1}, wVec={x:2,y:1};
+
+function coordDoEvento(ev, svg){
+  var rect = svg.getBoundingClientRect();
+  var cx = ev.clientX!==undefined ? ev.clientX : ev.touches[0].clientX;
+  var cy = ev.clientY!==undefined ? ev.clientY : ev.touches[0].clientY;
+  var mx = (cx - rect.left) / rect.width * 420;
+  var my = (cy - rect.top) / rect.height * 420;
+  var gx = Math.round((mx - CX) / U);
+  var gy = Math.round((CY - my) / U);
+  return { x: Math.max(-6,Math.min(6,gx)), y: Math.max(-6,Math.min(6,gy)) };
+}
+function pintaSoma(){
+  segV.setAttribute("x1",X(0)); segV.setAttribute("y1",Y(0));
+  segV.setAttribute("x2",X(vVec.x)); segV.setAttribute("y2",Y(vVec.y));
+  segW.setAttribute("x1",X(vVec.x)); segW.setAttribute("y1",Y(vVec.y));
+  segW.setAttribute("x2",X(vVec.x+wVec.x)); segW.setAttribute("y2",Y(vVec.y+wVec.y));
+  segSoma.setAttribute("x1",X(0)); segSoma.setAttribute("y1",Y(0));
+  segSoma.setAttribute("x2",X(vVec.x+wVec.x)); segSoma.setAttribute("y2",Y(vVec.y+wVec.y));
+  alcaV.setAttribute("cx",X(vVec.x)); alcaV.setAttribute("cy",Y(vVec.y));
+  alcaW.setAttribute("cx",X(vVec.x+wVec.x)); alcaW.setAttribute("cy",Y(vVec.y+wVec.y));
+  txtSoma.textContent = "v = ("+vVec.x+", "+vVec.y+") · w = ("+wVec.x+", "+wVec.y+") · v + w = ("+(vVec.x+wVec.x)+", "+(vVec.y+wVec.y)+")";
+}
+var arrastando=null;
+alcaV.addEventListener("pointerdown",function(ev){ arrastando="v"; ev.preventDefault(); });
+alcaW.addEventListener("pointerdown",function(ev){ arrastando="w"; ev.preventDefault(); });
+svgSoma.addEventListener("pointermove",function(ev){
+  if(!arrastando) return;
+  var c = coordDoEvento(ev, svgSoma);
+  if(arrastando==="v"){ vVec=c; } else { wVec={x:c.x-vVec.x, y:c.y-vVec.y}; }
+  pintaSoma();
+});
+window.addEventListener("pointerup",function(){ arrastando=null; });
+pintaSoma();
+
+/* ---------- lab 2: produto escalar ---------- */
+var slAngProd=document.getElementById("slAngProd"), setaProd=document.getElementById("setaProd");
+var arcoProd=document.getElementById("arcoProd"), txtProd=document.getElementById("txtProd");
+function pintaProd(){
+  var deg=parseInt(slAngProd.value,10);
+  document.getElementById("vAngProd").textContent=deg+"°";
+  var rad=deg*Math.PI/180;
+  var wx=120*Math.cos(rad), wy=120*Math.sin(rad);
+  setaProd.setAttribute("x2",210+wx); setaProd.setAttribute("y2",210-wy);
+  var prod = 120*wx + 0*(-wy);
+  var big = deg>180?1:0, sweep = deg>180?0:1;
+  var p0={x:210+40,y:210}, p1={x:210+40*Math.cos(rad),y:210-40*Math.sin(rad)};
+  arcoProd.setAttribute("d","M "+p0.x+" "+p0.y+" A 40 40 0 "+big+" "+ (deg<=180?0:0) +" "+p1.x+" "+p1.y);
+  var natureza = prod>1 ? "ângulo agudo" : prod<-1 ? "ângulo obtuso" : "ângulo reto (perpendiculares)";
+  txtProd.textContent = "v = (120, 0) · w = ("+Math.round(wx)+", "+Math.round(wy)+") · v · w = "+Math.round(prod)+" → "+natureza;
+}
+slAngProd.addEventListener("input",pintaProd);
+pintaProd();
+
+/* ---------- lab 3: matriz transformando figura ---------- */
+var slRot=document.getElementById("slRot");
+var figOriginal=document.getElementById("figOriginal"), figTransf=document.getElementById("figTransf");
+var eqMatriz=document.getElementById("eqMatriz"), txtMatriz=document.getElementById("txtMatriz");
+var pontosBase=[{x:0,y:3},{x:-2.5,y:-1.5},{x:2.5,y:-1.5}];
+var espH=1, espV=1, escala=1;
+
+function aplicaMatriz(p, deg){
+  var rad=deg*Math.PI/180, c=Math.cos(rad), s=Math.sin(rad);
+  var x=p.x*espH*escala, y=p.y*espV*escala;
+  return { x: c*x - s*y, y: s*x + c*y };
+}
+function pintaMatriz(){
+  var deg=parseInt(slRot.value,10);
+  document.getElementById("vRot").textContent=deg+"°";
+  var origStr = pontosBase.map(function(p){ return X(p.x)+","+Y(p.y); }).join(" ");
+  figOriginal.setAttribute("points", origStr);
+  var transf = pontosBase.map(function(p){ var t=aplicaMatriz(p,deg); return X(t.x)+","+Y(t.y); }).join(" ");
+  figTransf.setAttribute("points", transf);
+  var partes=[];
+  if(espH<0) partes.push("espelhada na horizontal");
+  if(espV<0) partes.push("espelhada na vertical");
+  if(escala!==1) partes.push("esticada "+escala.toFixed(1).replace(".",",")+"×");
+  if(deg!==0) partes.push("girada "+deg+"°");
+  txtMatriz.textContent = partes.length ? "Triângulo " + partes.join(", ") + "." : "Triângulo original em cinza tracejado; transformado em azul.";
+}
+slRot.addEventListener("input",pintaMatriz);
+document.getElementById("btEspH").addEventListener("click",function(){ espH*=-1; pintaMatriz(); });
+document.getElementById("btEspV").addEventListener("click",function(){ espV*=-1; pintaMatriz(); });
+document.getElementById("btEstica").addEventListener("click",function(){ escala = escala===1 ? 1.6 : 1; pintaMatriz(); });
+document.getElementById("btReset").addEventListener("click",function(){
+  espH=1; espV=1; escala=1; slRot.value=0; pintaMatriz();
+});
+pintaMatriz();
+
+/* ---------- exercicios ---------- */
+var feitos={}, TOTAL=6;
+function confete(){
+  var cores=["#fde68a","#2563eb","#dc2626","#059669","#7c3aed","#d97706"];
+  for(var i=0;i<50;i++){
+    (function(i){
+      var d=document.createElement("div");
+      d.className="conf"; d.style.left=(Math.random()*100)+"vw";
+      d.style.background=cores[i%cores.length];
+      d.style.animation="cai "+(1.9+Math.random()*1.5)+"s linear forwards";
+      d.style.animationDelay=(Math.random()*.5)+"s";
+      document.body.appendChild(d);
+      setTimeout(function(){d.remove();},4200);
+    })(i);
+  }
+}
+function marca(id,ok){
+  if(ok&&!feitos[id]){
+    feitos[id]=true;
+    if(window.Progresso) Progresso.marcar(AULA_ID,id);
+    var n=Object.keys(feitos).length;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Curso inteiro fechado! 🎉🎉</strong> De somar e subtrair até vetores e matrizes. Parabéns."; confete(); }
+    else msg.textContent="Boa! Faltam "+(TOTAL-n)+".";
+    document.querySelector("#"+id+" .selo").classList.add("ver");
+  }
+}
+function restauraProgresso(){
+  if(!window.Progresso) return;
+  Progresso.carregar(AULA_ID).then(function(itens){
+    itens.forEach(function(id){
+      if(!feitos[id] && document.getElementById(id)){
+        feitos[id]=true;
+        document.querySelector("#"+id+" .selo").classList.add("ver");
+      }
+    });
+    var n=Object.keys(feitos).length;
+    if(n===0) return;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    msg.textContent = n===TOTAL
+      ? "Você já tinha concluído esta aula. 🎉"
+      : "Progresso salvo: "+n+"/"+TOTAL+". Faltam "+(TOTAL-n)+".";
+  });
+}
+function fb(box,ok,txt){
+  var f=box.querySelector(".fb");
+  f.className="fb mostra "+(ok?"ok":"no"); f.innerHTML=txt;
+  box.classList.remove("chacoalha");
+  if(!ok){ void box.offsetWidth; box.classList.add("chacoalha"); }
+}
+var explica={
+  ex2:{ok:"Isso! 1 + 3 = 4.",no:"Soma cada coordenada separadamente: 1 + 3 = <strong>4</strong>."},
+  ex5:{ok:"Isso! (2·4) + (3·−1) = 8 − 3 = 5.",no:"(2 · 4) + (3 · −1) = 8 − 3 = <strong>5</strong>."}
+};
+document.querySelectorAll("button.check").forEach(function(b){
+  b.addEventListener("click",function(){
+    var box=document.getElementById(b.dataset.ex);
+    var ins=box.querySelectorAll("input[data-r]"), tudoOk=true, vazio=false;
+    ins.forEach(function(inp){
+      if(inp.value===""){vazio=true;return;}
+      var ok=Math.abs(parseFloat(inp.value)-parseFloat(inp.dataset.r)) < 0.001;
+      inp.style.borderColor=ok?"#059669":"#dc2626";
+      inp.style.background=ok?"#d1fae5":"#fee2e2";
+      if(!ok) tudoOk=false;
+    });
+    if(vazio){ fb(box,false,"Preencha o campo antes de conferir. 🙂"); return; }
+    fb(box,tudoOk,(tudoOk?"✔ ":"✘ ")+(tudoOk?explica[b.dataset.ex].ok:explica[b.dataset.ex].no));
+    marca(b.dataset.ex,tudoOk);
+  });
+});
+var expAlt={
+  ex1:["Isso seria só um número solto, sem direção — não é um vetor.",
+       "Isso mesmo! Um vetor é uma seta: tamanho e direção.",
+       "Essa é a descrição de uma matriz, não de um vetor."],
+  ex3:["Encolher sozinho seria multiplicar por um número entre −1 e 1.",
+       "Esticar sem inverter seria multiplicar por um número positivo maior que 1.",
+       "Isso! O 2 estica ao dobro, e o sinal de menos inverte a direção."],
+  ex4:["Ângulo agudo dá produto escalar positivo, não zero.",
+       "Isso! Produto escalar zero significa ângulo reto — as setas são perpendiculares.",
+       "Ângulo obtuso dá produto escalar negativo, não zero."],
+  ex6:["Uma seta especial ainda seria só um vetor, não uma matriz.",
+       "Isso! Matriz é uma tabela de números que transforma setas.",
+       "Um único número seria um escalar, como o resultado do produto escalar — não uma matriz."]
+};
+document.querySelectorAll(".alts").forEach(function(grupo){
+  var box=grupo.closest(".ex"), certa=parseInt(grupo.dataset.r,10);
+  grupo.querySelectorAll(".alt").forEach(function(alt){
+    alt.setAttribute("tabindex","0");
+    alt.setAttribute("role","button");
+    alt.setAttribute("aria-label","Alternativa "+alt.textContent.trim());
+    function escolhe(){
+      var i=parseInt(alt.dataset.i,10), ok=(i===certa);
+      grupo.querySelectorAll(".alt").forEach(function(a){a.classList.remove("certa","errada");});
+      alt.classList.add(ok?"certa":"errada");
+      if(ok) alt.classList.add("pulsa");
+      fb(box,ok,(ok?"✔ ":"✘ ")+expAlt[box.id][i]);
+      marca(box.id,ok);
+    }
+    alt.addEventListener("click",escolhe);
+    alt.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();escolhe();}});
+  });
+});
+
+restauraProgresso();
+
+})();
+</script>
+</body>
+</html>
