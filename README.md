@@ -1,8 +1,15 @@
 # Matemática do Zero
 
 Um curso de matemática construído do chão para cima, para quem só sabe as quatro operações
-(somar, subtrair, multiplicar e dividir) e quer chegar até **trigonometria**, **álgebra linear**,
-**cálculo**, **probabilidade** e **números complexos** sem passar por nenhuma etapa no escuro.
+(somar, subtrair, multiplicar e dividir) e quer chegar a **toda a matemática da escola até a
+faculdade** — frações e porcentagem, álgebra, geometria, trigonometria, álgebra linear, cálculo,
+probabilidade, números complexos e equações diferenciais — sem passar por nenhuma etapa no escuro.
+
+> **Em reestruturação:** o curso está sendo reorganizado em **5 níveis e 30 aulas**, na ordem da
+> escola (Fundamental → Médio → Faculdade). O roteiro completo, com o mapa das 18 aulas atuais para
+> a numeração nova, está em **[PLANO.md](PLANO.md)**; a trilha de referência usada está em
+> [`trilha_de_aprendizado_em_matemativa.md`](trilha_de_aprendizado_em_matemativa.md). As tabelas
+> abaixo mostram as aulas publicadas hoje.
 
 Cada aula é uma **página HTML interativa e autocontida**: você mexe nos controles, o gráfico
 responde na hora, e os exercícios se corrigem sozinhos com explicação do erro. O formato é
@@ -90,6 +97,7 @@ math/
 ├── index.html                          o curso: cabeçalho com os níveis, painel e quadro da aula
 ├── README.md                           este arquivo
 ├── PLANO.md                            roteiro do curso, por níveis
+├── trilha_de_aprendizado_em_matemativa.md   trilha de referência usada no plano
 │
 ├── aulas/
 │   ├── 01-o-que-e-uma-funcao/

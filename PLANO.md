@@ -1,335 +1,685 @@
 # Plano do curso
 
-O destino é conseguir ler e usar **trigonometria** (seno, cosseno, ondas) e **álgebra linear**
-(vetores, matrizes) partindo apenas das quatro operações — depois usar isso tudo de verdade em
-**sistemas de equações, sinais, estatística e regressão** — e, por fim, chegar a **cálculo,
-probabilidade e números complexos**. O curso é dividido em níveis de seis aulas; dentro de cada
-nível, cada aula resolve exatamente um obstáculo.
+> **Estado:** em reestruturação. As 18 aulas publicadas continuam valendo e estão sendo
+> reorganizadas na ordem abaixo — veja [Migração](#migração-das-18-aulas-publicadas). Este
+> documento é a referência: toda aula nova ou adaptada segue o que está aqui.
 
-| Nível | Aulas | Estado |
-|---|---|---|
-| 1 — Básico | 1–6 | ✅ pronto |
-| 2 — Intermediário | 7–12 | ✅ pronto |
-| 3 — Avançado | 13–18 | ✅ pronto |
-| 4 — Especialista | — | 💭 sementes |
+## Objetivo
 
-Nenhuma aula usa nada que não tenha sido apresentado numa aula anterior — nem entre níveis.
+Ensinar **toda a matemática da escola até a faculdade** — do "sei somar, subtrair, multiplicar e
+dividir" até cálculo, álgebra linear, probabilidade, equações diferenciais e o jeito de pensar de
+quem pesquisa matemática — **sem pular nenhum degrau e sem decorar nada**.
+
+O curso segue a **ordem da escola** (Ensino Fundamental → Ensino Médio → Faculdade), porque é a
+ordem em que os conceitos de fato dependem uns dos outros, e porque o aluno se reconhece nela. O
+que muda é o **jeito de ensinar**: em vez de lista de fórmulas, cada ideia chega por um desenho que
+se mexe, uma história e um exercício que explica o erro — a metodologia da série *Head First*, da
+O'Reilly.
+
+Três regras valem para as 30 aulas:
+
+1. **Nada é usado antes de ser apresentado** — nem entre níveis. Cada aula abre com "Você já sabe"
+   listando de onde vem cada peça.
+2. **O desenho vem antes da fórmula.** Primeiro o aluno vê a coisa acontecer num laboratório,
+   depois escreve.
+3. **Reencontros, não assuntos soltos.** Cada ideia nova é apresentada como uma ideia antiga vista
+   de outro jeito (a PA é a reta de passo em passo, a correlação é um cosseno, o número complexo é
+   um giro).
 
 ---
 
-## Nível 1 — Básico ✅
+## Visão geral
 
-Das quatro operações até trigonometria e álgebra linear. Seis aulas, sem pular nenhum degrau.
+| Nível | Etapa da escola | Aulas | Ao terminar, o aluno consegue... |
+|---|---|---|---|
+| **1 — Fundamentos** | Fundamental I e II | 1–6 | fazer conta com qualquer tipo de número (inteiro, negativo, fração, decimal, porcentagem, potência) e resumir uma lista de dados |
+| **2 — Álgebra e Geometria** | Fundamental II | 7–12 | trocar número por letra, resolver equações e sistemas, desenhar retas e medir figuras no plano e no espaço |
+| **3 — Ensino Médio** | Ensino Médio | 13–18 | entender o comportamento das funções clássicas (quadrática, exponencial, trigonométricas), usar vetores e matrizes e girar com números complexos |
+| **4 — Superior I** | Faculdade: cálculo e dados | 19–24 | derivar, integrar, medir incerteza com a curva normal e extrair padrões de dados (correlação, regressão, Fourier) |
+| **5 — Superior II** | Faculdade: matemática aplicada e computacional | 25–30 | modelar sistemas que mudam no tempo, otimizar, trabalhar com acaso ao longo do tempo e demonstrar um resultado |
+| **Eletivas** | Aprofundamento | — | seguir para áreas específicas (criptografia, grafos, topologia, ...) |
 
-### Aula 1 — O que é uma função ✅
+Nas tabelas abaixo, o **Estado** diz de onde vem cada aula:
 
-**O obstáculo:** o símbolo `f(x)` assusta mais do que a ideia por trás dele.
+- ✅ **pronta** — já publicada; só muda de número e de referências.
+- ♻️ **adaptar** — já publicada; será dividida, ampliada ou juntada com outra.
+- 🆕 **nova** — ainda não existe.
 
-- Função é uma máquina: entra um número, sai outro
-- Como se escreve: `f(3) = 6` e por que os parênteses **não** são multiplicação
-- O `x` é só um espaço em branco esperando ser preenchido
+---
+
+## Metodologia: a anatomia de toda aula
+
+Inspirada na série *Head First*: o cérebro presta atenção no que é visual, conversado, surpreendente
+e feito com as próprias mãos. Toda aula, em todos os níveis, tem:
+
+| Peça | Para quê | Obrigatório |
+|---|---|---|
+| **Cabeçalho** com "AULA N de 30 · NÍVEL X" e o quadro **Você já sabe** | Mostra de onde vem cada peça usada na aula | sim |
+| **Gancho** — um problema ou uma história do mundo real | Dar um motivo antes da teoria | sim |
+| **6 laboratórios** 🔧 | Sliders, botões e arrastar: a ideia entra pelas mãos | sim, exatamente 6 |
+| **O Guru** 🧘 | Uma frase que arruma a cabeça no momento certo | sim, ao menos 1 |
+| **Não existe pergunta idiota** 💬 | As dúvidas que todo mundo tem, respondidas antes | sim, ao menos 1 |
+| **Cuidado** ⚠️ | A armadilha clássica, marcada antes da queda | sim, ao menos 1 |
+| **Pontos importantes** 📌 | O resumo da aula em uma tela | sim |
+| **Afie o lápis** ✏️ | 6 exercícios; errou → explica o porquê; acertou → selo; um deles é o desafio 🏆 | sim, exatamente 6 |
+| **Placar** e progresso salvo | Motivação e retomada | sim |
+| **notas.md** e **figuras.png** | O mesmo conteúdo para ler, imprimir ou colar num caderno | sim |
+
+Peças que passam a entrar gradualmente (novas aulas já nascem com elas; as antigas recebem na
+migração):
+
+| Peça | Para quê | Onde |
+|---|---|---|
+| **🧠 Poder do cérebro** | Uma pergunta aberta *antes* da explicação: o aluno pensa primeiro | todas as aulas novas |
+| **Por que é verdade?** | Uma mini-demonstração visual (sem formalismo) de um fato da aula | a partir do Nível 2 |
+| **Conversa ao pé da lareira** | Diálogo entre dois conceitos que se confundem | uma por nível (lista abaixo) |
+| **Quem faz o quê?** | Exercício de ligar colunas (novo tipo de exercício no motor das aulas) | a partir do Nível 2 |
+
+**Conversas ao pé da lareira** (uma por nível): Média × Mediana (N1) · Equação × Função (N2) ·
+Seno × Cosseno (N3) · Derivada × Integral (N4) · Determinístico × Aleatório (N5).
+
+**Critério de qualidade** de cada aula, antes de publicar:
+
+1. `tests/verifica.js` verde: 6 laboratórios, 6 exercícios, controles nos extremos sem `NaN`,
+   erro nunca pontua e gabarito sempre é aceito, nenhum erro de JavaScript, nada rolando para o
+   lado a 375 px, links válidos.
+2. Toda conta citada no texto e nas notas foi conferida numericamente.
+3. Nenhuma peça é usada antes de ser apresentada (conferir contra a tabela de pré-requisitos).
+4. Nenhum laboratório dá "acertou" sozinho ao carregar a página.
+
+---
+
+## Nível 1 — Fundamentos
+
+*Ensino Fundamental I e II · trilha: frações e decimais, múltiplos e divisores, potências e raízes,
+proporcionalidade.*
+
+O aluno sai daqui fazendo conta com **qualquer tipo de número** e resumindo uma lista de dados. É o
+chão de todo o resto: porcentagem, frações e negativos aparecem em todas as aulas seguintes.
+
+| # | Aula | Estado | Vem de |
+|---|---|---|---|
+| 1 | Múltiplos, divisores e primos | 🆕 | — |
+| 2 | Pedaços e sinais: frações, decimais e negativos | 🆕 | — |
+| 3 | Porcentagem, razão e regra de três | 🆕 | — |
+| 4 | Potências e raízes | ♻️ | atual Aula 9 (seções 1, 2 e 6) |
+| 5 | Dados: média, mediana, moda e desvio | ♻️ | atual Aula 10 (seção 1) + novo |
+| 6 | Contagem e chance | ♻️ | atual Aula 17 (seções 1–3) + novo |
+
+### Aula 1 — Múltiplos, divisores e primos 🆕
+
+**O obstáculo:** somar frações, simplificar e dividir coisas em partes iguais dependem de saber
+"quem cabe dentro de quem" — e isso nunca é mostrado, só decorado.
+
+- Múltiplos: pular de 3 em 3 na reta; divisores: quem divide sem sobrar
+- Números primos: os que só se dividem por 1 e por eles mesmos; o crivo de Eratóstenes
+- Todo número é um produto de primos (a "receita" do número)
+- MMC: quando duas engrenagens voltam à posição inicial juntas
+- MDC: o maior ladrilho quadrado que cobre um retângulo sem cortar
+
+**Laboratórios:** pulos na reta · o crivo de Eratóstenes · a árvore de fatores · engrenagens
+(MMC) · ladrilhos (MDC) · semáforos que piscam juntos
+
+### Aula 2 — Pedaços e sinais: frações, decimais e negativos 🆕
+
+**O obstáculo:** meio, terço, 0,25, −3 °C — todos são "números", mas cada um parece ter suas
+próprias regras.
+
+- Fração como pedaço: pizza e barra de chocolate; frações equivalentes
+- Somar frações: deixar os pedaços do mesmo tamanho (reencontro com o MMC da Aula 1)
+- Decimais: a fração de 10, 100, 1000 — a vírgula na régua
+- A reta numerada inteira: negativos à esquerda do zero (termômetro, saldo no banco)
+- Somar e multiplicar com sinais: andar para trás; menos vezes menos dá mais
+
+**Laboratórios:** a pizza fatiada · frações equivalentes · soma de pedaços · a régua dos decimais ·
+o termômetro (negativos) · o saldo que entra e sai
+
+### Aula 3 — Porcentagem, razão e regra de três 🆕
+
+**O obstáculo:** desconto, juros, receita de bolo e mapa são a mesma conta, mas parecem quatro
+assuntos.
+
+- Razão: comparar por divisão (2 xícaras de farinha para 1 de açúcar)
+- Proporção: duas razões iguais; a receita que dobra
+- Porcentagem: "por cem" — a fração de denominador 100
+- Aumentos e descontos em sequência (e por que 10% de aumento seguido de 10% de desconto não volta
+  ao preço original)
+- Regra de três simples e composta; grandezas diretas e inversas
+
+**Laboratórios:** a receita que dobra · a barra de porcentagem · desconto × aumento ·
+a escala do mapa · regra de três ao vivo · direta ou inversa?
+
+### Aula 4 — Potências e raízes ♻️
+
+**O obstáculo:** "ao quadrado" e "raiz" parecem símbolos soltos; são um quadrado de verdade e o
+lado dele.
+
+- Ao quadrado é, literalmente, um quadrado; ao cubo é um cubo (volume)
+- A raiz quadrada como caminho de volta; a raiz cúbica
+- Nem toda raiz é inteira (√2 ≈ 1,41)
+- Quadrado nunca é negativo (reencontro com os sinais da Aula 2)
+- Notação científica: potências de 10 para números enormes e minúsculos
+
+**Laboratórios:** o quadrado cresce · o cubo cresce · ache o lado · ache a aresta ·
+quadrado nunca é negativo · a régua das potências de 10
+
+### Aula 5 — Dados: média, mediana, moda e desvio ♻️
+
+**O obstáculo:** uma lista de números não diz nada até ser resumida — e cada resumo esconde algo.
+
+- Média como ponto de equilíbrio (a gangorra)
+- Mediana: o do meio; moda: o que mais aparece; quando cada uma engana (salários)
+- Gráficos de barras e histogramas
+- Desvio: o quanto a lista se espalha (usa quadrado e raiz da Aula 4)
+- **Conversa ao pé da lareira:** Média × Mediana
+
+**Laboratórios:** a gangorra da média · o do meio (mediana) · o salário do chefe (média ×
+mediana) · monte o histograma · centralize a lista · espalhado ou apertado?
+
+### Aula 6 — Contagem e chance ♻️
+
+**O obstáculo:** o acaso parece não ter regra, e contar possibilidades parece exigir fórmulas
+decoradas.
+
+- Contar com árvores de possibilidades (princípio multiplicativo)
+- Permutações e arranjos: de quantos jeitos dá para ordenar ou escolher em ordem; o fatorial
+- Probabilidade como fração dos casos (reencontro com as Aulas 2 e 3)
+- Repetir muitas vezes: a frequência se aproxima da probabilidade
+- A moeda não tem memória (falácia do apostador)
+
+**Laboratórios:** a árvore de roupas · ordenar a fila · a moeda repetida · o dado viciado? ·
+a média que gruda · duas moedas, quatro casos
+
+---
+
+## Nível 2 — Álgebra e Geometria
+
+*Ensino Fundamental II · trilha: expressões algébricas, equações e inequações, sistemas lineares,
+geometria plana.*
+
+O aluno troca número por letra, resolve equações e sistemas, desenha retas e mede figuras. Aqui
+começam as peças **Por que é verdade?** e **Quem faz o quê?**.
+
+| # | Aula | Estado | Vem de |
+|---|---|---|---|
+| 7 | Letras no lugar de números: a função | ♻️ | atual Aula 1 + expressões algébricas |
+| 8 | Equações e inequações: a balança | ♻️ | atual Aula 7 + inequações + abrir parênteses (da atual 13) |
+| 9 | O plano e a reta | ✅ | atual Aula 2 |
+| 10 | Sistemas de equações | ✅ | atual Aula 8 |
+| 11 | Ângulos, círculo e π | ♻️ | atual Aula 3 + perímetro, área do círculo e π (da atual 15) |
+| 12 | Áreas, volumes e Pitágoras | ♻️ | atual Aula 9 (seção 3) + áreas de figuras + volumes |
+
+### Aula 7 — Letras no lugar de números: a função ♻️
+
+**O obstáculo:** o `x` e o `f(x)` assustam mais do que a ideia por trás deles.
+
+- A máquina: entra um número, sai outro; o `x` é um espaço esperando ser preenchido
+- Expressões algébricas: `3x + 2` como receita; juntar termos parecidos
 - Máquinas de dois passos e a ordem das contas
 - A regra de ouro: mesma entrada → sempre a mesma saída
-- Cada teste vira um ponto no papel; todos juntos formam o gráfico
+- Cada teste vira um ponto; todos juntos formam o gráfico
+- **Conversa ao pé da lareira:** Equação × Função
 
-**Laboratórios:** a máquina animada · a fórmula clicável · o slider do `x` · a ordem das contas ·
+**Laboratórios:** a máquina animada · a fórmula clicável · o slider do x · a ordem das contas ·
 confiável × quebrada · o gráfico nascendo ponto a ponto
 
-### Aula 2 — Desenhar números no papel ✅
+### Aula 8 — Equações e inequações: a balança ♻️
 
-**O obstáculo:** sem saber marcar um ponto, nenhum gráfico faz sentido.
+**O obstáculo:** descobrir o número escondido parece chute.
 
-- Duas réguas e o endereço de dois números
-- Por que `(3, 5)` e `(5, 3)` são lugares diferentes
-- Números negativos: antes do zero a régua continua
-- Toda máquina de multiplicar dá uma linha reta
-- O passo da escada: ando 1 → subo quanto?
-- O número solto levanta a linha e marca onde ela cruza a régua em pé
-- A receita geral: `f(x) = passo · x + altura de partida`
+- A balança: o que fizer de um lado, faça do outro
+- Isolar o x passo a passo; conferir é de graça
+- Abrir parênteses: cada pedaço vezes cada pedaço, pela área do retângulo
+- Inequações: a balança que pende para um lado; o sinal que vira quando se multiplica por negativo
+- **Por que é verdade?** Por que multiplicar por −1 vira o sinal da desigualdade (reta numerada)
 
-**Laboratórios:** encontre o ponto (com o caminho animado) · leia o ponto · o elevador dos negativos ·
-sobe, desce ou fica deitada? · compare duas retas · a fábrica de retas (com o desafio da reta misteriosa)
+**Laboratórios:** a balança equilibrada · desfazendo passos · abra os parênteses · a balança
+que pende · o sinal que vira · confira sua resposta
 
-### Aula 3 — Ângulos e o círculo ✅
+### Aula 9 — O plano e a reta ✅
 
-**O obstáculo:** girar é uma ideia diferente de andar em linha reta, e precisa de unidade própria.
+Atual Aula 2, sem mudança de conteúdo: as duas réguas, o endereço de um ponto, os quatro
+quadrantes, o passo da escada e a receita `y = ax + b`. Na migração ganha um reencontro: **a
+sequência de passo fixo (PA) é a reta vista de degrau em degrau**, preparando a Aula 14.
 
-- O que é um ângulo: não é distância, é *quanto virou*
-- A volta completa e por que ela vale 360
-- Ângulo reto, meia volta, quarto de volta
-- Medir giro no sentido anti-horário, começando da direita
-- Onde o ponto para depois de girar tanto
+### Aula 10 — Sistemas de equações ✅
 
-**Laboratórios:** o ponteiro que gira · o relógio de ângulos · soma de ângulos ·
-ângulos negativos e voltas extras · o transferidor interativo (arrastável) · adivinhe o ângulo
+Atual Aula 8, sem mudança de conteúdo: resolver = achar onde duas retas se cruzam; um, nenhum ou
+infinitos cruzamentos; substituição.
 
-### Aula 4 — Seno e cosseno ✅
+### Aula 11 — Ângulos, círculo e π ♻️
 
-**O obstáculo:** as duas palavras que mais assustam na matemática do ensino médio.
+**O obstáculo:** grau, volta e π parecem convenções arbitrárias.
 
-- Um ponto andando na beirada de um círculo
-- **Cosseno** = o quanto ele andou para o lado. **Seno** = o quanto ele subiu
-- Por que os dois vivem entre −1 e 1
-- Os valores que vale a pena reconhecer de olho (0°, 90°, 180°, 270°)
-- A relação entre os dois num único desenho
+- O que é girar; a volta de 360°; sentido anti-horário e ângulos negativos (reencontro com a reta
+  numerada)
+- Onde o ponto para depois de girar
+- **O comprimento da volta:** enrolar uma linha no círculo → `2π · raio`, com π ≈ 3,14
+- **A área do círculo:** fatiar em gomos e rearrumar num quase-retângulo → `π · raio²`
+- **Por que é verdade?** A área do círculo pelos gomos
 
-**Laboratórios:** o círculo com a sombra e a altura marcadas ao vivo · corrida sombra vs altura ·
-simetria do círculo · a tabela que se preenche sozinha conforme o ponto gira ·
-adivinhe o valor · ache o ângulo certo
+**Laboratórios:** gire o ponteiro · a volta completa · onde o ponto para · desenrole o
+círculo (π) · os gomos viram retângulo · medidas de rodas
 
-### Aula 5 — Ondas ✅
+### Aula 12 — Áreas, volumes e Pitágoras ♻️
 
-**O obstáculo:** entender que a onda não é outra coisa — é o giro visto de lado.
+**O obstáculo:** cada figura parece ter sua fórmula decorada; são todas "retângulo arrumado".
 
-- Desenrolando o círculo: o giro vira onda
-- **Altura** da onda (amplitude): estica para cima
-- **Largura** da onda (frequência): quantas voltas cabem no mesmo espaço
-- **Adiantar ou atrasar** a onda (fase)
-- Reencontro com as Aulas 1 e 2: os quatro jeitos de mexer numa máquina (multiplicar ou somar,
-  na entrada ou na saída) valem igualzinho para a onda
-- Somar duas ondas
+- Área do retângulo, do triângulo (metade do retângulo), do paralelogramo e do trapézio
+- Pitágoras: três quadrados num triângulo retângulo
+- **Por que é verdade?** Pitágoras rearrumando quatro triângulos
+- Volume: área da base × altura (prisma, cilindro); cubo e esfera
+- Perímetro × área: a mesma cerca, áreas diferentes
 
-**Laboratórios:** círculo e onda lado a lado, sincronizados · três sliders (altura, largura, atraso) ·
-quantas ondas cabem? · somador de ondas · reconheça a onda · onda ao vivo
-
-### Aula 6 — Setas e tabelas de números ✅
-
-**O obstáculo:** vetor e matriz parecem coisa de outro mundo, mas são só seta e tabela.
-
-- Um vetor é uma **seta**: tem tamanho e direção
-- Somar setas é andar um caminho e depois o outro
-- Multiplicar uma seta por um número: estica ou encolhe
-- O produto escalar e o que ele diz sobre o ângulo entre duas setas
-- Uma matriz é uma **tabela que move setas**: gira, estica, espelha
-- Onde isso aparece na vida real
-
-**Laboratórios:** somador de setas arrastável · meça o tamanho da seta · multiplicar por um número ·
-produto escalar ao vivo · paralelas ou não? · gire a figura com uma matriz
+**Laboratórios:** o triângulo é meio retângulo · Pitágoras com quadrados · a prova dos quatro
+triângulos · empilhe a base (volume) · a lata de refrigerante · mesma cerca, outra área
 
 ---
 
-## Nível 2 — Intermediário ✅
+## Nível 3 — Ensino Médio
 
-Com funções, retas, seno, cosseno, ondas, vetores e matrizes na mão, dá para resolver problemas de
-verdade: descobrir um número escondido, achar onde duas retas se cruzam, medir o quanto duas coisas
-andam juntas, ajustar uma reta a pontos que nunca ficam alinhados e decompor um som. Seis aulas,
-ordenadas para que cada uma só use o que as anteriores ensinaram.
+*Ensino Médio · trilha: sequências (PA e PG), matemática financeira, funções, trigonometria,
+exponenciais e logaritmos, polinômios e complexos, geometria analítica, matemática discreta.*
 
-### Aula 7 — Equações: a balança ✅
+O aluno passa a estudar o **comportamento** das funções clássicas e ganha as ferramentas de
+geometria que o cálculo vai precisar.
 
-**O obstáculo:** "isolar o x" parece um truque de passar números de um lado para o outro; na
-verdade é manter uma balança equilibrada.
+| # | Aula | Estado | Vem de |
+|---|---|---|---|
+| 13 | Curvas que não são retas: a parábola | ♻️ | atual Aula 13 (abrir parênteses vai para a 8) |
+| 14 | Crescimento que acelera: PA, PG, juros, exponenciais e logaritmos | ♻️ | atual Aula 14 + PA/PG + juros simples |
+| 15 | Trigonometria: seno, cosseno, tangente e radianos | ♻️ | atual Aula 4 + tangente + radianos (da atual 15) |
+| 16 | Ondas | ✅ | atual Aula 5 |
+| 17 | Vetores e matrizes | ♻️ | atual Aula 6 + tamanho da seta (da atual 9) + distância e circunferência |
+| 18 | Números complexos | ♻️ | atual Aula 18 (as ondas como giros vão para a 24) |
 
-- Uma equação é uma balança: os dois lados pesam a mesma coisa
-- A regra de ouro: o que fizer de um lado, faça do outro
-- A máquina ao contrário: desfazer as contas na ordem inversa (reencontro com a Aula 1)
-- x dos dois lados: juntar as caixas num lado só
-- Conferir substituindo o x
+### Aula 13 — Curvas que não são retas: a parábola ♻️
 
-**Laboratórios:** a balança em equilíbrio · desequilibre a balança · a máquina ao contrário ·
-x dos dois lados, passo a passo · confira a resposta · gerador de equações
+Atual Aula 13. Na migração, as transformações `a(x − h)² + k` passam a ser apresentadas **aqui pela
+primeira vez** (reencontrando a reta da Aula 9 e a máquina da Aula 7); a Aula 16 (ondas) é que
+passa a reencontrá-las. Zeros pela balança com a raiz de dois lados, Bhaskara como "arrumar e passar
+para o outro lado", o vértice como melhor valor, polinômios e o teste das diferenças.
 
-### Aula 8 — Sistemas de equações ✅
+**Laboratórios:** a máquina que dobra · três sliders da parábola · ache onde ela cruza o zero ·
+caça ao vértice · somador de potências · reta ou curva?
 
-**O obstáculo:** "resolver" duas equações ao mesmo tempo parece mágica, mas é só achar onde duas
-retas se cruzam.
+### Aula 14 — Crescimento que acelera ♻️
 
-- Duas retas, um papel só (reencontro com a Aula 2)
-- O que significa "resolver": o único ponto que serve para as duas receitas ao mesmo tempo
-- Sistema com uma solução, sem solução (retas paralelas) e com infinitas soluções (a mesma reta)
-- Resolver por substituição: juntar as duas receitas numa só e usar a balança da Aula 7
-- O mesmo truque funciona com mais réguas — um gostinho do que vem depois
+**O obstáculo:** crescer somando e crescer multiplicando parecem parecidos no começo.
 
-**Laboratórios:** duas retas buscando o cruzamento · retas paralelas nunca se tocam ·
-classifique o sistema · resolva por substituição, passo a passo · ache o cruzamento no desenho ·
-monte o sistema para um alvo
+- PA: somar sempre o mesmo — a reta da Aula 9 de degrau em degrau; a soma de Gauss
+- PG: multiplicar sempre pelo mesmo — a dobra do papel
+- Juros simples (PA) × juros compostos (PG) (reencontro com a porcentagem da Aula 3)
+- A escada das potências: expoente zero, negativo e fracionário; o chapeuzinho `^`
+- O logaritmo: "quantas vezes multipliquei?"; a régua logarítmica
+- O número e: `(1 + 1/n)ⁿ`
 
-### Aula 9 — Potências, raízes e Pitágoras ✅
+**Laboratórios:** corrida PA × PG (juros simples × compostos) · a dobra do papel · a escada das
+potências · quantas dobras? (logaritmo) · a régua logarítmica · de onde vem o e
 
-**O obstáculo:** `x²`, `√` e "hipotenusa" soam como jargão, mas são um quadrado, o lado dele e três
-quadrados em volta de um canto reto.
+### Aula 15 — Trigonometria: seno, cosseno, tangente e radianos ♻️
 
-- Ao quadrado é a área de um quadrado; potência é multiplicação repetida
-- Raiz quadrada: o caminho de volta (nem sempre inteira: √2 ≈ 1,41)
-- Pitágoras: `a² + b² = c²` no triângulo retângulo
-- O tamanho de qualquer seta: `√(x² + y²)` (a promessa da Aula 6)
-- Reencontro com a Aula 4: `cosseno² + seno² = 1`
-- Quadrado nunca é negativo — a peça que desvio padrão e mínimos quadrados vão usar
+**O obstáculo:** seno e cosseno parecem fórmulas decoradas de triângulo.
 
-**Laboratórios:** o quadrado cresce · ache o lado · Pitágoras com quadrados · o tamanho da seta ·
-o círculo de raio 1 · quadrado nunca é negativo
+- A altura e a sombra de um ponto girando (reencontro com a Aula 11)
+- No triângulo retângulo: cateto oposto, adjacente e hipotenusa (reencontro com a Aula 12)
+- Tangente: a altura dividida pela sombra — a inclinação da reta (reencontro com a Aula 9)
+- `cos² + sen² = 1` (Pitágoras no círculo)
+- Radianos: o ângulo medido pelo arco (reencontro com o π da Aula 11)
+- **Conversa ao pé da lareira:** Seno × Cosseno
 
-### Aula 10 — Estatística com vetores ✅
+**Laboratórios:** o ponto girando · sombra e altura · o triângulo retângulo · a tangente como
+inclinação · o círculo de raio 1 (cos² + sen²) · radianos: o ângulo medido pelo arco
 
-**O obstáculo:** "correlação" parece um número místico, mas é só um produto escalar disfarçado.
+### Aula 16 — Ondas ✅
 
-- Uma lista de números pareados vira um vetor
-- Média, centralizar (subtrair a média) e desvio padrão (usa quadrado e raiz da Aula 9)
-- Duas listas relacionadas → dois vetores; o ângulo entre eles conta a história
-- Reencontro com a Aula 6: produto escalar e o que o sinal dele conta
-- Correlação = o cosseno do ângulo entre os vetores centralizados — por isso vive entre −1 e 1
+Atual Aula 5: desenrolar o círculo, amplitude, frequência e fase, somar ondas. Na migração, o
+reencontro das transformações aponta para a parábola (Aula 13) e os ângulos podem aparecer também
+em radianos (Aula 15).
 
-**Laboratórios:** centralize a lista · nuvem de pontos com correlação ao vivo ·
-dois vetores, ângulo e correlação · a escala não muda a correlação · positiva, negativa ou nula? ·
-adivinhe a correlação
+### Aula 17 — Vetores e matrizes ♻️
 
-### Aula 11 — Projeção e mínimos quadrados ✅
+**O obstáculo:** "álgebra linear" soa abstrato; é só seta e tabela que move seta.
 
-**O obstáculo:** "a reta que melhor se ajusta aos pontos" parece precisar de cálculo avançado, mas
-é geometria de sombra.
+- Vetor é uma seta; somar setas; esticar uma seta
+- O tamanho de uma seta: `√(x² + y²)` (reencontro com Pitágoras da Aula 12)
+- Distância entre dois pontos e a equação da circunferência (geometria analítica)
+- Produto escalar: o quanto duas setas apontam juntas (reencontro com o cosseno da Aula 15)
+- Matriz é uma tabela que transforma setas: esticar, espelhar, girar
+- Sistema de equações como uma matriz (reencontro com a Aula 10)
 
-- Reencontro com a Aula 4: projetar é jogar sombra
-- Projetar um vetor sobre outro: o pedacinho da seta que "cabe" naquela direção
-- Nem todo conjunto de pontos cabe numa reta perfeita — o erro é a distância que sobra
-- Mínimos quadrados: a reta que deixa a soma dos erros ao quadrado (Aula 9) a menor possível
-- Reencontro com a Aula 2: a reta de regressão ainda é `passo · x + altura de partida`
+**Laboratórios:** some as setas · o tamanho da seta · a circunferência como distância fixa ·
+produto escalar e ângulo · gire a figura com uma matriz · o sistema como matriz
 
-**Laboratórios:** projeção de um vetor sobre outro · monte a projeção passo a passo ·
-erro grande ou pequeno? · reta de regressão se ajustando ao vivo · comparador de erro ·
-estique o vetor, a projeção também estica
+### Aula 18 — Números complexos ♻️
 
-### Aula 12 — Decomposição de sinais em ondas ✅
+Atual Aula 18: `i` como giro de 90°, o plano complexo, multiplicar = girar e esticar, potências e
+a fórmula de Euler por `(1 + iθ/n)ⁿ`. Na migração, a seção "ondas como giros" (que depende de
+Fourier) vai para a Aula 24; no lugar entra **resolver equações do 2º grau sem solução real**
+(pendência da Aula 13) — o laboratório "as raízes que faltavam".
 
-**O obstáculo:** um som complicado parece impossível de entender, mas é só várias ondas simples
-somadas — e a projeção da Aula 11 desmonta a soma de volta.
-
-- Reencontro com a Aula 5: somar ondas simples dá uma onda complicada
-- A pergunta ao contrário: dada uma onda complicada, quais ondas simples a formam?
-- O espectro: um gráfico de "quanto tem de cada frequência" no sinal
-- O jeito direto: projetar o sinal sobre cada onda — ondas de frequências diferentes são
-  perpendiculares, então cada projeção isola uma nota
-- Onde isso aparece: áudio, imagem, compressão — a ideia por trás de Fourier, sem a fórmula pesada
-
-**Laboratórios:** monte uma onda complicada · reconheça a frequência · o espectro revelado ·
-projete o sinal em cada onda · decomponha a onda misteriosa · o acorde ao vivo
+**Laboratórios:** multiplique por i · o plano complexo · girar e esticar · potências de um número
+complexo · o ponto de Euler · as raízes que faltavam
 
 ---
 
-## Nível 3 — Avançado ✅
+## Nível 4 — Superior I: Cálculo e Dados
 
-O Nível 2 terminou com retas, quadrados, médias e projeções. O Nível 3 sai do mundo das retas: curvas
-que dobram, crescimento que acelera, a inclinação em cada ponto de uma curva, a área acumulada
-debaixo dela, o acaso medido com régua e, no fim, um número que gira quando multiplica. Seis aulas,
-cada uma usando só o que veio antes.
+*Faculdade · trilha: limites e continuidade, cálculo diferencial, cálculo integral; estatística e
+análise de sinais.*
 
-**Pré-requisitos que o Nível 3 precisa introduzir** — ausentes nos Níveis 1–2 (verificado nas 12
-aulas) e onde cada um entra:
+A matemática do movimento, da variação contínua e da extração de padrões em dados.
 
-| Peça que faltava | Quem precisa | Onde é apresentada |
-|---|---|---|
-| Função não linear (parábola), distributiva `(x − 1)² = x² − 2x + 1` | 13, 18 | Aula 13 |
-| Raiz com dois lados (`x² = 4 → ±2`) | 13 | Aula 13 (a Aula 9 só tinha a raiz positiva) |
-| Expoente zero, negativo e fracionário (`2⁰`, `2⁻¹`, `2^0,5 = √2`) | 17 (sino) | Aula 14, "a escada das potências" |
-| O número e como `(1 + 1/n)ⁿ` | 15, 17, 18 | Aula 14 |
-| **π** e o comprimento da volta (`2π` raios) | 15, 17, 18 | Aula 15 (nenhuma aula anterior usava π) |
-| Radianos | 15, 16, 18 | Aula 15 |
-| Área do triângulo (`base · altura ÷ 2`) | 16 | Aula 16 (a Aula 9 só tinha quadrados) |
-| Soma de inclinações, "número sozinho some" | 15, 16 | Aula 15 |
-| `e^(iθ)` definido pelo mesmo limite do e: `(1 + iθ/n)ⁿ` | 18 | Aula 18 |
+| # | Aula | Estado | Vem de |
+|---|---|---|---|
+| 19 | Limites e a derivada | ♻️ | atual Aula 15 (radianos vão para a 15) + limites e continuidade |
+| 20 | A integral | ♻️ | atual Aula 16 + volumes por fatias |
+| 21 | A curva normal | ♻️ | atual Aula 17 (seções 4–6) + combinações e o triângulo de Pascal |
+| 22 | Correlação: estatística com vetores | ♻️ | atual Aula 10 (seções 2–4) |
+| 23 | Projeção e mínimos quadrados | ✅ | atual Aula 11 |
+| 24 | Decomposição de sinais: Fourier | ♻️ | atual Aula 12 + ondas como giros (da atual 18) |
 
-### Aula 13 — Curvas que não são retas: parábolas e polinômios ✅
+### Aula 19 — Limites e a derivada ♻️
 
-**O obstáculo:** até aqui toda máquina desenhava uma reta; a primeira curva parece outro assunto,
-mas é só a máquina da Aula 1 com um quadrado dentro.
+- Chegar cada vez mais perto: o limite (a lupa e os dois pontos que se aproximam)
+- Continuidade: curva sem saltos; onde a derivada não existe (bicos)
+- A reta tangente e a inclinação em cada ponto
+- A derivada como máquina: `x² → 2x`, `x³ → 3x²`, `eˣ → eˣ`, `sen → cos` (em radianos, Aula 15)
+- Topos e fundos: candidatos em `f′(x) = 0`, conferidos pela troca de sinal
+- **Conversa ao pé da lareira:** Derivada × Integral (fecha na Aula 20)
 
-- A máquina `x²` (reencontro com a Aula 9): a primeira curva — a parábola
-- As mesmas transformações de sempre: `a(x − h)² + k` (reencontro com as Aulas 2 e 5)
-- Onde a parábola cruza o zero: a balança da Aula 7 e a raiz com dois lados; Bhaskara como
-  "arrumar e passar para o outro lado", sem decorar
-- O ponto mais alto ou mais baixo (vértice) — no meio dos zeros (a média da Aula 10)
-- Polinômios: cada grau a mais permite uma dobra a mais
-- O teste das diferenças: reta × parábola sem desenhar
+**Laboratórios:** a lupa que endireita a curva · saltos e bicos (continuidade) · dois pontos se
+aproximando · a reta que encosta · o gráfico da inclinação · caça ao topo
 
-**Laboratórios:** a máquina que dobra · três sliders da parábola · ache onde ela cruza o
-zero · caça ao vértice · somador de potências · reta ou curva?
+### Aula 20 — A integral ♻️
 
-### Aula 14 — Crescimento que acelera: exponenciais e logaritmos ✅
+Atual Aula 16: fatias, somas por baixo e por cima, velocidade → distância, o acumulado e o Teorema
+Fundamental. Ganha **volumes por fatias** (o sólido de revolução como pilha de moedas, reencontro com
+o volume da Aula 12).
 
-**O obstáculo:** crescer "somando" e crescer "multiplicando" parecem parecidos no começo; em pouco
-tempo, um deles explode.
+**Laboratórios:** fatie a curva · fatias mais finas · velocidade vira distância · o acumulado ao
+vivo · derivar o acumulado · a pilha de moedas (volume)
 
-- Somar sempre o mesmo (reta) × multiplicar sempre pelo mesmo (exponencial); juros compostos
-  como "multiplicar por 1,1"
-- A dobra do papel: `2ⁿ` (reencontro com as potências da Aula 9)
-- A escada das potências: `2⁰ = 1`, expoente negativo divide, `2^0,5 = √2`
-- O logaritmo: a pergunta de volta — "quantas vezes multipliquei?" (como a raiz foi o caminho de
-  volta do quadrado)
-- A escala logarítmica: exponencial vira reta
-- O número `e`: o crescimento contínuo, `(1 + 1/n)ⁿ`
+### Aula 21 — A curva normal ♻️
 
-**Laboratórios:** corrida soma × multiplicação · a dobra do papel · a escada das potências ·
-quantas dobras? (logaritmo) · a régua logarítmica · de onde vem o e
-
-### Aula 15 — A inclinação em cada ponto: a derivada ✅
-
-**O obstáculo:** a reta tem um passo da escada só (Aula 2); uma curva muda de inclinação a cada
-ponto — e medir isso parece exigir mágica.
-
-- A lupa: com zoom, toda curva lisa vira reta (tangente)
-- Chegar cada vez mais perto: o passo entre dois pontos quando o segundo encosta no primeiro (limite)
-- A derivada como máquina: `x² → 2x`, `x³ → 3x²`, `eˣ → eˣ`; somas e constantes
-- **π e radianos:** o ângulo medido pelo arco, em que a inclinação do seno vira exatamente o cosseno
-- Onde a derivada é zero: o topo e o fundo das curvas (reencontro com o vértice da Aula 13)
-
-**Laboratórios:** a lupa que endireita a curva · a reta que encosta · dois pontos se
-aproximando · o gráfico da inclinação · radianos: o ângulo medido pelo arco · caça ao topo
-
-### Aula 16 — Somando fatias: a integral ✅
-
-**O obstáculo:** calcular a área debaixo de uma curva parece impossível — até você cortá-la em
-fatias finas.
-
-- Área de retângulos (reencontro com a Aula 9) e a soma de fatias
-- Fatias cada vez mais finas: a área exata, presa entre a soma por baixo e a por cima
-- Triângulo = metade do retângulo; distância a partir da velocidade
-- O acumulado `A(x)` e a área negativa
-- O caminho de volta: a inclinação do acumulado é a curva (Teorema Fundamental, sem a fórmula
-  pesada)
-
-**Laboratórios:** fatie a curva · fatias mais finas · velocidade vira distância ·
-o acumulado ao vivo · derivar o acumulado · desafio: estime a área
-
-### Aula 17 — Acaso com régua: probabilidade e a curva normal ✅
-
-**O obstáculo:** o acaso parece não ter regra, mas milhares de acasos juntos desenham sempre a
-mesma curva.
-
-- Probabilidade como fração dos casos (contagem)
-- Repetir muitas vezes: a frequência se aproxima da probabilidade; a moeda não tem memória
-- Valor esperado (reencontro com a média da Aula 10) e dispersão (desvio padrão)
-- Somar muitos acasos pequenos: surge o sino — a curva normal (usa e, π e o expoente negativo)
-- Área debaixo do sino = probabilidade (reencontro com a integral da Aula 16); regra 68–95–99,7
+- Combinações e o triângulo de Pascal (reencontro com a contagem da Aula 6)
+- A máquina de Galton: somar muitos acasos pequenos dá o sino
+- A fórmula do sino: `e`, π e o expoente negativo (Aulas 11, 14)
+- Área = chance (integral, Aula 20); a regra 68–95–99,7
 - Onde a normal **não** vale: caudas gordas
 
-**Laboratórios:** a moeda repetida · o dado viciado? · a média que gruda · a máquina de Galton ·
-o sino ajustável · área = chance (68–95–99,7)
+**Laboratórios:** o triângulo de Pascal · a máquina de Galton · o sino ajustável · área = chance ·
+padronizar (z) · caudas gordas × sino
 
-### Aula 18 — Girar multiplicando: números complexos ✅
+### Aula 22 — Correlação: estatística com vetores ♻️
 
-**O obstáculo:** "a raiz de −1" parece uma invenção sem sentido, mas é só um jeito de escrever
-"gire 90°".
+Atual Aula 10 sem a seção de média e desvio (que foi para a Aula 5): a lista como vetor, o ângulo
+entre duas listas, a correlação como cosseno, a escala que não muda a correlação, correlação não é
+causa.
 
-- O problema: nenhum número real ao quadrado dá negativo (pendência da Aula 13)
-- `i` como "gire 90°": multiplicar por `i` duas vezes é girar 180°, ou seja, virar o sinal
-- O plano complexo: um número é um ponto (reencontro com as Aulas 2, 3 e 9)
-- Multiplicar = girar e esticar ao mesmo tempo (reencontro com a matriz de rotação da Aula 6)
-- Potências: espirais e círculos
-- A fórmula de Euler: `e^(iθ) = (1 + iθ/n)ⁿ` no limite é o ponto girando no círculo (fecha as
-  Aulas 4, 14 e 15)
-- Reencontro com a Aula 12: as ondas de Fourier escritas como pontos girando
+### Aula 23 — Projeção e mínimos quadrados ✅
 
-**Laboratórios:** multiplique por i · o plano complexo · girar e esticar ·
-potências de um número complexo · o ponto de Euler · ondas como giros
+Atual Aula 11: projetar é jogar sombra, a reta que melhor se ajusta, por que o quadrado dos erros.
+
+### Aula 24 — Decomposição de sinais: Fourier ♻️
+
+Atual Aula 12 (espectro, projeção sobre cada onda, voltas completas) mais **as ondas como giros**
+vindas da atual Aula 18: a soma de setas girando `e^(iωt)` é a forma de verdade da série de Fourier.
 
 ---
 
-## Nível 4 — Especialista 💭
+## Nível 5 — Superior II: Matemática Aplicada e Computacional
 
-Sementes, ainda sem ordem nem conteúdo fechado. Todas dependem do Nível 3.
+*Faculdade · trilha: equações diferenciais, probabilidade avançada e processos estocásticos,
+análise numérica, otimização; e o que a trilha não tem — lógica e demonstração.*
 
-- **Autovalores e autovetores:** as direções que uma matriz só estica (as da rotação são
-  complexas — por isso vêm depois da Aula 18)
-- **PCA:** as direções principais de uma nuvem de pontos (reencontra correlação e projeção)
-- **Otimização e gradiente:** descer a ladeira da derivada — a generalização dos mínimos quadrados
-- **Séries temporais e FFT:** Fourier aplicado a dados reais ao longo do tempo
-- **Equações diferenciais:** quando a regra fala da taxa de variação, e não do valor
+Todas as aulas são novas. Cada uma junta ferramentas de vários níveis para modelar algo que muda,
+que é incerto ou que precisa ser calculado por um computador — e a última mostra como um matemático
+tem certeza de que algo é verdade.
+
+| # | Aula | Estado | Reencontra |
+|---|---|---|---|
+| 25 | Matrizes que transformam: determinante, inversa e autovalores | 🆕 | 10, 17, 18 |
+| 26 | PCA: as direções principais dos dados | 🆕 | 22, 23, 25 |
+| 27 | Otimização: descer a ladeira pelo gradiente | 🆕 | 19, 23 |
+| 28 | Equações diferenciais e o método de Euler | 🆕 | 14, 16, 19, 20 |
+| 29 | Acaso no tempo: passeio aleatório e movimento browniano | 🆕 | 6, 21, 28 |
+| 30 | Pensar como matemático: lógica, demonstração e conjecturas | 🆕 | todas |
+
+### Aula 25 — Matrizes que transformam: determinante, inversa e autovalores 🆕
+
+**O obstáculo:** determinante e autovalor são ensinados como contas; são área e direção.
+
+- O determinante é o quanto a matriz estica a **área** (e o sinal diz se ela espelha)
+- Determinante zero: a matriz achata o plano numa reta — o sistema sem solução única (Aula 10)
+- A inversa: a transformação que desfaz a outra
+- Autovetores: as setas que a matriz só estica, sem girar; o autovalor é o quanto
+- A rotação não tem autovetor real — seus autovalores são complexos (Aula 18)
+
+**Laboratórios:** o quadrado que vira paralelogramo (determinante) · achatar o plano · desfazer
+a transformação (inversa) · caça às setas que não giram · autovalores ao vivo · a rotação e os
+complexos
+
+### Aula 26 — PCA: as direções principais dos dados 🆕
+
+**O obstáculo:** dados com muitas colunas parecem impossíveis de visualizar.
+
+- A nuvem de pontos e sua "direção mais comprida" (reencontro com a correlação da Aula 22)
+- Projetar a nuvem numa reta perdendo o mínimo (Aula 23)
+- A matriz de covariância e seus autovetores (Aula 25)
+- Quanto da variação cada direção explica
+- Aplicação: comprimir imagens e resumir muitas variáveis em poucas
+
+**Laboratórios:** a nuvem e sua direção · gire a reta de projeção · a variância explicada · os
+autovetores da covariância · de 2 dimensões para 1 · a imagem comprimida
+
+### Aula 27 — Otimização: descer a ladeira pelo gradiente 🆕
+
+**O obstáculo:** achar o melhor valor quando há muitas variáveis parece impossível de fazer à mão.
+
+- A derivada diz para onde a curva desce (Aula 19)
+- Com duas variáveis: o relevo, as curvas de nível e o gradiente (a seta de subida mais íngreme)
+- Descer a ladeira passo a passo; o tamanho do passo (pequeno demais × grande demais)
+- Mínimos locais: o vale que não é o mais fundo
+- Reencontro com os mínimos quadrados (Aula 23): a mesma reta, achada descendo
+
+**Laboratórios:** a bolinha na curva · o mapa de curvas de nível · a seta do gradiente ·
+o tamanho do passo · presos num vale local · ajuste a reta descendo
+
+### Aula 28 — Equações diferenciais e o método de Euler 🆕
+
+**O obstáculo:** equações em que a incógnita é uma função inteira parecem outro planeta.
+
+- Quando a regra fala da inclinação: `y′ = k · y` (juros contínuos e decaimento — reencontro com o e)
+- O campo de direções: setinhas que mostram para onde ir em cada ponto
+- O método de Euler: andar pequenos passos na direção da seta (reencontro com a integral)
+- A mola: `y″ = −y` devolve seno e cosseno (reencontro com as ondas)
+- Erro numérico: passos grandes enganam
+
+**Laboratórios:** o campo de setinhas · siga as setas (Euler) · crescimento e decaimento ·
+a mola que oscila · passo grande × passo pequeno · o predador e a presa
+
+### Aula 29 — Acaso no tempo: passeio aleatório e movimento browniano 🆕
+
+**O obstáculo:** "cálculo estocástico" soa inalcançável; começa com uma moeda.
+
+- O passeio aleatório: cada passo é uma moeda (reencontro com a Aula 6)
+- Depois de n passos, o espalhamento cresce como `√n` (reencontro com a normal da Aula 21)
+- Passos cada vez menores e mais rápidos: o movimento browniano
+- Tendência + ruído: `dy = tendência · dt + ruído` (reencontro com Euler da Aula 28)
+- Aplicações e limites: difusão, preços, e por que o modelo subestima eventos extremos
+
+**Laboratórios:** a moeda que anda · mil caminhantes · o √n do espalhamento · do passeio ao
+browniano · tendência + ruído · caudas gordas de novo
+
+### Aula 30 — Pensar como matemático: lógica, demonstração e conjecturas 🆕
+
+**O obstáculo:** ver um fato dar certo em mil exemplos não prova nada — e ninguém ensina o que prova.
+
+- Afirmações, "e", "ou", "se... então"; contraexemplo derruba uma regra (reencontro com o patamar de
+  `x³` na Aula 19)
+- Demonstração direta: a soma de Gauss (Aula 14)
+- Por absurdo: √2 não é fração (Aulas 2 e 4); os primos nunca acabam (Aula 1)
+- Por indução: o dominó que derruba todos
+- Conjecturas: problemas simples que ninguém resolveu (Collatz, primos gêmeos) — o que é pesquisa
+
+**Laboratórios:** verdadeiro, falso ou depende? · caça ao contraexemplo · a soma de Gauss ·
+o dominó da indução · √2 não é fração · a sequência de Collatz
+
+---
+
+## Eletivas
+
+Módulos independentes para depois do Nível 5 (ou em paralelo, quando os pré-requisitos já foram
+vistos). Mesma anatomia de aula. Ficam como sementes até o Nível 5 estar pronto.
+
+| Eletiva | Pré-requisitos | Área da trilha |
+|---|---|---|
+| Aritmética do relógio e criptografia RSA | 1, 14 | Teoria dos números |
+| Grafos: caminhos, redes e rotas | 17, 27 | Otimização combinatória e grafos |
+| Simetrias: o que é um grupo | 15, 17, 18 | Álgebra abstrata |
+| Topologia de borracha: Möbius e V − A + F | 12 | Topologia |
+| Curvas e superfícies: curvatura | 17, 19 | Geometria diferencial |
+| Séries de Taylor: trocar uma curva por potências | 19 | Análise |
+| Calor e ondas: equações diferenciais parciais | 24, 28 | EDP |
+| Fractais e dimensão | 14, 17 | Geometria (fractais) |
+| Cálculo estocástico: a integral do acaso | 20, 29 | Probabilidade avançada |
+| Métodos numéricos: Newton, erro e estabilidade | 19, 28 | Análise numérica |
+
+---
+
+## Cobertura da trilha de referência
+
+Cada tópico da [trilha](trilha_de_aprendizado_em_matemativa.md) e onde ele é ensinado aqui.
+
+| Nível da trilha | Tópico | Aulas |
+|---|---|---|
+| 1 | Frações e decimais | 2 |
+| 1 | Múltiplos e divisores (MMC, MDC) | 1 |
+| 1 | Potenciação e radiciação (quadrada, cúbica) | 4 |
+| 1 | Razão, proporção, porcentagem, regra de três simples e composta | 3 |
+| 2 | Expressões algébricas | 7, 8 |
+| 2 | Equações de 1º e 2º grau (Bhaskara) e inequações | 8, 13 |
+| 2 | Sistemas lineares | 10, 17 |
+| 2 | Geometria plana: ângulos, perímetros, áreas, círculo, Pitágoras | 11, 12 |
+| 2 | Estatística básica: média, mediana, moda, desvio | 5 |
+| 3 | PA e PG | 14 (e 9) |
+| 3 | Juros simples e compostos | 3, 14 |
+| 3 | Funções: retas e parábolas | 7, 9, 13 |
+| 3 | Trigonometria: seno, cosseno, tangente, triângulo retângulo, ciclo | 11, 15 |
+| 3 | Exponenciais e logaritmos | 14 |
+| 3 | Polinômios de grau maior que 2 e números complexos | 13, 18 |
+| 3 | Geometria espacial (volumes) e analítica | 12, 17, 20 |
+| 3 | Combinatória (arranjos, permutações) e probabilidade | 6, 21 |
+| 4 | Limites e continuidade | 19 |
+| 4 | Derivadas | 19 |
+| 4 | Integrais (áreas e volumes) | 20 |
+| 4 | Álgebra linear: matrizes, transformações, sistemas | 17, 25 |
+| 5 | Equações diferenciais ordinárias e parciais | 28; eletiva de EDP |
+| 5 | Álgebra abstrata e teoria dos números | 1, 30; eletivas de grupos e de criptografia |
+| 5 | Cálculo estocástico e probabilidade avançada | 21, 29; eletiva de cálculo estocástico |
+| 5 | Análise numérica | 28; eletiva de métodos numéricos |
+| 5 | Geometria diferencial e topologia | eletivas de curvatura e de topologia |
+| 5 | Otimização combinatória e grafos | 27; eletiva de grafos |
+| — | *Fora da trilha:* lógica e demonstração | 30 |
+| — | *Fora da trilha:* estatística de dados (correlação, regressão, PCA, Fourier) | 22, 23, 24, 26 |
+
+---
+
+## Pré-requisitos: onde cada peça é apresentada
+
+Tabela de controle da regra "nada é usado antes de ser apresentado". Toda aula nova ou adaptada é
+conferida contra ela.
+
+| Peça | Apresentada na aula | Usada depois em |
+|---|---|---|
+| Múltiplos, primos, MMC | 1 | 2, 30 |
+| Frações, decimais | 2 | todas |
+| Números negativos e regra de sinais | 2 | 4, 5, 8, 9 |
+| Porcentagem, razão, regra de três | 3 | 5, 6, 14, 21 |
+| Potências, raízes, notação científica | 4 | 5, 12, 14 |
+| Média e desvio padrão | 5 | 13, 21, 22 |
+| Contagem, fatorial, probabilidade | 6 | 21, 29 |
+| Variável, expressão algébrica, função | 7 | todas |
+| Balança, abrir parênteses, inequações | 8 | 10, 13, 18 |
+| Plano cartesiano, reta, passo da escada | 9 | 10, 13, 14, 15, 19 |
+| Ângulo, π, comprimento e área do círculo | 11 | 15, 21 |
+| Área do triângulo, Pitágoras, volume | 12 | 15, 17, 20 |
+| Parábola, transformações `a(x − h)² + k` | 13 | 16, 18, 19 |
+| PA, PG, expoente negativo/fracionário, log, e | 14 | 19, 21, 28, 30 |
+| Seno, cosseno, tangente, radianos | 15 | 16, 17, 19, 22 |
+| Vetor, produto escalar, matriz | 17 | 22, 23, 25 |
+| Número complexo, Euler | 18 | 24, 25 |
+| Limite, derivada | 19 | 20, 27, 28 |
+| Integral | 20 | 21, 28 |
+
+---
+
+## Migração das 18 aulas publicadas
+
+| Atual | Nova | Estado | O que muda |
+|---|---|---|---|
+| 1 O que é uma função | 7 | ♻️ | expressões algébricas; Equação × Função |
+| 2 Desenhar números no papel | 9 | ✅ | reencontro com PA |
+| 3 Ângulos e o círculo | 11 | ♻️ | ganha π, perímetro e área do círculo |
+| 4 Seno e cosseno | 15 | ♻️ | ganha tangente, triângulo retângulo e radianos |
+| 5 Ondas | 16 | ✅ | reencontro das transformações passa a apontar para a 13 |
+| 6 Setas e tabelas de números | 17 | ♻️ | ganha tamanho da seta, distância, circunferência e sistema como matriz |
+| 7 Equações: a balança | 8 | ♻️ | ganha abrir parênteses e inequações |
+| 8 Sistemas de equações | 10 | ✅ | só referências |
+| 9 Potências, raízes e Pitágoras | 4 + 12 + 17 | ♻️ | dividida: potências/raízes (4), Pitágoras (12), tamanho da seta (17) |
+| 10 Estatística com vetores | 5 + 22 | ♻️ | dividida: média e desvio (5), correlação (22) |
+| 11 Projeção e mínimos quadrados | 23 | ✅ | só referências |
+| 12 Decomposição de sinais | 24 | ♻️ | ganha as ondas como giros |
+| 13 Curvas que não são retas | 13 | ♻️ | apresenta as transformações; abrir parênteses vai para a 8 |
+| 14 Crescimento que acelera | 14 | ♻️ | ganha PA, PG e juros simples |
+| 15 A inclinação em cada ponto | 19 | ♻️ | perde radianos (→ 15), ganha continuidade |
+| 16 Somando fatias | 20 | ♻️ | ganha volumes por fatias |
+| 17 Acaso com régua | 6 + 21 | ♻️ | dividida: contagem e chance (6), curva normal (21) |
+| 18 Girar multiplicando | 18 | ♻️ | ondas como giros → 24; ganha as raízes que faltavam |
+
+**Detalhes técnicos da migração:**
+
+- **Pastas e endereços:** cada aula ganha a pasta com o número novo (`aulas/07-letras-no-lugar-de-numeros/`
+  etc.). A SPA passa a aceitar os endereços antigos (`#/aula/<slug antigo>`) e redireciona para os
+  novos, para não quebrar links compartilhados.
+- **Progresso salvo:** o `progresso.js` ganha um mapa slug antigo → slug novo e converte, uma vez,
+  o `localStorage` do aluno. Em aulas divididas, os exercícios que continuam iguais mantêm o selo;
+  os novos começam em branco.
+- **Numeração:** "AULA N de 30 · NÍVEL X" em todas; `catalogo.js` com os 5 níveis.
+- **Testes:** `tests/verifica.js` passa a conferir também que toda aula tem Guru, Não existe pergunta
+  idiota, Cuidado e Pontos importantes.
+
+**Fases** (cada uma é um PR com os testes verdes antes do merge):
+
+1. **Plano** — este documento.
+2. **Reorganização** — renumerar, migrar pastas e progresso, dividir 9, 10 e 17, mover π, radianos,
+   parênteses e Fourier, reescrever "Você já sabe" e reencontros. Ao fim, as 18 aulas atuais estão
+   no lugar novo e o curso continua completo, com buracos só onde há 🆕.
+3. **Nível 1** — Aulas 1, 2 e 3 (novas) e a ampliação das 4, 5 e 6.
+4. **Nível 2** — ampliações das 7, 8, 11 e 12.
+5. **Níveis 3 e 4** — ampliações (tangente, PA/PG, continuidade, Pascal, volumes...).
+6. **Nível 5** — Aulas 25 a 30.
+7. **Peças novas** — Poder do cérebro, Por que é verdade?, Conversa ao pé da lareira e o exercício
+   Quem faz o quê? em todas as aulas.
+8. **Eletivas.**
+
+---
+
+## De onde veio esta estrutura
+
+- **Ordem da escola** (Fundamental → Médio → Faculdade), por ser a ordem real de dependência entre
+  os conceitos.
+- **Trilha de referência** de cinco níveis (Básico → Pesquisador), guardada em
+  [`trilha_de_aprendizado_em_matemativa.md`](trilha_de_aprendizado_em_matemativa.md). Adotamos os
+  tópicos dela e fizemos quatro ajustes:
+  1. Vetores e matrizes vêm no Ensino Médio (Aula 17), não depois do cálculo — álgebra linear não
+     depende de cálculo, e o cálculo e a estatística ficam mais claros com vetores.
+  2. Limites entram dentro da derivada (Aula 19), com a lupa, e não como bloco isolado.
+  3. O Nível 5 foi rebatizado de "Superior II — Aplicada e Computacional": o que a trilha chama de
+     "Pesquisador" são disciplinas de graduação e pós. Temas que exigem anos de base (topologia,
+     geometria diferencial, EDP rigorosa) viraram eletivas em versão visual.
+  4. Entrou **lógica e demonstração** (Aula 30), que a trilha não tem e que é o que separa usar
+     matemática de fazer matemática.
+- **Auditorias anteriores** deste curso: frações, porcentagem e decimais já eram usados sem terem
+  sido ensinados — agora são as Aulas 2 e 3.
