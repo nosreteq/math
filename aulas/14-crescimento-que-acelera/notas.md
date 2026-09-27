@@ -37,6 +37,8 @@ Cada degrau para baixo divide por 2:
 - somar expoentes é multiplicar: `2² · 2³ = 2⁵`;
 - então `2^0,5 · 2^0,5 = 2`, ou seja, `2^0,5 = √2 ≈ 1,41`.
 
+Expoente comprido vem depois de um chapeuzinho: `2^0,5` lê-se "2 elevado a 0,5".
+
 ---
 
 ## O logaritmo: a pergunta de volta

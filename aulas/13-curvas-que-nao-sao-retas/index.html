@@ -195,10 +195,37 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p class="rabisco centro" id="txt3"></p>
 </div>
 
+<h3>Abrir os parênteses: cada pedaço vezes cada pedaço</h3>
+
+<p>Às vezes a receita vem "fechada", como <span class="mono">(x + 2) · (x + 3)</span>, e a gente quer ela "aberta", como uma soma de potências. O jeito de abrir é um desenho que você já conhece desde a Aula 9: <strong>área de retângulo</strong>. Um retângulo de lados <span class="mono">x + 2</span> e <span class="mono">x + 3</span> se divide em quatro pedaços:</p>
+
+<div class="tela" style="max-width:360px;margin:14px auto">
+  <svg viewBox="0 0 300 250" role="img" aria-label="Retângulo de lados x mais 2 e x mais 3 dividido em quatro áreas: x ao quadrado, 3x, 2x e 6">
+    <rect x="40" y="30" width="150" height="150" fill="rgba(37,99,235,.18)" stroke="#2563eb" stroke-width="2"/>
+    <rect x="190" y="30" width="90" height="150" fill="rgba(5,150,105,.18)" stroke="#059669" stroke-width="2"/>
+    <rect x="40" y="180" width="150" height="60" fill="rgba(217,119,6,.2)" stroke="#d97706" stroke-width="2"/>
+    <rect x="190" y="180" width="90" height="60" fill="rgba(124,58,237,.2)" stroke="#7c3aed" stroke-width="2"/>
+    <text x="115" y="112" font-size="20" font-weight="800" text-anchor="middle" fill="#2563eb">x²</text>
+    <text x="235" y="112" font-size="18" font-weight="800" text-anchor="middle" fill="#059669">3x</text>
+    <text x="115" y="216" font-size="18" font-weight="800" text-anchor="middle" fill="#d97706">2x</text>
+    <text x="235" y="216" font-size="18" font-weight="800" text-anchor="middle" fill="#7c3aed">6</text>
+    <text x="115" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1b1b1b">x</text>
+    <text x="235" y="22" font-size="14" font-weight="700" text-anchor="middle" fill="#1b1b1b">3</text>
+    <text x="28" y="110" font-size="14" font-weight="700" text-anchor="middle" fill="#1b1b1b">x</text>
+    <text x="28" y="214" font-size="14" font-weight="700" text-anchor="middle" fill="#1b1b1b">2</text>
+  </svg>
+</div>
+
+<p class="centro" style="font-size:20px;font-weight:800">(x + 2) · (x + 3) = x² + 3x + 2x + 6 = x² + 5x + 6</p>
+
+<p>A regra é: <strong>cada pedaço de um lado vezes cada pedaço do outro</strong>, e soma tudo. Com sinais de menos vale igual, lembrando que menos vezes menos dá mais (Aula 9):</p>
+
+<p class="centro" style="font-size:19px;font-weight:800">(x − 1) · (x − 1) = x·x − x·1 − 1·x + 1·1 = x² − 2x + 1</p>
+
 <div class="idiota">
   <div class="tit">Não existe pergunta idiota</div>
   <p class="q">E quando a equação não vem arrumada, tipo x² − 2x − 3 = 0?</p>
-  <p class="a">Dá para arrumar sempre: <span class="mono">x² − 2x − 3</span> é o mesmo que <span class="mono">(x − 1)² − 4</span> (abra as contas e confira: <span class="mono">(x − 1)² = x² − 2x + 1</span>). Existe uma receita pronta que faz essa arrumação por você — a famosa fórmula de Bhaskara — mas ela é só esse "arrumar e passar para o outro lado da balança", feito uma vez para todos os casos.</p>
+  <p class="a">Dá para arrumar sempre: <span class="mono">x² − 2x − 3</span> é o mesmo que <span class="mono">(x − 1)² − 4</span> (abra os parênteses como no quadro acima: <span class="mono">(x − 1)² = x² − 2x + 1</span>, e <span class="mono">x² − 2x + 1 − 4 = x² − 2x − 3</span>). Existe uma receita pronta que faz essa arrumação por você — a famosa fórmula de Bhaskara — mas ela é só esse "arrumar e passar para o outro lado da balança", feito uma vez para todos os casos.</p>
   <p class="q">Uma parábola pode não cruzar o zero nenhuma vez?</p>
   <p class="a">Pode. <span class="mono">(x − 1)² + 2</span> nunca vale zero: o quadrado é no mínimo 0, então a soma é no mínimo 2. Na balança aparece <span class="mono">(x − 1)² = −2</span> — e nenhum número ao quadrado dá negativo. Guarde esse "nenhum": a Aula 18 vai inventar um número que dá.</p>
 </div>
@@ -208,7 +235,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <p>Você tem <strong>20 metros de cerca</strong> para cercar uma horta retangular. Se um lado mede x, o outro mede <span class="mono">10 − x</span> (a volta toda é 20). A área é:</p>
 
-<p class="centro" style="font-size:22px;font-weight:800">área = x · (10 − x)</p>
+<p class="centro" style="font-size:22px;font-weight:800">área = x · (10 − x) = 10x − x²</p>
 
 <p>Isso é uma parábola de cabeça para baixo: cruza o zero em x = 0 e x = 10 (horta sem largura) e tem um <strong>topo</strong> exatamente no meio dos dois — na média, como na Aula 10. O topo é o melhor valor possível.</p>
 
@@ -285,6 +312,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
     <li>Cruzar o zero = resolver a equação na balança; a raiz tem dois lados: <span class="mono">(x − 1)² = 4</span> dá x = 3 <strong>ou</strong> x = −1.</li>
     <li>Se sobrar "quadrado = negativo", a parábola não cruza o zero.</li>
     <li>O vértice é o <strong>melhor valor</strong> (maior área, menor custo) e fica no meio dos dois zeros.</li>
+    <li>Abrir parênteses: cada pedaço vezes cada pedaço — <span class="mono">(x + 2)(x + 3) = x² + 5x + 6</span>.</li>
     <li><strong>Polinômio</strong> = soma de potências; cada grau a mais permite uma dobra a mais.</li>
     <li>Reta: diferenças iguais. Parábola: diferenças das diferenças iguais.</li>
   </ul>

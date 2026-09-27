@@ -48,6 +48,11 @@ A Transformada de Fourier faz isso para milhares de frequências: uma projeção
 
 ---
 
+> ⚠️ Só funciona com voltas completas: fora de um trecho em que todas as ondas dão voltas inteiras,
+> elas deixam de ser perpendiculares e uma nota "vaza" na outra (vazamento espectral).
+
+---
+
 ## Pontos importantes
 
 - Toda onda complicada pode ser vista como **várias ondas simples somadas**.

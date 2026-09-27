@@ -25,6 +25,9 @@ cima**. A área verdadeira está presa entre as duas, que se apertam com mais fa
 
 `∫₀³ x² dx = 9` — "a soma das fatias de altura x² e largura dx, de 0 até 3".
 
+> ⚠️ Área não é altura: de 0 a 3 as duas dão 9 por coincidência. De 0 a 6, a área é 72 e a altura
+> final é 36. Altura é o velocímetro; área é o hodômetro.
+
 ---
 
 ## Velocidade vira distância

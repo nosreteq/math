@@ -54,8 +54,13 @@ Medida natural de ângulo: **quantos raios de comprimento tem o arco**. A volta 
 
 ## Onde a inclinação é zero
 
-Topo e fundo de uma curva lisa: `f′(x) = 0`. Horta da Aula 13: `10x − x²` → `10 − 2x = 0` →
+Todo topo ou fundo no meio de uma curva lisa tem `f′(x) = 0`, então esses pontos são os
+**candidatos**. Horta da Aula 13: `10x − x²` → `10 − 2x = 0` →
 x = 5. Em `x³ − 3x`: `3x² − 3 = 0` → morro em x = −1 e vale em x = 1.
+
+> ⚠️ Inclinação zero não garante topo nem fundo: `x³` em x = 0 tem inclinação 0 e continua subindo
+> dos dois lados. Confira o sinal antes e depois: + → − é topo, − → + é fundo, sem troca não é
+> nenhum.
 
 ---
 
@@ -65,7 +70,7 @@ x = 5. Em `x³ − 3x`: `3x² − 3 = 0` → morro em x = −1 e vale em x = 1.
 - Derivada = limite de `(f(x + h) − f(x)) ÷ h`.
 - `x² → 2x`, `x³ → 3x²`, `eˣ → eˣ`, `sen → cos` (radianos).
 - `360° = 2π` radianos.
-- Melhor valor: onde `f′(x) = 0`.
+- Melhor valor: candidatos onde `f′(x) = 0`, conferindo a troca de sinal.
 
 ---
 

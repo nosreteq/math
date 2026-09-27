@@ -42,6 +42,10 @@ x − 1 = 2   ou   x − 1 = −2
 x = 3       ou   x = −1
 ```
 
+**Abrir os parênteses** é área de retângulo (Aula 9): cada pedaço de um lado vezes cada pedaço
+do outro. `(x + 2)(x + 3) = x² + 3x + 2x + 6 = x² + 5x + 6`; com sinais,
+`(x − 1)(x − 1) = x² − x − x + 1 = x² − 2x + 1` (menos vezes menos dá mais).
+
 A raiz tem **dois lados**, porque `(−2)² = 4` também. Se sobrar "quadrado = negativo", a parábola
 não cruza o zero. `x² − 2x − 3` é o mesmo que `(x − 1)² − 4`: a fórmula de Bhaskara é só essa
 arrumação feita uma vez para todos os casos.
@@ -50,7 +54,7 @@ arrumação feita uma vez para todos os casos.
 
 ## O vértice como "melhor valor"
 
-20 m de cerca, lados `x` e `10 − x`: área `x · (10 − x)`. Zera em 0 e 10; o topo fica no meio,
+20 m de cerca, lados `x` e `10 − x`: área `x · (10 − x) = 10x − x²`. Zera em 0 e 10; o topo fica no meio,
 `x = 5`, área 25 m². O vértice está sempre na média dos dois zeros.
 
 ---

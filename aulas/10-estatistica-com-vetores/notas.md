@@ -24,6 +24,11 @@ Uma lista de números pareados — por exemplo, a nota de 5 provas — pode ser 
 
 ---
 
+> ⚠️ A média sozinha engana: `(7, 7, 7, 7, 7)` e `(3, 11, 5, 9, 7)` têm média 7, mas desvios 0 e
+> ≈ 2,83. Sempre pergunte também pelo desvio.
+
+---
+
 ## Duas listas, dois vetores, um ângulo
 
 Se eu tenho duas listas relacionadas, cada lista vira um vetor. O **ângulo entre esses dois
