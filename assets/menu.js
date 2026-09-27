@@ -52,6 +52,7 @@
     + ".md0-menu-item.bloqueada{color:#9ca3af;cursor:default;display:flex;justify-content:space-between;gap:8px}"
     + ".md0-menu-item.bloqueada:hover{background:none}"
     + ".md0-menu-tag{font-size:11px;background:#e5e7eb;color:#6b7280;padding:2px 8px;border-radius:10px;white-space:nowrap}"
+    + "@media(max-width:620px){.md0-menu{top:auto;bottom:14px;left:14px}.md0-menu-btn{box-shadow:0 4px 12px rgba(0,0,0,.35)}}"
     + ".md0-menu-plano{display:block;margin-top:16px;padding-top:14px;border-top:2px solid #e6e0d2;color:#2563eb;font-weight:700;text-decoration:none;font-size:14px}";
   var style = document.createElement("style");
   style.textContent = css;

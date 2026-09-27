@@ -470,7 +470,7 @@ var CX=210, CY=210, R=170;
 
 function cosseno(deg){ return Math.cos(deg*Math.PI/180); }
 function seno(deg){ return Math.sin(deg*Math.PI/180); }
-function fmt(v){ return (Math.round(v*100)/100).toFixed(2).replace("-0.00","0.00"); }
+function fmt(v){ return (Math.round(v*100)/100).toFixed(2).replace("-0.00","0.00").replace(".",","); }
 
 /* ---------- lab 1: circulo com sombra e altura ---------- */
 var slAng=document.getElementById("slAng");

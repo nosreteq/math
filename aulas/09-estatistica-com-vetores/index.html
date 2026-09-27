@@ -379,7 +379,14 @@ var AULA_ID = "09-estatistica-com-vetores";
 var NS="http://www.w3.org/2000/svg";
 
 function cosseno(deg){ return Math.cos(deg*Math.PI/180); }
-function fmt(v){ return (Math.round(v*100)/100).toFixed(2).replace("-0.00","0.00"); }
+function fmt(v){ return (Math.round(v*100)/100).toFixed(2).replace("-0.00","0.00").replace(".",","); }
+function pearson(xs,ys){
+  var n=xs.length, mx=0, my=0, sxy=0, sxx=0, syy=0, i;
+  for(i=0;i<n;i++){ mx+=xs[i]; my+=ys[i]; }
+  mx/=n; my/=n;
+  for(i=0;i<n;i++){ sxy+=(xs[i]-mx)*(ys[i]-my); sxx+=(xs[i]-mx)*(xs[i]-mx); syy+=(ys[i]-my)*(ys[i]-my); }
+  return (sxx===0||syy===0) ? 0 : sxy/Math.sqrt(sxx*syy);
+}
 
 /* ---------- lab: monte o vetor a partir da lista ---------- */
 var barrasLista=document.getElementById("barrasLista"), txtLista=document.getElementById("txtLista");
@@ -420,18 +427,17 @@ function pintaEscalaCorr(){
   var k=parseFloat(slEscalaCorr.value);
   document.getElementById("vEscalaCorr").textContent=k.toFixed(1).replace(".",",");
   while(pontosEscalaCorr.firstChild) pontosEscalaCorr.removeChild(pontosEscalaCorr.firstChild);
-  var maxY=0;
-  var ys=seedEscala.map(function(p){ var y=(1-p.x)*0.9 + p.ruido*0.15; return y*k; });
-  maxY=Math.max.apply(null, ys.concat([1*k]));
+  var xs=seedEscala.map(function(p){ return p.x; });
+  var ys=seedEscala.map(function(p){ return (p.x*0.9 + p.ruido*0.15 + 0.08)*k; });
   seedEscala.forEach(function(p,idx){
     var px=30+p.x*320;
-    var py=190-(ys[idx]/maxY)*160;
+    var py=190-(ys[idx]/3.2)*165;
     var c=document.createElementNS(NS,"circle");
     c.setAttribute("cx",px); c.setAttribute("cy",py); c.setAttribute("r",5);
     c.setAttribute("fill","var(--azul)"); c.setAttribute("opacity",0.75);
     pontosEscalaCorr.appendChild(c);
   });
-  txtEscalaCorr.textContent="Escala "+k.toFixed(1).replace(".",",")+"× — correlação continua ≈ 0,90, não muda com a escala.";
+  txtEscalaCorr.textContent="Escala "+k.toFixed(1).replace(".",",")+"× — a nuvem estica, mas a correlação continua "+fmt(pearson(xs,ys))+".";
 }
 slEscalaCorr.addEventListener("input",pintaEscalaCorr);
 pintaEscalaCorr();
@@ -469,20 +475,23 @@ function pintaNuvem(){
   var forca=parseInt(slNuvem.value,10)/100;
   document.getElementById("vNuvem").textContent=(forca*100)+"%";
   while(pontosNuvem.firstChild) pontosNuvem.removeChild(pontosNuvem.firstChild);
+  var xsN=[], ysN=[];
   seedNuvem.forEach(function(p){
     var px=30+p.x*320;
-    var yBase=1-p.x;
+    var yBase=p.x;
     var y=yBase*forca + p.ruido*(1-forca)*1.4 + p.ruido*0.15;
     y=Math.max(0,Math.min(1,y));
+    xsN.push(p.x); ysN.push(y);
     var py=230-y*200;
     var c=document.createElementNS(NS,"circle");
     c.setAttribute("cx",px); c.setAttribute("cy",py); c.setAttribute("r",5);
     c.setAttribute("fill","var(--azul)"); c.setAttribute("opacity",0.75);
     pontosNuvem.appendChild(c);
   });
-  txtNuvem.textContent = forca>0.7 ? "Correlação alta: os pontos quase formam uma reta."
-    : forca>0.3 ? "Correlação moderada: dá para notar uma tendência."
-    : "Correlação baixa: nuvem espalhada, sem tendência clara.";
+  var rN=pearson(xsN,ysN);
+  txtNuvem.textContent = "Correlação = "+fmt(rN)+" — "+(rN>0.7 ? "alta: os pontos quase formam uma reta que sobe."
+    : rN>0.3 ? "moderada: dá para notar uma tendência de subida."
+    : "baixa: nuvem espalhada, sem tendência clara.");
 }
 slNuvem.addEventListener("input",pintaNuvem);
 pintaNuvem();
@@ -508,33 +517,36 @@ pintaCorr();
 var pontosAdivinha=document.getElementById("pontosAdivinha"), txtAdivinha=document.getElementById("txtAdivinha");
 var palpiteCorr=document.getElementById("palpiteCorr"), alvoCorr=null;
 function novaAdivinha(){
-  alvoCorr=Math.round((Math.random()*2-1)*10)/10;
-  var forca=Math.abs(alvoCorr), sinal=alvoCorr<0?-1:1;
+  var nominal=Math.random()*2-1;
+  var forca=Math.abs(nominal), sinal=nominal<0?-1:1;
+  var xsA=[], ysA=[];
   while(pontosAdivinha.firstChild) pontosAdivinha.removeChild(pontosAdivinha.firstChild);
   for(var i=0;i<24;i++){
     var x=Math.random();
-    var yBase = sinal>0 ? (1-x) : x;
+    var yBase = sinal>0 ? x : (1-x);
     var ruido=(Math.random()-0.5);
     var y=yBase*forca + ruido*(1-forca)*1.4 + ruido*0.15;
     y=Math.max(0,Math.min(1,y));
+    xsA.push(x); ysA.push(y);
     var px=20+x*220, py=180-y*160;
     var c=document.createElementNS(NS,"circle");
     c.setAttribute("cx",px); c.setAttribute("cy",py); c.setAttribute("r",4.5);
     c.setAttribute("fill","var(--roxo)"); c.setAttribute("opacity",0.75);
     pontosAdivinha.appendChild(c);
   }
+  alvoCorr=Math.round(pearson(xsA,ysA)*100)/100;
   palpiteCorr.value="";
   txtAdivinha.textContent="Que correlação (entre −1 e 1) essa nuvem sugere?";
 }
 document.getElementById("btNovaAdivinha").addEventListener("click",novaAdivinha);
 document.getElementById("btRevelarCorr").addEventListener("click",function(){
   if(alvoCorr===null){ txtAdivinha.textContent="Clique primeiro em \"Nova nuvem\"."; return; }
-  var p=parseFloat(palpiteCorr.value);
+  var p=parseFloat(String(palpiteCorr.value).replace(",","."));
   if(isNaN(p)){ txtAdivinha.textContent="Escreva um palpite antes de revelar."; return; }
   var ok=Math.abs(p-alvoCorr)<=0.3;
   txtAdivinha.innerHTML = ok
-    ? "🎉 <strong>Perto!</strong> A correlação real era "+alvoCorr+"."
-    : "A correlação real era <strong>"+alvoCorr+"</strong>. Clique em Nova nuvem para tentar outra.";
+    ? "🎉 <strong>Perto!</strong> A correlação real era "+fmt(alvoCorr)+"."
+    : "A correlação real era <strong>"+fmt(alvoCorr)+"</strong>. Clique em Nova nuvem para tentar outra.";
 });
 
 /* ---------- exercicios ---------- */

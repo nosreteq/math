@@ -474,7 +474,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <!-- ============ exercicios ============ -->
 <h2><span class="n">✏️</span> Afie o lápis</h2>
-<p>Cinco exercícios. Erre à vontade — errar aqui é de graça, e a correção explica o porquê.</p>
+<p>Seis exercícios. Erre à vontade — errar aqui é de graça, e a correção explica o porquê.</p>
 
 <div class="ex" id="ex1">
   <div class="tit">Exercício 1</div>
@@ -542,9 +542,23 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p class="dica">Dica: de uma linha para a outra, a saída pula de quanto em quanto? Esse pulo é o número que multiplica.</p>
 </div>
 
+<div class="ex" id="ex6">
+  <div class="tit">Exercício 6 — a armadilha número 1</div>
+  <div class="selo">✅</div>
+  <p>O que quer dizer <span class="mono">g(5) = 12</span>?</p>
+  <div class="alts" data-r="1">
+    <div class="alt" data-i="0">g vezes 5 dá 12.</div>
+    <div class="alt" data-i="1">Joguei o 5 na máquina g e saiu o 12.</div>
+    <div class="alt" data-i="2">Joguei o 12 na máquina g e saiu o 5.</div>
+    <div class="alt" data-i="3">5 vezes 12.</div>
+  </div>
+  <div class="fb"></div>
+  <p class="dica">Dica: releia o "Cuidado" da seção 2 — os parênteses são a boca da máquina.</p>
+</div>
+
 <div class="placar" id="placar">
   <p style="margin:0 0 4px;font-family:var(--mao);font-size:19px">Seu placar</p>
-  <div class="n"><span id="pn">0</span> / 5</div>
+  <div class="n"><span id="pn">0</span> / 6</div>
   <div class="barra"><i id="pbar"></i></div>
   <p id="pmsg" style="margin:0;color:#cfc9bb">Resolva os exercícios acima e acompanhe aqui.</p>
 </div>
@@ -752,7 +766,7 @@ document.getElementById("grafLinha").addEventListener("click",function(){
 document.getElementById("grafReset").addEventListener("click",limpaGraf);
 
 /* ---------------- exercicios ---------------- */
-var feitos={}, TOTAL=5;
+var feitos={}, TOTAL=6;
 function confete(){
   var cores=["#fde68a","#2563eb","#dc2626","#059669","#7c3aed","#d97706"];
   for(var i=0;i<40;i++){
@@ -836,7 +850,11 @@ var expAlt={
   ex5:["Testando: 1 + 3 = 4 ✔, mas 2 + 3 = 5, e a tabela diz 7. Não serve.",
        "Testando: 4 × 1 = 4 ✔, mas 4 × 2 = 8, e a tabela diz 7. Não serve.",
        "Isso! A saída pula de 3 em 3 (4 → 7 → 10), então multiplica por 3. E 3 × 1 = 3, falta 1 para chegar no 4: por isso o + 1.",
-       "Testando: 2 × 1 + 2 = 4 ✔, mas 2 × 2 + 2 = 6, e a tabela diz 7. Não serve."]
+       "Testando: 2 × 1 + 2 = 4 ✔, mas 2 × 2 + 2 = 6, e a tabela diz 7. Não serve."],
+  ex6:["Essa é a armadilha: os parênteses NÃO são multiplicação. g é o nome da máquina, não um número.",
+       "Isso! O que está dentro dos parênteses entrou; o que está depois do = saiu.",
+       "Invertido: o número dentro dos parênteses é o que ENTRA, e o depois do = é o que SAI.",
+       "Nenhuma multiplicação aqui — g(5) = 12 fala de uma máquina que recebeu o 5 e devolveu o 12."]
 };
 document.querySelectorAll(".alts").forEach(function(grupo){
   var box=grupo.closest(".ex");

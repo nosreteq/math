@@ -376,6 +376,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 (function(){
 "use strict";
 var AULA_ID = "10-projecao-e-minimos-quadrados";
+function num(v){ return String(Math.round(v*100)/100).replace(".",",").replace("-","−"); }
 var NS="http://www.w3.org/2000/svg";
 var CX=210, CY=210, U=30;
 function X(x){return CX+x*U;}
@@ -409,7 +410,7 @@ function pintaProj(){
   tracoProj.setAttribute("x2",210+proj); tracoProj.setAttribute("y2",210);
   sombraProj.setAttribute("x2",210+proj); sombraProj.setAttribute("y2",210);
   var razao=Math.cos(rad);
-  txtProj.textContent="A sombra de v sobre w tem tamanho ≈ "+(Math.round(razao*100)/100)+" × o tamanho de v.";
+  txtProj.textContent="A sombra de v sobre w tem tamanho ≈ "+num(razao)+" × o tamanho de v.";
 }
 slProjAng.addEventListener("input",pintaProj);
 pintaProj();
@@ -485,7 +486,7 @@ function pintaRegr(){
   var r=regressaoLinear(pontosDadosRegr);
   retaRegr.setAttribute("x1",X(-7)); retaRegr.setAttribute("y1",Y(r.a*-7+r.b));
   retaRegr.setAttribute("x2",X(7));  retaRegr.setAttribute("y2",Y(r.a*7+r.b));
-  txtRegr.textContent="Reta: y = "+(Math.round(r.a*100)/100)+"x + "+(Math.round(r.b*100)/100);
+  txtRegr.textContent="Reta: y = "+num(r.a)+"x "+(r.b<0?"− ":"+ ")+num(Math.abs(r.b));
 }
 var arrastandoRegr=null;
 function coordSvg(ev, svg){
@@ -534,7 +535,7 @@ function pintaErro(){
   retaMelhor.setAttribute("x2",X(7));  retaMelhor.setAttribute("y2",Y(melhor.a*7+melhor.b));
   var seuErro=somaErros2(a,b,pontosDadosErro);
   var erroMelhor=somaErros2(melhor.a,melhor.b,pontosDadosErro);
-  txtErro.textContent="Sua soma dos erros² = "+(Math.round(seuErro*100)/100)+" · Melhor possível = "+(Math.round(erroMelhor*100)/100);
+  txtErro.textContent="Sua soma dos erros² = "+num(seuErro)+" · Melhor possível = "+num(erroMelhor);
 }
 slErroA.addEventListener("input",pintaErro);
 slErroB.addEventListener("input",pintaErro);
@@ -552,7 +553,7 @@ function pintaEstica(){
   var proj=tam*Math.cos(rad);
   sombraEstica.setAttribute("x2",210+proj); sombraEstica.setAttribute("y2",210);
   var tamV=1*k, sombraV=tamV*Math.cos(rad);
-  txtEstica.textContent="v tem tamanho "+k.toFixed(1).replace(".",",")+" · sombra ≈ "+(Math.round(sombraV*100)/100);
+  txtEstica.textContent="v tem tamanho "+k.toFixed(1).replace(".",",")+" · sombra ≈ "+num(sombraV);
 }
 slEsticaProj.addEventListener("input",pintaEstica);
 pintaEstica();
