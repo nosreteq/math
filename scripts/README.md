@@ -20,11 +20,13 @@ Você pode rodar os scripts a partir de qualquer pasta (da raiz ou de dentro de 
 # A partir da raiz do projeto:
 python scripts/figuras_aula01.py
 python scripts/figuras_aula02.py
+python scripts/figuras_aula03.py
 
 # Ou de dentro da pasta scripts:
 cd scripts
 python figuras_aula01.py
 python figuras_aula02.py
+python figuras_aula03.py
 ```
 
 Cada script usa o backend `Agg`, então funciona em servidor sem tela.

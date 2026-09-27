@@ -41,7 +41,7 @@ a fábrica de retas · o desafio da reta misteriosa
 
 ---
 
-## Aula 3 — Ângulos e o círculo 🔜
+## Aula 3 — Ângulos e o círculo ✅
 
 **O obstáculo:** girar é uma ideia diferente de andar em linha reta, e precisa de unidade própria.
 
@@ -51,7 +51,7 @@ a fábrica de retas · o desafio da reta misteriosa
 - Medir giro no sentido anti-horário, começando da direita
 - Onde o ponto para depois de girar tanto
 
-**Laboratórios previstos:** o ponteiro que gira · o transferidor interativo · adivinhe o ângulo
+**Laboratórios:** o ponteiro que gira · o transferidor interativo (arrastável) · adivinhe o ângulo
 
 ---
 
