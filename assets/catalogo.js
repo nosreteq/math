@@ -29,15 +29,15 @@ window.CATALOGO = [
     ]
   },
   {
-    n: 3, nome: "Avançado", estado: "em breve",
+    n: 3, nome: "Avançado", estado: "completo",
     resumo: "Curvas que dobram, crescimento que acelera, a inclinação em cada ponto, a área acumulada, o acaso com régua e um número que gira quando multiplica.",
     aulas: [
-      { n: 13, slug: null, titulo: "Curvas que não são retas", desc: "Parábolas e polinômios: a máquina da Aula 1 com um quadrado dentro." },
-      { n: 14, slug: null, titulo: "Crescimento que acelera", desc: "Exponenciais e logaritmos: somar sempre o mesmo contra multiplicar sempre pelo mesmo." },
-      { n: 15, slug: null, titulo: "A inclinação em cada ponto", desc: "A derivada — e os radianos, a medida de ângulo que faz tudo encaixar." },
-      { n: 16, slug: null, titulo: "Somando fatias", desc: "A integral: a área debaixo de uma curva, cortada em fatias cada vez mais finas." },
-      { n: 17, slug: null, titulo: "Acaso com régua", desc: "Probabilidade e a curva normal: milhares de acasos desenham sempre o mesmo sino." },
-      { n: 18, slug: null, titulo: "Girar multiplicando", desc: "Números complexos: a raiz de −1 é só um jeito de escrever \"gire 90°\"." }
+      { n: 13, slug: "13-curvas-que-nao-sao-retas", titulo: "Curvas que não são retas", desc: "Parábolas e polinômios: a máquina da Aula 1 com um quadrado dentro." },
+      { n: 14, slug: "14-crescimento-que-acelera", titulo: "Crescimento que acelera", desc: "Exponenciais e logaritmos: somar sempre o mesmo contra multiplicar sempre pelo mesmo." },
+      { n: 15, slug: "15-a-inclinacao-em-cada-ponto", titulo: "A inclinação em cada ponto", desc: "A derivada — e os radianos, a medida de ângulo que faz tudo encaixar." },
+      { n: 16, slug: "16-somando-fatias", titulo: "Somando fatias", desc: "A integral: a área debaixo de uma curva, cortada em fatias cada vez mais finas." },
+      { n: 17, slug: "17-acaso-com-regua", titulo: "Acaso com régua", desc: "Probabilidade e a curva normal: milhares de acasos desenham sempre o mesmo sino." },
+      { n: 18, slug: "18-girar-multiplicando", titulo: "Girar multiplicando", desc: "Números complexos: a raiz de −1 é só um jeito de escrever \"gire 90°\"." }
     ]
   }
 ];

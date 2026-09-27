@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aula 15 — A inclinação em cada ponto | Matemática do Zero</title>
+<style>
+:root{
+  --papel:#f6f2e9; --papel2:#fffdf7; --tinta:#1b1b1b; --cinza:#6b7280;
+  --azul:#2563eb; --azulc:#dbeafe; --verm:#dc2626; --vermc:#fee2e2;
+  --verde:#059669; --verdec:#d1fae5; --amar:#fde68a; --laranja:#d97706;
+  --roxo:#7c3aed; --linha:#c9c1ae;
+  --mao:'Comic Sans MS','Comic Neue','Chalkboard SE','Bradley Hand','Marker Felt','Segoe Print','Ink Free',cursive;
+  --corpo:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--corpo);font-size:17px;line-height:1.65}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 90px}
+
+header{background:var(--tinta);color:var(--papel2);padding:34px 22px 30px;margin-bottom:34px;border-bottom:6px solid var(--laranja)}
+header .inner{max-width:820px;margin:0 auto}
+.serie{font-family:var(--mao);font-size:15px;letter-spacing:.5px;color:var(--amar);margin:0 0 6px}
+header h1{margin:0;font-size:40px;line-height:1.1;letter-spacing:-.5px}
+header .sub{margin:12px 0 0;color:#cfc9bb;font-size:17px;max-width:620px}
+.aula-num{display:inline-block;background:var(--laranja);color:#fff;font-weight:700;padding:3px 13px;border-radius:20px;font-size:14px;margin-bottom:14px;letter-spacing:.5px}
+.voltou{background:#3a3a3a;border-left:5px solid var(--amar);padding:12px 18px;margin:18px 0 0;font-size:15.5px;color:#e6e0d2;border-radius:0 8px 8px 0}
+
+h2{font-size:29px;margin:52px 0 6px;line-height:1.2;border-bottom:3px solid var(--tinta);padding-bottom:8px}
+h2 .n{color:var(--laranja);font-family:var(--mao);font-size:24px;margin-right:8px}
+h3{font-size:21px;margin:32px 0 8px}
+p{margin:14px 0}
+.grande{font-size:20px}
+.centro{text-align:center}
+code,.mono{font-family:'Consolas','Monaco',monospace;background:#eae4d6;padding:2px 7px;border-radius:4px;font-size:.95em}
+
+.guru{display:flex;gap:18px;align-items:flex-start;margin:34px 0;background:linear-gradient(#efe9db,#e8e1d0);border-left:6px solid var(--roxo);padding:20px 22px;border-radius:4px}
+.guru svg{flex:0 0 92px}
+.guru .fala{position:relative;background:#fff;border:2px solid var(--tinta);border-radius:16px;padding:14px 18px;font-family:var(--mao);font-size:16.5px;line-height:1.55}
+.guru .fala:before{content:"";position:absolute;left:-11px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:var(--tinta)}
+.guru .fala:after{content:"";position:absolute;left:-8px;top:26px;width:0;height:0;border:10px solid transparent;border-right-color:#fff}
+.guru .quem{font-family:var(--mao);font-size:13px;color:var(--roxo);text-align:center;margin-top:4px;font-weight:700}
+
+.idiota{background:#e7eefc;border:3px solid var(--azul);border-radius:10px;padding:6px 24px 20px;margin:34px 0}
+.idiota .tit{font-family:var(--mao);font-size:20px;font-weight:700;color:#fff;background:var(--azul);display:inline-block;padding:5px 16px;border-radius:0 0 10px 10px;margin:0 0 8px}
+.idiota .q{font-weight:700;margin:16px 0 4px}
+.idiota .q:before{content:"P: ";color:var(--azul);font-weight:800}
+.idiota .a{margin:0 0 6px}
+.idiota .a:before{content:"R: ";color:var(--verm);font-weight:800}
+
+.cuidado{background:var(--vermc);border:3px dashed var(--verm);border-radius:10px;padding:16px 20px;margin:30px 0}
+.cuidado .tit{font-family:var(--mao);font-weight:700;color:var(--verm);font-size:19px;margin-bottom:2px}
+
+.pontos{background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:8px 26px 22px;margin:44px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.pontos .tit{font-family:var(--mao);font-size:22px;font-weight:700;background:var(--amar);display:inline-block;padding:6px 18px;border:3px solid var(--tinta);border-radius:8px;transform:rotate(-1.5deg);margin:-22px 0 10px}
+.pontos ul{padding-left:22px;margin:8px 0}
+.pontos li{margin:9px 0}
+
+.sticky{background:var(--amar);padding:16px 20px;font-family:var(--mao);font-size:16px;transform:rotate(-1.2deg);box-shadow:3px 4px 9px rgba(0,0,0,.16);margin:30px auto;max-width:540px;border-radius:2px}
+.rabisco{font-family:var(--mao);color:var(--laranja);font-size:15.5px;line-height:1.4}
+
+.lab{background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:8px 24px 26px;margin:34px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13)}
+.lab .tit{font-family:var(--mao);font-size:19px;font-weight:700;background:var(--verde);color:#fff;display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;border:3px solid var(--tinta)}
+.controles{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
+button{font-family:var(--corpo);font-size:16px;font-weight:700;cursor:pointer;background:var(--azul);color:#fff;border:3px solid var(--tinta);border-radius:9px;padding:9px 18px;box-shadow:3px 3px 0 var(--tinta);transition:.09s}
+button:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--tinta)}
+button:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--tinta)}
+button.sec{background:#fff;color:var(--tinta)}
+button.on{background:var(--verde)}
+button:disabled{opacity:.5;cursor:not-allowed;box-shadow:none;transform:none}
+.alt:focus-visible{outline:3px solid var(--laranja);outline-offset:2px}
+input[type=number]{font-family:var(--corpo);font-size:18px;font-weight:700;width:92px;padding:8px 10px;border:3px solid var(--tinta);border-radius:9px;background:#fff;text-align:center}
+input:focus{outline:3px solid var(--amar)}
+input[type=range]{width:100%;max-width:280px;accent-color:var(--azul);height:26px;vertical-align:middle}
+label.lab-l{font-weight:700;font-size:15px}
+.sl-linha{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0}
+.sl-val{font-family:var(--mao);font-size:22px;font-weight:700;min-width:52px;text-align:center;background:var(--amar);border:2px solid var(--tinta);border-radius:8px;padding:1px 8px}
+
+.tela{background:#fff;border:2px solid var(--linha);border-radius:10px;padding:6px}
+.tela svg{width:100%;height:auto;display:block;max-width:400px;margin:0 auto}
+
+.ex{background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:8px 24px 24px;margin:30px 0;box-shadow:6px 6px 0 rgba(27,27,27,.13);position:relative}
+.ex .tit{font-family:var(--mao);font-size:19px;font-weight:700;background:var(--laranja);color:#fff;display:inline-block;padding:6px 16px;border-radius:8px;transform:rotate(-1deg);margin:-20px 0 6px;border:3px solid var(--tinta)}
+.alt{display:block;background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:12px 16px;margin:9px 0;cursor:pointer;font-size:16.5px;transition:.12s;font-weight:600}
+.alt:hover{background:var(--amar)}
+.alt.certa{background:var(--verdec);border-color:var(--verde)}
+.alt.errada{background:var(--vermc);border-color:var(--verm)}
+.fb{margin-top:14px;font-family:var(--mao);font-size:17px;min-height:0;padding:0;border-radius:9px;overflow:hidden;transition:.2s}
+.fb.mostra{padding:12px 16px;min-height:24px}
+.fb.ok{background:var(--verdec);border:3px solid var(--verde);color:#065f46}
+.fb.no{background:var(--vermc);border:3px solid var(--verm);color:#991b1b}
+@keyframes chacoalha{0%,100%{transform:translateX(0)}15%{transform:translateX(-10px)}30%{transform:translateX(10px)}45%{transform:translateX(-7px)}60%{transform:translateX(7px)}75%{transform:translateX(-3px)}}
+.chacoalha{animation:chacoalha .5s}
+@keyframes pulsa{0%{transform:scale(1)}45%{transform:scale(1.11)}100%{transform:scale(1)}}
+.pulsa{animation:pulsa .45s}
+.selo{position:absolute;right:16px;top:14px;font-size:34px;opacity:0;transform:scale(.2) rotate(-25deg);transition:.4s cubic-bezier(.34,1.7,.5,1)}
+.selo.ver{opacity:1;transform:scale(1) rotate(-12deg)}
+.dica{font-size:14.5px;color:var(--cinza);margin-top:10px;font-style:italic}
+
+.placar{background:var(--tinta);color:var(--papel2);border-radius:14px;padding:26px 28px;margin:44px 0 0;text-align:center}
+.placar .n{font-size:52px;font-weight:800;font-family:var(--mao);color:var(--amar);line-height:1}
+.barra{height:20px;background:#3a3a3a;border-radius:12px;overflow:hidden;margin:16px auto;max-width:420px}
+.barra i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--verde),var(--amar));transition:.6s}
+.conf{position:fixed;top:-20px;width:11px;height:16px;z-index:99;pointer-events:none;border-radius:2px}
+@keyframes cai{to{transform:translateY(105vh) rotate(720deg);opacity:.1}}
+
+footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:var(--cinza);font-size:15px;text-align:center}
+@media(max-width:620px){header h1{font-size:30px}h2{font-size:24px}.guru{flex-direction:column;align-items:center}.guru svg{flex:0 0 auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <p class="serie">✏️ MATEMÁTICA DO ZERO — nível 3, avançado</p>
+    <span class="aula-num">AULA 15 de 18 · NÍVEL 3</span>
+    <h1>A inclinação em cada ponto</h1>
+    <p class="sub">A derivada: a reta tem um passo da escada só; a curva muda de passo a cada ponto — e dá para medir cada um deles chegando cada vez mais perto.</p>
+    <div class="voltou"><strong>Você já sabe:</strong> o passo da escada de uma reta (Aula 2), graus e o círculo (Aula 3), seno e cosseno (Aula 4), o vértice da parábola (Aula 13) e o número e (Aula 14). Hoje eles se encontram.</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<p class="grande">Na Aula 2, a reta <span class="mono">y = 2x + 1</span> subia <strong>2 a cada passo</strong>, em qualquer lugar. Mas a parábola da Aula 13 sobe devagar perto do fundo e cada vez mais rápido depois. Então quanto ela sobe "por passo"? A resposta honesta é: <strong>depende de onde você está</strong>. A derivada é a máquina que responde isso ponto a ponto.</p>
+
+<!-- ============ 1 ============ -->
+<h2><span class="n">1</span> A lupa que endireita a curva</h2>
+
+<p>Olhe um pedacinho muito pequeno de qualquer curva lisa com uma lupa bem forte: ela parece uma <strong>reta</strong>. É como a Terra, que é redonda mas parece plana de onde você está. E reta tem passo da escada — então cada ponto da curva também tem o seu.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: a lupa que endireita a curva</div>
+  <p>A curva azul é <span class="mono">y = x²</span>; a tracejada vermelha é uma reta. Escolha um ponto e aumente o zoom.</p>
+  <div class="sl-linha"><label class="lab-l" for="slX1" style="min-width:60px">ponto x:</label><input type="range" id="slX1" min="-2" max="2" step="0.5" value="1"><span class="sl-val" id="vX1">1</span></div>
+  <div class="sl-linha"><label class="lab-l" for="slZ1" style="min-width:60px">zoom:</label><input type="range" id="slZ1" min="0" max="6" step="1" value="0"><span class="sl-val" id="vZ1">×1</span></div>
+  <div class="tela"><svg id="svg1" role="img" aria-label="Pedaço da parábola visto com zoom"></svg></div>
+  <p class="rabisco centro" id="txt1"></p>
+</div>
+
+<!-- ============ 2 ============ -->
+<h2><span class="n">2</span> A reta que encosta</h2>
+
+<p>A reta que a lupa enxerga se chama <strong>reta tangente</strong>: ela encosta na curva naquele ponto, indo exatamente na mesma direção. A <strong>inclinação da curva</strong> num ponto é o passo da escada dessa reta.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: a reta que encosta</div>
+  <p>Deslize o ponto pela parábola e acompanhe a reta que encosta nela.</p>
+  <div class="sl-linha"><label class="lab-l" for="slX2" style="min-width:60px">ponto x:</label><input type="range" id="slX2" min="-2.5" max="2.5" step="0.25" value="1"><span class="sl-val" id="vX2">1</span></div>
+  <div class="tela"><svg id="svg2" role="img" aria-label="Parábola e a reta tangente no ponto escolhido"></svg></div>
+  <p class="rabisco centro" id="txt2"></p>
+</div>
+
+<!-- ============ 3 ============ -->
+<h2><span class="n">3</span> Chegar cada vez mais perto</h2>
+
+<p>Como medir o passo de uma reta que só encosta num ponto? Com <strong>dois</strong> pontos a gente sabe (Aula 2): sobe ÷ anda. Então pegue o ponto <span class="mono">x = 1</span> e um segundo ponto um pouco à frente, <span class="mono">1 + h</span>. A reta que passa pelos dois tem passo:</p>
+
+<p class="centro" style="font-size:20px;font-weight:800">(f(1 + h) − f(1)) ÷ h</p>
+
+<p>Agora encolha o h. O segundo ponto escorrega na direção do primeiro, e o passo se aproxima de um número fixo. <strong>Esse número é a derivada.</strong></p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: dois pontos se aproximando</div>
+  <p>Diminua a distância h e veja o passo da reta roxa.</p>
+  <div class="sl-linha"><label class="lab-l" for="slH3" style="min-width:90px">distância h:</label><input type="range" id="slH3" min="0" max="6" step="1" value="0"><span class="sl-val" id="vH3">2</span></div>
+  <div class="tela"><svg id="svg3" role="img" aria-label="Reta que passa por dois pontos da parábola"></svg></div>
+  <div style="overflow-x:auto"><table id="tab3" style="border-collapse:collapse;margin:8px auto;font-size:15px;text-align:center"></table></div>
+  <p class="rabisco centro" id="txt3"></p>
+</div>
+
+<div class="idiota">
+  <div class="tit">Não existe pergunta idiota</div>
+  <p class="q">Por que não usar h = 0 de uma vez?</p>
+  <p class="a">Porque aí os dois pontos são o mesmo, a conta vira <span class="mono">0 ÷ 0</span> e não diz nada — com um ponto só não se desenha reta. O truque é olhar para onde o passo <strong>vai</strong> quando h fica minúsculo, sem nunca chegar a zero. Isso tem nome: <strong>limite</strong>.</p>
+  <p class="q">Toda curva tem derivada em todo ponto?</p>
+  <p class="a">Só onde ela é lisa. Num bico (como o fundo de um V) a lupa nunca endireita: de um lado você vê uma reta, do outro, outra. Ali não existe uma única reta que encosta.</p>
+</div>
+
+<!-- ============ 4 ============ -->
+<h2><span class="n">4</span> A derivada como máquina</h2>
+
+<p>Faça a conta da seção 3 em cada ponto x, e não só no 1. Para <span class="mono">x²</span> o passo sempre se aproxima de <span class="mono">2x</span>. Então existe uma <strong>máquina nova</strong>: entra o x, sai a inclinação da curva naquele x. Ela se chama <strong>derivada</strong> e se escreve <span class="mono">f′(x)</span> (lê-se "f linha de x").</p>
+
+<div class="sticky">
+  <span class="mono">x² → 2x</span> &nbsp;·&nbsp; <span class="mono">x³ → 3x²</span> &nbsp;·&nbsp; <span class="mono">eˣ → eˣ</span><br>
+  Somas: deriva cada pedaço. Número multiplicando: fica. Número sozinho: some (reta deitada tem passo 0).<br>
+  Exemplo: <span class="mono">−x² + 6x + 1 → −2x + 6</span>
+</div>
+
+<p>Repare no <span class="mono">eˣ</span>: a inclinação dele em cada ponto é <strong>a própria altura</strong>. É o crescimento contínuo da Aula 14 — quanto mais tem, mais rápido cresce. Essa é a razão de o e ser tão especial.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: o gráfico da inclinação</div>
+  <p>Em cima, a curva e a reta que encosta. Embaixo, a inclinação medida em cada ponto — a derivada sendo desenhada.</p>
+  <div class="controles">
+    <button class="sec on" data-f4="0">x²</button>
+    <button class="sec" data-f4="1">x³</button>
+    <button class="sec" data-f4="2">eˣ</button>
+    <button class="sec" data-f4="3">seno</button>
+  </div>
+  <div class="sl-linha"><label class="lab-l" for="slX4" style="min-width:60px">ponto x:</label><input type="range" id="slX4" min="-3" max="3" step="0.1" value="1"><span class="sl-val" id="vX4">1</span></div>
+  <div class="tela"><svg id="svg4" role="img" aria-label="Curva com a tangente e, abaixo, o gráfico da inclinação"></svg></div>
+  <p class="rabisco centro" id="txt4"></p>
+</div>
+
+<!-- ============ 5 ============ -->
+<h2><span class="n">5</span> Radianos: o ângulo medido pelo arco</h2>
+
+<p>No laboratório de cima, a inclinação do seno deu exatamente o cosseno. Isso só funciona porque o ângulo ali não estava em graus. Os 360° da Aula 3 são uma convenção antiga; existe uma medida mais natural: <strong>quantos raios de comprimento o arco tem</strong>.</p>
+
+<p>Enrole uma linha em volta de um círculo de raio 1: a volta inteira mede <strong>6,28...</strong> — um pouco mais de 6 raios. Esse número tem nome há séculos: <span class="mono">2π</span>, com <strong>π ≈ 3,14159</strong> (pi). Então:</p>
+
+<div class="sticky"><strong>volta inteira = 360° = 2π radianos</strong><br>meia volta = 180° = π &nbsp;·&nbsp; um quarto = 90° = π/2 ≈ 1,57<br>1 radiano ≈ 57,3° (o arco do tamanho do raio)</div>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: radianos, o ângulo medido pelo arco</div>
+  <p>Gire o ângulo. O arco laranja é desenrolado na régua de baixo, medido em raios.</p>
+  <div class="sl-linha"><label class="lab-l" for="slAng5" style="min-width:70px">ângulo:</label><input type="range" id="slAng5" min="0" max="360" step="15" value="90"><span class="sl-val" id="vAng5">90°</span></div>
+  <div class="tela"><svg id="svg5" role="img" aria-label="Círculo de raio 1 com o arco e o arco desenrolado numa régua"></svg></div>
+  <p class="rabisco centro" id="txt5"></p>
+</div>
+
+<div class="cuidado">
+  <div class="tit">⚠️ Cuidado — em graus, a conta sai torta</div>
+  <p style="margin:6px 0 0">Medindo em graus, o seno sobe só <strong>0,01745</strong> por grau perto do zero — é <span class="mono">π/180</span>, um número feio que ia aparecer em todas as contas. Em radianos ele sobe <strong>exatamente 1</strong> e a derivada do seno é o cosseno, sem sobras. Por isso, daqui para frente, derivada de seno e cosseno é sempre com o ângulo em radianos.</p>
+</div>
+
+<div class="guru">
+  <svg viewBox="0 0 100 118" width="92">
+    <ellipse cx="50" cy="112" rx="34" ry="6" fill="#00000018"/>
+    <path d="M50 60 L20 108 L80 108 Z" fill="#7c3aed" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="50" cy="34" r="20" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M30 36 q20 46 40 0 q-6 34 -20 34 q-14 0 -20 -34" fill="#e5e7eb" stroke="#1b1b1b" stroke-width="3"/>
+    <path d="M40 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M52 31 q5 -4 10 0" fill="none" stroke="#1b1b1b" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M30 22 q20 -12 40 0" fill="none" stroke="#1b1b1b" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="24" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+    <circle cx="76" cy="86" r="7" fill="#f3d5b5" stroke="#1b1b1b" stroke-width="3"/>
+  </svg>
+  <div>
+        <div class="fala">A derivada assusta pelo nome, mas a ideia cabe numa lupa: chegue perto o bastante e a curva vira reta. Você já sabia medir reta desde a Aula 2. Tudo o que o cálculo acrescentou foi a coragem de chegar perto sem nunca encostar.</div>
+    <div class="quem">— o Guru</div>
+  </div>
+</div>
+
+<!-- ============ 6 ============ -->
+<h2><span class="n">6</span> Onde a inclinação é zero: topos e fundos</h2>
+
+<p>No vértice da parábola (Aula 13), a reta que encosta fica <strong>deitada</strong>: passo zero. Isso vale para qualquer curva lisa — no alto de um morro e no fundo de um vale a inclinação é zero. Então, para achar o melhor valor, basta procurar onde <span class="mono">f′(x) = 0</span>.</p>
+
+<p>Com a horta da Aula 13: área <span class="mono">x · (10 − x) = 10x − x²</span>, derivada <span class="mono">10 − 2x</span>, que zera em <span class="mono">x = 5</span>. O mesmo 5 que você caçou com o slider — agora sem chutar.</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: caça ao topo</div>
+  <p>A curva <span class="mono">y = x³ − 3x</span> tem um morro e um vale. Ache os dois pela inclinação.</p>
+  <div class="sl-linha"><label class="lab-l" for="slX6" style="min-width:30px">x:</label><input type="range" id="slX6" min="-2.2" max="2.2" step="0.1" value="0"><span class="sl-val" id="vX6">0</span></div>
+  <div class="tela"><svg id="svg6" role="img" aria-label="Curva com morro e vale e a reta tangente"></svg></div>
+  <p class="rabisco centro" id="txt6"></p>
+</div>
+
+<div class="pontos">
+  <div class="tit">Pontos importantes</div>
+  <ul>
+    <li>Com zoom suficiente, toda curva lisa parece reta: a <strong>reta tangente</strong>.</li>
+    <li>A <strong>inclinação num ponto</strong> é o passo da escada da tangente.</li>
+    <li>Ela é o limite de <span class="mono">(f(x + h) − f(x)) ÷ h</span> quando h encolhe.</li>
+    <li>A <strong>derivada</strong> <span class="mono">f′(x)</span> é a máquina "x → inclinação": <span class="mono">x² → 2x</span>, <span class="mono">x³ → 3x²</span>, <span class="mono">eˣ → eˣ</span>.</li>
+    <li><strong>Radianos</strong>: ângulo medido em raios de arco. <span class="mono">360° = 2π</span>, com <span class="mono">π ≈ 3,14</span>.</li>
+    <li>Em radianos, a inclinação do seno é o cosseno.</li>
+    <li>Topo e fundo de uma curva lisa: onde <span class="mono">f′(x) = 0</span>.</li>
+  </ul>
+</div>
+
+<!-- ============ exercicios ============ -->
+<h2><span class="n">✏️</span> Afie o lápis</h2>
+<p>Seis exercícios. Erre à vontade — a correção explica o porquê.</p>
+
+<div class="ex" id="ex1">
+  <div class="tit">Exercício 1</div>
+  <div class="selo">✅</div>
+  <p>Qual é a inclinação da reta <span class="mono">y = 3x + 1</span> no ponto x = 10?</p>
+  <p><input type="number" data-r="3" aria-label="Resposta do exercício 1"></p>
+  <button class="check" data-ex="ex1">Conferir</button>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex2">
+  <div class="tit">Exercício 2</div>
+  <div class="selo">✅</div>
+  <p>Qual é a inclinação de <span class="mono">y = x²</span> no ponto x = 3?</p>
+  <p><input type="number" data-r="6" aria-label="Resposta do exercício 2"></p>
+  <button class="check" data-ex="ex2">Conferir</button>
+  <div class="fb"></div>
+  <p class="dica">Dica: a derivada de x² é 2x.</p>
+</div>
+
+<div class="ex" id="ex3">
+  <div class="tit">Exercício 3</div>
+  <div class="selo">✅</div>
+  <p>Quanto vale 180° em radianos?</p>
+  <div class="alts" data-r="1">
+    <div class="alt" data-i="0">90</div>
+    <div class="alt" data-i="1">π (≈ 3,14)</div>
+    <div class="alt" data-i="2">2π (≈ 6,28)</div>
+    <div class="alt" data-i="3">1</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="ex" id="ex4">
+  <div class="tit">Exercício 4</div>
+  <div class="selo">✅</div>
+  <p>Na curva <span class="mono">y = x²</span>, qual é o passo da reta que passa pelos pontos x = 1 e x = 2?</p>
+  <p><input type="number" data-r="3" aria-label="Resposta do exercício 4"></p>
+  <button class="check" data-ex="ex4">Conferir</button>
+  <div class="fb"></div>
+  <p class="dica">Dica: (f(2) − f(1)) ÷ (2 − 1).</p>
+</div>
+
+<div class="ex" id="ex5">
+  <div class="tit">Exercício 5 — o desafio</div>
+  <div class="selo">🏆</div>
+  <p>A curva <span class="mono">y = −x² + 6x</span> tem um topo. Em que x ele fica?</p>
+  <p><input type="number" data-r="3" aria-label="Resposta do exercício 5"></p>
+  <button class="check" data-ex="ex5">Conferir</button>
+  <div class="fb"></div>
+  <p class="dica">Dica: derive pedaço por pedaço e descubra onde a inclinação é zero.</p>
+</div>
+
+<div class="ex" id="ex6">
+  <div class="tit">Exercício 6</div>
+  <div class="selo">✅</div>
+  <p>Qual é a derivada de <span class="mono">eˣ</span>?</p>
+  <div class="alts" data-r="2">
+    <div class="alt" data-i="0">x · eˣ⁻¹</div>
+    <div class="alt" data-i="1">0, porque e é um número fixo</div>
+    <div class="alt" data-i="2">eˣ — a inclinação é a própria altura</div>
+    <div class="alt" data-i="3">e</div>
+  </div>
+  <div class="fb"></div>
+</div>
+
+<div class="placar" id="placar">
+  <p style="margin:0 0 4px;font-family:var(--mao);font-size:19px">Seu placar</p>
+  <div class="n"><span id="pn">0</span> / 6</div>
+  <div class="barra"><i id="pbar"></i></div>
+  <p id="pmsg" style="margin:0;color:#cfc9bb">Resolva os exercícios acima e acompanhe aqui.</p>
+</div>
+
+<footer>
+  Matemática do Zero · Aula 15 — A inclinação em cada ponto<br>
+  <strong>Próxima aula:</strong> somando fatias — a área debaixo de uma curva, e o caminho de volta da derivada.
+</footer>
+
+</div>
+
+<script src="../../assets/progresso.js"></script>
+<script src="../../assets/auth.js"></script>
+<script src="../../assets/auth-ui.js"></script>
+<script src="../../assets/catalogo.js"></script>
+<script src="../../assets/menu.js"></script>
+<script>
+(function(){
+"use strict";
+var AULA_ID = "15-a-inclinacao-em-cada-ponto";
+var NS="http://www.w3.org/2000/svg";
+function $(id){ return document.getElementById(id); }
+function num(v,d){
+  if(d===undefined) d=2;
+  var p=Math.pow(10,d), r=Math.round(v*p)/p;
+  if(r===0) r=0;
+  return String(r).replace(".",",").replace("-","−");
+}
+function milhar(v){
+  var s=Math.round(v).toString(), neg=s.charAt(0)==="-"; if(neg) s=s.slice(1);
+  var out=""; while(s.length>3){ out="."+s.slice(-3)+out; s=s.slice(0,-3); }
+  return (neg?"−":"")+s+out;
+}
+function el(tag,attrs,pai){
+  var e=document.createElementNS(NS,tag);
+  for(var k in attrs) e.setAttribute(k,attrs[k]);
+  if(pai) pai.appendChild(e);
+  return e;
+}
+function limpa(g){ while(g.firstChild) g.removeChild(g.firstChild); }
+/* plano cartesiano: grade, eixos e conversao de coordenadas */
+function plano(svg,o){
+  /* ox/oy: desenha o plano numa regiao de um svg maior (sem mexer no viewBox) */
+  var w=o.w||400, h=o.h||300, ox=o.ox||0, oy=o.oy||0, regiao=("ox" in o)||("oy" in o);
+  if(!regiao) svg.setAttribute("viewBox","0 0 "+w+" "+h);
+  var P={w:w,h:h,o:o};
+  P.X=function(x){ return ox+(x-o.xmin)/(o.xmax-o.xmin)*w; };
+  P.Y=function(y){ return oy+h-(y-o.ymin)/(o.ymax-o.ymin)*h; };
+  P.xDe=function(px){ return o.xmin+(px-ox)/w*(o.xmax-o.xmin); };
+  var g=el("g",{},svg), px=o.px||1, py=o.py||1, i, eps=1e-9;
+  for(i=Math.ceil(o.xmin/px)*px;i<=o.xmax+eps;i+=px) el("line",{x1:P.X(i),y1:oy,x2:P.X(i),y2:oy+h,stroke:"#ece7da","stroke-width":1},g);
+  for(i=Math.ceil(o.ymin/py)*py;i<=o.ymax+eps;i+=py) el("line",{x1:ox,y1:P.Y(i),x2:ox+w,y2:P.Y(i),stroke:"#ece7da","stroke-width":1},g);
+  if(o.ymin<=0&&o.ymax>=0) el("line",{x1:ox,y1:P.Y(0),x2:ox+w,y2:P.Y(0),stroke:"#1b1b1b","stroke-width":1.6},g);
+  if(o.xmin<=0&&o.xmax>=0) el("line",{x1:P.X(0),y1:oy,x2:P.X(0),y2:oy+h,stroke:"#1b1b1b","stroke-width":1.6},g);
+  if(o.rotulos){
+    var lx=o.rotX||px, ly=o.rotY||py, y0=(o.ymin<=0&&o.ymax>=0)?P.Y(0):oy+h, x0=(o.xmin<=0&&o.xmax>=0)?P.X(0):ox;
+    var dx=(o.xmax-o.xmin)*0.03, dy=(o.ymax-o.ymin)*0.04;
+    for(i=Math.ceil(o.xmin/lx)*lx;i<=o.xmax+eps;i+=lx) if(Math.abs(i)>eps&&i>o.xmin+dx&&i<o.xmax-dx) el("text",{x:P.X(i),y:Math.min(oy+h-3,y0+14),"font-size":11,fill:"#6b7280","text-anchor":"middle"},g).textContent=num(i);
+    for(i=Math.ceil(o.ymin/ly)*ly;i<=o.ymax+eps;i+=ly) if(Math.abs(i)>eps&&i>o.ymin+dy&&i<o.ymax-dy) el("text",{x:x0-4<ox+14?x0+4:x0-4,y:P.Y(i)+4,"font-size":11,fill:"#6b7280","text-anchor":x0-4<ox+14?"start":"end"},g).textContent=num(i);
+  }
+  P.camada=el("g",{},svg);
+  if(regiao){
+    /* numa regiao, o que passa da borda e cortado para nao invadir o vizinho */
+    plano.n=(plano.n||0)+1;
+    var id="corte"+plano.n+"_"+Math.floor(Math.random()*1e6);
+    var cp=el("clipPath",{id:id},svg);
+    el("rect",{x:ox,y:oy,width:w,height:h},cp);
+    P.camada.setAttribute("clip-path","url(#"+id+")");
+  }
+  /* caminho de uma funcao, amostrada; valores fora da tela sao cortados */
+  P.d=function(f,a,b,n){
+    a=(a===undefined)?o.xmin:a; b=(b===undefined)?o.xmax:b; n=n||240;
+    var s="", novo=true, lim=(o.ymax-o.ymin)*3;
+    for(var k=0;k<=n;k++){
+      var x=a+(b-a)*k/n, y=f(x);
+      if(!isFinite(y)){ novo=true; continue; }
+      y=Math.max(o.ymin-lim,Math.min(o.ymax+lim,y));
+      s+=(novo?"M":"L")+P.X(x).toFixed(1)+" "+P.Y(y).toFixed(1)+" "; novo=false;
+    }
+    return s||"M0 0";
+  };
+  return P;
+}
+/* arrastar uma alca dentro de um svg; cb recebe coordenadas do viewBox */
+function arrasta(svg,alca,cb){
+  var ativo=false;
+  function pos(ev){
+    var r=svg.getBoundingClientRect(), vb=svg.viewBox.baseVal;
+    cb((ev.clientX-r.left)/r.width*vb.width,(ev.clientY-r.top)/r.height*vb.height);
+  }
+  alca.addEventListener("pointerdown",function(ev){ ativo=true; ev.preventDefault(); pos(ev); });
+  svg.addEventListener("pointermove",function(ev){ if(ativo) pos(ev); });
+  window.addEventListener("pointerup",function(){ ativo=false; });
+}
+/* texto de receita sem "+ -": termos [[coef, "x²"], [coef, "x"], [coef, ""]] */
+function receita(termos){
+  var s="";
+  termos.forEach(function(t){
+    var c=t[0], v=t[1];
+    if(Math.abs(c)<1e-9) return;
+    var a=Math.abs(c), cs=(a===1&&v)?"":num(a);
+    if(s==="") s=(c<0?"−":"")+cs+v;
+    else s+=(c<0?" − ":" + ")+cs+v;
+  });
+  return s||"0";
+}
+/* potencia com expoente inteiro em sobrescrito (2¹⁰); com virgula fica 2^0,5 */
+function pot(b,n){
+  var t=num(n,1);
+  if(t.indexOf(",")!==-1) return b+"^"+t;
+  var m={"0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹","−":"⁻"};
+  return b+t.split("").map(function(c){return m[c]||c;}).join("");
+}
+
+function quad(x){ return x*x; }
+
+/* ---------- lab 1: a lupa ---------- */
+var svg1=$("svg1");
+function pinta1(){
+  var x0=parseFloat($("slX1").value), z=Math.pow(2,parseInt($("slZ1").value,10)), w=2/z, y0=x0*x0, s=Math.max(1,Math.abs(2*x0)+0.5);
+  $("vX1").textContent=num(x0); $("vZ1").textContent="×"+z;
+  limpa(svg1);
+  var P=plano(svg1,{w:400,h:300,xmin:x0-w,xmax:x0+w,ymin:y0-w*s,ymax:y0+w*s,px:w/4,py:w*s/3,rotulos:false});
+  el("path",{d:P.d(function(x){return y0+2*x0*(x-x0);}),fill:"none",stroke:"var(--verm)","stroke-width":1.5,"stroke-dasharray":"6 5"},P.camada);
+  el("path",{d:P.d(quad),fill:"none",stroke:"var(--azul)","stroke-width":3.5},P.camada);
+  el("circle",{cx:P.X(x0),cy:P.Y(y0),r:6,fill:"var(--laranja)",stroke:"#1b1b1b","stroke-width":1.5},P.camada);
+  el("text",{x:392,y:292,"font-size":12,fill:"#6b7280","text-anchor":"end"},P.camada).textContent="janela de x = "+num(x0-w,3)+" até "+num(x0+w,3);
+  var a=quad(x0-w), b=quad(x0+w), meio=(a+b)/2, desvio=Math.abs(meio-y0)/(Math.abs(b-a)+w);
+  $("txt1").textContent = z===1 ? "Sem zoom a curva dobra bem à vista. Aumente o zoom."
+    : "zoom ×"+z+": a curva quase não se afasta de uma reta (desvio de "+num(desvio*100,1)+"% da janela) — e essa reta sobe "+num(2*x0)+" por passo.";
+}
+$("slX1").addEventListener("input",pinta1); $("slZ1").addEventListener("input",pinta1); pinta1();
+
+/* ---------- lab 2: tangente ---------- */
+var P2=plano($("svg2"),{w:400,h:320,xmin:-3.2,xmax:3.2,ymin:-2,ymax:8,px:1,py:1,rotulos:true,rotX:1,rotY:2});
+el("path",{d:P2.d(quad),fill:"none",stroke:"var(--azul)","stroke-width":3.5},P2.camada);
+var tan2=el("path",{fill:"none",stroke:"var(--verm)","stroke-width":2.5},P2.camada);
+var deg2=el("path",{fill:"none",stroke:"var(--verde)","stroke-width":2.5,"stroke-dasharray":"5 4"},P2.camada);
+var pt2=el("circle",{r:7,fill:"var(--laranja)",stroke:"#1b1b1b","stroke-width":1.5},P2.camada);
+function pinta2(){
+  var x0=parseFloat($("slX2").value), y0=x0*x0, m=2*x0;
+  $("vX2").textContent=num(x0);
+  tan2.setAttribute("d",P2.d(function(x){return y0+m*(x-x0);}));
+  deg2.setAttribute("d","M"+P2.X(x0)+" "+P2.Y(y0)+" L"+P2.X(x0+1)+" "+P2.Y(y0)+" L"+P2.X(x0+1)+" "+P2.Y(y0+m));
+  pt2.setAttribute("cx",P2.X(x0)); pt2.setAttribute("cy",P2.Y(y0));
+  $("txt2").textContent="no ponto ("+num(x0)+", "+num(y0)+") a reta que encosta "+(m>0?"sobe "+num(m):m<0?"desce "+num(-m):"fica deitada: passo 0")+(m!==0?" a cada passo (degrau verde)":" — é o fundo da parábola");
+}
+$("slX2").addEventListener("input",pinta2); pinta2();
+
+/* ---------- lab 3: dois pontos se aproximando ---------- */
+var hs3=[2,1,0.5,0.1,0.01,0.001,0.0001];
+var P3=plano($("svg3"),{w:400,h:300,xmin:-1,xmax:3.5,ymin:-1.5,ymax:10,px:0.5,py:1,rotulos:true,rotX:1,rotY:2});
+el("path",{d:P3.d(quad),fill:"none",stroke:"var(--azul)","stroke-width":3.5},P3.camada);
+var sec3=el("path",{fill:"none",stroke:"var(--roxo)","stroke-width":2.5},P3.camada);
+el("circle",{cx:P3.X(1),cy:P3.Y(1),r:7,fill:"var(--laranja)",stroke:"#1b1b1b","stroke-width":1.5},P3.camada);
+var q3=el("circle",{r:6,fill:"var(--roxo)",stroke:"#fff","stroke-width":2},P3.camada);
+function pinta3(){
+  var i=parseInt($("slH3").value,10), h=hs3[i], m=(quad(1+h)-1)/h;
+  $("vH3").textContent=num(h,4);
+  sec3.setAttribute("d",P3.d(function(x){return 1+m*(x-1);}));
+  q3.setAttribute("cx",P3.X(1+h)); q3.setAttribute("cy",P3.Y(quad(1+h)));
+  var linhas="<tr><td style='border:2px solid #c9c1ae;padding:5px 10px;font-weight:800'>h</td>", l2="<tr><td style='border:2px solid #c9c1ae;padding:5px 10px;font-weight:800'>passo</td>";
+  for(var k=0;k<=i;k++){ var hk=hs3[k]; linhas+="<td style='border:2px solid #c9c1ae;padding:5px 10px'>"+num(hk,4)+"</td>"; l2+="<td style='border:2px solid #c9c1ae;padding:5px 10px;color:var(--roxo);font-weight:700'>"+num((quad(1+hk)-1)/hk,4)+"</td>"; }
+  $("tab3").innerHTML=linhas+"</tr>"+l2+"</tr>";
+  $("txt3").textContent="(f(1 + "+num(h,4)+") − f(1)) ÷ "+num(h,4)+" = "+num(m,4)+(i>=4?" → o passo está grudando no 2: a inclinação de x² em x = 1 é 2.":"");
+}
+$("slH3").addEventListener("input",pinta3); pinta3();
+
+/* ---------- lab 4: o grafico da inclinacao ---------- */
+var fs4=[
+  {nome:"x²",f:quad,d:function(x){return 2*x;},dn:"2x",y:[-1,9],dy:[-6.5,6.5]},
+  {nome:"x³",f:function(x){return x*x*x;},d:function(x){return 3*x*x;},dn:"3x²",y:[-9,9],dy:[-3,27]},
+  {nome:"eˣ",f:Math.exp,d:Math.exp,dn:"eˣ",y:[-1,21],dy:[-1,21]},
+  {nome:"seno",f:Math.sin,d:Math.cos,dn:"cosseno",y:[-1.6,1.6],dy:[-1.6,1.6]}
+];
+var f4=0, svg4=$("svg4"); svg4.setAttribute("viewBox","0 0 400 440");
+function pinta4(){
+  var F=fs4[f4], x0=parseFloat($("slX4").value), y0=F.f(x0), m=F.d(x0);
+  $("vX4").textContent=num(x0,1);
+  limpa(svg4);
+  var A=plano(svg4,{ox:0,oy:0,w:400,h:215,xmin:-3.2,xmax:3.2,ymin:F.y[0],ymax:F.y[1],px:1,py:(F.y[1]-F.y[0])/8,rotulos:false});
+  el("path",{d:A.d(F.f),fill:"none",stroke:"var(--azul)","stroke-width":3},A.camada);
+  el("path",{d:A.d(function(x){return y0+m*(x-x0);},Math.max(-3.2,x0-1.2),Math.min(3.2,x0+1.2)),fill:"none",stroke:"var(--verm)","stroke-width":2.5},A.camada);
+  el("circle",{cx:A.X(x0),cy:A.Y(Math.max(F.y[0],Math.min(F.y[1],y0))),r:6,fill:"var(--laranja)",stroke:"#1b1b1b","stroke-width":1.5},A.camada);
+  el("text",{x:8,y:16,"font-size":12,"font-weight":700,fill:"var(--azul)"},A.camada).textContent="a curva: "+F.nome;
+  el("line",{x1:0,y1:220,x2:400,y2:220,stroke:"#c9c1ae","stroke-width":2},svg4);
+  var B=plano(svg4,{ox:0,oy:225,w:400,h:215,xmin:-3.2,xmax:3.2,ymin:F.dy[0],ymax:F.dy[1],px:1,py:(F.dy[1]-F.dy[0])/8,rotulos:false});
+  el("path",{d:B.d(F.d),fill:"none",stroke:"#c9c1ae","stroke-width":2,"stroke-dasharray":"5 4"},B.camada);
+  el("path",{d:B.d(F.d,-3.2,x0),fill:"none",stroke:"var(--verm)","stroke-width":3},B.camada);
+  el("circle",{cx:B.X(x0),cy:B.Y(Math.max(F.dy[0],Math.min(F.dy[1],m))),r:6,fill:"var(--verm)",stroke:"#fff","stroke-width":2},B.camada);
+  el("text",{x:8,y:241,"font-size":12,"font-weight":700,fill:"var(--verm)"},B.camada).textContent="a inclinação: "+F.dn;
+  var medido=(F.f(x0+1e-5)-F.f(x0-1e-5))/2e-5;
+  $("txt4").textContent="f(x) = "+F.nome+" → f′(x) = "+F.dn+" · em x = "+num(x0,1)+": inclinação medida "+num(medido,3)+(F.nome==="seno"?" = cosseno de "+num(x0,1)+" rad":"");
+}
+document.querySelectorAll("[data-f4]").forEach(function(b){ b.addEventListener("click",function(){
+  f4=parseInt(b.dataset.f4,10);
+  document.querySelectorAll("[data-f4]").forEach(function(o){ o.classList.toggle("on",o===b); });
+  pinta4();
+}); });
+$("slX4").addEventListener("input",pinta4); pinta4();
+
+/* ---------- lab 5: radianos ---------- */
+var svg5=$("svg5"); svg5.setAttribute("viewBox","0 0 400 330");
+function pinta5(){
+  var g=parseInt($("slAng5").value,10), r=g*Math.PI/180, R=90, cx=200, cy=120;
+  $("vAng5").textContent=g+"°";
+  limpa(svg5);
+  el("circle",{cx:cx,cy:cy,r:R,fill:"none",stroke:"#c9c1ae","stroke-width":2},svg5);
+  el("line",{x1:cx,y1:cy,x2:cx+R,y2:cy,stroke:"#1b1b1b","stroke-width":2},svg5);
+  el("text",{x:cx+R/2,y:cy+16,"font-size":12,"font-weight":700,"text-anchor":"middle",fill:"#1b1b1b"},svg5).textContent="raio 1";
+  var px=cx+R*Math.cos(r), py=cy-R*Math.sin(r);
+  if(g>0){
+    var grande=g>180?1:0;
+    el("path",{d:g>=360?"M"+(cx+R)+" "+cy+" A"+R+" "+R+" 0 1 0 "+(cx-R)+" "+cy+" A"+R+" "+R+" 0 1 0 "+(cx+R)+" "+cy:"M"+(cx+R)+" "+cy+" A"+R+" "+R+" 0 "+grande+" 0 "+px.toFixed(2)+" "+py.toFixed(2),fill:"none",stroke:"var(--laranja)","stroke-width":6,"stroke-linecap":"round"},svg5);
+  }
+  el("line",{x1:cx,y1:cy,x2:px,y2:py,stroke:"var(--roxo)","stroke-width":2.5},svg5);
+  el("circle",{cx:px,cy:py,r:6,fill:"var(--roxo)"},svg5);
+  /* regua em raios */
+  var x0=20, u=56, y=270;
+  el("line",{x1:x0,y1:y,x2:x0+u*6.4,y2:y,stroke:"#1b1b1b","stroke-width":2},svg5);
+  for(var k=0;k<=6;k++){ el("line",{x1:x0+k*u,y1:y-8,x2:x0+k*u,y2:y+8,stroke:"#1b1b1b","stroke-width":2},svg5); el("text",{x:x0+k*u,y:y+24,"font-size":12,"text-anchor":"middle",fill:"#6b7280"},svg5).textContent=k; }
+  el("text",{x:x0+u*6.28,y:y+40,"font-size":12,"font-weight":700,"text-anchor":"middle",fill:"var(--roxo)"},svg5).textContent="2π";
+  el("line",{x1:x0+u*6.2832,y1:y-14,x2:x0+u*6.2832,y2:y+30,stroke:"var(--roxo)","stroke-width":1.5,"stroke-dasharray":"3 3"},svg5);
+  if(r>0) el("line",{x1:x0,y1:y-4,x2:x0+u*r,y2:y-4,stroke:"var(--laranja)","stroke-width":7,"stroke-linecap":"round"},svg5);
+  el("text",{x:x0,y:y-20,"font-size":12,fill:"#6b7280"},svg5).textContent="arco desenrolado, medido em raios:";
+  var nomes={0:"0",30:"π/6",45:"π/4",60:"π/3",90:"π/2",180:"π",270:"3π/2",360:"2π"};
+  $("txt5").textContent=g+"° → arco de "+num(r,3)+" raios = "+num(r,3)+" rad"+(nomes[g]&&g>0?" = "+nomes[g]:"")+(g===360?" — a volta inteira mede 2π ≈ 6,283 raios.":"");
+}
+$("slAng5").addEventListener("input",pinta5); pinta5();
+
+/* ---------- lab 6: caca ao topo ---------- */
+var f6=function(x){return x*x*x-3*x;}, d6=function(x){return 3*x*x-3;};
+var P6=plano($("svg6"),{w:400,h:300,xmin:-2.5,xmax:2.5,ymin:-3.5,ymax:3.5,px:0.5,py:1,rotulos:true,rotX:1,rotY:1});
+el("path",{d:P6.d(f6),fill:"none",stroke:"var(--azul)","stroke-width":3.5},P6.camada);
+var tan6=el("path",{fill:"none",stroke:"var(--verm)","stroke-width":2.5},P6.camada);
+var pt6=el("circle",{r:7,fill:"var(--laranja)",stroke:"#1b1b1b","stroke-width":1.5},P6.camada);
+var achados6={};
+function pinta6(){
+  var x0=Math.round(parseFloat($("slX6").value)*10)/10, y0=f6(x0), m=d6(x0);
+  $("vX6").textContent=num(x0,1);
+  tan6.setAttribute("d",P6.d(function(x){return y0+m*(x-x0);},x0-0.9,x0+0.9));
+  pt6.setAttribute("cx",P6.X(x0)); pt6.setAttribute("cy",P6.Y(y0));
+  var zero=Math.abs(m)<1e-9;
+  if(zero) achados6[x0<0?"morro":"vale"]=true;
+  var t="x = "+num(x0,1)+" · f′(x) = 3x² − 3 = "+num(m)+" → ";
+  t += zero ? (x0<0?"inclinação zero: o topo do morro!":"inclinação zero: o fundo do vale!")
+    : m>0 ? "subindo — ainda não é topo nem fundo" : "descendo — ainda não é topo nem fundo";
+  var n=Object.keys(achados6).length;
+  if(n) t+=" · achados: "+n+" de 2";
+  $("txt6").textContent=t;
+}
+$("slX6").addEventListener("input",pinta6); pinta6();
+
+/* ---------- exercicios ---------- */
+var feitos={}, TOTAL=6;
+function confete(){
+  var cores=["#fde68a","#2563eb","#dc2626","#059669","#7c3aed","#d97706"];
+  for(var i=0;i<40;i++){
+    (function(i){
+      var d=document.createElement("div");
+      d.className="conf"; d.style.left=(Math.random()*100)+"vw";
+      d.style.background=cores[i%cores.length];
+      d.style.animation="cai "+(1.9+Math.random()*1.5)+"s linear forwards";
+      d.style.animationDelay=(Math.random()*.5)+"s";
+      document.body.appendChild(d);
+      setTimeout(function(){d.remove();},4200);
+    })(i);
+  }
+}
+function marca(id,ok){
+  if(ok&&!feitos[id]){
+    feitos[id]=true;
+    if(window.Progresso) Progresso.marcar(AULA_ID,id);
+    var n=Object.keys(feitos).length;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Você fechou a Aula 15. 🎉</strong> Derivada e radianos no bolso. Na próxima, o caminho de volta: somar fatias."; confete(); }
+    else msg.textContent="Boa! Faltam "+(TOTAL-n)+".";
+    document.querySelector("#"+id+" .selo").classList.add("ver");
+  }
+}
+function restauraProgresso(){
+  if(!window.Progresso) return;
+  Progresso.carregar(AULA_ID).then(function(itens){
+    itens.forEach(function(id){
+      if(!feitos[id] && document.getElementById(id)){
+        feitos[id]=true;
+        document.querySelector("#"+id+" .selo").classList.add("ver");
+      }
+    });
+    var n=Object.keys(feitos).length;
+    if(n===0) return;
+    document.getElementById("pn").textContent=n;
+    document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
+    var msg=document.getElementById("pmsg");
+    msg.textContent = n===TOTAL
+      ? "Você já tinha concluído esta aula. 🎉"
+      : "Progresso salvo: "+n+"/"+TOTAL+". Faltam "+(TOTAL-n)+".";
+  });
+}
+function fb(box,ok,txt){
+  var f=box.querySelector(".fb");
+  f.className="fb mostra "+(ok?"ok":"no"); f.innerHTML=txt;
+  box.classList.remove("chacoalha");
+  if(!ok){ void box.offsetWidth; box.classList.add("chacoalha"); }
+}
+var explica={
+ "ex1": {
+  "ok": "Isso: reta tem o mesmo passo em todo lugar. 3 em x = 10, em x = 0, em qualquer x.",
+  "no": "Numa reta o passo da escada é o número que multiplica o x — e é o mesmo em qualquer ponto: 3. O x = 10 não muda nada."
+ },
+ "ex2": {
+  "ok": "Exato: f′(x) = 2x, então em x = 3 a inclinação é 6.",
+  "no": "A derivada de x² é 2x. Em x = 3: 2 · 3 = 6. (O 9 é a altura f(3), não a inclinação.)"
+ },
+ "ex4": {
+  "ok": "Isso: (4 − 1) ÷ 1 = 3. Com h = 1 ainda está longe do 2 da tangente — encolha o h e ele se aproxima.",
+  "no": "f(2) = 4 e f(1) = 1. Sobe 4 − 1 = 3 enquanto anda 2 − 1 = 1: passo 3."
+ },
+ "ex5": {
+  "ok": "Perfeito: f′(x) = −2x + 6, que zera em x = 3. O topo vale −9 + 18 = 9.",
+  "no": "Derive pedaço por pedaço: −x² vira −2x, 6x vira 6. f′(x) = −2x + 6 = 0 → 2x = 6 → x = 3."
+ }
+};
+document.querySelectorAll("button.check").forEach(function(b){
+  b.addEventListener("click",function(){
+    var box=document.getElementById(b.dataset.ex);
+    var ins=box.querySelectorAll("input[data-r]"), tudoOk=true, vazio=false;
+    ins.forEach(function(inp){
+      if(inp.value===""){vazio=true;return;}
+      var ok=Math.abs(parseFloat(inp.value)-parseFloat(inp.dataset.r)) < 0.001;
+      inp.style.borderColor=ok?"#059669":"#dc2626";
+      inp.style.background=ok?"#d1fae5":"#fee2e2";
+      if(!ok) tudoOk=false;
+    });
+    if(vazio){ fb(box,false,"Preencha o campo antes de conferir. 🙂"); return; }
+    fb(box,tudoOk,(tudoOk?"✔ ":"✘ ")+(tudoOk?explica[b.dataset.ex].ok:explica[b.dataset.ex].no));
+    marca(b.dataset.ex,tudoOk);
+  });
+});
+var expAlt={
+ "ex3": [
+  "90 é outro jeito de escrever um quarto de volta em graus — e 180° é meia volta.",
+  "Isso! Meia volta é metade de 2π: π ≈ 3,14 raios de arco.",
+  "2π é a volta inteira (360°). 180° é metade disso.",
+  "1 radiano é só uns 57°."
+ ],
+ "ex6": [
+  "Essa regra (baixar o expoente) vale para x², x³... em que o x está embaixo. No eˣ o x está no expoente — é outro bicho.",
+  "e é fixo, mas eˣ muda com x: sobe cada vez mais rápido, então a inclinação não é 0.",
+  "Isso! eˣ é a curva cuja inclinação em cada ponto é a própria altura — o crescimento contínuo da Aula 14.",
+  "A inclinação muda de ponto para ponto: em x = 0 é 1, em x = 2 é ≈ 7,39. Não é um número fixo."
+ ]
+};
+document.querySelectorAll(".alts").forEach(function(grupo){
+  var box=grupo.closest(".ex"), certa=parseInt(grupo.dataset.r,10);
+  grupo.querySelectorAll(".alt").forEach(function(alt){
+    alt.setAttribute("tabindex","0");
+    alt.setAttribute("role","button");
+    alt.setAttribute("aria-label","Alternativa "+alt.textContent.trim());
+    function escolhe(){
+      var i=parseInt(alt.dataset.i,10), ok=(i===certa);
+      grupo.querySelectorAll(".alt").forEach(function(a){a.classList.remove("certa","errada");});
+      alt.classList.add(ok?"certa":"errada");
+      if(ok) alt.classList.add("pulsa");
+      fb(box,ok,(ok?"✔ ":"✘ ")+expAlt[box.id][i]);
+      marca(box.id,ok);
+    }
+    alt.addEventListener("click",escolhe);
+    alt.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();escolhe();}});
+  });
+});
+
+restauraProgresso();
+
+})();
+</script>
+</body>
+</html>

@@ -1,8 +1,8 @@
 # Matemática do Zero
 
 Um curso de matemática construído do chão para cima, para quem só sabe as quatro operações
-(somar, subtrair, multiplicar e dividir) e quer chegar até **trigonometria** e **álgebra linear**
-sem passar por nenhuma etapa no escuro.
+(somar, subtrair, multiplicar e dividir) e quer chegar até **trigonometria**, **álgebra linear**,
+**cálculo**, **probabilidade** e **números complexos** sem passar por nenhuma etapa no escuro.
 
 Cada aula é uma **página HTML interativa e autocontida**: você mexe nos controles, o gráfico
 responde na hora, e os exercícios se corrigem sozinhos com explicação do erro. O formato é
@@ -38,16 +38,16 @@ usar nada que não tenha sido apresentado numa aula anterior — nem entre níve
 | 11 | [Projeção e mínimos quadrados](aulas/11-projecao-e-minimos-quadrados/) | Regressão como geometria de sombra | ✅ pronta |
 | 12 | [Decomposição de sinais em ondas](aulas/12-decomposicao-de-sinais-em-ondas/) | Fourier como projeção sobre ondas | ✅ pronta |
 
-### Nível 3 — Avançado 🔜
+### Nível 3 — Avançado ✅
 
 | # | Aula | Assunto | Estado |
 |---|------|---------|--------|
-| 13 | Curvas que não são retas | Parábolas e polinômios | 🔜 planejada |
-| 14 | Crescimento que acelera | Exponenciais e logaritmos | 🔜 planejada |
-| 15 | A inclinação em cada ponto | Derivada (e radianos) | 🔜 planejada |
-| 16 | Somando fatias | Integral | 🔜 planejada |
-| 17 | Acaso com régua | Probabilidade e a curva normal | 🔜 planejada |
-| 18 | Girar multiplicando | Números complexos | 🔜 planejada |
+| 13 | [Curvas que não são retas](aulas/13-curvas-que-nao-sao-retas/) | Parábolas, equação do 2º grau, vértice e polinômios | ✅ pronta |
+| 14 | [Crescimento que acelera](aulas/14-crescimento-que-acelera/) | Exponenciais, expoente zero/negativo/fracionário, logaritmos e o número e | ✅ pronta |
+| 15 | [A inclinação em cada ponto](aulas/15-a-inclinacao-em-cada-ponto/) | Derivada, radianos e π, topos e fundos | ✅ pronta |
+| 16 | [Somando fatias](aulas/16-somando-fatias/) | Integral e o Teorema Fundamental do Cálculo | ✅ pronta |
+| 17 | [Acaso com régua](aulas/17-acaso-com-regua/) | Probabilidade, valor esperado e a curva normal | ✅ pronta |
+| 18 | [Girar multiplicando](aulas/18-girar-multiplicando/) | Números complexos e a fórmula de Euler | ✅ pronta |
 
 O roteiro completo, com o que entra em cada aula, está em **[PLANO.md](PLANO.md)**.
 
@@ -107,7 +107,13 @@ math/
 │   ├── 09-potencias-raizes-e-pitagoras/    ]
 │   ├── 10-estatistica-com-vetores/         ]
 │   ├── 11-projecao-e-minimos-quadrados/    ]
-│   └── 12-decomposicao-de-sinais-em-ondas/ ]
+│   ├── 12-decomposicao-de-sinais-em-ondas/ ]
+│   ├── 13-curvas-que-nao-sao-retas/        ] Nível 3 — Avançado
+│   ├── 14-crescimento-que-acelera/         ]
+│   ├── 15-a-inclinacao-em-cada-ponto/      ]
+│   ├── 16-somando-fatias/                  ]
+│   ├── 17-acaso-com-regua/                 ]
+│   └── 18-girar-multiplicando/             ]
 │       (mesma estrutura: index.html, notas.md, figuras.png)
 │
 ├── assets/
@@ -118,7 +124,7 @@ math/
 │
 └── scripts/
     ├── README.md
-    └── figuras_aula01.py .. figuras_aula12.py    gera o figuras.png de cada aula (matplotlib)
+    └── figuras_aula01.py .. figuras_aula18.py    gera o figuras.png de cada aula (matplotlib)
 ```
 
 Cada aula tem três formas do mesmo conteúdo:
@@ -161,7 +167,7 @@ As imagens estáticas são geradas por scripts em Python. Detalhes em
 ```bash
 pip install matplotlib numpy
 cd scripts
-for n in 01 02 03 04 05 06 07 08 09 10 11 12; do python3 figuras_aula$n.py; done
+for n in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18; do python3 figuras_aula$n.py; done
 ```
 
 ---
@@ -179,6 +185,7 @@ aulas (`.github/workflows/verifica-aulas.yml`). Para rodar localmente:
 ```bash
 npm install --no-save playwright && npx playwright install chromium
 node tests/verifica.js
+AULAS=13,14 node tests/verifica.js   # só algumas aulas
 ```
 
 ---

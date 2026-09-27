@@ -14,6 +14,7 @@ function checaLinks() {
   const arquivos = ['index.html'];
   for (const d of fs.readdirSync(path.join(RAIZ, 'aulas'))) arquivos.push(`aulas/${d}/index.html`, `aulas/${d}/notas.md`);
   for (const f of arquivos) {
+    if (!fs.existsSync(path.join(RAIZ, f))) { falha(f, 'arquivo ausente'); continue; }
     const txt = fs.readFileSync(path.join(RAIZ, f), 'utf8');
     const hrefs = [...txt.matchAll(/href="([^"#]+)"/g), ...txt.matchAll(/\]\((\.\.[^)]+)\)/g)].map(m => m[1]);
     for (const h of hrefs) {
@@ -52,8 +53,13 @@ async function checaSPA(browser) {
   if (cards2 !== 6) falha(nome, `painel do Nível 2 com ${cards2} aulas (esperado 6)`);
   if ((await p.locator('#chips a.chip').count()) !== 6) falha(nome, 'faixa de aulas do Nível 2 incompleta');
 
-  await clica('#niveis a[href="#/nivel/3"]', '#/nivel/3');
-  if ((await p.locator('#painel-nivel .card.breve').count()) !== 6) falha(nome, 'Nível 3 deveria listar 6 aulas "em breve"');
+  // cada nível lista todas as suas aulas: prontas viram link, as que faltam aparecem "em breve"
+  for (const nv of await p.evaluate(() => window.CATALOGO.map(n => ({ n: n.n, prontas: n.aulas.filter(a => a.slug).length, total: n.aulas.length })))) {
+    await clica(`#niveis a[href="#/nivel/${nv.n}"]`, `#/nivel/${nv.n}`);
+    const links = await p.locator('#painel-nivel a.card').count();
+    const breves = await p.locator('#painel-nivel .card.breve').count();
+    if (links !== nv.prontas || links + breves !== nv.total) falha(nome, `Nível ${nv.n}: ${links} aulas prontas e ${breves} em breve (esperado ${nv.prontas} de ${nv.total})`);
+  }
 
   // abre uma aula pelo painel: vira iframe abaixo do cabeçalho
   await clica('#niveis a[href="#/nivel/2"]', '#/nivel/2');
@@ -93,7 +99,7 @@ async function checaSPA(browser) {
 
   // celular: nenhuma visão rola para o lado
   await p.setViewportSize({ width: 375, height: 800 });
-  for (const r of ['#/', '#/nivel/1', '#/nivel/3', '#/aula/06-setas-e-tabelas-de-numeros']) {
+  for (const r of ['#/', '#/nivel/1', '#/nivel/3', '#/aula/06-setas-e-tabelas-de-numeros', '#/aula/18-girar-multiplicando']) {
     await p.goto(base + r);
     await p.waitForTimeout(300);
     const sobra = await p.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
@@ -108,7 +114,10 @@ async function checaSPA(browser) {
 (async () => {
   checaLinks();
   const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
-  const aulas = fs.readdirSync(path.join(RAIZ, 'aulas')).sort();
+  // AULAS=13,14 node tests/verifica.js → só as aulas cujo nome começa com esses números
+  const filtro = (process.env.AULAS || '').split(',').filter(Boolean);
+  const aulas = fs.readdirSync(path.join(RAIZ, 'aulas')).sort()
+    .filter(a => !filtro.length || filtro.some(f => a.startsWith(f)));
   for (const slug of aulas) {
     const url = 'file://' + path.join(RAIZ, 'aulas', slug, 'index.html');
     const p = await browser.newPage();
@@ -168,7 +177,7 @@ async function checaSPA(browser) {
     console.log(`${falhas.some(f => f.startsWith(slug)) ? '✘' : '✔'} ${slug}`);
     await p.close();
   }
-  await checaSPA(browser);
+  if (!filtro.length) await checaSPA(browser);
   await browser.close();
   if (falhas.length) { console.log('\nFalhas:\n- ' + falhas.join('\n- ')); process.exit(1); }
   console.log(`\nTudo certo: ${aulas.length} aulas verificadas.`);

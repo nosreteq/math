@@ -87,4 +87,4 @@ A Transformada de Fourier faz isso para milhares de frequências: uma projeção
 ---
 
 **Aula anterior:** [Projeção e mínimos quadrados](../11-projecao-e-minimos-quadrados/)
-Fim do Nível 2 — Intermediário! Veja o [roteiro completo](../../PLANO.md) para o Nível 3.
+Fim do Nível 2 — Intermediário! **Próxima aula:** [curvas que não são retas](../13-curvas-que-nao-sao-retas/notas.md), abrindo o Nível 3.
