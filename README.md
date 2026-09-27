@@ -13,6 +13,11 @@ soltando uma frase no meio do caminho e nenhuma fórmula caindo do céu.
 
 ## Aulas
 
+O curso é dividido em níveis. Dentro de cada nível, cada aula resolve exatamente um obstáculo, sem
+usar nada que não tenha sido apresentado numa aula anterior — nem entre níveis.
+
+### Nível 1 — Básico ✅
+
 | # | Aula | Assunto | Estado |
 |---|------|---------|--------|
 | 01 | [O que é uma função](aulas/01-o-que-e-uma-funcao/) | A máquina de números, a notação `f(x)`, a regra de ouro e o primeiro gráfico | ✅ pronta |
@@ -21,6 +26,15 @@ soltando uma frase no meio do caminho e nenhuma fórmula caindo do céu.
 | 04 | [Seno e cosseno](aulas/04-seno-e-cosseno/) | A altura e a sombra de um ponto girando | ✅ pronta |
 | 05 | [Ondas](aulas/05-ondas/) | Amplitude, frequência e fase | ✅ pronta |
 | 06 | [Setas e tabelas de números](aulas/06-setas-e-tabelas-de-numeros/) | Vetores e matrizes | ✅ pronta |
+
+### Nível 2 — Intermediário 🔜
+
+| # | Aula | Assunto | Estado |
+|---|------|---------|--------|
+| 07 | Sistemas de equações | Resolver = achar onde duas retas se cruzam | 🔜 em preparo |
+| 08 | Decomposição de sinais em ondas | A ideia por trás de Fourier, sem a fórmula pesada | 🔜 em preparo |
+| 09 | Estatística com vetores | Correlação como o cosseno do ângulo entre dois vetores | 🔜 em preparo |
+| 10 | Projeção e mínimos quadrados | Regressão como geometria de sombra | 🔜 em preparo |
 
 O roteiro completo, com o que entra em cada aula, está em **[PLANO.md](PLANO.md)**.
 

@@ -28,6 +28,11 @@ h2{font-size:28px;margin:50px 0 8px;border-bottom:3px solid var(--tinta);padding
 h2 .n{color:var(--laranja);font-family:var(--mao);font-size:23px;margin-right:8px}
 p{margin:14px 0}
 
+.nivel{font-family:var(--mao);font-size:22px;font-weight:700;margin:34px 0 4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.nivel .badge{font-family:var(--corpo);font-size:12px;font-weight:700;background:var(--verde);color:#fff;padding:3px 12px;border-radius:20px;letter-spacing:.3px}
+.nivel.futuro{color:var(--cinza)}
+.nivel.futuro .badge{background:var(--cinza)}
+
 .grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:20px;margin:26px 0}
 .card{
   background:var(--papel2);border:3px solid var(--tinta);border-radius:12px;padding:20px 22px 18px;
@@ -80,7 +85,7 @@ footer a{color:var(--azul)}
     <h1>Matemática do Zero</h1>
     <p class="sub">Das quatro operações até trigonometria e álgebra linear, sem pular nenhum degrau e sem decorar nada.</p>
     <div class="tags">
-      <span class="tag">6 aulas</span>
+      <span class="tag">2 níveis · 10 aulas</span>
       <span class="tag">interativo</span>
       <span class="tag">funciona offline</span>
       <span class="tag">exercícios corrigidos na hora</span>
@@ -95,6 +100,9 @@ footer a{color:var(--azul)}
 <div class="sticky">Regra da casa: <strong>não decore nada.</strong> Se você entendeu, a fórmula vem de graça depois. Se decorou sem entender, esquece em uma semana. 🙂</div>
 
 <h2><span class="n">📚</span> As aulas</h2>
+
+<h3 class="nivel">Nível 1 — Básico <span class="badge">completo</span></h3>
+<p style="margin-top:0;color:#555">Das quatro operações até trigonometria e álgebra linear.</p>
 
 <div class="grade">
 
@@ -145,6 +153,45 @@ footer a{color:var(--azul)}
     <p>Vetor é uma seta. Matriz é uma tabela que move setas. Pronto, álgebra linear desmistificada.</p>
     <p class="labs">🔧 6 laboratórios · ✏️ 6 exercícios</p>
   </a>
+
+</div>
+
+<h3 class="nivel futuro">Nível 2 — Intermediário <span class="badge">em preparo</span></h3>
+<p style="margin-top:0;color:#555">Sistemas de equações, decomposição de ondas, estatística com vetores e regressão — reencontrando o Nível 1 o tempo todo.</p>
+
+<div class="grade">
+
+  <div class="card breve">
+    <span class="estado">🔜</span>
+    <span class="num">AULA 7</span>
+    <h3>Sistemas de equações</h3>
+    <p>Resolver duas equações ao mesmo tempo é só achar onde duas retas se cruzam.</p>
+    <p class="labs">em preparo</p>
+  </div>
+
+  <div class="card breve">
+    <span class="estado">🔜</span>
+    <span class="num">AULA 8</span>
+    <h3>Decomposição de sinais em ondas</h3>
+    <p>Todo som complicado é só várias ondas simples somadas — e dá para desmontar a soma de volta.</p>
+    <p class="labs">em preparo</p>
+  </div>
+
+  <div class="card breve">
+    <span class="estado">🔜</span>
+    <span class="num">AULA 9</span>
+    <h3>Estatística com vetores</h3>
+    <p>Correlação não é mágica: é o produto escalar disfarçado, o cosseno do ângulo entre dois vetores.</p>
+    <p class="labs">em preparo</p>
+  </div>
+
+  <div class="card breve">
+    <span class="estado">🔜</span>
+    <span class="num">AULA 10</span>
+    <h3>Projeção e mínimos quadrados</h3>
+    <p>A reta que melhor se ajusta aos pontos não precisa de cálculo avançado — é geometria de sombra.</p>
+    <p class="labs">em preparo</p>
+  </div>
 
 </div>
 
