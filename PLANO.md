@@ -10,7 +10,7 @@ nível, cada aula resolve exatamente um obstáculo.
 |---|---|---|
 | 1 — Básico | 1–6 | ✅ pronto |
 | 2 — Intermediário | 7–12 | ✅ pronto |
-| 3 — Avançado | 13–18 | 🔜 planejado |
+| 3 — Avançado | 13–18 | ✅ pronto |
 | 4 — Especialista | — | 💭 sementes |
 
 Nenhuma aula usa nada que não tenha sido apresentado numa aula anterior — nem entre níveis.
@@ -205,102 +205,120 @@ projete o sinal em cada onda · decomponha a onda misteriosa · o acorde ao vivo
 
 ---
 
-## Nível 3 — Avançado 🔜
+## Nível 3 — Avançado ✅
 
 O Nível 2 terminou com retas, quadrados, médias e projeções. O Nível 3 sai do mundo das retas: curvas
 que dobram, crescimento que acelera, a inclinação em cada ponto de uma curva, a área acumulada
 debaixo dela, o acaso medido com régua e, no fim, um número que gira quando multiplica. Seis aulas,
 cada uma usando só o que veio antes.
 
-**Pré-requisitos que o Nível 3 precisa introduzir** (ausentes nos Níveis 1–2, verificados):
-funções não lineares (parábola), exponencial e logaritmo, e **radianos** — sem eles, a derivada do
-seno e a fórmula de Euler não fecham.
+**Pré-requisitos que o Nível 3 precisa introduzir** — ausentes nos Níveis 1–2 (verificado nas 12
+aulas) e onde cada um entra:
 
-### Aula 13 — Curvas que não são retas: parábolas e polinômios 🔜
+| Peça que faltava | Quem precisa | Onde é apresentada |
+|---|---|---|
+| Função não linear (parábola), distributiva `(x − 1)² = x² − 2x + 1` | 13, 18 | Aula 13 |
+| Raiz com dois lados (`x² = 4 → ±2`) | 13 | Aula 13 (a Aula 9 só tinha a raiz positiva) |
+| Expoente zero, negativo e fracionário (`2⁰`, `2⁻¹`, `2^0,5 = √2`) | 17 (sino) | Aula 14, "a escada das potências" |
+| O número e como `(1 + 1/n)ⁿ` | 15, 17, 18 | Aula 14 |
+| **π** e o comprimento da volta (`2π` raios) | 15, 17, 18 | Aula 15 (nenhuma aula anterior usava π) |
+| Radianos | 15, 16, 18 | Aula 15 |
+| Área do triângulo (`base · altura ÷ 2`) | 16 | Aula 16 (a Aula 9 só tinha quadrados) |
+| Soma de inclinações, "número sozinho some" | 15, 16 | Aula 15 |
+| `e^(iθ)` definido pelo mesmo limite do e: `(1 + iθ/n)ⁿ` | 18 | Aula 18 |
+
+### Aula 13 — Curvas que não são retas: parábolas e polinômios ✅
 
 **O obstáculo:** até aqui toda máquina desenhava uma reta; a primeira curva parece outro assunto,
 mas é só a máquina da Aula 1 com um quadrado dentro.
 
 - A máquina `x²` (reencontro com a Aula 9): a primeira curva — a parábola
-- As mesmas transformações de sempre: esticar, levantar, deslocar (reencontro com as Aulas 2 e 5)
-- Onde a parábola cruza o zero: equação do 2º grau como uma balança (reencontro com a Aula 7)
-- O ponto mais alto ou mais baixo (vértice) — o primeiro problema de "melhor valor"
-- Polinômios: somar potências dá curvas com mais dobras
+- As mesmas transformações de sempre: `a(x − h)² + k` (reencontro com as Aulas 2 e 5)
+- Onde a parábola cruza o zero: a balança da Aula 7 e a raiz com dois lados; Bhaskara como
+  "arrumar e passar para o outro lado", sem decorar
+- O ponto mais alto ou mais baixo (vértice) — no meio dos zeros (a média da Aula 10)
+- Polinômios: cada grau a mais permite uma dobra a mais
+- O teste das diferenças: reta × parábola sem desenhar
 
-**Laboratórios previstos:** a máquina que dobra · três sliders da parábola · ache onde ela cruza o
+**Laboratórios:** a máquina que dobra · três sliders da parábola · ache onde ela cruza o
 zero · caça ao vértice · somador de potências · reta ou curva?
 
-### Aula 14 — Crescimento que acelera: exponenciais e logaritmos 🔜
+### Aula 14 — Crescimento que acelera: exponenciais e logaritmos ✅
 
 **O obstáculo:** crescer "somando" e crescer "multiplicando" parecem parecidos no começo; em pouco
 tempo, um deles explode.
 
-- Somar sempre o mesmo (reta) × multiplicar sempre pelo mesmo (exponencial)
-- Juros compostos e dobras: `2ˣ`, `1,1ˣ` (reencontro com as potências da Aula 9)
+- Somar sempre o mesmo (reta) × multiplicar sempre pelo mesmo (exponencial); juros compostos
+  como "multiplicar por 1,1"
+- A dobra do papel: `2ⁿ` (reencontro com as potências da Aula 9)
+- A escada das potências: `2⁰ = 1`, expoente negativo divide, `2^0,5 = √2`
 - O logaritmo: a pergunta de volta — "quantas vezes multipliquei?" (como a raiz foi o caminho de
   volta do quadrado)
-- A escala logarítmica: por que gráficos de crescimento usam réguas "esticadas"
-- O número `e`: o crescimento contínuo
+- A escala logarítmica: exponencial vira reta
+- O número `e`: o crescimento contínuo, `(1 + 1/n)ⁿ`
 
-**Laboratórios previstos:** corrida soma × multiplicação · a dobra do papel · juros compostos ·
-a régua logarítmica · quantas dobras? (logaritmo) · de onde vem o e
+**Laboratórios:** corrida soma × multiplicação · a dobra do papel · a escada das potências ·
+quantas dobras? (logaritmo) · a régua logarítmica · de onde vem o e
 
-### Aula 15 — A inclinação em cada ponto: a derivada 🔜
+### Aula 15 — A inclinação em cada ponto: a derivada ✅
 
 **O obstáculo:** a reta tem um passo da escada só (Aula 2); uma curva muda de inclinação a cada
 ponto — e medir isso parece exigir mágica.
 
-- Reencontro com a Aula 2: o passo da escada de uma reta
-- A reta que encosta na curva (tangente) e o passo dela
-- Chegar cada vez mais perto: o passo entre dois pontos quando o segundo encosta no primeiro
-- A derivada como máquina: entra x, sai a inclinação naquele x
-- **Radianos:** a medida de ângulo em que a inclinação do seno vira exatamente o cosseno
+- A lupa: com zoom, toda curva lisa vira reta (tangente)
+- Chegar cada vez mais perto: o passo entre dois pontos quando o segundo encosta no primeiro (limite)
+- A derivada como máquina: `x² → 2x`, `x³ → 3x²`, `eˣ → eˣ`; somas e constantes
+- **π e radianos:** o ângulo medido pelo arco, em que a inclinação do seno vira exatamente o cosseno
 - Onde a derivada é zero: o topo e o fundo das curvas (reencontro com o vértice da Aula 13)
 
-**Laboratórios previstos:** a lupa que endireita a curva · a reta que encosta · dois pontos se
+**Laboratórios:** a lupa que endireita a curva · a reta que encosta · dois pontos se
 aproximando · o gráfico da inclinação · radianos: o ângulo medido pelo arco · caça ao topo
 
-### Aula 16 — Somando fatias: a integral 🔜
+### Aula 16 — Somando fatias: a integral ✅
 
 **O obstáculo:** calcular a área debaixo de uma curva parece impossível — até você cortá-la em
 fatias finas.
 
 - Área de retângulos (reencontro com a Aula 9) e a soma de fatias
-- Fatias cada vez mais finas: a área exata
-- A integral como acumulado: distância a partir da velocidade, total a partir de uma taxa
-- O caminho de volta: acumular e depois derivar devolve a curva original (a ideia do Teorema
-  Fundamental, sem a fórmula pesada)
+- Fatias cada vez mais finas: a área exata, presa entre a soma por baixo e a por cima
+- Triângulo = metade do retângulo; distância a partir da velocidade
+- O acumulado `A(x)` e a área negativa
+- O caminho de volta: a inclinação do acumulado é a curva (Teorema Fundamental, sem a fórmula
+  pesada)
 
-**Laboratórios previstos:** fatie a curva · fatias mais finas · velocidade vira distância ·
+**Laboratórios:** fatie a curva · fatias mais finas · velocidade vira distância ·
 o acumulado ao vivo · derivar o acumulado · desafio: estime a área
 
-### Aula 17 — Acaso com régua: probabilidade e a curva normal 🔜
+### Aula 17 — Acaso com régua: probabilidade e a curva normal ✅
 
 **O obstáculo:** o acaso parece não ter regra, mas milhares de acasos juntos desenham sempre a
 mesma curva.
 
 - Probabilidade como fração dos casos (contagem)
-- Repetir muitas vezes: a frequência se aproxima da probabilidade
+- Repetir muitas vezes: a frequência se aproxima da probabilidade; a moeda não tem memória
 - Valor esperado (reencontro com a média da Aula 10) e dispersão (desvio padrão)
-- Somar muitos acasos pequenos: surge o sino — a curva normal (usa a exponencial da Aula 14)
-- Área debaixo do sino = probabilidade (reencontro com a integral da Aula 16)
+- Somar muitos acasos pequenos: surge o sino — a curva normal (usa e, π e o expoente negativo)
+- Área debaixo do sino = probabilidade (reencontro com a integral da Aula 16); regra 68–95–99,7
+- Onde a normal **não** vale: caudas gordas
 
-**Laboratórios previstos:** a moeda repetida · o dado viciado? · a máquina de Galton ·
-o sino ajustável (média e desvio) · área = chance · regra dos 68–95–99,7
+**Laboratórios:** a moeda repetida · o dado viciado? · a média que gruda · a máquina de Galton ·
+o sino ajustável · área = chance (68–95–99,7)
 
-### Aula 18 — Girar multiplicando: números complexos 🔜
+### Aula 18 — Girar multiplicando: números complexos ✅
 
 **O obstáculo:** "a raiz de −1" parece uma invenção sem sentido, mas é só um jeito de escrever
 "gire 90°".
 
-- O problema: nenhum número real ao quadrado dá negativo (reencontro com a Aula 9)
+- O problema: nenhum número real ao quadrado dá negativo (pendência da Aula 13)
 - `i` como "gire 90°": multiplicar por `i` duas vezes é girar 180°, ou seja, virar o sinal
-- O plano complexo: um número é um ponto (reencontro com as Aulas 2 e 3)
+- O plano complexo: um número é um ponto (reencontro com as Aulas 2, 3 e 9)
 - Multiplicar = girar e esticar ao mesmo tempo (reencontro com a matriz de rotação da Aula 6)
-- A fórmula de Euler: `e^(iθ)` é o ponto girando no círculo (fecha as Aulas 4, 14 e 15)
+- Potências: espirais e círculos
+- A fórmula de Euler: `e^(iθ) = (1 + iθ/n)ⁿ` no limite é o ponto girando no círculo (fecha as
+  Aulas 4, 14 e 15)
 - Reencontro com a Aula 12: as ondas de Fourier escritas como pontos girando
 
-**Laboratórios previstos:** multiplique por i · o plano complexo · girar e esticar ·
+**Laboratórios:** multiplique por i · o plano complexo · girar e esticar ·
 potências de um número complexo · o ponto de Euler · ondas como giros
 
 ---
