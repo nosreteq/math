@@ -85,7 +85,8 @@ adivinhe o valor · ache o ângulo certo
 - **Altura** da onda (amplitude): estica para cima
 - **Largura** da onda (frequência): quantas voltas cabem no mesmo espaço
 - **Adiantar ou atrasar** a onda (fase)
-- Reencontro com a Aula 1: são as mesmas quatro transformações de sempre
+- Reencontro com as Aulas 1 e 2: os quatro jeitos de mexer numa máquina (multiplicar ou somar,
+  na entrada ou na saída) valem igualzinho para a onda
 - Somar duas ondas
 
 **Laboratórios:** círculo e onda lado a lado, sincronizados · três sliders (altura, largura, atraso) ·

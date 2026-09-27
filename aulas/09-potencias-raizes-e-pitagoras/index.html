@@ -135,7 +135,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <div class="tit">🔧 Laboratório: o quadrado cresce</div>
   <p>Mude o lado e conte os quadradinhos.</p>
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:60px">lado:</label>
+    <label class="lab-l" for="slLado" style="min-width:60px">lado:</label>
     <input type="range" id="slLado" min="1" max="8" step="1" value="3">
     <span class="sl-val" id="vLado">3</span>
   </div>
@@ -156,7 +156,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <div class="tit">🔧 Laboratório: ache o lado</div>
   <p>Escolha a área. O laboratório desenha o quadrado e mede o lado.</p>
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:60px">área:</label>
+    <label class="lab-l" for="slArea" style="min-width:60px">área:</label>
     <input type="range" id="slArea" min="1" max="64" step="1" value="36">
     <span class="sl-val" id="vArea">36</span>
   </div>
@@ -185,12 +185,12 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <div class="tit">🔧 Laboratório: Pitágoras com quadrados</div>
   <p>Mude os dois lados que formam o ângulo reto e confira a soma das áreas.</p>
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:110px;color:var(--verde)">lado deitado:</label>
+    <label class="lab-l" for="slCatA" style="min-width:110px;color:var(--verde)">lado deitado:</label>
     <input type="range" id="slCatA" min="1" max="5" step="1" value="4">
     <span class="sl-val" id="vCatA">4</span>
   </div>
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:110px;color:var(--verm)">lado em pé:</label>
+    <label class="lab-l" for="slCatB" style="min-width:110px;color:var(--verm)">lado em pé:</label>
     <input type="range" id="slCatB" min="1" max="5" step="1" value="3">
     <span class="sl-val" id="vCatB">3</span>
   </div>
@@ -261,7 +261,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <div class="tit">🔧 Laboratório: o círculo de raio 1</div>
   <p>Gire o ângulo: as duas barras trocam de tamanho, mas juntas enchem sempre a barra inteira.</p>
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:70px">ângulo:</label>
+    <label class="lab-l" for="slAngPit" style="min-width:70px">ângulo:</label>
     <input type="range" id="slAngPit" min="0" max="360" step="5" value="30">
     <span class="sl-val" id="vAngPit">30°</span>
   </div>
@@ -281,7 +281,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <div class="tit">🔧 Laboratório: quadrado nunca é negativo</div>
   <p>Arraste x para os negativos e repare na barra do quadrado.</p>
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:40px">x:</label>
+    <label class="lab-l" for="slXQ" style="min-width:40px">x:</label>
     <input type="range" id="slXQ" min="-5" max="5" step="0.5" value="-3">
     <span class="sl-val" id="vXQ">−3</span>
   </div>

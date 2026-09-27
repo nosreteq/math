@@ -1,0 +1,27 @@
+name: Verifica aulas
+
+on:
+  push:
+    paths:
+      - "aulas/**"
+      - "assets/**"
+      - "index.html"
+      - "tests/**"
+      - ".github/workflows/verifica-aulas.yml"
+  pull_request:
+  workflow_dispatch: {}
+
+jobs:
+  verifica:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Instala Playwright e Chromium
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Roda a verificação
+        run: node tests/verifica.js

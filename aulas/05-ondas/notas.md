@@ -29,15 +29,16 @@ A onda mais simples é `y = seno(x)`. Ela tem três controles:
 
 ---
 
-## Reencontro com a Aula 1
+## Reencontro com as Aulas 1 e 2
 
-São as **mesmas quatro transformações** da máquina da Aula 1, aplicadas ao seno em vez de a `x`:
+São os mesmos **quatro jeitos de mexer numa máquina** das Aulas 1 e 2, aplicados ao seno em vez de a `x`:
 
 | ação | efeito |
 |---|---|
 | multiplicar a **saída** da onda | estica para cima/baixo (amplitude) |
 | multiplicar a **entrada** (ângulo) | aperta ou alarga (frequência) |
 | somar algo na **entrada** | desloca para o lado (fase) |
+| somar algo na **saída** | sobe ou desce a onda inteira (como a altura de partida da Aula 2) |
 
 ---
 
@@ -55,7 +56,7 @@ completamente, se estiverem perfeitamente opostas.
 - **Amplitude**: multiplica a onda inteira, estica para cima/baixo.
 - **Frequência**: multiplica o ângulo, aperta ou alarga a onda.
 - **Fase**: soma no ângulo, desloca a onda para o lado.
-- São as mesmas transformações da Aula 1, aplicadas ao seno.
+- São os mesmos quatro jeitos de mexer numa máquina (Aulas 1 e 2), aplicados ao seno.
 - Somar duas ondas soma as alturas **ponto a ponto**.
 
 ---

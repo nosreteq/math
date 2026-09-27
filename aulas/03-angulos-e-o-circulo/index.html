@@ -116,7 +116,7 @@ table.t td.sai{color:var(--verm);font-weight:800}
 @keyframes cai{to{transform:translateY(105vh) rotate(720deg);opacity:.1}}
 
 footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:var(--cinza);font-size:15px;text-align:center}
-@media(max-width:620px){header h1{font-size:30px}h2{font-size:24px}.guru{flex-direction:column;align-items:center}.guru svg{flex:0 0 auto}}
+@media(max-width:620px){table.t th,table.t td{padding:6px 8px;font-size:14px}header h1{font-size:30px}h2{font-size:24px}.guru{flex-direction:column;align-items:center}.guru svg{flex:0 0 auto}}
 </style>
 </head>
 <body>
@@ -149,7 +149,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p>Arraste o controle e observe o ponteiro girar em torno do centro. O número mostra <strong>quanto ele virou</strong>, não o quanto ele andou.</p>
 
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:80px;color:var(--roxo)">girar:</label>
+    <label class="lab-l" for="slAng" style="min-width:80px;color:var(--roxo)">girar:</label>
     <input type="range" id="slAng" min="0" max="360" step="5" value="0">
     <span class="sl-val" id="vAng">0°</span>
   </div>
@@ -231,6 +231,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <p>Antes de qualquer conta, vale guardar de olho quatro giros que aparecem toda hora. Pense numa pizza redonda cortada ao meio, depois ao meio de novo:</p>
 
+<div style="overflow-x:auto">
 <table class="t">
   <tr><th>giro</th><th>fração da volta</th><th>graus</th><th>apelido</th></tr>
   <tr><td class="ent">nenhum</td><td>0</td><td class="sai">0°</td><td>ponto de partida</td></tr>
@@ -239,6 +240,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <tr><td class="ent">três quartos</td><td>3/4</td><td class="sai">270°</td><td>três quartos de volta</td></tr>
   <tr><td class="ent">tudo</td><td>4/4</td><td class="sai">360°</td><td><strong>volta completa</strong></td></tr>
 </table>
+</div>
 
 <div class="sticky">O <strong>ângulo reto</strong> (90°) é o giro mais importante de todos — é o giro de um canto de folha de papel, de uma esquina bem quadrada, do encontro das duas réguas da Aula 2.</div>
 
@@ -249,12 +251,12 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p>Gire duas vezes seguidas e veja onde o ponteiro termina — mesmo passando de 360°.</p>
 
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:110px;color:var(--verde)">1º giro:</label>
+    <label class="lab-l" for="slSoma1" style="min-width:110px;color:var(--verde)">1º giro:</label>
     <input type="range" id="slSoma1" min="0" max="360" step="15" value="90">
     <span class="sl-val" id="vSoma1">90°</span>
   </div>
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:110px;color:var(--verm)">2º giro:</label>
+    <label class="lab-l" for="slSoma2" style="min-width:110px;color:var(--verm)">2º giro:</label>
     <input type="range" id="slSoma2" min="0" max="360" step="15" value="90">
     <span class="sl-val" id="vSoma2">90°</span>
   </div>
@@ -297,7 +299,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p>Arraste além de 360° ou abaixo de 0° e veja o ponteiro cair sempre no mesmo lugar de um ângulo "normal".</p>
 
   <div class="sl-linha">
-    <label class="lab-l" style="min-width:80px;color:var(--roxo)">girar:</label>
+    <label class="lab-l" for="slNeg" style="min-width:80px;color:var(--roxo)">girar:</label>
     <input type="range" id="slNeg" min="-360" max="720" step="15" value="90">
     <span class="sl-val" id="vNeg" style="min-width:80px">90°</span>
   </div>
