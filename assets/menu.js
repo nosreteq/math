@@ -1,138 +1,127 @@
 /*
- * menu.js — menu de navegação entre níveis e aulas.
+ * menu.js — ligação de cada aula com o resto do curso.
  *
- * Basta incluir <script src=".../assets/menu.js"> em qualquer página
- * (home ou aula) para ganhar um botão fixo "☰ Aulas" que abre um painel
- * com todos os níveis e aulas do curso, destacando a aula atual e
- * marcando as que ainda não existem como "em preparo".
+ * Precisa de catalogo.js carregado antes. Dois modos:
+ *
+ *  - Dentro do curso (a aula aberta no quadro da página inicial): não
+ *    desenha menu nenhum — o cabeçalho com os níveis já está lá em cima.
+ *    Só avisa a página de fora quando um exercício é marcado (para
+ *    atualizar o progresso) e faz os links saírem do quadro.
+ *
+ *  - Aula aberta sozinha (arquivo direto ou link compartilhado): coloca
+ *    uma barra fina no topo com o caminho "curso › nível › aula", o link
+ *    para abrir a aula dentro do curso e os botões anterior/próxima.
+ *
+ * Nos dois modos, o fim da aula ganha o botão para a próxima.
  */
 (function () {
   "use strict";
 
-  var NIVEIS = [
-    {
-      nome: "Nível 1 — Básico",
-      aulas: [
-        { n: 1, slug: "01-o-que-e-uma-funcao", titulo: "O que é uma função" },
-        { n: 2, slug: "02-desenhar-numeros-no-papel", titulo: "Desenhar números no papel" },
-        { n: 3, slug: "03-angulos-e-o-circulo", titulo: "Ângulos e o círculo" },
-        { n: 4, slug: "04-seno-e-cosseno", titulo: "Seno e cosseno" },
-        { n: 5, slug: "05-ondas", titulo: "Ondas" },
-        { n: 6, slug: "06-setas-e-tabelas-de-numeros", titulo: "Setas e tabelas de números" }
-      ]
-    },
-    {
-      nome: "Nível 2 — Intermediário",
-      aulas: [
-        { n: 7, slug: "07-equacoes-a-balanca", titulo: "Equações: a balança" },
-        { n: 8, slug: "08-sistemas-de-equacoes", titulo: "Sistemas de equações" },
-        { n: 9, slug: "09-potencias-raizes-e-pitagoras", titulo: "Potências, raízes e Pitágoras" },
-        { n: 10, slug: "10-estatistica-com-vetores", titulo: "Estatística com vetores" },
-        { n: 11, slug: "11-projecao-e-minimos-quadrados", titulo: "Projeção e mínimos quadrados" },
-        { n: 12, slug: "12-decomposicao-de-sinais-em-ondas", titulo: "Decomposição de sinais em ondas" }
-      ]
-    }
-  ];
+  var CAT = window.CATALOGO || [];
+  var m = location.pathname.match(/\/aulas\/([^/]+)\//);
+  var slug = m ? m[1] : null;
+  if (!slug) return;
 
-  var emAula = location.pathname.indexOf("/aulas/") !== -1;
-  var prefixoAulas = emAula ? "../../aulas/" : "aulas/";
-  var hrefHome = emAula ? "../../index.html" : "index.html";
-  var hrefPlano = emAula ? "../../PLANO.md" : "PLANO.md";
+  var ordem = [];
+  CAT.forEach(function (nv) {
+    nv.aulas.forEach(function (a) { if (a.slug) ordem.push({ nivel: nv, aula: a }); });
+  });
+  var i = -1;
+  for (var k = 0; k < ordem.length; k++) if (ordem[k].aula.slug === slug) i = k;
+  if (i === -1) return;
+  var atual = ordem[i], ant = ordem[i - 1], prox = ordem[i + 1];
+
+  var dentro = false;
+  try { dentro = window.self !== window.top; } catch (e) { dentro = true; }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
 
   var css = ""
-    + ".md0-menu{position:fixed;top:14px;left:14px;z-index:9999;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px}"
-    + ".md0-menu-btn{background:#1b1b1b;color:#f6f2e9;padding:8px 16px;border-radius:20px;cursor:pointer;box-shadow:2px 3px 6px rgba(0,0,0,.2);border:none;font-size:14px;font-weight:700}"
-    + ".md0-menu-overlay{position:fixed;inset:0;background:rgba(27,27,27,.55);z-index:10000;display:flex;align-items:flex-start;justify-content:center;padding:70px 16px 16px}"
-    + ".md0-menu-panel{background:#fffdf7;border-radius:12px;padding:20px 22px 16px;max-width:380px;width:100%;max-height:80vh;overflow-y:auto;box-shadow:0 12px 30px rgba(0,0,0,.3)}"
-    + ".md0-menu-panel h4{margin:18px 0 8px;font-size:13px;letter-spacing:.4px;color:#6b7280;text-transform:uppercase;display:flex;align-items:center;gap:6px}"
-    + ".md0-menu-panel h4:first-of-type{margin-top:2px}"
-    + ".md0-menu-fechar{background:none;border:none;color:#6b7280;cursor:pointer;font-size:20px;float:right;line-height:1;padding:0}"
-    + ".md0-menu-home{display:block;padding:9px 12px;border-radius:8px;text-decoration:none;color:#1b1b1b;font-weight:700;background:#fde68a;margin-bottom:4px}"
-    + ".md0-menu-item{display:block;padding:9px 12px;border-radius:8px;text-decoration:none;color:#1b1b1b;font-size:14.5px;margin:2px 0}"
-    + ".md0-menu-item:hover{background:#eae4d6}"
-    + ".md0-menu-item.ativa{background:#dbeafe;font-weight:700;color:#1e3a8a}"
-    + ".md0-menu-item.bloqueada{color:#9ca3af;cursor:default;display:flex;justify-content:space-between;gap:8px}"
-    + ".md0-menu-item.bloqueada:hover{background:none}"
-    + ".md0-menu-tag{font-size:11px;background:#e5e7eb;color:#6b7280;padding:2px 8px;border-radius:10px;white-space:nowrap}"
-    + "@media(max-width:620px){.md0-menu{top:auto;bottom:14px;left:14px}.md0-menu-btn{box-shadow:0 4px 12px rgba(0,0,0,.35)}}"
-    + ".md0-menu-plano{display:block;margin-top:16px;padding-top:14px;border-top:2px solid #e6e0d2;color:#2563eb;font-weight:700;text-decoration:none;font-size:14px}";
+    + ".md0-barra{background:#1b1b1b;color:#e6e0d2;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;border-bottom:3px solid #d97706}"
+    + ".md0-barra .in{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:8px 14px;padding:8px 16px;flex-wrap:wrap}"
+    + ".md0-barra a{color:#e6e0d2;text-decoration:none}"
+    + ".md0-barra a:hover{text-decoration:underline}"
+    + ".md0-barra .marca{font-family:'Comic Sans MS','Comic Neue','Chalkboard SE',cursive;font-weight:700;color:#fde68a}"
+    + ".md0-barra .sep{color:#6b7280}"
+    + ".md0-barra .trilha{flex:1 1 auto;min-width:0}"
+    + ".md0-barra .acoes{display:flex;gap:6px;flex-wrap:wrap}"
+    + ".md0-barra .acoes a{background:#383838;padding:3px 12px;border-radius:14px;font-weight:600;white-space:nowrap}"
+    + ".md0-barra .acoes a.curso{background:#2563eb;color:#fff}"
+    + ".md0-fim{max-width:860px;margin:0 auto 60px;padding:0 22px;display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;font-family:'Segoe UI',system-ui,sans-serif}"
+    + ".md0-fim a{flex:1 1 220px;display:block;text-decoration:none;color:#1b1b1b;background:#fffdf7;border:3px solid #1b1b1b;border-radius:12px;padding:12px 16px;box-shadow:4px 4px 0 rgba(27,27,27,.13)}"
+    + ".md0-fim a:hover{background:#fff}"
+    + ".md0-fim a small{display:block;color:#d97706;font-weight:700;font-size:13px}"
+    + ".md0-fim a.prox{text-align:right}"
+    + (dentro ? ".md0-auth{display:none!important}" : "");
   var style = document.createElement("style");
   style.textContent = css;
   document.head.appendChild(style);
 
-  var raiz = document.createElement("div");
-  raiz.className = "md0-menu";
-  document.body.appendChild(raiz);
-
-  var btn = document.createElement("button");
-  btn.className = "md0-menu-btn";
-  btn.textContent = "☰ Aulas";
-  btn.setAttribute("aria-haspopup", "true");
-  btn.addEventListener("click", abrirMenu);
-  raiz.appendChild(btn);
-
-  function slugAtual() {
-    if (!emAula) return null;
-    var m = location.pathname.match(/\/aulas\/([^/]+)\//);
-    return m ? m[1] : null;
+  // endereço de uma aula: dentro do curso é uma rota; sozinha é o arquivo
+  function hrefAula(item) {
+    return dentro ? "#" : "../" + item.aula.slug + "/index.html";
+  }
+  function ligar(a, item) {
+    a.href = hrefAula(item);
+    if (dentro) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        window.parent.postMessage({ md0: "ir", hash: "#/aula/" + item.aula.slug }, "*");
+      });
+    }
   }
 
-  function abrirMenu() {
-    var atual = slugAtual();
-    var overlay = document.createElement("div");
-    overlay.className = "md0-menu-overlay";
+  // ---------- barra do topo (só na aula aberta sozinha) ----------
+  if (!dentro) {
+    var barra = document.createElement("nav");
+    barra.className = "md0-barra";
+    barra.setAttribute("aria-label", "Navegação do curso");
+    var base = "../../index.html";
+    barra.innerHTML = '<div class="in">'
+      + '<span class="trilha"><a class="marca" href="' + base + '#/">✏️ Matemática do Zero</a>'
+      + ' <span class="sep">›</span> <a href="' + base + "#/nivel/" + atual.nivel.n + '">Nível ' + atual.nivel.n + " · " + esc(atual.nivel.nome) + "</a>"
+      + ' <span class="sep">›</span> Aula ' + atual.aula.n + "</span>"
+      + '<span class="acoes">'
+      + (ant ? '<a href="../' + ant.aula.slug + '/index.html" title="Aula ' + ant.aula.n + " — " + esc(ant.aula.titulo) + '">◀ Aula ' + ant.aula.n + "</a>" : "")
+      + '<a class="curso" href="' + base + "#/aula/" + slug + '">Abrir no curso</a>'
+      + (prox ? '<a href="../' + prox.aula.slug + '/index.html" title="Aula ' + prox.aula.n + " — " + esc(prox.aula.titulo) + '">Aula ' + prox.aula.n + " ▶</a>" : "")
+      + "</span></div>";
+    document.body.insertBefore(barra, document.body.firstChild);
+  }
 
-    var painel = document.createElement("div");
-    painel.className = "md0-menu-panel";
+  // ---------- fim da aula: anterior / próxima ----------
+  var fim = document.createElement("nav");
+  fim.className = "md0-fim";
+  fim.setAttribute("aria-label", "Aula anterior e próxima");
+  [[ant, "◀ Aula anterior", "ant"], [prox, "Próxima aula ▶", "prox"]].forEach(function (p) {
+    if (!p[0]) return;
+    var a = document.createElement("a");
+    a.className = p[2];
+    a.innerHTML = "<small>" + p[1] + "</small>Aula " + p[0].aula.n + " — " + esc(p[0].aula.titulo);
+    ligar(a, p[0]);
+    fim.appendChild(a);
+  });
+  if (fim.children.length) document.body.appendChild(fim);
 
-    var fechar = document.createElement("button");
-    fechar.className = "md0-menu-fechar";
-    fechar.setAttribute("aria-label", "Fechar menu");
-    fechar.innerHTML = "&times;";
-    fechar.addEventListener("click", function () { overlay.remove(); });
-    painel.appendChild(fechar);
+  if (!dentro) return;
 
-    var home = document.createElement("a");
-    home.className = "md0-menu-home";
-    home.href = hrefHome;
-    home.textContent = "🏠 Início do curso";
-    painel.appendChild(home);
+  // ---------- dentro do curso ----------
+  // links para fora da aula (roteiro, README...) saem do quadro
+  Array.prototype.forEach.call(document.querySelectorAll("a[href]"), function (a) {
+    var h = a.getAttribute("href");
+    if (h.charAt(0) !== "#" && !a.target && !a.closest(".md0-fim")) a.target = "_top";
+  });
 
-    NIVEIS.forEach(function (nivel) {
-      var h4 = document.createElement("h4");
-      h4.textContent = nivel.nome;
-      painel.appendChild(h4);
-
-      nivel.aulas.forEach(function (aula) {
-        if (aula.slug) {
-          var a = document.createElement("a");
-          a.className = "md0-menu-item" + (aula.slug === atual ? " ativa" : "");
-          a.href = prefixoAulas + aula.slug + "/index.html";
-          a.textContent = "Aula " + aula.n + " — " + aula.titulo;
-          painel.appendChild(a);
-        } else {
-          var span = document.createElement("span");
-          span.className = "md0-menu-item bloqueada";
-          span.innerHTML = "<span>Aula " + aula.n + " — " + aula.titulo + "</span><span class=\"md0-menu-tag\">em preparo</span>";
-          painel.appendChild(span);
-        }
-      });
-    });
-
-    var plano = document.createElement("a");
-    plano.className = "md0-menu-plano";
-    plano.href = hrefPlano;
-    plano.textContent = "📋 Ver o roteiro completo do curso";
-    painel.appendChild(plano);
-
-    overlay.appendChild(painel);
-    document.body.appendChild(overlay);
-
-    overlay.addEventListener("click", function (e) {
-      if (e.target === overlay) overlay.remove();
-    });
-    document.addEventListener("keydown", function fechaEsc(e) {
-      if (e.key === "Escape") { overlay.remove(); document.removeEventListener("keydown", fechaEsc); }
-    });
+  // avisa a página de fora quando um exercício é marcado
+  if (window.Progresso && Progresso.marcar) {
+    var marcar = Progresso.marcar;
+    Progresso.marcar = function (aulaId, itemId) {
+      marcar(aulaId, itemId);
+      try { window.parent.postMessage({ md0: "progresso", aula: aulaId }, "*"); } catch (e) { /* sem página de fora */ }
+    };
   }
 })();

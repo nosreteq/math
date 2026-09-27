@@ -59,6 +59,19 @@ O roteiro completo, com o que entra em cada aula, está em **[PLANO.md](PLANO.md
 servidor, nem de internet, nem instalar nada — cada aula é um arquivo único com todo o CSS e
 JavaScript embutidos.
 
+O `index.html` é uma página única (SPA): os níveis ficam no cabeçalho, cada nível abre o painel
+com as suas aulas, e a aula abre ali mesmo, num quadro logo abaixo do cabeçalho, com os botões
+de anterior/próxima. As rotas ficam no `#` do endereço, então dá para favoritar ou compartilhar:
+
+| Endereço | O que mostra |
+|---|---|
+| `index.html#/` | início do curso |
+| `index.html#/nivel/2` | painel do Nível 2, com o progresso de cada aula |
+| `index.html#/aula/07-equacoes-a-balanca` | a Aula 7 aberta dentro do curso |
+
+Uma aula aberta sozinha (`aulas/<aula>/index.html`) continua funcionando e ganha uma barra fina
+no topo com o caminho do curso e o link para abri-la dentro dele.
+
 ```bash
 git clone https://github.com/nosreteq/math.git
 cd math
@@ -74,7 +87,7 @@ O curso fica no ar em `https://nosreteq.github.io/math/`.
 
 ```
 math/
-├── index.html                          página inicial com o índice do curso
+├── index.html                          o curso: cabeçalho com os níveis, painel e quadro da aula
 ├── README.md                           este arquivo
 ├── PLANO.md                            roteiro do curso, por níveis
 │
@@ -98,7 +111,10 @@ math/
 │       (mesma estrutura: index.html, notas.md, figuras.png)
 │
 ├── assets/
-│   └── menu.js                         menu de navegação entre níveis e aulas
+│   ├── catalogo.js                     lista única de níveis e aulas (título, resumo, pasta)
+│   ├── spa.js                          rotas e painéis da página inicial
+│   ├── menu.js                         liga cada aula ao curso (barra avulsa, anterior/próxima)
+│   └── progresso.js, auth*.js          progresso salvo e login opcional
 │
 └── scripts/
     ├── README.md
@@ -155,7 +171,9 @@ for n in 01 02 03 04 05 06 07 08 09 10 11 12; do python3 figuras_aula$n.py; done
 `tests/verifica.js` abre cada aula num navegador de verdade e confere: 6 laboratórios e 6
 exercícios por aula, todos os controles nos extremos sem texto quebrado (`NaN`, `undefined`),
 resposta errada nunca pontua e gabarito sempre aceito, nenhum erro de JavaScript, nenhum link
-quebrado e nenhuma rolagem lateral no celular. Roda sozinho no GitHub a cada push que mexe nas
+quebrado e nenhuma rolagem lateral no celular. Na página inicial, confere as abas de nível, a
+troca de painel, a aula abrindo no quadro, anterior/próxima, o botão voltar do navegador e o
+progresso feito dentro da aula aparecendo no painel. Roda sozinho no GitHub a cada push que mexe nas
 aulas (`.github/workflows/verifica-aulas.yml`). Para rodar localmente:
 
 ```bash
