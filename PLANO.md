@@ -1,9 +1,17 @@
 # Plano do curso
 
 O destino é conseguir ler e usar **trigonometria** (seno, cosseno, ondas) e **álgebra linear**
-(vetores, matrizes) partindo apenas das quatro operações — e depois usar isso tudo de verdade em
-**sistemas de equações, sinais, estatística e regressão**. O curso é dividido em níveis; dentro de
-cada nível, cada aula resolve exatamente um obstáculo.
+(vetores, matrizes) partindo apenas das quatro operações — depois usar isso tudo de verdade em
+**sistemas de equações, sinais, estatística e regressão** — e, por fim, chegar a **cálculo,
+probabilidade e números complexos**. O curso é dividido em níveis de seis aulas; dentro de cada
+nível, cada aula resolve exatamente um obstáculo.
+
+| Nível | Aulas | Estado |
+|---|---|---|
+| 1 — Básico | 1–6 | ✅ pronto |
+| 2 — Intermediário | 7–12 | ✅ pronto |
+| 3 — Avançado | 13–18 | 🔜 planejado |
+| 4 — Especialista | — | 💭 sementes |
 
 Nenhuma aula usa nada que não tenha sido apresentado numa aula anterior — nem entre níveis.
 
@@ -196,8 +204,113 @@ projete o sinal em cada onda · decomponha a onda misteriosa · o acorde ao vivo
 
 ---
 
-## Depois do Nível 2
+## Nível 3 — Avançado 🔜
 
-Ainda sem data nem conteúdo definido, mas são os assuntos que ficam ao alcance depois do Nível 2 —
-possíveis sementes para um futuro **Nível 3 — Avançado**: cálculo (taxa de variação e área sob a
-curva), números complexos, autovalores e autovetores, e probabilidade.
+O Nível 2 terminou com retas, quadrados, médias e projeções. O Nível 3 sai do mundo das retas: curvas
+que dobram, crescimento que acelera, a inclinação em cada ponto de uma curva, a área acumulada
+debaixo dela, o acaso medido com régua e, no fim, um número que gira quando multiplica. Seis aulas,
+cada uma usando só o que veio antes.
+
+**Pré-requisitos que o Nível 3 precisa introduzir** (ausentes nos Níveis 1–2, verificados):
+funções não lineares (parábola), exponencial e logaritmo, e **radianos** — sem eles, a derivada do
+seno e a fórmula de Euler não fecham.
+
+### Aula 13 — Curvas que não são retas: parábolas e polinômios 🔜
+
+**O obstáculo:** até aqui toda máquina desenhava uma reta; a primeira curva parece outro assunto,
+mas é só a máquina da Aula 1 com um quadrado dentro.
+
+- A máquina `x²` (reencontro com a Aula 9): a primeira curva — a parábola
+- As mesmas transformações de sempre: esticar, levantar, deslocar (reencontro com as Aulas 2 e 5)
+- Onde a parábola cruza o zero: equação do 2º grau como uma balança (reencontro com a Aula 7)
+- O ponto mais alto ou mais baixo (vértice) — o primeiro problema de "melhor valor"
+- Polinômios: somar potências dá curvas com mais dobras
+
+**Laboratórios previstos:** a máquina que dobra · três sliders da parábola · ache onde ela cruza o
+zero · caça ao vértice · somador de potências · reta ou curva?
+
+### Aula 14 — Crescimento que acelera: exponenciais e logaritmos 🔜
+
+**O obstáculo:** crescer "somando" e crescer "multiplicando" parecem parecidos no começo; em pouco
+tempo, um deles explode.
+
+- Somar sempre o mesmo (reta) × multiplicar sempre pelo mesmo (exponencial)
+- Juros compostos e dobras: `2ˣ`, `1,1ˣ` (reencontro com as potências da Aula 9)
+- O logaritmo: a pergunta de volta — "quantas vezes multipliquei?" (como a raiz foi o caminho de
+  volta do quadrado)
+- A escala logarítmica: por que gráficos de crescimento usam réguas "esticadas"
+- O número `e`: o crescimento contínuo
+
+**Laboratórios previstos:** corrida soma × multiplicação · a dobra do papel · juros compostos ·
+a régua logarítmica · quantas dobras? (logaritmo) · de onde vem o e
+
+### Aula 15 — A inclinação em cada ponto: a derivada 🔜
+
+**O obstáculo:** a reta tem um passo da escada só (Aula 2); uma curva muda de inclinação a cada
+ponto — e medir isso parece exigir mágica.
+
+- Reencontro com a Aula 2: o passo da escada de uma reta
+- A reta que encosta na curva (tangente) e o passo dela
+- Chegar cada vez mais perto: o passo entre dois pontos quando o segundo encosta no primeiro
+- A derivada como máquina: entra x, sai a inclinação naquele x
+- **Radianos:** a medida de ângulo em que a inclinação do seno vira exatamente o cosseno
+- Onde a derivada é zero: o topo e o fundo das curvas (reencontro com o vértice da Aula 13)
+
+**Laboratórios previstos:** a lupa que endireita a curva · a reta que encosta · dois pontos se
+aproximando · o gráfico da inclinação · radianos: o ângulo medido pelo arco · caça ao topo
+
+### Aula 16 — Somando fatias: a integral 🔜
+
+**O obstáculo:** calcular a área debaixo de uma curva parece impossível — até você cortá-la em
+fatias finas.
+
+- Área de retângulos (reencontro com a Aula 9) e a soma de fatias
+- Fatias cada vez mais finas: a área exata
+- A integral como acumulado: distância a partir da velocidade, total a partir de uma taxa
+- O caminho de volta: acumular e depois derivar devolve a curva original (a ideia do Teorema
+  Fundamental, sem a fórmula pesada)
+
+**Laboratórios previstos:** fatie a curva · fatias mais finas · velocidade vira distância ·
+o acumulado ao vivo · derivar o acumulado · desafio: estime a área
+
+### Aula 17 — Acaso com régua: probabilidade e a curva normal 🔜
+
+**O obstáculo:** o acaso parece não ter regra, mas milhares de acasos juntos desenham sempre a
+mesma curva.
+
+- Probabilidade como fração dos casos (contagem)
+- Repetir muitas vezes: a frequência se aproxima da probabilidade
+- Valor esperado (reencontro com a média da Aula 10) e dispersão (desvio padrão)
+- Somar muitos acasos pequenos: surge o sino — a curva normal (usa a exponencial da Aula 14)
+- Área debaixo do sino = probabilidade (reencontro com a integral da Aula 16)
+
+**Laboratórios previstos:** a moeda repetida · o dado viciado? · a máquina de Galton ·
+o sino ajustável (média e desvio) · área = chance · regra dos 68–95–99,7
+
+### Aula 18 — Girar multiplicando: números complexos 🔜
+
+**O obstáculo:** "a raiz de −1" parece uma invenção sem sentido, mas é só um jeito de escrever
+"gire 90°".
+
+- O problema: nenhum número real ao quadrado dá negativo (reencontro com a Aula 9)
+- `i` como "gire 90°": multiplicar por `i` duas vezes é girar 180°, ou seja, virar o sinal
+- O plano complexo: um número é um ponto (reencontro com as Aulas 2 e 3)
+- Multiplicar = girar e esticar ao mesmo tempo (reencontro com a matriz de rotação da Aula 6)
+- A fórmula de Euler: `e^(iθ)` é o ponto girando no círculo (fecha as Aulas 4, 14 e 15)
+- Reencontro com a Aula 12: as ondas de Fourier escritas como pontos girando
+
+**Laboratórios previstos:** multiplique por i · o plano complexo · girar e esticar ·
+potências de um número complexo · o ponto de Euler · ondas como giros
+
+---
+
+## Nível 4 — Especialista 💭
+
+Sementes, ainda sem ordem nem conteúdo fechado. Todas dependem do Nível 3.
+
+- **Autovalores e autovetores:** as direções que uma matriz só estica (as da rotação são
+  complexas — por isso vêm depois da Aula 18)
+- **PCA:** as direções principais de uma nuvem de pontos (reencontra correlação e projeção)
+- **Otimização e gradiente:** descer a ladeira da derivada — a generalização dos mínimos quadrados
+- **Séries temporais e FFT:** Fourier aplicado a dados reais ao longo do tempo
+- **Equações diferenciais:** quando a regra fala da taxa de variação, e não do valor

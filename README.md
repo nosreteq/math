@@ -38,6 +38,17 @@ usar nada que não tenha sido apresentado numa aula anterior — nem entre níve
 | 11 | [Projeção e mínimos quadrados](aulas/11-projecao-e-minimos-quadrados/) | Regressão como geometria de sombra | ✅ pronta |
 | 12 | [Decomposição de sinais em ondas](aulas/12-decomposicao-de-sinais-em-ondas/) | Fourier como projeção sobre ondas | ✅ pronta |
 
+### Nível 3 — Avançado 🔜
+
+| # | Aula | Assunto | Estado |
+|---|------|---------|--------|
+| 13 | Curvas que não são retas | Parábolas e polinômios | 🔜 planejada |
+| 14 | Crescimento que acelera | Exponenciais e logaritmos | 🔜 planejada |
+| 15 | A inclinação em cada ponto | Derivada (e radianos) | 🔜 planejada |
+| 16 | Somando fatias | Integral | 🔜 planejada |
+| 17 | Acaso com régua | Probabilidade e a curva normal | 🔜 planejada |
+| 18 | Girar multiplicando | Números complexos | 🔜 planejada |
+
 O roteiro completo, com o que entra em cada aula, está em **[PLANO.md](PLANO.md)**.
 
 ---
