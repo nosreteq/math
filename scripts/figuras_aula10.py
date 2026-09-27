@@ -12,68 +12,60 @@ AZUL, VERM, VERDE, LARANJA, ROXO, CINZA, TXT = ("#2563eb", "#dc2626", "#059669",
 
 fig, ax = plt.subplots(2, 2, figsize=(13, 10))
 fig.patch.set_facecolor("white")
+rng = np.random.default_rng(7)
 
 
-def papel(a, titulo, lim=6):
-    a.set_xlim(-lim, lim); a.set_ylim(-lim, lim)
-    a.axhline(0, color=TXT, lw=1.5); a.axvline(0, color=TXT, lw=1.5)
-    a.set_xticks([]); a.set_yticks([])
-    a.set_aspect("equal")
+def nuvem(a, titulo, forca, cor=AZUL):
     a.set_title(titulo, fontsize=13.5, weight="bold", color=TXT, pad=10)
+    x = rng.random(30)
+    ruido = rng.random(30) - 0.5
+    y = x * forca + ruido * (1 - forca) * 1.3
+    a.scatter(x, y, s=45, color=cor, alpha=0.75, edgecolor="white", lw=0.8)
+    a.set_xticks([]); a.set_yticks([])
     for s in a.spines.values():
         s.set_visible(False)
+    a.axhline(min(y) - 0.1, color=TXT, lw=1.5)
+    a.axvline(-0.05, color=TXT, lw=1.5)
 
 
-# ---------------- 1. projecao = sombra -----------------------------------------
+# ---------------- 1. lista vira vetor -------------------------------------------
 a = ax[0, 0]
-papel(a, "1. Projeção: a sombra de v sobre w")
-a.add_patch(FancyArrowPatch((0, 0), (4.5, 0), arrowstyle="-|>", mutation_scale=16, color=LARANJA, lw=3))
-deg = 35
-rad = np.radians(deg)
-vx, vy = 4 * np.cos(rad), 4 * np.sin(rad)
-a.add_patch(FancyArrowPatch((0, 0), (vx, vy), arrowstyle="-|>", mutation_scale=16, color=AZUL, lw=3))
-proj = 4 * np.cos(rad)
-a.add_patch(FancyArrowPatch((0, 0), (proj, 0), arrowstyle="-|>", mutation_scale=16, color=VERDE, lw=4))
-a.plot([vx, proj], [vy, 0], color=CINZA, lw=1.5, ls="--")
-a.text(4.6, -0.1, "w", fontsize=12, color=LARANJA, weight="bold")
-a.text(vx + 0.1, vy + 0.15, "v", fontsize=12, color=AZUL, weight="bold")
-a.text(proj / 2, -0.5, "sombra", fontsize=10.5, color=VERDE, weight="bold", ha="center")
+a.set_title("1. Uma lista de números é um vetor", fontsize=13.5, weight="bold", color=TXT, pad=10)
+notas = [6, 8, 7, 9, 5]
+a.bar(range(len(notas)), notas, color=ROXO, width=0.5)
+a.set_xticks(range(len(notas)))
+a.set_xticklabels([str(n) for n in notas], fontsize=11)
+a.set_yticks([])
+for s in ["top", "right", "left"]:
+    a.spines[s].set_visible(False)
+a.set_ylim(0, 11)
+a.text(2, 10.3, "v = (6, 8, 7, 9, 5)", fontsize=12, weight="bold", color=ROXO, ha="center")
 
-# ---------------- 2. erro entre ponto e reta -------------------------------------
+# ---------------- 2. correlacao alta vs baixa ------------------------------------
 a = ax[0, 1]
-papel(a, "2. Erro: distância do ponto até a reta")
-xs = np.linspace(-5, 5, 20)
-a.plot(xs, 0.6 * xs, color=ROXO, lw=2.5)
-pontos = [(-3, -1), (-1, 0.5), (1.5, 0.3), (3.5, 2.8)]
-for px, py in pontos:
-    yreta = 0.6 * px
-    a.plot([px, px], [py, yreta], color=VERM, lw=2, ls=":")
-    a.scatter([px], [py], s=70, color=AZUL, zorder=6, edgecolor="white", lw=1.2)
-a.text(-5.5, 5.2, "linhas vermelhas = erros", fontsize=9.5, color=VERM)
+nuvem(a, "2. Correlação alta: quase uma reta", 0.92, AZUL)
 
-# ---------------- 3. minimos quadrados -----------------------------------------------
 a = ax[1, 0]
-papel(a, "3. A reta que minimiza a soma dos erros²")
-rng = np.random.default_rng(3)
-xs2 = np.linspace(-4, 4, 10)
-ys2 = 0.5 * xs2 + rng.normal(0, 0.8, size=10)
-a.scatter(xs2, ys2, s=60, color=AZUL, zorder=6, edgecolor="white", lw=1.2)
-coef = np.polyfit(xs2, ys2, 1)
-a.plot(xs2, coef[0] * xs2 + coef[1], color=ROXO, lw=3, label="melhor ajuste")
-a.plot(xs2, 0.5 * xs2 - 2, color=CINZA, lw=2, ls="--", label="outra reta qualquer")
-a.legend(fontsize=8.5, loc="upper left", framealpha=0.95)
+nuvem(a, "3. Correlação baixa: nuvem espalhada", 0.15, LARANJA)
 
-# ---------------- 4. mesma receita da aula 2 --------------------------------------------
+# ---------------- 4. angulo entre vetores -----------------------------------------
 a = ax[1, 1]
+a.set_title("4. Correlação = cosseno do ângulo", fontsize=13.5, weight="bold", color=TXT, pad=10)
+a.set_xlim(-1.3, 1.3); a.set_ylim(-1.3, 1.3)
+a.set_aspect("equal")
 a.axis("off")
-a.set_title("4. A receita continua igual", fontsize=13.5, weight="bold", color=TXT, pad=10)
-a.text(0.5, 0.65, "f(x) = passo · x + altura de partida", fontsize=15, weight="bold",
-       color=TXT, ha="center", transform=a.transAxes)
-a.text(0.5, 0.4, "só muda COMO passo e altura\nsão escolhidos: para minimizar\na soma dos erros ao quadrado",
-       fontsize=12, ha="center", color=CINZA, transform=a.transAxes)
+a.add_patch(FancyArrowPatch((0, 0), (1, 0), arrowstyle="-|>", mutation_scale=18, color=AZUL, lw=3))
+deg = 25
+rad = np.radians(deg)
+a.add_patch(FancyArrowPatch((0, 0), (np.cos(rad), np.sin(rad)), arrowstyle="-|>",
+                            mutation_scale=18, color=VERDE, lw=3))
+a.text(1.05, -0.05, "lista A", fontsize=11, color=AZUL, weight="bold")
+a.text(np.cos(rad) + 0.05, np.sin(rad), "lista B", fontsize=11, color=VERDE, weight="bold")
+a.text(0.3, 0.08, f"{deg}°", fontsize=11, color=TXT)
+a.text(0, -1.2, "ângulo pequeno → correlação perto de 1", fontsize=10.5, color=TXT, ha="center")
 
-fig.suptitle("Aula 10 — Projeção e mínimos quadrados", fontsize=18, weight="bold", color=TXT)
+fig.suptitle("Aula 10 — Estatística com vetores", fontsize=18, weight="bold", color=TXT)
 fig.tight_layout(rect=[0, 0, 1, 0.955])
-saida = Path(__file__).resolve().parent.parent / "aulas" / "10-projecao-e-minimos-quadrados" / "figuras.png"
+saida = Path(__file__).resolve().parent.parent / "aulas" / "10-estatistica-com-vetores" / "figuras.png"
 fig.savefig(saida, dpi=150, facecolor="white")
 print(f"Salvo em: {saida}")

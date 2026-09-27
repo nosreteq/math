@@ -31,10 +31,12 @@ usar nada que não tenha sido apresentado numa aula anterior — nem entre níve
 
 | # | Aula | Assunto | Estado |
 |---|------|---------|--------|
-| 07 | [Sistemas de equações](aulas/07-sistemas-de-equacoes/) | Resolver = achar onde duas retas se cruzam | ✅ pronta |
-| 08 | [Decomposição de sinais em ondas](aulas/08-decomposicao-de-sinais-em-ondas/) | A ideia por trás de Fourier, sem a fórmula pesada | ✅ pronta |
-| 09 | [Estatística com vetores](aulas/09-estatistica-com-vetores/) | Correlação como o cosseno do ângulo entre dois vetores | ✅ pronta |
-| 10 | [Projeção e mínimos quadrados](aulas/10-projecao-e-minimos-quadrados/) | Regressão como geometria de sombra | ✅ pronta |
+| 07 | [Equações: a balança](aulas/07-equacoes-a-balanca/) | Isolar o x mantendo a balança equilibrada | ✅ pronta |
+| 08 | [Sistemas de equações](aulas/08-sistemas-de-equacoes/) | Resolver = achar onde duas retas se cruzam | ✅ pronta |
+| 09 | [Potências, raízes e Pitágoras](aulas/09-potencias-raizes-e-pitagoras/) | O quadrado, o lado dele e o tamanho de qualquer seta | ✅ pronta |
+| 10 | [Estatística com vetores](aulas/10-estatistica-com-vetores/) | Média, desvio padrão e correlação como cosseno | ✅ pronta |
+| 11 | [Projeção e mínimos quadrados](aulas/11-projecao-e-minimos-quadrados/) | Regressão como geometria de sombra | ✅ pronta |
+| 12 | [Decomposição de sinais em ondas](aulas/12-decomposicao-de-sinais-em-ondas/) | Fourier como projeção sobre ondas | ✅ pronta |
 
 O roteiro completo, com o que entra em cada aula, está em **[PLANO.md](PLANO.md)**.
 
@@ -63,7 +65,7 @@ O curso fica no ar em `https://nosreteq.github.io/math/`.
 math/
 ├── index.html                          página inicial com o índice do curso
 ├── README.md                           este arquivo
-├── PLANO.md                            roteiro das 10 aulas, em 2 níveis
+├── PLANO.md                            roteiro do curso, por níveis
 │
 ├── aulas/
 │   ├── 01-o-que-e-uma-funcao/
@@ -76,10 +78,12 @@ math/
 │   ├── 04-seno-e-cosseno/                  ]
 │   ├── 05-ondas/                           ]
 │   ├── 06-setas-e-tabelas-de-numeros/      ]
-│   ├── 07-sistemas-de-equacoes/            ] Nível 2 — Intermediário
-│   ├── 08-decomposicao-de-sinais-em-ondas/ ]
-│   ├── 09-estatistica-com-vetores/         ]
-│   └── 10-projecao-e-minimos-quadrados/    ]
+│   ├── 07-equacoes-a-balanca/              ] Nível 2 — Intermediário
+│   ├── 08-sistemas-de-equacoes/            ]
+│   ├── 09-potencias-raizes-e-pitagoras/    ]
+│   ├── 10-estatistica-com-vetores/         ]
+│   ├── 11-projecao-e-minimos-quadrados/    ]
+│   └── 12-decomposicao-de-sinais-em-ondas/ ]
 │       (mesma estrutura: index.html, notas.md, figuras.png)
 │
 ├── assets/
@@ -87,7 +91,7 @@ math/
 │
 └── scripts/
     ├── README.md
-    └── figuras_aula01.py .. figuras_aula10.py    gera o figuras.png de cada aula (matplotlib)
+    └── figuras_aula01.py .. figuras_aula12.py    gera o figuras.png de cada aula (matplotlib)
 ```
 
 Cada aula tem três formas do mesmo conteúdo:
@@ -130,7 +134,7 @@ As imagens estáticas são geradas por scripts em Python. Detalhes em
 ```bash
 pip install matplotlib numpy
 cd scripts
-for n in 01 02 03 04 05 06 07 08 09 10; do python3 figuras_aula$n.py; done
+for n in 01 02 03 04 05 06 07 08 09 10 11 12; do python3 figuras_aula$n.py; done
 ```
 
 ---

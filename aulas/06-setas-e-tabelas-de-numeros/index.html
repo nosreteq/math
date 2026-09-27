@@ -118,7 +118,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <header>
   <div class="inner">
     <p class="serie">✏️ MATEMÁTICA DO ZERO — uma série para quem só sabe somar, subtrair, multiplicar e dividir</p>
-    <span class="aula-num">AULA 6 de 6 — a última!</span>
+    <span class="aula-num">AULA 6 de 12 · NÍVEL 1</span>
     <h1>Setas e tabelas de números</h1>
     <p class="sub">Onde vetor vira só uma seta, e matriz vira só uma tabela que move setas.</p>
     <div class="voltou"><strong>Na aula passada:</strong> a onda é o giro do círculo desenrolado — amplitude estica, frequência aperta, fase desloca.</div>
@@ -180,7 +180,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: meça o tamanho da seta</div>
-  <p>Arraste a ponta e veja o tamanho da seta sendo calculado ao vivo (o mesmo truque do triângulo retângulo).</p>
+  <p>Arraste a ponta e veja o tamanho da seta — o comprimento dela, do zero até a ponta. Repare em (3, 4): a seta mede exatamente 5. O porquê disso (o triângulo retângulo) fica para a Aula 9, no Nível 2.</p>
   <div class="tela">
     <svg viewBox="0 0 420 420" id="svgTam" class="arrastavel" role="img" aria-label="Vetor arrastável com o tamanho calculado ao vivo">
       <g id="gradeTam"></g>
@@ -190,7 +190,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
       <circle id="alcaTam" class="alca" cx="330" cy="150" r="13" fill="var(--roxo)" stroke="#fff" stroke-width="3"/>
     </svg>
   </div>
-  <p class="rabisco centro" id="txtTam">v = (4, 2) · tamanho = √(4² + 2²) ≈ 4,47</p>
+  <p class="rabisco centro" id="txtTam">v = (4, 2) · tamanho ≈ 4,47</p>
 </div>
 
 <!-- ============ 3 ============ -->
@@ -413,7 +413,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <footer>
   Matemática do Zero · Aula 6 — Setas e tabelas de números<br>
-  <strong>Fim do curso principal!</strong> Veja o <a href="../../PLANO.md" style="color:var(--azul)">roteiro completo</a> para os assuntos que ficam ao alcance a partir daqui.
+  <strong>Fim do Nível 1 — Básico!</strong> <strong>Próxima aula:</strong> equações — a balança, abrindo o Nível 2.
 </footer>
 
 </div>
@@ -546,7 +546,7 @@ function pintaTam(){
   segTam.setAttribute("x2",X(vecTam.x)); segTam.setAttribute("y2",Y(vecTam.y));
   alcaTam.setAttribute("cx",X(vecTam.x)); alcaTam.setAttribute("cy",Y(vecTam.y));
   var tam=Math.sqrt(vecTam.x*vecTam.x+vecTam.y*vecTam.y);
-  txtTam.textContent="v = ("+vecTam.x+", "+vecTam.y+") · tamanho = √("+vecTam.x+"² + "+vecTam.y+"²) ≈ "+tam.toFixed(2).replace(".",",");
+  txtTam.textContent="v = ("+vecTam.x+", "+vecTam.y+") · tamanho ≈ "+tam.toFixed(2).replace(".",",");
 }
 var arrastandoTam=false;
 alcaTam.addEventListener("pointerdown",function(ev){ arrastandoTam=true; ev.preventDefault(); });
@@ -620,7 +620,7 @@ function marca(id,ok){
     document.getElementById("pn").textContent=n;
     document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
     var msg=document.getElementById("pmsg");
-    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Curso inteiro fechado! 🎉🎉</strong> De somar e subtrair até vetores e matrizes. Parabéns."; confete(); }
+    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Nível 1 completo! 🎉🎉</strong> De somar e subtrair até vetores e matrizes. Bora para o Nível 2."; confete(); }
     else msg.textContent="Boa! Faltam "+(TOTAL-n)+".";
     document.querySelector("#"+id+" .selo").classList.add("ver");
   }

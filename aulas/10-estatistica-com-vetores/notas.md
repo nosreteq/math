@@ -1,10 +1,10 @@
-# Aula 9 — Estatística com vetores
+# Aula 10 — Estatística com vetores
 
 > Estas são as notas em texto da aula. A versão interativa, com os laboratórios e os exercícios
 > que se corrigem sozinhos, está em [`index.html`](index.html).
 
-**No nível 1:** vetor é uma seta (Aula 6), e o produto escalar conta uma história sobre o ângulo
-entre duas setas.
+**Você já sabe:** vetor é uma seta e o produto escalar conta uma história sobre o ângulo entre
+duas setas (Aula 6); quadrado e raiz quadrada vieram na Aula 9.
 
 ![Ilustrações da aula 9](figuras.png)
 
@@ -14,6 +14,13 @@ entre duas setas.
 
 Uma lista de números pareados — por exemplo, a nota de 5 provas — pode ser vista como um vetor de
 5 coordenadas. Não dá mais para desenhar a seta no papel, mas a ideia continua a mesma.
+
+### A média e o desvio padrão
+
+- **Média:** some tudo e divida pela quantidade. `(6, 8, 7, 9, 5)` → 35 ÷ 5 = **7**.
+- **Centralizar:** subtrair a média de cada número. `(6, 8, 7, 9, 5)` → `(−1, 1, 0, 2, −2)`.
+- **Desvio padrão:** eleve cada diferença ao quadrado, tire a média e depois a raiz:
+  √((1 + 1 + 0 + 4 + 4) ÷ 5) = √2 ≈ 1,41. Lista espalhada → desvio grande.
 
 ---
 
@@ -54,6 +61,8 @@ Correlação alta **não** prova que uma coisa causa a outra — só mostra que 
 ## Pontos importantes
 
 - Uma lista de números pareados vira um **vetor**.
+- **Média** = soma ÷ quantidade. **Centralizar** = subtrair a média. **Desvio padrão** = tamanho
+  típico das diferenças para a média.
 - Duas listas relacionadas → dois vetores; o **ângulo** entre eles conta a história.
 - **Correlação = cosseno do ângulo** entre os vetores centralizados.
 - Vive sempre entre **−1 e 1** — porque é literalmente um cosseno.
@@ -66,7 +75,7 @@ Correlação alta **não** prova que uma coisa causa a outra — só mostra que 
 
 **1.** A correlação entre duas listas é, na essência, o quê?
 
-**2.** Por que a correlação nunca passa de 1?
+**2.** Qual é a média da lista `(4, 6, 8, 10, 12)`?
 
 **3.** Duas listas têm correlação −1. Que ângulo isso representa entre os vetores?
 
@@ -80,7 +89,7 @@ Correlação alta **não** prova que uma coisa causa a outra — só mostra que 
 <summary>Respostas</summary>
 
 1. **O cosseno do ângulo** entre os dois vetores (depois de centralizar).
-2. Porque ela **é um cosseno**, e cosseno nunca passa de 1.
+2. **8** — (4 + 6 + 8 + 10 + 12) ÷ 5 = 40 ÷ 5.
 3. **180°**.
 4. **Não** — só mostra que andam juntas, não o motivo.
 5. **1**.
@@ -90,5 +99,5 @@ Correlação alta **não** prova que uma coisa causa a outra — só mostra que 
 
 ---
 
-**Aula anterior:** [Decomposição de sinais em ondas](../08-decomposicao-de-sinais-em-ondas/)
-**Próxima aula:** projeção e mínimos quadrados — a regressão como geometria de sombra.
+**Aula anterior:** [Potências, raízes e Pitágoras](../09-potencias-raizes-e-pitagoras/)
+**Próxima aula:** [Projeção e mínimos quadrados](../11-projecao-e-minimos-quadrados/)

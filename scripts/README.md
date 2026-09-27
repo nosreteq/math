@@ -28,6 +28,8 @@ python scripts/figuras_aula07.py
 python scripts/figuras_aula08.py
 python scripts/figuras_aula09.py
 python scripts/figuras_aula10.py
+python scripts/figuras_aula11.py
+python scripts/figuras_aula12.py
 
 # Ou de dentro da pasta scripts:
 cd scripts
@@ -41,6 +43,8 @@ python figuras_aula07.py
 python figuras_aula08.py
 python figuras_aula09.py
 python figuras_aula10.py
+python figuras_aula11.py
+python figuras_aula12.py
 ```
 
 Cada script usa o backend `Agg`, então funciona em servidor sem tela.

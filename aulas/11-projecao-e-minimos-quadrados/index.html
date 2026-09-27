@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aula 10 — Projeção e mínimos quadrados | Matemática do Zero</title>
+<title>Aula 11 — Projeção e mínimos quadrados | Matemática do Zero</title>
 <style>
 :root{
   --papel:#f6f2e9; --papel2:#fffdf7; --tinta:#1b1b1b; --cinza:#6b7280;
@@ -113,7 +113,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <header>
   <div class="inner">
     <p class="serie">✏️ MATEMÁTICA DO ZERO — nível 2, intermediário</p>
-    <span class="aula-num">AULA 10 de 10 — a última!</span>
+    <span class="aula-num">AULA 11 de 12 · NÍVEL 2</span>
     <h1>Projeção e mínimos quadrados</h1>
     <p class="sub">"A reta que melhor se ajusta aos pontos" não precisa de cálculo avançado — é geometria de sombra.</p>
     <div class="voltou"><strong>No nível 1:</strong> projetar é jogar sombra (Aula 4) — o cosseno já era essa ideia, aplicada a um círculo.</div>
@@ -122,7 +122,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <div class="wrap">
 
-<p class="grande">Última aula do curso. Pontos de dados quase nunca ficam perfeitamente alinhados numa reta — e mesmo assim, a gente consegue achar a "melhor" reta possível para eles. A ideia por trás disso é a mesma sombra da Aula 4.</p>
+<p class="grande">Pontos de dados quase nunca ficam perfeitamente alinhados numa reta — e mesmo assim, a gente consegue achar a "melhor" reta possível para eles. A ideia por trás disso é a mesma sombra da Aula 4.</p>
 
 <!-- ============ 1 ============ -->
 <h2><span class="n">1</span> Projetar é jogar sombra</h2>
@@ -189,7 +189,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <!-- ============ 3 ============ -->
 <h2><span class="n">3</span> Mínimos quadrados</h2>
 
-<p>A receita: para cada ponto, meça o erro (a distância vertical até a reta), eleve ao quadrado, e some tudo. A "melhor" reta é aquela que deixa essa <strong>soma dos erros ao quadrado</strong> a menor possível.</p>
+<p>A receita: para cada ponto, meça o erro (a distância vertical até a reta), eleve ao quadrado (Aula 9), e some tudo. A "melhor" reta é aquela que deixa essa <strong>soma dos erros ao quadrado</strong> a menor possível.</p>
 
 <div class="sticky">Por que elevar ao quadrado? Assim, erros positivos e negativos não se cancelam — e erros grandes pesam desproporcionalmente mais, então a reta tenta evitá-los.</div>
 
@@ -362,8 +362,8 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 </div>
 
 <footer>
-  Matemática do Zero · Aula 10 — Projeção e mínimos quadrados<br>
-  <strong>Fim do Nível 2 — Intermediário!</strong> Veja o <a href="../../PLANO.md" style="color:var(--azul)">roteiro completo</a> para o que vem depois.
+  Matemática do Zero · Aula 11 — Projeção e mínimos quadrados<br>
+  <strong>Próxima aula:</strong> decomposição de sinais em ondas — a mesma projeção, agora sobre ondas.
 </footer>
 
 </div>
@@ -375,7 +375,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <script>
 (function(){
 "use strict";
-var AULA_ID = "10-projecao-e-minimos-quadrados";
+var AULA_ID = "11-projecao-e-minimos-quadrados";
 function num(v){ return String(Math.round(v*100)/100).replace(".",",").replace("-","−"); }
 var NS="http://www.w3.org/2000/svg";
 var CX=210, CY=210, U=30;
@@ -582,7 +582,7 @@ function marca(id,ok){
     document.getElementById("pn").textContent=n;
     document.getElementById("pbar").style.width=(n/TOTAL*100)+"%";
     var msg=document.getElementById("pmsg");
-    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Nível 2 completo! 🎉🎉</strong> Você fechou as dez aulas do curso. Parabéns!"; confete(); }
+    if(n===TOTAL){ msg.innerHTML="<strong style='color:#fde68a'>Aula 11 fechada. 🎉</strong> Você já projeta e ajusta retas. Falta a última do nível: ondas."; confete(); }
     else msg.textContent="Boa! Faltam "+(TOTAL-n)+".";
     document.querySelector("#"+id+" .selo").classList.add("ver");
   }

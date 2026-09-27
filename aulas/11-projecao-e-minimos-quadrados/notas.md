@@ -1,4 +1,4 @@
-# Aula 10 — Projeção e mínimos quadrados
+# Aula 11 — Projeção e mínimos quadrados
 
 > Estas são as notas em texto da aula. A versão interativa, com os laboratórios e os exercícios
 > que se corrigem sozinhos, está em [`index.html`](index.html).
@@ -83,6 +83,6 @@ A reta de regressão ainda cabe em `f(x) = passo · x + altura de partida` (Aula
 
 ---
 
-**Aula anterior:** [Estatística com vetores](../09-estatistica-com-vetores/)
+**Aula anterior:** [Estatística com vetores](../10-estatistica-com-vetores/)
 
-Fim do Nível 2 — Intermediário! Veja o [roteiro completo](../../PLANO.md) para o que vem depois.
+**Próxima aula:** [Decomposição de sinais em ondas](../12-decomposicao-de-sinais-em-ondas/)

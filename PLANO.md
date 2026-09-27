@@ -101,12 +101,26 @@ produto escalar ao vivo · paralelas ou não? · gire a figura com uma matriz
 
 ## Nível 2 — Intermediário ✅
 
-Com seno, cosseno, ondas, vetores e matrizes na mão, dá para resolver problemas de verdade: achar
-onde duas retas se cruzam, decompor um som, medir o quanto duas coisas andam juntas, e ajustar uma
-reta a pontos que nunca ficam perfeitamente alinhados. Quatro aulas, cada uma reencontrando algo do
-Nível 1 e levando um degrau adiante.
+Com funções, retas, seno, cosseno, ondas, vetores e matrizes na mão, dá para resolver problemas de
+verdade: descobrir um número escondido, achar onde duas retas se cruzam, medir o quanto duas coisas
+andam juntas, ajustar uma reta a pontos que nunca ficam alinhados e decompor um som. Seis aulas,
+ordenadas para que cada uma só use o que as anteriores ensinaram.
 
-### Aula 7 — Sistemas de equações ✅
+### Aula 7 — Equações: a balança ✅
+
+**O obstáculo:** "isolar o x" parece um truque de passar números de um lado para o outro; na
+verdade é manter uma balança equilibrada.
+
+- Uma equação é uma balança: os dois lados pesam a mesma coisa
+- A regra de ouro: o que fizer de um lado, faça do outro
+- A máquina ao contrário: desfazer as contas na ordem inversa (reencontro com a Aula 1)
+- x dos dois lados: juntar as caixas num lado só
+- Conferir substituindo o x
+
+**Laboratórios:** a balança em equilíbrio · desequilibre a balança · a máquina ao contrário ·
+x dos dois lados, passo a passo · confira a resposta · gerador de equações
+
+### Aula 8 — Sistemas de equações ✅
 
 **O obstáculo:** "resolver" duas equações ao mesmo tempo parece mágica, mas é só achar onde duas
 retas se cruzam.
@@ -114,42 +128,43 @@ retas se cruzam.
 - Duas retas, um papel só (reencontro com a Aula 2)
 - O que significa "resolver": o único ponto que serve para as duas receitas ao mesmo tempo
 - Sistema com uma solução, sem solução (retas paralelas) e com infinitas soluções (a mesma reta)
-- Resolver por substituição: juntar as duas receitas numa só
+- Resolver por substituição: juntar as duas receitas numa só e usar a balança da Aula 7
 - O mesmo truque funciona com mais réguas — um gostinho do que vem depois
 
 **Laboratórios:** duas retas buscando o cruzamento · retas paralelas nunca se tocam ·
 classifique o sistema · resolva por substituição, passo a passo · ache o cruzamento no desenho ·
 monte o sistema para um alvo
 
-### Aula 8 — Decomposição de sinais em ondas ✅
+### Aula 9 — Potências, raízes e Pitágoras ✅
 
-**O obstáculo:** um som complicado parece impossível de entender, mas é só várias ondas simples
-somadas — e dá para desmontar a soma de volta.
+**O obstáculo:** `x²`, `√` e "hipotenusa" soam como jargão, mas são um quadrado, o lado dele e três
+quadrados em volta de um canto reto.
 
-- Reencontro com a Aula 5: somar ondas simples dá uma onda complicada
-- A pergunta ao contrário: dada uma onda complicada, quais ondas simples a formam?
-- Cada "nota" tem sua própria amplitude e frequência
-- O espectro: um gráfico de "quanto tem de cada frequência" no sinal
-- Onde isso aparece: áudio, imagem, compressão — a ideia por trás de Fourier, sem a fórmula pesada
+- Ao quadrado é a área de um quadrado; potência é multiplicação repetida
+- Raiz quadrada: o caminho de volta (nem sempre inteira: √2 ≈ 1,41)
+- Pitágoras: `a² + b² = c²` no triângulo retângulo
+- O tamanho de qualquer seta: `√(x² + y²)` (a promessa da Aula 6)
+- Reencontro com a Aula 4: `cosseno² + seno² = 1`
+- Quadrado nunca é negativo — a peça que desvio padrão e mínimos quadrados vão usar
 
-**Laboratórios:** monte uma onda complicada · reconheça a frequência · compare duas notas ·
-o espectro revelado · decomponha a onda misteriosa · o acorde ao vivo
+**Laboratórios:** o quadrado cresce · ache o lado · Pitágoras com quadrados · o tamanho da seta ·
+o círculo de raio 1 · quadrado nunca é negativo
 
-### Aula 9 — Estatística com vetores ✅
+### Aula 10 — Estatística com vetores ✅
 
 **O obstáculo:** "correlação" parece um número místico, mas é só um produto escalar disfarçado.
 
 - Uma lista de números pareados vira um vetor
+- Média, centralizar (subtrair a média) e desvio padrão (usa quadrado e raiz da Aula 9)
 - Duas listas relacionadas → dois vetores; o ângulo entre eles conta a história
 - Reencontro com a Aula 6: produto escalar e o que o sinal dele conta
-- Por que a correlação sempre vive entre −1 e 1 — reencontro com o cosseno da Aula 4
-- Correlação = o cosseno do ângulo entre os vetores (depois de centralizar os dados)
+- Correlação = o cosseno do ângulo entre os vetores centralizados — por isso vive entre −1 e 1
 
-**Laboratórios:** monte o vetor a partir da lista · nuvem de pontos com correlação ao vivo ·
+**Laboratórios:** centralize a lista · nuvem de pontos com correlação ao vivo ·
 dois vetores, ângulo e correlação · a escala não muda a correlação · positiva, negativa ou nula? ·
 adivinhe a correlação
 
-### Aula 10 — Projeção e mínimos quadrados ✅
+### Aula 11 — Projeção e mínimos quadrados ✅
 
 **O obstáculo:** "a reta que melhor se ajusta aos pontos" parece precisar de cálculo avançado, mas
 é geometria de sombra.
@@ -157,12 +172,27 @@ adivinhe a correlação
 - Reencontro com a Aula 4: projetar é jogar sombra
 - Projetar um vetor sobre outro: o pedacinho da seta que "cabe" naquela direção
 - Nem todo conjunto de pontos cabe numa reta perfeita — o erro é a distância que sobra
-- Mínimos quadrados: a reta que deixa a soma dos erros ao quadrado a menor possível
+- Mínimos quadrados: a reta que deixa a soma dos erros ao quadrado (Aula 9) a menor possível
 - Reencontro com a Aula 2: a reta de regressão ainda é `passo · x + altura de partida`
 
 **Laboratórios:** projeção de um vetor sobre outro · monte a projeção passo a passo ·
 erro grande ou pequeno? · reta de regressão se ajustando ao vivo · comparador de erro ·
 estique o vetor, a projeção também estica
+
+### Aula 12 — Decomposição de sinais em ondas ✅
+
+**O obstáculo:** um som complicado parece impossível de entender, mas é só várias ondas simples
+somadas — e a projeção da Aula 11 desmonta a soma de volta.
+
+- Reencontro com a Aula 5: somar ondas simples dá uma onda complicada
+- A pergunta ao contrário: dada uma onda complicada, quais ondas simples a formam?
+- O espectro: um gráfico de "quanto tem de cada frequência" no sinal
+- O jeito direto: projetar o sinal sobre cada onda — ondas de frequências diferentes são
+  perpendiculares, então cada projeção isola uma nota
+- Onde isso aparece: áudio, imagem, compressão — a ideia por trás de Fourier, sem a fórmula pesada
+
+**Laboratórios:** monte uma onda complicada · reconheça a frequência · o espectro revelado ·
+projete o sinal em cada onda · decomponha a onda misteriosa · o acorde ao vivo
 
 ---
 
