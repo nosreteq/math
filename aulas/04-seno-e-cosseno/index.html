@@ -217,6 +217,26 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p style="margin:6px 0 0">Depois de 90°, o ponto entra do lado esquerdo do círculo, e a sombra horizontal (cosseno) fica <strong>negativa</strong>. Depois de 180°, é a sombra vertical (seno) que fica negativa. Sinal de menos aqui quer dizer exatamente o que já significava na Aula 2: "do outro lado do zero".</p>
 </div>
 
+<div class="lab">
+  <div class="tit">🔧 Laboratório: corrida sombra vs altura</div>
+  <p>Deixe girando e observe as duas barras — nenhuma delas passa de 1 nem fica abaixo de −1.</p>
+  <div class="controles">
+    <button id="btCorridaGo">▶ Girar</button>
+    <button class="sec" id="btCorridaParar">⏸ Parar</button>
+  </div>
+  <div style="max-width:340px;margin:16px auto">
+    <p style="margin:0 0 4px;font-weight:700;color:var(--verde)">cosseno (sombra)</p>
+    <div style="background:#eae4d6;border-radius:8px;height:22px;position:relative;overflow:hidden">
+      <div id="barraCos" style="position:absolute;top:0;bottom:0;left:50%;width:0;background:var(--verde)"></div>
+    </div>
+    <p style="margin:14px 0 4px;font-weight:700;color:var(--verm)">seno (altura)</p>
+    <div style="background:#eae4d6;border-radius:8px;height:22px;position:relative;overflow:hidden">
+      <div id="barraSen" style="position:absolute;top:0;bottom:0;left:50%;width:0;background:var(--verm)"></div>
+    </div>
+  </div>
+  <p class="rabisco centro" id="txtCorrida">Clique em girar para começar.</p>
+</div>
+
 <!-- ============ 3 ============ -->
 <h2><span class="n">3</span> Os valores que valem a pena reconhecer de olho</h2>
 
@@ -260,6 +280,30 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p class="a">Em 0° o ponto ainda não girou nada: ele está parado bem na borda direita do círculo, no lugar mais afastado possível para o lado. A sombra dele é máxima — vale exatamente o raio, que é 1.</p>
 </div>
 
+<div class="lab">
+  <div class="tit">🔧 Laboratório: simetria do círculo</div>
+  <p>Gire o ponto azul e observe o ponto laranja, sempre no ângulo espelhado (180° − ângulo). Repare no padrão dos sinais.</p>
+
+  <div class="sl-linha">
+    <label class="lab-l" style="min-width:80px;color:var(--azul)">girar:</label>
+    <input type="range" id="slSim" min="0" max="180" step="5" value="30">
+    <span class="sl-val" id="vSim">30°</span>
+  </div>
+
+  <div class="tela">
+    <svg viewBox="0 0 420 420" id="svgSim" role="img" aria-label="Dois pontos simétricos no círculo, em ângulos espelhados">
+      <circle cx="210" cy="210" r="170" fill="none" stroke="#e6e1d4" stroke-width="2"/>
+      <line x1="30" y1="210" x2="390" y2="210" stroke="#c9c1ae" stroke-width="1.5"/>
+      <line x1="210" y1="30" x2="210" y2="390" stroke="#c9c1ae" stroke-width="1.5"/>
+      <line id="raioSim1" x1="210" y1="210" x2="380" y2="210" stroke="var(--azul)" stroke-width="3" stroke-dasharray="5 5"/>
+      <line id="raioSim2" x1="210" y1="210" x2="380" y2="210" stroke="var(--laranja)" stroke-width="3" stroke-dasharray="5 5"/>
+      <circle id="ptSim1" cx="380" cy="210" r="9" fill="var(--azul)" stroke="#fff" stroke-width="3"/>
+      <circle id="ptSim2" cx="380" cy="210" r="9" fill="var(--laranja)" stroke="#fff" stroke-width="3"/>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="txtSim">Azul: 30° → (0,87, 0,50). Laranja: 150° → (−0,87, 0,50).</p>
+</div>
+
 <!-- ============ 4 ============ -->
 <h2><span class="n">4</span> Os dois números num único desenho</h2>
 
@@ -268,6 +312,46 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <p class="centro" style="font-size:26px;font-weight:800">ponto = (cosseno do ângulo, seno do ângulo)</p>
 
 <p>O primeiro número é a sombra (quanto andou para o lado). O segundo é a altura (quanto subiu). Exatamente a mesma ordem da Aula 2 — "primeiro ando, depois subo".</p>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: adivinhe o valor</div>
+  <p>O ponto para num marco redondo. Escreva seu palpite para o cosseno e o seno antes de revelar.</p>
+
+  <div class="controles">
+    <button id="btNovoValor">🎲 Novo ângulo</button>
+  </div>
+
+  <div class="tela" style="max-width:260px;margin:10px auto">
+    <svg viewBox="0 0 420 420" id="svgValor" role="img" aria-label="Ponto escondido num ângulo do círculo, para adivinhar cosseno e seno">
+      <circle cx="210" cy="210" r="170" fill="none" stroke="#e6e1d4" stroke-width="2"/>
+      <line x1="30" y1="210" x2="390" y2="210" stroke="#c9c1ae" stroke-width="1.5"/>
+      <line x1="210" y1="30" x2="210" y2="390" stroke="#c9c1ae" stroke-width="1.5"/>
+      <circle id="ptValor" cx="380" cy="210" r="9" fill="var(--roxo)" stroke="#fff" stroke-width="3"/>
+    </svg>
+  </div>
+
+  <div class="sl-linha centro" style="justify-content:center">
+    <label class="lab-l">cosseno:</label> <input type="number" id="palpiteCos" step="0.1">
+    <label class="lab-l">seno:</label> <input type="number" id="palpiteSen" step="0.1">
+    <button class="sec" id="btRevelarValor">👁 Revelar</button>
+  </div>
+  <p class="rabisco centro" id="txtValor">Clique em "Novo ângulo" para começar.</p>
+</div>
+
+<div class="lab">
+  <div class="tit">🔧 Laboratório: ache o ângulo certo</div>
+  <p>Dados os valores de cosseno e seno, clique no marco que combina com eles.</p>
+  <p class="rabisco centro" id="flashCsTxt" style="font-size:19px">clique em "próximo" para começar</p>
+  <div class="controles" style="justify-content:center">
+    <button class="sec" data-ang="0">0°</button>
+    <button class="sec" data-ang="90">90°</button>
+    <button class="sec" data-ang="180">180°</button>
+    <button class="sec" data-ang="270">270°</button>
+  </div>
+  <div class="controles" style="justify-content:center">
+    <button id="flashCsProxima">▶ Próximo</button>
+  </div>
+</div>
 
 <div class="pontos">
   <div class="tit">Pontos importantes</div>
@@ -452,6 +536,85 @@ document.getElementById("btAuto").addEventListener("click",function(){
   },550);
 });
 addLinha(0); anguloTabela=15;
+
+/* ---------- lab: corrida sombra vs altura ---------- */
+var barraCos=document.getElementById("barraCos"), barraSen=document.getElementById("barraSen"), txtCorrida=document.getElementById("txtCorrida");
+var anguloCorrida=0, timerCorrida=null;
+function pintaCorrida(){
+  var c=cosseno(anguloCorrida), s=seno(anguloCorrida);
+  if(c>=0){ barraCos.style.left="50%"; barraCos.style.width=(c*50)+"%"; }
+  else { barraCos.style.left=(50+c*50)+"%"; barraCos.style.width=(-c*50)+"%"; }
+  if(s>=0){ barraSen.style.left="50%"; barraSen.style.width=(s*50)+"%"; }
+  else { barraSen.style.left=(50+s*50)+"%"; barraSen.style.width=(-s*50)+"%"; }
+  txtCorrida.textContent = Math.round(anguloCorrida)+"° — cosseno = "+fmt(c)+" · seno = "+fmt(s);
+}
+document.getElementById("btCorridaGo").addEventListener("click",function(){
+  if(timerCorrida) return;
+  timerCorrida=setInterval(function(){ anguloCorrida=(anguloCorrida+2)%360; pintaCorrida(); },30);
+});
+document.getElementById("btCorridaParar").addEventListener("click",function(){
+  clearInterval(timerCorrida); timerCorrida=null;
+});
+pintaCorrida();
+
+/* ---------- lab: simetria do circulo ---------- */
+var slSim=document.getElementById("slSim");
+var raioSim1=document.getElementById("raioSim1"), raioSim2=document.getElementById("raioSim2");
+var ptSim1=document.getElementById("ptSim1"), ptSim2=document.getElementById("ptSim2"), txtSim=document.getElementById("txtSim");
+function pintaSim(){
+  var deg=parseInt(slSim.value,10), deg2=180-deg;
+  document.getElementById("vSim").textContent=deg+"°";
+  var c1=cosseno(deg), s1=seno(deg), c2=cosseno(deg2), s2=seno(deg2);
+  var p1x=CX+c1*R, p1y=CY-s1*R, p2x=CX+c2*R, p2y=CY-s2*R;
+  raioSim1.setAttribute("x2",p1x); raioSim1.setAttribute("y2",p1y);
+  raioSim2.setAttribute("x2",p2x); raioSim2.setAttribute("y2",p2y);
+  ptSim1.setAttribute("cx",p1x); ptSim1.setAttribute("cy",p1y);
+  ptSim2.setAttribute("cx",p2x); ptSim2.setAttribute("cy",p2y);
+  txtSim.textContent="Azul: "+deg+"° → ("+fmt(c1)+", "+fmt(s1)+"). Laranja: "+deg2+"° → ("+fmt(c2)+", "+fmt(s2)+").";
+}
+slSim.addEventListener("input",pintaSim);
+pintaSim();
+
+/* ---------- lab: adivinhe o valor ---------- */
+var ptValor=document.getElementById("ptValor"), txtValor=document.getElementById("txtValor");
+var palpiteCos=document.getElementById("palpiteCos"), palpiteSen=document.getElementById("palpiteSen");
+var alvoValor=null;
+document.getElementById("btNovoValor").addEventListener("click",function(){
+  var opcoes=[0,30,45,60,90,120,135,150,180,210,225,240,270,300,315,330];
+  alvoValor=opcoes[Math.floor(Math.random()*opcoes.length)];
+  var p={x:CX+cosseno(alvoValor)*R, y:CY-seno(alvoValor)*R};
+  ptValor.setAttribute("cx",p.x); ptValor.setAttribute("cy",p.y);
+  palpiteCos.value=""; palpiteSen.value="";
+  txtValor.textContent="Quanto valem o cosseno e o seno desse ângulo?";
+});
+document.getElementById("btRevelarValor").addEventListener("click",function(){
+  if(alvoValor===null){ txtValor.textContent="Clique primeiro em \"Novo ângulo\"."; return; }
+  var pc=parseFloat(palpiteCos.value), ps=parseFloat(palpiteSen.value);
+  if(isNaN(pc)||isNaN(ps)){ txtValor.textContent="Escreva os dois palpites antes de revelar."; return; }
+  var realC=cosseno(alvoValor), realS=seno(alvoValor);
+  var ok=Math.abs(pc-realC)<=0.15 && Math.abs(ps-realS)<=0.15;
+  txtValor.innerHTML = ok
+    ? "🎉 Isso! Era ("+fmt(realC)+", "+fmt(realS)+") — ângulo de "+alvoValor+"°."
+    : "Era ("+fmt(realC)+", "+fmt(realS)+") — ângulo de "+alvoValor+"°. Clique em Novo ângulo para tentar outro.";
+});
+
+/* ---------- lab: ache o angulo certo ---------- */
+var flashCsAlvo=null;
+function novaFlashCs(){
+  var opcoes=[0,90,180,270];
+  flashCsAlvo=opcoes[Math.floor(Math.random()*opcoes.length)];
+  document.getElementById("flashCsTxt").textContent="cosseno = "+fmt(cosseno(flashCsAlvo))+" · seno = "+fmt(seno(flashCsAlvo))+" — qual ângulo é esse?";
+}
+document.querySelectorAll("[data-ang]").forEach(function(b){
+  b.addEventListener("click",function(){
+    if(flashCsAlvo===null){ novaFlashCs(); return; }
+    var ok=parseInt(b.dataset.ang,10)===flashCsAlvo;
+    document.getElementById("flashCsTxt").textContent = ok
+      ? "✔ Isso! Era mesmo "+flashCsAlvo+"°."
+      : "✘ Não — era "+flashCsAlvo+"° (cosseno = "+fmt(cosseno(flashCsAlvo))+", seno = "+fmt(seno(flashCsAlvo))+").";
+  });
+});
+document.getElementById("flashCsProxima").addEventListener("click",novaFlashCs);
 
 /* ---------- exercicios ---------- */
 var feitos={}, TOTAL=6;
