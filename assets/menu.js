@@ -24,10 +24,10 @@
     {
       nome: "Nível 2 — Intermediário",
       aulas: [
-        { n: 7, slug: null, titulo: "Sistemas de equações" },
-        { n: 8, slug: null, titulo: "Decomposição de sinais em ondas" },
-        { n: 9, slug: null, titulo: "Estatística com vetores" },
-        { n: 10, slug: null, titulo: "Projeção e mínimos quadrados" }
+        { n: 7, slug: "07-sistemas-de-equacoes", titulo: "Sistemas de equações" },
+        { n: 8, slug: "08-decomposicao-de-sinais-em-ondas", titulo: "Decomposição de sinais em ondas" },
+        { n: 9, slug: "09-estatistica-com-vetores", titulo: "Estatística com vetores" },
+        { n: 10, slug: "10-projecao-e-minimos-quadrados", titulo: "Projeção e mínimos quadrados" }
       ]
     }
   ];

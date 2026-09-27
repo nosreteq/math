@@ -27,14 +27,14 @@ usar nada que não tenha sido apresentado numa aula anterior — nem entre níve
 | 05 | [Ondas](aulas/05-ondas/) | Amplitude, frequência e fase | ✅ pronta |
 | 06 | [Setas e tabelas de números](aulas/06-setas-e-tabelas-de-numeros/) | Vetores e matrizes | ✅ pronta |
 
-### Nível 2 — Intermediário 🔜
+### Nível 2 — Intermediário ✅
 
 | # | Aula | Assunto | Estado |
 |---|------|---------|--------|
-| 07 | Sistemas de equações | Resolver = achar onde duas retas se cruzam | 🔜 em preparo |
-| 08 | Decomposição de sinais em ondas | A ideia por trás de Fourier, sem a fórmula pesada | 🔜 em preparo |
-| 09 | Estatística com vetores | Correlação como o cosseno do ângulo entre dois vetores | 🔜 em preparo |
-| 10 | Projeção e mínimos quadrados | Regressão como geometria de sombra | 🔜 em preparo |
+| 07 | [Sistemas de equações](aulas/07-sistemas-de-equacoes/) | Resolver = achar onde duas retas se cruzam | ✅ pronta |
+| 08 | [Decomposição de sinais em ondas](aulas/08-decomposicao-de-sinais-em-ondas/) | A ideia por trás de Fourier, sem a fórmula pesada | ✅ pronta |
+| 09 | [Estatística com vetores](aulas/09-estatistica-com-vetores/) | Correlação como o cosseno do ângulo entre dois vetores | ✅ pronta |
+| 10 | [Projeção e mínimos quadrados](aulas/10-projecao-e-minimos-quadrados/) | Regressão como geometria de sombra | ✅ pronta |
 
 O roteiro completo, com o que entra em cada aula, está em **[PLANO.md](PLANO.md)**.
 
@@ -63,7 +63,7 @@ O curso fica no ar em `https://nosreteq.github.io/math/`.
 math/
 ├── index.html                          página inicial com o índice do curso
 ├── README.md                           este arquivo
-├── PLANO.md                            roteiro das 6 aulas
+├── PLANO.md                            roteiro das 10 aulas, em 2 níveis
 │
 ├── aulas/
 │   ├── 01-o-que-e-uma-funcao/
@@ -71,21 +71,23 @@ math/
 │   │   ├── notas.md                    o texto da aula, para ler ou imprimir
 │   │   └── figuras.png                 versão estática das ilustrações
 │   │
-│   ├── 02-desenhar-numeros-no-papel/
-│   ├── 03-angulos-e-o-circulo/
-│   ├── 04-seno-e-cosseno/
-│   ├── 05-ondas/
-│   └── 06-setas-e-tabelas-de-numeros/
+│   ├── 02-desenhar-numeros-no-papel/       ] Nível 1 — Básico
+│   ├── 03-angulos-e-o-circulo/             ]
+│   ├── 04-seno-e-cosseno/                  ]
+│   ├── 05-ondas/                           ]
+│   ├── 06-setas-e-tabelas-de-numeros/      ]
+│   ├── 07-sistemas-de-equacoes/            ] Nível 2 — Intermediário
+│   ├── 08-decomposicao-de-sinais-em-ondas/ ]
+│   ├── 09-estatistica-com-vetores/         ]
+│   └── 10-projecao-e-minimos-quadrados/    ]
 │       (mesma estrutura: index.html, notas.md, figuras.png)
+│
+├── assets/
+│   └── menu.js                         menu de navegação entre níveis e aulas
 │
 └── scripts/
     ├── README.md
-    ├── figuras_aula01.py               gera figuras.png da aula 1 (matplotlib)
-    ├── figuras_aula02.py               gera figuras.png da aula 2
-    ├── figuras_aula03.py               gera figuras.png da aula 3
-    ├── figuras_aula04.py               gera figuras.png da aula 4
-    ├── figuras_aula05.py               gera figuras.png da aula 5
-    └── figuras_aula06.py               gera figuras.png da aula 6
+    └── figuras_aula01.py .. figuras_aula10.py    gera o figuras.png de cada aula (matplotlib)
 ```
 
 Cada aula tem três formas do mesmo conteúdo:
@@ -128,12 +130,7 @@ As imagens estáticas são geradas por scripts em Python. Detalhes em
 ```bash
 pip install matplotlib numpy
 cd scripts
-python3 figuras_aula01.py
-python3 figuras_aula02.py
-python3 figuras_aula03.py
-python3 figuras_aula04.py
-python3 figuras_aula05.py
-python3 figuras_aula06.py
+for n in 01 02 03 04 05 06 07 08 09 10; do python3 figuras_aula$n.py; done
 ```
 
 ---
