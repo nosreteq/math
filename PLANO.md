@@ -802,6 +802,21 @@ conferida contra ela.
 
 ---
 
+## Revisão de qualidade dos laboratórios e exercícios ✅
+
+Auditoria das 40 aulas com rubrica (laboratório com controle próprio, retorno, previsão; exercícios
+com 4 alternativas explicadas, contas e desafio de verdade). Resultado, método e o que mudou em
+[`QUALIDADE.md`](QUALIDADE.md): 5 laboratórios passivos viraram "preveja e confira", o espectro da
+Aula 24 virou equalizador, a onda ao vivo da Aula 16 ganhou boia e segundo controle, todas as
+múltiplas escolhas passaram a 4 alternativas e 15 exercícios de memória viraram conta. O
+`tests/verifica.js` passou a exigir 4 alternativas com explicação em cada erro e a rodar um aluno
+simulado nos laboratórios "preveja e confira".
+
+Segunda rodada: mínimo de 3 contas em todas as aulas (17, 23, 24), teclado em todas as alças
+arrastáveis (helper `arrasta()` + 09, 17, 23; checado pelo `verifica.js`) e blocos "Agora é você"
+de preveja e confira dentro dos laboratórios das aulas 04 (raiz na mão), 12 (Pitágoras) e 20
+(somar as fatias).
+
 ## Fase 9 — testes unitários em todas as aulas
 
 **Por quê.** O `tests/verifica.js` é um teste de ponta a ponta: abre cada aula num navegador e confere

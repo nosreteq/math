@@ -182,13 +182,9 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: a máquina ao contrário</div>
-  <p>A máquina <span class="mono">3 · x + 2</span> devolveu <strong>17</strong>. Que número entrou?</p>
-  <div class="controles">
-    <button id="btContrario">▶ Desfazer passo a passo</button>
-  </div>
-  <div style="background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:14px 18px" id="caixaContrario">
-    <p style="margin:0;font-size:18px">clique no botão…</p>
-  </div>
+  <p>A máquina devolveu um número. Descubra o que entrou, <strong>desfazendo as contas de trás para a frente</strong>.</p>
+  <div class="controles"><button id="pc08a-novo" class="sec">🎲 Novo problema</button></div>
+  <div class="pc-caixa" id="pc08a-caixa"></div>
 </div>
 
 <div class="guru">
@@ -216,12 +212,9 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: x dos dois lados, passo a passo</div>
-  <div class="controles">
-    <button id="btDoisLados">▶ Ver os passos</button>
-  </div>
-  <div style="background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:14px 18px" id="caixaDoisLados">
-    <p style="margin:0;font-size:18px">clique no botão…</p>
-  </div>
+  <p>Uma balança com x nos dois pratos. Faça cada passo — sempre <strong>o mesmo dos dois lados</strong> — e o laboratório confere.</p>
+  <div class="controles"><button id="pc08b-novo" class="sec">🎲 Novo problema</button></div>
+  <div class="pc-caixa" id="pc08b-caixa"></div>
 </div>
 
 <div class="idiota">
@@ -364,10 +357,11 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <div class="tit">Exercício 6</div>
   <div class="selo">✅</div>
   <p>A máquina <span class="mono">3 · x + 2</span> primeiro multiplica por 3 e depois soma 2. Para desfazer, qual é a ordem certa?</p>
-  <div class="alts" data-r="1">
-    <div class="alt" data-i="0">Dividir por 3, depois subtrair 2.</div>
-    <div class="alt" data-i="1">Subtrair 2, depois dividir por 3.</div>
-    <div class="alt" data-i="2">Somar 2, depois multiplicar por 3.</div>
+  <div class="alts" data-r="2">
+    <div class="alt" data-i="0">Subtrair 3, depois dividir por 2.</div>
+    <div class="alt" data-i="1">Dividir por 3, depois subtrair 2.</div>
+    <div class="alt" data-i="2">Subtrair 2, depois dividir por 3.</div>
+    <div class="alt" data-i="3">Somar 2, depois multiplicar por 3.</div>
   </div>
   <div class="fb"></div>
 </div>
@@ -462,23 +456,8 @@ function passoAPasso(idCaixa, passos){
     }, i*650);
   });
 }
-document.getElementById("btContrario").addEventListener("click",function(){
-  passoAPasso("caixaContrario",[
-    "A máquina fez: × 3, depois + 2. Saiu <strong>17</strong>.",
-    "Desfaço o último passo primeiro (o + 2): 17 − 2 = <strong>15</strong>",
-    "Desfaço o primeiro passo (o × 3): 15 ÷ 3 = <strong>5</strong>",
-    "Entrou o <strong style='font-size:22px'>5</strong>. Confira: 3 · 5 + 2 = 17 ✔"
-  ]);
-});
-document.getElementById("btDoisLados").addEventListener("click",function(){
-  passoAPasso("caixaDoisLados",[
-    "5 · x − 4 = 2 · x + 8",
-    "Tiro 2 · x dos dois lados: &nbsp; 3 · x − 4 = 8",
-    "Somo 4 dos dois lados: &nbsp; 3 · x = 12",
-    "Divido os dois lados por 3: &nbsp; x = <strong>4</strong>",
-    "Confiro: 5 · 4 − 4 = 16 &nbsp;e&nbsp; 2 · 4 + 8 = 16 ✔"
-  ]);
-});
+
+
 
 /* ---------- exercicios ---------- */
 var feitos={}, TOTAL=6;
@@ -576,10 +555,10 @@ var expAlt={
   "Dividir por 2 só faz sentido em algumas equações — não é uma regra geral."
  ],
  "ex6": [
+  "Troca os números de papel: o 3 multiplicou e o 2 somou. Desfaça o último passo primeiro (−2) e depois o outro (÷3).",
   "Ordem trocada: 3 · 5 + 2 = 17, mas 17 ÷ 3 − 2 não dá 5.",
   "Isso! Desfaz-se o último passo primeiro: tira o + 2, depois desfaz o × 3.",
-  "Somar e multiplicar é fazer a máquina de novo, não desfazer."
- ]
+  "Somar e multiplicar é fazer a máquina de novo, não desfazer."]
 };
 document.querySelectorAll(".alts").forEach(function(grupo){
   var box=grupo.closest(".ex"), certa=parseInt(grupo.dataset.r,10);
@@ -681,6 +660,24 @@ function arrasta(svg,alca,cb){
   alca.addEventListener("pointerdown",function(ev){ ativo=true; ev.preventDefault(); pos(ev); });
   svg.addEventListener("pointermove",function(ev){ if(ativo) pos(ev); });
   window.addEventListener("pointerup",function(){ ativo=false; });
+  teclaAlca(svg,alca,cb);
+}
+/* teclado: as setas movem a alça (Shift = passo maior); aumenta o passo até ela sair do lugar,
+   para funcionar também quando o laboratório encaixa a posição numa grade */
+function teclaAlca(svg,alca,cb){
+  alca.setAttribute("tabindex","0");
+  if(!alca.getAttribute("aria-label")) alca.setAttribute("aria-label","alça arrastável: use as setas do teclado");
+  alca.addEventListener("keydown",function(ev){
+    var d={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[ev.key]; if(!d) return;
+    ev.preventDefault();
+    var r=svg.getBoundingClientRect(), vb=svg.viewBox.baseVal;
+    function centro(){ var b=alca.getBoundingClientRect(); return [(b.left+b.width/2-r.left)/r.width*vb.width,(b.top+b.height/2-r.top)/r.height*vb.height]; }
+    var c=centro(), passo=vb.width/(ev.shiftKey?20:80);
+    for(var k=1;k<=40;k++){
+      cb(c[0]+d[0]*passo*k,c[1]+d[1]*passo*k);
+      var n=centro(); if(Math.abs(n[0]-c[0])+Math.abs(n[1]-c[1])>0.5) break;
+    }
+  });
 }
 /* texto de receita sem "+ -": termos [[coef, "x²"], [coef, "x"], [coef, ""]] */
 function receita(termos){
@@ -763,6 +760,91 @@ function pintaSinal(){
   $("txtSinal").textContent="2 < 5 → vezes "+num(m)+": "+num(a)+" "+rel+" "+num(b)+(m<0?" — multiplicou por negativo: o sinal virou!":m===0?" — multiplicar por zero apaga tudo: os dois viram 0.":" — multiplicou por positivo: a ordem continua.");
 }
 $("slMi").addEventListener("input",pintaSinal); pintaSinal();
+})();
+</script>
+<script>
+/* ---------- "preveja e confira": o aluno faz cada passo, o laboratório confere ---------- */
+function PrevejaConfira(o){
+  var caixa=document.getElementById(o.caixa), prob, k, tent, primeira;
+  function lerNumero(v){ v=String(v).trim().replace(/\s/g,"").replace("−","-").replace(",","."); return v===""?null:Number(v); }
+  function novo(){
+    prob=o.gerar(); k=0; primeira=0; caixa.innerHTML="";
+    var e=document.createElement("p"); e.className="pc-enun"; e.innerHTML=prob.enunciado; caixa.appendChild(e);
+    mostraPasso();
+  }
+  function mostraPasso(){
+    var P=prob.passos[k], linha=document.createElement("div"); tent=0;
+    linha.className="pc-passo";
+    var rs=[].concat(P.r), ins=[];
+    linha.innerHTML="<span class='pc-num'>"+(k+1)+"</span><span class='pc-pede'>"+P.pede+"</span>";
+    rs.forEach(function(r,i){
+      if(P.rotulos) { var l=document.createElement("span"); l.className="pc-rot"; l.textContent=P.rotulos[i]; linha.appendChild(l); }
+      var inp=document.createElement("input"); inp.type="text"; inp.inputMode="decimal"; inp.setAttribute("aria-label","resposta do passo "+(k+1)+(rs.length>1?", valor "+(i+1):""));
+      linha.appendChild(inp); ins.push(inp);
+    });
+    var bt=document.createElement("button"); bt.className="pc-conf"; bt.textContent="Conferir"; linha.appendChild(bt);
+    var fb=document.createElement("div"); fb.className="pc-fb"; linha.appendChild(fb);
+    caixa.appendChild(linha);
+    ins[0].addEventListener("keydown",function(ev){ if(ev.key==="Enter") bt.click(); });
+    bt.addEventListener("click",function(){
+      var vals=ins.map(function(i){ return lerNumero(i.value); });
+      if(vals.some(function(v){ return v===null||isNaN(v); })){ fb.className="pc-fb pc-no"; fb.textContent="Digite um número em cada campo."; return; }
+      var tol=P.tol||1e-6, ok=vals.every(function(v,i){ return Math.abs(v-rs[i])<=tol; });
+      if(ok){
+        if(tent===0) primeira++;
+        ins.forEach(function(i){ i.disabled=true; i.style.borderColor="#059669"; i.style.background="#d1fae5"; });
+        bt.remove(); linha.classList.add("pc-ok");
+        fb.className="pc-fb pc-sim"; fb.innerHTML="✔ "+(P.mostra||"certo!");
+        k++;
+        if(k<prob.passos.length) mostraPasso(); else fim();
+      } else {
+        tent++;
+        ins.forEach(function(i,j){ var c=Math.abs(vals[j]-rs[j])<=tol; i.style.borderColor=c?"#059669":"#dc2626"; i.style.background=c?"#d1fae5":"#fee2e2"; });
+        fb.className="pc-fb pc-no";
+        fb.innerHTML="✘ "+(P.dica||"Ainda não.")+(tent>=2?" <button class='pc-ver sec'>Mostrar a resposta</button>":"");
+        var ver=fb.querySelector(".pc-ver");
+        if(ver) ver.addEventListener("click",function(){ ins.forEach(function(i,j){ i.value=String(rs[j]).replace(".",",").replace("-","−"); }); bt.click(); });
+        linha.classList.remove("chacoalha"); void linha.offsetWidth; linha.classList.add("chacoalha");
+      }
+    });
+  }
+  function fim(){
+    var f=document.createElement("div"); f.className="pc-fim";
+    f.innerHTML=prob.fim+"<br><span class='pc-placar'>Você acertou "+primeira+" de "+prob.passos.length+" passos de primeira. Clique em <strong>Novo problema</strong> para treinar com outros números.</span>";
+    caixa.appendChild(f);
+    if(prob.depois) prob.depois();
+  }
+  document.getElementById(o.novo).addEventListener("click",novo);
+  novo();
+}
+function sorteia(a,b){ return a+Math.floor(Math.random()*(b-a+1)); }
+function sinalTxt(n){ return n<0?" − "+(-n):" + "+n; }
+function numTxt(n){ return String(n).replace(".",",").replace("-","−"); }
+</script>
+<script>
+(function(){
+PrevejaConfira({caixa:"pc08a-caixa", novo:"pc08a-novo", gerar:function(){
+  var a=sorteia(2,7), b=sorteia(1,12), x=sorteia(1,9), y=a*x+b;
+  return {enunciado:"A máquina <span class='mono'>"+a+" · x + "+b+"</span> devolveu <strong>"+y+"</strong>. Que número entrou?",
+    passos:[
+      {pede:"O último passo da máquina foi <strong>+ "+b+"</strong>. Desfaça: "+y+" − "+b+" = ?", r:y-b, dica:"Desfazer uma soma é subtrair.", mostra:"antes do + "+b+" havia "+(y-b)},
+      {pede:"Antes, a máquina fez <strong>× "+a+"</strong>. Desfaça: "+(y-b)+" ÷ "+a+" = ?", r:x, dica:"Desfazer uma multiplicação é dividir.", mostra:"entrou o "+x}],
+    fim:"✔ Entrou o <strong>"+x+"</strong>. Confira na máquina: "+a+" · "+x+" + "+b+" = "+y+". Desfazer é andar de trás para a frente, com a conta oposta."};
+}});
+})();
+</script>
+<script>
+(function(){
+PrevejaConfira({caixa:"pc08b-caixa", novo:"pc08b-novo", gerar:function(){
+  var c=sorteia(1,4), a=c+sorteia(1,4), x=sorteia(1,8), b=sorteia(1,9), d=(a-c)*x+b;
+  var eq=a+" · x + "+b+" = "+c+" · x + "+d;
+  return {enunciado:"Resolva <span class='mono'>"+eq+"</span>.",
+    passos:[
+      {pede:"Tire <strong>"+c+" · x</strong> dos dois lados. Sobra quantos x do lado esquerdo?", r:a-c, dica:a+" x menos "+c+" x.", mostra:(a-c)+" · x + "+b+" = "+d},
+      {pede:"Tire <strong>"+b+"</strong> dos dois lados: "+(a-c)+" · x = ?", r:d-b, dica:d+" − "+b+".", mostra:(a-c)+" · x = "+(d-b)},
+      {pede:"Divida os dois lados por "+(a-c)+": x = ?", r:x, dica:(d-b)+" ÷ "+(a-c)+".", mostra:"x = "+x}],
+    fim:"✔ x = <strong>"+x+"</strong>. Confira: "+a+" · "+x+" + "+b+" = "+(a*x+b)+" e "+c+" · "+x+" + "+d+" = "+(c*x+d)+". A balança fica equilibrada."};
+}});
 })();
 </script>
 </body>

@@ -203,7 +203,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <div class="tit">🔧 Laboratório: leia o ponto</div>
   <p>Agora ao contrário: clique em qualquer lugar do papel e leia o endereço dele.</p>
   <div class="tela">
-    <svg viewBox="0 0 420 420" id="svgLeia" role="img" aria-label="Clique no papel quadriculado para ler as coordenadas do ponto" tabindex="0">
+    <svg viewBox="0 0 420 420" id="svgLeia" role="img" aria-label="Clique no papel quadriculado (ou use as setas do teclado) para ler as coordenadas do ponto" tabindex="0">
       <g id="gradeLeia"></g>
       <line x1="0" y1="210" x2="420" y2="210" stroke="#1b1b1b" stroke-width="3"/>
       <line x1="210" y1="0" x2="210" y2="420" stroke="#1b1b1b" stroke-width="3"/>
@@ -725,6 +725,15 @@ function cliqueLeia(ev){
     (gy<0?"desço "+Math.abs(gy):"subo "+gy)+".";
 }
 svgLeia.addEventListener("pointerdown",cliqueLeia);
+/* teclado: as setas andam uma casa no papel quadriculado */
+var teclaLeia={x:0,y:0};
+svgLeia.addEventListener("keydown",function(ev){
+  var d={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,1],ArrowDown:[0,-1]}[ev.key]; if(!d) return;
+  ev.preventDefault();
+  teclaLeia.x=Math.max(-6,Math.min(6,teclaLeia.x+d[0])); teclaLeia.y=Math.max(-6,Math.min(6,teclaLeia.y+d[1]));
+  var rect=svgLeia.getBoundingClientRect();
+  cliqueLeia({clientX:rect.left+X(teclaLeia.x)/420*rect.width, clientY:rect.top+Y(teclaLeia.y)/420*rect.height});
+});
 
 /* ---------- lab: sobe, desce ou deitada (flashcards) ---------- */
 var flashMaqs=[

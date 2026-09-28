@@ -119,7 +119,8 @@ Uma máquina pode fazer duas contas seguidas. Por exemplo:
 
 A ordem **importa muito**. Veja o que acontece com o número 3 nos dois caminhos:
 
-> 🔧 **Laboratório — a ordem das contas.** *(interativo, na versão em HTML)*
+> 🔧 **Laboratório — a ordem das contas.** A máquina recebe um número. Faça as contas **na ordem
+> certa**, um passo de cada vez: o laboratório confere cada passo. *(interativo, na versão em HTML)*
 
 > 🧘 **O Guru:** Multiplicação e divisão têm mais pressa que soma e subtração. Elas passam na frente
 > da fila. Quando você quiser furar essa fila, use parênteses — eles mandam mais que todo mundo.

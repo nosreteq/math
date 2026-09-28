@@ -379,19 +379,9 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: a ordem das contas</div>
-  <div class="controles">
-    <button id="ordemGo">▶ Comparar os dois caminhos</button>
-  </div>
-  <div style="display:flex;gap:16px;flex-wrap:wrap">
-    <div style="flex:1;min-width:230px;background:var(--verdec);border:3px solid var(--verde);border-radius:10px;padding:14px 18px">
-      <p style="margin:0 0 8px;font-weight:800;color:var(--verde)">✔ JEITO CERTO</p>
-      <p style="margin:0;font-size:19px;line-height:2" id="ordemC">clique no botão…</p>
-    </div>
-    <div style="flex:1;min-width:230px;background:var(--vermc);border:3px solid var(--verm);border-radius:10px;padding:14px 18px">
-      <p style="margin:0 0 8px;font-weight:800;color:var(--verm)">✘ JEITO ERRADO</p>
-      <p style="margin:0;font-size:19px;line-height:2" id="ordemE">clique no botão…</p>
-    </div>
-  </div>
+  <p>A máquina recebe um número. Faça as contas <strong>na ordem certa</strong>, um passo de cada vez: o laboratório confere cada passo.</p>
+  <div class="controles"><button id="pc07-novo" class="sec">🎲 Novo problema</button></div>
+  <div class="pc-caixa" id="pc07-caixa"></div>
 </div>
 
 <div class="guru">
@@ -698,14 +688,7 @@ function attX(){
 sl.addEventListener("input",attX); attX();
 
 /* ---------------- 4. ordem das contas ---------------- */
-document.getElementById("ordemGo").addEventListener("click",function(){
-  var C=document.getElementById("ordemC"), E=document.getElementById("ordemE");
-  C.innerHTML=""; E.innerHTML="";
-  var passosC=["f(3) = 2 · 3 + 1","primeiro multiplico: 2 · 3 = <strong>6</strong>","depois somo: 6 + 1 = <strong>7</strong>","resposta: <strong style='font-size:24px'>7</strong> ✔"];
-  var passosE=["f(3) = 2 · 3 + 1","somei antes: 3 + 1 = <strong>4</strong>","depois multipliquei: 2 · 4 = <strong>8</strong>","resposta: <strong style='font-size:24px'>8</strong> ✘"];
-  passosC.forEach(function(t,i){ setTimeout(function(){ var d=document.createElement("div"); d.className="nova"; d.innerHTML=t; C.appendChild(d); }, i*650); });
-  passosE.forEach(function(t,i){ setTimeout(function(){ var d=document.createElement("div"); d.className="nova"; d.innerHTML=t; E.appendChild(d); }, i*650+250); });
-});
+
 
 /* ---------------- 5. confiavel x quebrada ---------------- */
 var hA=[], hB=[];
@@ -911,6 +894,82 @@ document.querySelectorAll(".alts").forEach(function(grupo){
 
 restauraProgresso();
 
+})();
+</script>
+<script>
+/* ---------- "preveja e confira": o aluno faz cada passo, o laboratório confere ---------- */
+function PrevejaConfira(o){
+  var caixa=document.getElementById(o.caixa), prob, k, tent, primeira;
+  function lerNumero(v){ v=String(v).trim().replace(/\s/g,"").replace("−","-").replace(",","."); return v===""?null:Number(v); }
+  function novo(){
+    prob=o.gerar(); k=0; primeira=0; caixa.innerHTML="";
+    var e=document.createElement("p"); e.className="pc-enun"; e.innerHTML=prob.enunciado; caixa.appendChild(e);
+    mostraPasso();
+  }
+  function mostraPasso(){
+    var P=prob.passos[k], linha=document.createElement("div"); tent=0;
+    linha.className="pc-passo";
+    var rs=[].concat(P.r), ins=[];
+    linha.innerHTML="<span class='pc-num'>"+(k+1)+"</span><span class='pc-pede'>"+P.pede+"</span>";
+    rs.forEach(function(r,i){
+      if(P.rotulos) { var l=document.createElement("span"); l.className="pc-rot"; l.textContent=P.rotulos[i]; linha.appendChild(l); }
+      var inp=document.createElement("input"); inp.type="text"; inp.inputMode="decimal"; inp.setAttribute("aria-label","resposta do passo "+(k+1)+(rs.length>1?", valor "+(i+1):""));
+      linha.appendChild(inp); ins.push(inp);
+    });
+    var bt=document.createElement("button"); bt.className="pc-conf"; bt.textContent="Conferir"; linha.appendChild(bt);
+    var fb=document.createElement("div"); fb.className="pc-fb"; linha.appendChild(fb);
+    caixa.appendChild(linha);
+    ins[0].addEventListener("keydown",function(ev){ if(ev.key==="Enter") bt.click(); });
+    bt.addEventListener("click",function(){
+      var vals=ins.map(function(i){ return lerNumero(i.value); });
+      if(vals.some(function(v){ return v===null||isNaN(v); })){ fb.className="pc-fb pc-no"; fb.textContent="Digite um número em cada campo."; return; }
+      var tol=P.tol||1e-6, ok=vals.every(function(v,i){ return Math.abs(v-rs[i])<=tol; });
+      if(ok){
+        if(tent===0) primeira++;
+        ins.forEach(function(i){ i.disabled=true; i.style.borderColor="#059669"; i.style.background="#d1fae5"; });
+        bt.remove(); linha.classList.add("pc-ok");
+        fb.className="pc-fb pc-sim"; fb.innerHTML="✔ "+(P.mostra||"certo!");
+        k++;
+        if(k<prob.passos.length) mostraPasso(); else fim();
+      } else {
+        tent++;
+        ins.forEach(function(i,j){ var c=Math.abs(vals[j]-rs[j])<=tol; i.style.borderColor=c?"#059669":"#dc2626"; i.style.background=c?"#d1fae5":"#fee2e2"; });
+        fb.className="pc-fb pc-no";
+        fb.innerHTML="✘ "+(P.dica||"Ainda não.")+(tent>=2?" <button class='pc-ver sec'>Mostrar a resposta</button>":"");
+        var ver=fb.querySelector(".pc-ver");
+        if(ver) ver.addEventListener("click",function(){ ins.forEach(function(i,j){ i.value=String(rs[j]).replace(".",",").replace("-","−"); }); bt.click(); });
+        linha.classList.remove("chacoalha"); void linha.offsetWidth; linha.classList.add("chacoalha");
+      }
+    });
+  }
+  function fim(){
+    var f=document.createElement("div"); f.className="pc-fim";
+    f.innerHTML=prob.fim+"<br><span class='pc-placar'>Você acertou "+primeira+" de "+prob.passos.length+" passos de primeira. Clique em <strong>Novo problema</strong> para treinar com outros números.</span>";
+    caixa.appendChild(f);
+    if(prob.depois) prob.depois();
+  }
+  document.getElementById(o.novo).addEventListener("click",novo);
+  novo();
+}
+function sorteia(a,b){ return a+Math.floor(Math.random()*(b-a+1)); }
+function sinalTxt(n){ return n<0?" − "+(-n):" + "+n; }
+function numTxt(n){ return String(n).replace(".",",").replace("-","−"); }
+</script>
+<script>
+(function(){
+PrevejaConfira({caixa:"pc07-caixa", novo:"pc07-novo", gerar:function(){
+  var a=sorteia(2,6), b=sorteia(1,9), n=sorteia(2,7), par=Math.random()<0.4;
+  if(!par) return {enunciado:"A máquina é <span class='mono'>f(x) = "+a+" · x + "+b+"</span>. Quanto sai quando entra o <strong>"+n+"</strong>?",
+    passos:[
+      {pede:"Multiplicação passa na frente da fila. Quanto é "+a+" · "+n+"?", r:a*n, dica:"Só a multiplicação agora: "+a+" vezes "+n+".", mostra:"primeiro a multiplicação: "+a*n},
+      {pede:"Agora a soma: "+(a*n)+" + "+b+" = ?", r:a*n+b, dica:"Some o que sobrou.", mostra:"f("+n+") = "+(a*n+b)}],
+    fim:"✔ f("+n+") = "+(a*n+b)+". Quem soma antes (" +n+" + "+b+" = "+(n+b)+", depois vezes "+a+") chega em <strong>"+a*(n+b)+"</strong> — errado!"};
+  return {enunciado:"A máquina é <span class='mono'>g(x) = "+a+" · (x + "+b+")</span>. Quanto sai quando entra o <strong>"+n+"</strong>?",
+    passos:[
+      {pede:"Parênteses mandam mais que todo mundo. Quanto é "+n+" + "+b+"?", r:n+b, dica:"Resolva o que está dentro dos parênteses.", mostra:"primeiro os parênteses: "+(n+b)},
+      {pede:"Agora a multiplicação: "+a+" · "+(n+b)+" = ?", r:a*(n+b), dica:"Multiplique pelo resultado dos parênteses.", mostra:"g("+n+") = "+a*(n+b)}],
+    fim:"✔ g("+n+") = "+a*(n+b)+". Sem os parênteses, "+a+" · "+n+" + "+b+" daria <strong>"+(a*n+b)+"</strong>: os parênteses mudaram a fila."};
+}});
 })();
 </script>
 </body>

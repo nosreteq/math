@@ -189,6 +189,9 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
     <text id="tC" font-size="14" font-weight="800" fill="var(--roxo)" text-anchor="middle"></text>
   </svg></div>
   <p class="rabisco centro" id="txtPit"></p>
+  <p style="margin-top:16px;border-top:2px dashed #c9c1ae;padding-top:12px"><strong>✍️ Agora é você:</strong> agora sem os quadradinhos. Calcule passo a passo — às vezes falta a hipotenusa, às vezes um cateto.</p>
+  <div class="controles"><button id="pc12-novo" class="sec">🎲 Novo problema</button></div>
+  <div class="pc-caixa" id="pc12-caixa"></div>
 </div>
 
 <!-- ============ 4 ============ -->
@@ -370,6 +373,102 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 </div>
 
+<script>
+/* ---------- "preveja e confira": o aluno faz cada passo, o laboratório confere ---------- */
+function PrevejaConfira(o){
+  var caixa=document.getElementById(o.caixa), prob, k, tent, primeira;
+  function lerNumero(v){ v=String(v).trim().replace(/\s/g,"").replace("−","-").replace(",","."); return v===""?null:Number(v); }
+  function novo(){
+    prob=o.gerar(); k=0; primeira=0; caixa.innerHTML="";
+    var e=document.createElement("p"); e.className="pc-enun"; e.innerHTML=prob.enunciado; caixa.appendChild(e);
+    mostraPasso();
+  }
+  function mostraPasso(){
+    var P=prob.passos[k], linha=document.createElement("div"); tent=0;
+    linha.className="pc-passo";
+    var rs=[].concat(P.r), ins=[];
+    linha.innerHTML="<span class='pc-num'>"+(k+1)+"</span><span class='pc-pede'>"+P.pede+"</span>";
+    rs.forEach(function(r,i){
+      if(P.rotulos) { var l=document.createElement("span"); l.className="pc-rot"; l.textContent=P.rotulos[i]; linha.appendChild(l); }
+      var inp=document.createElement("input"); inp.type="text"; inp.inputMode="decimal"; inp.setAttribute("aria-label","resposta do passo "+(k+1)+(rs.length>1?", valor "+(i+1):""));
+      linha.appendChild(inp); ins.push(inp);
+    });
+    var bt=document.createElement("button"); bt.className="pc-conf"; bt.textContent="Conferir"; linha.appendChild(bt);
+    var fb=document.createElement("div"); fb.className="pc-fb"; linha.appendChild(fb);
+    caixa.appendChild(linha);
+    ins[0].addEventListener("keydown",function(ev){ if(ev.key==="Enter") bt.click(); });
+    bt.addEventListener("click",function(){
+      var vals=ins.map(function(i){ return lerNumero(i.value); });
+      if(vals.some(function(v){ return v===null||isNaN(v); })){ fb.className="pc-fb pc-no"; fb.textContent="Digite um número em cada campo."; return; }
+      var tol=P.tol||1e-6, ok=vals.every(function(v,i){ return Math.abs(v-rs[i])<=tol; });
+      if(ok){
+        if(tent===0) primeira++;
+        ins.forEach(function(i){ i.disabled=true; i.style.borderColor="#059669"; i.style.background="#d1fae5"; });
+        bt.remove(); linha.classList.add("pc-ok");
+        fb.className="pc-fb pc-sim"; fb.innerHTML="✔ "+(P.mostra||"certo!");
+        k++;
+        if(k<prob.passos.length) mostraPasso(); else fim();
+      } else {
+        tent++;
+        ins.forEach(function(i,j){ var c=Math.abs(vals[j]-rs[j])<=tol; i.style.borderColor=c?"#059669":"#dc2626"; i.style.background=c?"#d1fae5":"#fee2e2"; });
+        fb.className="pc-fb pc-no";
+        fb.innerHTML="✘ "+(P.dica||"Ainda não.")+(tent>=2?" <button class='pc-ver sec'>Mostrar a resposta</button>":"");
+        var ver=fb.querySelector(".pc-ver");
+        if(ver) ver.addEventListener("click",function(){ ins.forEach(function(i,j){ i.value=String(rs[j]).replace(".",",").replace("-","−"); }); bt.click(); });
+        linha.classList.remove("chacoalha"); void linha.offsetWidth; linha.classList.add("chacoalha");
+      }
+    });
+  }
+  function fim(){
+    var f=document.createElement("div"); f.className="pc-fim";
+    f.innerHTML=prob.fim+"<br><span class='pc-placar'>Você acertou "+primeira+" de "+prob.passos.length+" passos de primeira. Clique em <strong>Novo problema</strong> para treinar com outros números.</span>";
+    caixa.appendChild(f);
+    if(prob.depois) prob.depois();
+  }
+  document.getElementById(o.novo).addEventListener("click",novo);
+  novo();
+}
+function sorteia(a,b){ return a+Math.floor(Math.random()*(b-a+1)); }
+function sinalTxt(n){ return n<0?" − "+(-n):" + "+n; }
+function numTxt(n){ return String(n).replace(".",",").replace("-","−"); }
+/* ---------- agora é você: Pitágoras passo a passo ---------- */
+(function(){
+var T=[[3,4,5],[6,8,10],[5,12,13],[8,15,17],[9,12,15],[7,24,25],[12,16,20],[20,21,29]];
+function desenha(a,b,c,pedido){
+  var NS="http://www.w3.org/2000/svg", k=150/Math.max(a,b), W=a*k, H=b*k;
+  var svg=document.createElementNS(NS,"svg"); svg.setAttribute("viewBox","0 0 260 200"); svg.setAttribute("role","img");
+  svg.setAttribute("aria-label","Triângulo retângulo de catetos "+a+" e "+b+" e hipotenusa "+c);
+  svg.style.maxWidth="300px"; svg.style.display="block"; svg.style.margin="10px auto 0";
+  var x0=40, y0=175;
+  function el(t,at,txt){ var e=document.createElementNS(NS,t); for(var q in at) e.setAttribute(q,at[q]); if(txt!==undefined) e.textContent=txt; svg.appendChild(e); return e; }
+  el("polygon",{points:x0+","+y0+" "+(x0+W)+","+y0+" "+x0+","+(y0-H),fill:"#fde68a",stroke:"#1b1b1b","stroke-width":3});
+  el("polyline",{points:x0+","+(y0-12)+" "+(x0+12)+","+(y0-12)+" "+(x0+12)+","+y0,fill:"none",stroke:"#1b1b1b","stroke-width":1.5});
+  el("text",{x:x0+W/2,y:y0+18,"text-anchor":"middle","font-size":14,"font-weight":800,fill:"var(--verde)"},String(a));
+  el("text",{x:x0-10,y:y0-H/2,"text-anchor":"end","font-size":14,"font-weight":800,fill:"var(--verm)"},String(b));
+  el("text",{x:x0+W/2+10,y:y0-H/2-6,"font-size":14,"font-weight":800,fill:"var(--roxo)"},String(c));
+  return svg;
+}
+PrevejaConfira({caixa:"pc12-caixa", novo:"pc12-novo", gerar:function(){
+  var t=T[sorteia(0,T.length-1)], a=t[0], b=t[1], c=t[2], hip=Math.random()<0.6;
+  if(Math.random()<0.5){ var z=a; a=b; b=z; }
+  var caixa=document.getElementById("pc12-caixa");
+  if(hip) return {enunciado:"Um triângulo retângulo tem catetos <strong>"+a+"</strong> e <strong>"+b+"</strong>. Quanto mede a hipotenusa?",
+    passos:[
+      {pede:a+"² = ?", r:a*a, dica:a+" · "+a+".", mostra:"quadrado verde: "+(a*a)},
+      {pede:b+"² = ?", r:b*b, dica:b+" · "+b+".", mostra:"quadrado vermelho: "+(b*b)},
+      {pede:"Some as duas áreas: "+(a*a)+" + "+(b*b)+" = ?", r:a*a+b*b, dica:"É o quadrado da hipotenusa.", mostra:"c² = "+(c*c)},
+      {pede:"Hipotenusa = √"+(c*c)+" = ?", r:c, dica:"Que número vezes ele mesmo dá "+(c*c)+"?", mostra:"c = "+c}],
+    fim:"✔ Hipotenusa <strong>"+c+"</strong>: "+a+"² + "+b+"² = "+c+"².", depois:function(){ caixa.appendChild(desenha(a,b,c)); }};
+  return {enunciado:"Uma escada de <strong>"+c+" m</strong> está encostada num muro, com o pé a <strong>"+a+" m</strong> da parede. A que altura ela toca o muro?",
+    passos:[
+      {pede:"A escada é a hipotenusa. "+c+"² = ?", r:c*c, dica:c+" · "+c+".", mostra:"c² = "+(c*c)},
+      {pede:a+"² = ?", r:a*a, dica:a+" · "+a+".", mostra:"a² = "+(a*a)},
+      {pede:"O que falta para o outro cateto: "+(c*c)+" − "+(a*a)+" = ?", r:c*c-a*a, dica:"Pitágoras ao contrário: b² = c² − a².", mostra:"b² = "+(b*b)},
+      {pede:"Altura = √"+(b*b)+" = ?", r:b, dica:"Que número vezes ele mesmo dá "+(b*b)+"?", mostra:"b = "+b+" m"}],
+    fim:"✔ A escada toca o muro a <strong>"+b+" m</strong> de altura: "+a+"² + "+b+"² = "+c+"².", depois:function(){ caixa.appendChild(desenha(a,b,c)); }};
+}});
+})();
+</script>
 <script src="../../assets/progresso.js"></script>
 <script src="../../assets/auth.js"></script>
 <script src="../../assets/auth-ui.js"></script>
@@ -452,6 +551,24 @@ function arrasta(svg,alca,cb){
   alca.addEventListener("pointerdown",function(ev){ ativo=true; ev.preventDefault(); pos(ev); });
   svg.addEventListener("pointermove",function(ev){ if(ativo) pos(ev); });
   window.addEventListener("pointerup",function(){ ativo=false; });
+  teclaAlca(svg,alca,cb);
+}
+/* teclado: as setas movem a alça (Shift = passo maior); aumenta o passo até ela sair do lugar,
+   para funcionar também quando o laboratório encaixa a posição numa grade */
+function teclaAlca(svg,alca,cb){
+  alca.setAttribute("tabindex","0");
+  if(!alca.getAttribute("aria-label")) alca.setAttribute("aria-label","alça arrastável: use as setas do teclado");
+  alca.addEventListener("keydown",function(ev){
+    var d={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[ev.key]; if(!d) return;
+    ev.preventDefault();
+    var r=svg.getBoundingClientRect(), vb=svg.viewBox.baseVal;
+    function centro(){ var b=alca.getBoundingClientRect(); return [(b.left+b.width/2-r.left)/r.width*vb.width,(b.top+b.height/2-r.top)/r.height*vb.height]; }
+    var c=centro(), passo=vb.width/(ev.shiftKey?20:80);
+    for(var k=1;k<=40;k++){
+      cb(c[0]+d[0]*passo*k,c[1]+d[1]*passo*k);
+      var n=centro(); if(Math.abs(n[0]-c[0])+Math.abs(n[1]-c[1])>0.5) break;
+    }
+  });
 }
 /* texto de receita sem "+ -": termos [[coef, "x²"], [coef, "x"], [coef, ""]] */
 function receita(termos){

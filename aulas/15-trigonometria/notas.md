@@ -208,6 +208,7 @@ sempre somam 1.
 4. *(quem faz o quê?)* Ligue cada peça da trigonometria ao seu papel. → **cosseno → a sombra (x)
    do ponto no círculo de raio 1; seno → a altura (y) do ponto no círculo de raio 1; tangente → seno
    ÷ cosseno: a inclinação; radiano → o ângulo medido pelo comprimento do arco**
-5. *(o desafio)* Quanto vale `cosseno de 180°`? → **−1**
+5. *(o desafio)* Uma rampa de 5 m faz com o chão um ângulo cujo cosseno é 0,8. Quantos metros ela
+   avança na horizontal? → **4**
 6. *(leia o desenho)* O ponto abaixo girou até parar reto para baixo (270°). Quais são a sombra e
    a altura dele? Cosseno (sombra): Seno (altura): → **0 · −1**

@@ -355,6 +355,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
     <div class="alt" data-i="0">1.000 · n, porque começa muito na frente.</div>
     <div class="alt" data-i="1">2ⁿ: a partir de algum n ela passa e nunca mais é alcançada.</div>
     <div class="alt" data-i="2">Crescem igual, porque os dois só aumentam.</div>
+    <div class="alt" data-i="3">Depende: 1.000 · n vence sempre que n é par.</div>
   </div>
   <div class="fb"></div>
 </div>
@@ -455,6 +456,24 @@ function arrasta(svg,alca,cb){
   alca.addEventListener("pointerdown",function(ev){ ativo=true; ev.preventDefault(); pos(ev); });
   svg.addEventListener("pointermove",function(ev){ if(ativo) pos(ev); });
   window.addEventListener("pointerup",function(){ ativo=false; });
+  teclaAlca(svg,alca,cb);
+}
+/* teclado: as setas movem a alça (Shift = passo maior); aumenta o passo até ela sair do lugar,
+   para funcionar também quando o laboratório encaixa a posição numa grade */
+function teclaAlca(svg,alca,cb){
+  alca.setAttribute("tabindex","0");
+  if(!alca.getAttribute("aria-label")) alca.setAttribute("aria-label","alça arrastável: use as setas do teclado");
+  alca.addEventListener("keydown",function(ev){
+    var d={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[ev.key]; if(!d) return;
+    ev.preventDefault();
+    var r=svg.getBoundingClientRect(), vb=svg.viewBox.baseVal;
+    function centro(){ var b=alca.getBoundingClientRect(); return [(b.left+b.width/2-r.left)/r.width*vb.width,(b.top+b.height/2-r.top)/r.height*vb.height]; }
+    var c=centro(), passo=vb.width/(ev.shiftKey?20:80);
+    for(var k=1;k<=40;k++){
+      cb(c[0]+d[0]*passo*k,c[1]+d[1]*passo*k);
+      var n=centro(); if(Math.abs(n[0]-c[0])+Math.abs(n[1]-c[1])>0.5) break;
+    }
+  });
 }
 /* texto de receita sem "+ -": termos [[coef, "x²"], [coef, "x"], [coef, ""]] */
 function receita(termos){
@@ -724,8 +743,8 @@ var expAlt={
  "ex6": [
   "Começar na frente não adianta: 2ⁿ passa 1.000 · n perto de n = 14 (2¹⁴ = 16.384 contra 14.000) e depois só se afasta.",
   "Isso! Qualquer exponencial com fator maior que 1 acaba passando qualquer reta — só é questão de tempo.",
-  "Os dois aumentam, mas de jeitos diferentes: um soma 1.000 por passo, o outro dobra. Dobrar ganha."
- ]
+  "Os dois aumentam, mas de jeitos diferentes: um soma 1.000 por passo, o outro dobra. Dobrar ganha.",
+  "Par ou ímpar não tem nada a ver. A partir de n = 14 (2¹⁴ = 16.384 > 14.000) a potência passa e nunca mais é alcançada."]
 };
 document.querySelectorAll(".alts").forEach(function(grupo){
   var box=grupo.closest(".ex"), certa=parseInt(grupo.dataset.r,10);

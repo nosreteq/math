@@ -56,8 +56,10 @@ três ondas separadas, cada uma com sua própria altura.
 Um jeito de "ver" as notas escondidas numa onda é desenhar um gráfico à parte: uma barra para cada
 frequência, do tamanho da altura (amplitude) daquela onda. Esse gráfico chama-se **espectro**.
 
-> 🔧 **Laboratório — o espectro revelado.** O espectro abaixo mostra ao vivo as alturas que você
-> ajustou lá em cima. *(interativo, na versão em HTML)*
+> 🔧 **Laboratório — o equalizador.** As barras mostram o espectro da onda que você montou no
+> laboratório anterior. **Clique numa barra** (ou nos botões) para desligar ou religar aquela
+> frequência — como o equalizador de um aparelho de som — e veja o que sobra da onda. *(interativo,
+> na versão em HTML)*
 
 ### Não existe pergunta idiota
 
@@ -144,14 +146,13 @@ tamanho da altura daquela onda.
    aquele sinal.**
 2. No espectro (gráfico de barras), o que a altura de cada barra representa? → **A amplitude
    daquela frequência no sinal.**
-3. Se um espectro tem barras nas frequências 1 e 3, quantas ondas simples diferentes formam o
-   sinal? → **2**
+3. O sinal é `3 · seno(x) + seno(3x)`. Qual é a altura da barra na frequência 1 e na frequência
+   3? → **freq. 1: 3, freq. 3: 1**
 4. *(quem faz o quê?)* Ligue cada peça ao seu papel. → **decompor → escrever o sinal como soma de
    ondas simples; espectro → as barras: quanto há de cada frequência; frequência → quantas voltas a
    onda dá no mesmo espaço; produto escalar com uma onda de teste → mede quanto daquela onda existe
    no sinal**
-5. *(o desafio)* Se a onda complicada é a soma de `seno(x)` com amplitude 1 e `seno(2x)` com
-   amplitude 0,5, qual barra do espectro é mais alta: a da frequência 1 ou a da frequência 2? → **A
-   da frequência 1 — amplitude 1 é maior que 0,5.**
-6. Para descobrir quanto de `seno(2x)` existe dentro de um sinal complicado, o jeito direto é: →
-   **Projetar o sinal sobre seno(2x) — o produto escalar entre os dois.**
+5. *(o desafio)* O sinal é `2 · seno(x) + 0,5 · seno(2x)`. Qual é a altura da barra mais alta do
+   espectro? → **2**
+6. Um sinal medido em 4 instantes é `(2, 0, −2, 0)` e a onda de teste é `(1, 0, −1, 0)`. Quanto
+   dessa onda existe no sinal? Calcule (sinal · onda) ÷ (onda · onda). → **2**

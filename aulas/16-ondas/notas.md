@@ -115,8 +115,9 @@ duas sobem juntas, o resultado sobe mais. Onde uma sobe e a outra desce, elas se
 > 🔧 **Laboratório — reconheça a onda.** A onda cinza tracejada é um alvo secreto. Ajuste amplitude e
 > frequência até a onda azul cobrir a cinza. *(interativo, na versão em HTML)*
 
-> 🔧 **Laboratório — onda ao vivo.** Aumente a velocidade e veja a onda correr — quanto mais rápido,
-> mais aguda seria a nota se isso fosse som. *(interativo, na versão em HTML)*
+> 🔧 **Laboratório — onda ao vivo.** Antes de mexer, **preveja**: a boia laranja vai ser carregada
+> para o lado junto com a onda? Depois mude a velocidade e o número de ondas e observe o
+> sobe-e-desce da boia. *(interativo, na versão em HTML)*
 
 ---
 
@@ -135,14 +136,14 @@ duas sobem juntas, o resultado sobe mais. Onde uma sobe e a outra desce, elas se
 
 1. O que gera o formato de onda que vimos hoje? → **A altura de um ponto girando num círculo,
    desenrolada ao longo do tempo.**
-2. Qual dos três controles faz a onda ficar **mais alta**? → **A amplitude.**
-3. Qual dos três controles faz a onda ficar **mais apertada** (mais voltas no mesmo espaço)? →
-   **A frequência.**
+2. Na receita `y = 3 · seno(2 · x)`, qual é a altura máxima que a onda atinge? → **3**
+3. A onda `y = seno(4 · x)` vai de x = 0° até x = 360°. Quantas ondas completas cabem nesse
+   trecho? → **4**
 4. *(quem faz o quê?)* Ligue cada controle ou situação ao que ele faz com a onda. → **amplitude →
    muda a altura da onda; frequência → muda quantas voltas cabem no mesmo espaço; fase → desloca a
    onda para o lado; duas ondas opostas somadas → se cancelam**
-5. *(o desafio)* Se duas ondas estão exatamente sincronizadas (sobem e descem juntas), o que
-   acontece quando elas se somam? → **A onda resultante fica mais alta — elas se reforçam.**
+5. *(o desafio)* Duas ondas **sincronizadas**, de amplitudes 2 e 3, são somadas. Qual é a
+   amplitude da onda resultante? → **5**
 6. No laboratório dos três sliders, a receita é `y = amplitude · seno(frequência · x − fase)`. Se
    eu quero uma onda **bem baixinha** mas mantendo a mesma largura de sempre, qual número eu devo
    diminuir? → **A amplitude.**

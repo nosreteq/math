@@ -138,13 +138,14 @@ relação sendo perfeita.
 
 1. A correlação entre duas listas é, na essência, o quê? → **O cosseno do ângulo entre os dois
    vetores (depois de centralizar).**
-2. Qual é a média da lista `(4, 6, 8, 10, 12)`? → **8**
+2. A lista `(4, 6, 8, 10, 12)` vai ser **centralizada** (cada número menos a média). Que número
+   fica no lugar do 6? → **−2**
 3. Duas listas têm correlação **−1**. O que isso quer dizer sobre o ângulo entre os vetores? →
    **180**
 4. Duas variáveis têm correlação alta. Isso prova que uma **causa** a outra? → **Não — correlação
    só mostra que andam juntas, não o motivo.**
-5. *(o desafio)* O ângulo entre dois vetores de dados é **0°**. Qual é a correlação entre eles? →
-   **1**
+5. *(o desafio)* O ângulo entre dois vetores de dados centralizados é **60°**. Qual é a
+   correlação entre eles? → **0,5**
 6. *(quem faz o quê?)* Ligue cada valor ou passo ao que ele diz. → **correlação +1 → pontos numa
    reta que sobe; correlação −1 → pontos numa reta que desce; correlação 0 → nenhuma tendência de
    reta (pode haver curva!); centralizar → tirar a média de cada lista**

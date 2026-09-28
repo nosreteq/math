@@ -33,3 +33,25 @@
 .ligar td:first-child{font-weight:700;width:38%}
 .ligar select{font-family:inherit;font-size:15px;padding:7px 8px;border:3px solid #1b1b1b;border-radius:9px;background:#fff;width:100%;max-width:100%}
 @media(max-width:620px){.ligar td{display:block;width:100%;border:none;padding:3px 0}.ligar tr{display:block;border-bottom:1px dashed #c9c1ae;padding:6px 0}}
+
+/* Preveja e confira — laboratório em que o aluno faz cada passo e o laboratório confere */
+.pc-caixa{background:#fff;border:3px solid #1b1b1b;border-radius:10px;padding:14px 18px}
+.pc-enun{margin:0 0 12px;font-size:18px;font-weight:700}
+.pc-passo{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 12px;font-size:17px;line-height:1.5}
+.pc-num{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:#1b1b1b;color:#fff;font-weight:800;font-size:14px;display:inline-flex;align-items:center;justify-content:center}
+.pc-pede{flex:1 1 260px}
+.pc-rot{font-weight:700}
+.pc-passo input{width:92px;font-size:17px;font-weight:700;padding:6px 8px;border:3px solid #1b1b1b;border-radius:8px;text-align:center;background:#fff}
+.pc-passo .pc-conf{padding:7px 14px;font-size:15px}
+.pc-fb{flex:1 1 100%;font-size:15px}
+.pc-fb.pc-sim{color:#065f46;font-weight:700}
+.pc-fb.pc-no{color:#b91c1c}
+.pc-fb .pc-ver{margin-left:8px;padding:4px 10px;font-size:13px}
+.pc-passo.pc-ok .pc-num{background:#059669}
+.pc-fim{background:#ecfdf5;border:2px solid #059669;border-radius:10px;padding:10px 14px;font-weight:700;font-size:16px}
+.pc-placar{font-weight:400;font-size:14px;color:#374151}
+@media(max-width:620px){.pc-passo input{width:78px}.pc-pede{flex-basis:100%}}
+
+/* alças arrastáveis também respondem ao teclado: mostrar onde está o foco */
+svg [tabindex]:focus{outline:none;stroke:#f59e0b !important;stroke-width:5px !important}
+svg:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}

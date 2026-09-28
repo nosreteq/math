@@ -321,10 +321,11 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <div class="tit">Exercício 1</div>
   <div class="selo">✅</div>
   <p>A correlação entre duas listas é, na essência, o quê?</p>
-  <div class="alts" data-r="2">
-    <div class="alt" data-i="0">A soma das duas listas.</div>
-    <div class="alt" data-i="1">O tamanho médio dos números da lista.</div>
-    <div class="alt" data-i="2">O cosseno do ângulo entre os dois vetores (depois de centralizar).</div>
+  <div class="alts" data-r="3">
+    <div class="alt" data-i="0">A diferença entre o maior e o menor número de uma lista.</div>
+    <div class="alt" data-i="1">A soma das duas listas.</div>
+    <div class="alt" data-i="2">O tamanho médio dos números da lista.</div>
+    <div class="alt" data-i="3">O cosseno do ângulo entre os dois vetores (depois de centralizar).</div>
   </div>
   <div class="fb"></div>
 </div>
@@ -332,11 +333,11 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <div class="ex" id="ex2">
   <div class="tit">Exercício 2</div>
   <div class="selo">✅</div>
-  <p>Qual é a média da lista <span class="mono">(4, 6, 8, 10, 12)</span>?</p>
-  <p><input type="number" data-r="8"></p>
+  <p>A lista <span class="mono">(4, 6, 8, 10, 12)</span> vai ser <strong>centralizada</strong> (cada número menos a média). Que número fica no lugar do 6?</p>
+  <p><input type="number" step="any" data-r="-2" aria-label="Resposta do exercício 2"></p>
   <button class="check" data-ex="ex2">Conferir</button>
   <div class="fb"></div>
-  <p class="dica">Dica: some tudo e divida pela quantidade de números.</p>
+  <p class="dica">Dica: ache a média primeiro.</p>
 </div>
 
 <div class="ex" id="ex3">
@@ -357,18 +358,19 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
     <div class="alt" data-i="0">Sim — correlação alta é prova de causa.</div>
     <div class="alt" data-i="1">Não — correlação só mostra que andam juntas, não o motivo.</div>
     <div class="alt" data-i="2">Só prova causa se a correlação for negativa.</div>
+    <div class="alt" data-i="3">Sim, desde que a correlação passe de 0,9.</div>
   </div>
   <div class="fb"></div>
 </div>
 
 <div class="ex" id="ex5">
   <div class="tit">Exercício 5 — o desafio</div>
-  <div class="selo">🏆</div>
-  <p>O ângulo entre dois vetores de dados é <strong>0°</strong>. Qual é a correlação entre eles?</p>
-  <p><input type="number" data-r="1"></p>
+  <div class="selo">✅</div>
+  <p>O ângulo entre dois vetores de dados centralizados é <strong>60°</strong>. Qual é a correlação entre eles?</p>
+  <p><input type="number" step="any" data-r="0.5" aria-label="Resposta do exercício 5"></p>
   <button class="check" data-ex="ex5">Conferir</button>
   <div class="fb"></div>
-  <p class="dica">Dica: cosseno de 0° (Aula 15).</p>
+  <p class="dica">Dica: cosseno de 60° (Aula 15).</p>
 </div>
 
 <div class="ex" id="ex6">
@@ -606,9 +608,9 @@ function fb(box,ok,txt){
 }
 var explica={
   ex6:{"ok": "Tudo certo! As duas retas, a nuvem sem reta e o primeiro passo.", "no": "Quase. +1 = reta que sobe; −1 = reta que desce; 0 = nenhuma tendência de reta; centralizar = tirar a média de cada lista."},
-  ex2:{ok:"Isso! 4 + 6 + 8 + 10 + 12 = 40, e 40 ÷ 5 = 8.",no:"Some tudo: 4 + 6 + 8 + 10 + 12 = 40. Divida pela quantidade (5): <strong>8</strong>."},
+  ex2:{ok:"Isso! A média é 8, e 6 − 8 = −2.",no:"A média é (4 + 6 + 8 + 10 + 12) ÷ 5 = 8. Centralizar: 6 − 8 = <strong>−2</strong>."},
   ex3:{ok:"Isso! Cosseno de 180° = −1.",no:"Cosseno de <strong>180°</strong> vale −1 — vetores apontando para lados opostos."},
-  ex5:{ok:"Isso! Cosseno de 0° = 1.",no:"Cosseno de 0° vale <strong>1</strong> — vetores apontando para o mesmo lado."}
+  ex5:{ok:"Isso! Correlação = cosseno do ângulo, e cos 60° = 0,5.",no:"Correlação é o cosseno do ângulo: cos 60° = <strong>0,5</strong> — relação positiva moderada."}
 };
 document.querySelectorAll("button.check").forEach(function(b){
   b.addEventListener("click",function(){
@@ -627,12 +629,16 @@ document.querySelectorAll("button.check").forEach(function(b){
   });
 });
 var expAlt={
-  ex1:["A soma não diz nada sobre o quanto as listas se relacionam.",
-       "Tamanho médio é a média, não tem a ver com relação entre duas listas.",
-       "Isso! Correlação é o cosseno do ângulo entre os vetores centralizados."],
-  ex4:["Correlação nunca prova causa sozinha — pode haver outra explicação.",
-       "Isso! Correlação mostra que andam juntas, não o motivo.",
-       "O sinal da correlação não muda essa regra — nem negativa prova causa."],
+  ex1:[
+  "Isso mede o espalhamento de UMA lista; correlação mede a relação entre DUAS.",
+  "A soma não diz nada sobre o quanto as listas se relacionam.",
+  "Tamanho médio é a média, não tem a ver com relação entre duas listas.",
+  "Isso! Correlação é o cosseno do ângulo entre os vetores centralizados."],
+  ex4:[
+  "Correlação nunca prova causa sozinha — pode haver outra explicação.",
+  "Isso! Correlação mostra que andam juntas, não o motivo.",
+  "O sinal da correlação não muda essa regra — nem negativa prova causa.",
+  "Nenhum valor prova causa: sorvete e afogamentos sobem juntos por causa do verão, não um pelo outro."],
   ex6:["Correlação 1 significa nuvem quase perfeitamente alinhada, não espalhada.",
        "Isso! Nuvem espalhada sem tendência é sinal de correlação perto de 0.",
        "Correlação −1 também formaria uma reta (descendente), não uma nuvem espalhada."]
@@ -737,6 +743,24 @@ function arrasta(svg,alca,cb){
   alca.addEventListener("pointerdown",function(ev){ ativo=true; ev.preventDefault(); pos(ev); });
   svg.addEventListener("pointermove",function(ev){ if(ativo) pos(ev); });
   window.addEventListener("pointerup",function(){ ativo=false; });
+  teclaAlca(svg,alca,cb);
+}
+/* teclado: as setas movem a alça (Shift = passo maior); aumenta o passo até ela sair do lugar,
+   para funcionar também quando o laboratório encaixa a posição numa grade */
+function teclaAlca(svg,alca,cb){
+  alca.setAttribute("tabindex","0");
+  if(!alca.getAttribute("aria-label")) alca.setAttribute("aria-label","alça arrastável: use as setas do teclado");
+  alca.addEventListener("keydown",function(ev){
+    var d={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[ev.key]; if(!d) return;
+    ev.preventDefault();
+    var r=svg.getBoundingClientRect(), vb=svg.viewBox.baseVal;
+    function centro(){ var b=alca.getBoundingClientRect(); return [(b.left+b.width/2-r.left)/r.width*vb.width,(b.top+b.height/2-r.top)/r.height*vb.height]; }
+    var c=centro(), passo=vb.width/(ev.shiftKey?20:80);
+    for(var k=1;k<=40;k++){
+      cb(c[0]+d[0]*passo*k,c[1]+d[1]*passo*k);
+      var n=centro(); if(Math.abs(n[0]-c[0])+Math.abs(n[1]-c[1])>0.5) break;
+    }
+  });
 }
 /* texto de receita sem "+ -": termos [[coef, "x²"], [coef, "x"], [coef, ""]] */
 function receita(termos){

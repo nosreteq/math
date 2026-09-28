@@ -162,15 +162,54 @@ async function checaSPA(browser) {
     const foraNS = await p.evaluate(() => [...document.querySelectorAll('svg *')].filter(e => e.namespaceURI !== 'http://www.w3.org/2000/svg').length);
     if (foraNS) falha(slug, `${foraNS} elementos dentro de <svg> fora do namespace SVG (ficam invisíveis)`);
 
+    // "preveja e confira": um aluno que erra tudo precisa conseguir terminar 20 problemas sorteados
+    const pcs = await p.evaluate(() => [...document.querySelectorAll('.pc-caixa')].map(c => {
+      const id = c.id.replace(/-caixa$/, ''), ruins = [];
+      for (let n = 0; n < 20; n++) {
+        document.getElementById(id + '-novo').click();
+        for (let k = 0; k < 10; k++) {
+          const ab = c.querySelector('.pc-passo:not(.pc-ok)'); if (!ab) break;
+          ab.querySelectorAll('input').forEach(i => { i.value = '99999'; });
+          ab.querySelector('.pc-conf').click(); ab.querySelector('.pc-conf').click();
+          const ver = ab.querySelector('.pc-ver'); if (!ver) { ruins.push('passo sem "Mostrar a resposta"'); break; }
+          ver.click();
+        }
+        const t = c.textContent;
+        if (/NaN|undefined|Infinity/.test(t) || !/Você acertou/.test(t)) ruins.push(t.slice(0, 120));
+      }
+      return [id, ruins];
+    }));
+    for (const [id, ruins] of pcs) if (ruins.length) falha(slug, `${id}: preveja-e-confira quebrou: ${ruins[0]}`);
+
+    // acessibilidade: toda alça focável dentro de um laboratório precisa andar com as setas do teclado
+    const nTecla = await p.locator('.lab svg [tabindex], .lab svg[tabindex]').count();
+    for (let k = 0; k < nTecla; k++) {
+      const alca = p.locator('.lab svg [tabindex], .lab svg[tabindex]').nth(k);
+      const lab = await alca.evaluate(e => { e.focus(); const l = e.closest('.lab'); l.dataset.tk = '1'; return l.innerHTML; });
+      let mudou = false;
+      for (const tecla of ['ArrowRight', 'ArrowUp', 'ArrowLeft', 'ArrowDown']) {
+        await p.keyboard.press(tecla);
+        if (await p.evaluate(a => document.querySelector('.lab[data-tk]').innerHTML !== a, lab)) { mudou = true; break; }
+      }
+      await p.evaluate(() => document.querySelector('.lab[data-tk]').removeAttribute('data-tk'));
+      if (!mudou) falha(slug, `alça ${k + 1} de laboratório não responde ao teclado`);
+    }
+
     // exercícios: primeiro errado (não pode pontuar), depois certo (tem que pontuar)
     const ids = await p.locator('.ex').evaluateAll(els => els.map(e => e.id));
     if (ids.length !== 6) falha(slug, `${ids.length} exercícios (esperado 6)`);
     for (const id of ids) {
       if (await p.locator(`#${id} .alts`).count()) {
         const certa = await p.locator(`#${id} .alts`).getAttribute('data-r');
-        const errada = certa === '0' ? '1' : '0';
-        await p.click(`#${id} .alt[data-i="${errada}"]`);
-        if (!(await p.textContent(`#${id} .fb`)).trim().startsWith('✘')) falha(slug, `${id}: alternativa errada sem feedback de erro`);
+        const nAlts = await p.locator(`#${id} .alt`).count();
+        if (nAlts !== 4) falha(slug, `${id}: ${nAlts} alternativas (esperado 4)`);
+        // toda alternativa errada precisa explicar o próprio erro
+        for (let i = 0; i < nAlts; i++) {
+          if (String(i) === certa) continue;
+          await p.click(`#${id} .alt[data-i="${i}"]`);
+          const t = (await p.textContent(`#${id} .fb`)).trim();
+          if (!t.startsWith('✘') || /undefined/.test(t) || t.length < 12) falha(slug, `${id}: alternativa ${i} sem explicação do erro`);
+        }
         await p.click(`#${id} .alt[data-i="${certa}"]`);
       } else {
         const ins = await p.locator(`#${id} input[data-r]`).all();
