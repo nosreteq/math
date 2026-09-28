@@ -22,7 +22,7 @@ soltando uma frase no meio do caminho e nenhuma fórmula caindo do céu.
 O curso é dividido em níveis. Dentro de cada nível, cada aula resolve exatamente um obstáculo, sem
 usar nada que não tenha sido apresentado numa aula anterior — nem entre níveis.
 
-### Nível 1 — Fundamentos (Ensino Fundamental I e II) ✅
+### Nível 1 — Básico (Ensino Fundamental I e II) ✅
 
 | # | Aula | Assunto |
 |---|------|---------|
@@ -33,7 +33,7 @@ usar nada que não tenha sido apresentado numa aula anterior — nem entre níve
 | 05 | [Dados: média, mediana, moda e desvio](aulas/05-dados-media-mediana-moda-e-desvio/) | Resumir uma lista em poucos números — e descobrir o que cada resumo esconde. |
 | 06 | [Contagem e chance](aulas/06-contagem-e-chance/) | Árvores de possibilidades, filas e moedas: o acaso tem régua. |
 
-### Nível 2 — Álgebra e Geometria (Ensino Fundamental II) ✅
+### Nível 2 — Intermediário (Ensino Fundamental II) ✅
 
 | # | Aula | Assunto |
 |---|------|---------|
@@ -44,7 +44,7 @@ usar nada que não tenha sido apresentado numa aula anterior — nem entre níve
 | 11 | [Ângulos, círculo e π](aulas/11-angulos-circulo-e-pi/) | O que é girar, por que a volta tem 360° e de onde sai o π. |
 | 12 | [Áreas, volumes e Pitágoras](aulas/12-areas-volumes-e-pitagoras/) | Toda figura é um retângulo arrumado — e três quadrados guardam o segredo do triângulo retângulo. |
 
-### Nível 3 — Ensino Médio (Ensino Médio) ✅
+### Nível 3 — Avançado (Ensino Médio) ✅
 
 | # | Aula | Assunto |
 |---|------|---------|
@@ -55,7 +55,7 @@ usar nada que não tenha sido apresentado numa aula anterior — nem entre níve
 | 17 | [Vetores e matrizes](aulas/17-vetores-e-matrizes/) | Vetor é uma seta. Matriz é uma tabela que move setas. Álgebra linear desmistificada. |
 | 18 | [Girar multiplicando: números complexos](aulas/18-girar-multiplicando/) | A raiz de −1 é só um jeito de escrever \ |
 
-### Nível 4 — Superior I (Faculdade: cálculo e dados) ✅
+### Nível 4 — Especialista (Faculdade: cálculo e dados) ✅
 
 | # | Aula | Assunto |
 |---|------|---------|
@@ -66,7 +66,7 @@ usar nada que não tenha sido apresentado numa aula anterior — nem entre níve
 | 23 | [Projeção e mínimos quadrados](aulas/23-projecao-e-minimos-quadrados/) | A reta que melhor se ajusta aos pontos é geometria de sombra. |
 | 24 | [Decomposição de sinais: Fourier](aulas/24-fourier/) | Todo som complicado é várias ondas simples somadas — ou setas girando. |
 
-### Nível 5 — Superior II (Faculdade: aplicada e computacional) ✅
+### Nível 5 — Pesquisador (Faculdade: aplicada e computacional) ✅
 
 | # | Aula | Assunto |
 |---|------|---------|
@@ -146,30 +146,30 @@ math/
 │   │   ├── notas.md                    o texto da aula, para ler ou imprimir
 │   │   └── figuras.png                 versão estática das ilustrações
 │   │
-│   ├── 02-fracoes-decimais-e-negativos/        ] Nível 1 — Fundamentos
+│   ├── 02-fracoes-decimais-e-negativos/        ] Nível 1 — Básico
 │   ├── 03-porcentagem-razao-e-regra-de-tres/   ]
 │   ├── 04-potencias-e-raizes/                  ]
 │   ├── 05-dados-media-mediana-moda-e-desvio/   ]
 │   ├── 06-contagem-e-chance/                   ]
-│   ├── 07-letras-no-lugar-de-numeros/          ] Nível 2 — Álgebra e Geometria
+│   ├── 07-letras-no-lugar-de-numeros/          ] Nível 2 — Intermediário
 │   ├── 08-equacoes-e-inequacoes/               ]
 │   ├── 09-o-plano-e-a-reta/                    ]
 │   ├── 10-sistemas-de-equacoes/                ]
 │   ├── 11-angulos-circulo-e-pi/                ]
 │   ├── 12-areas-volumes-e-pitagoras/           ]
-│   ├── 13-curvas-que-nao-sao-retas/            ] Nível 3 — Ensino Médio
+│   ├── 13-curvas-que-nao-sao-retas/            ] Nível 3 — Avançado
 │   ├── 14-crescimento-que-acelera/             ]
 │   ├── 15-trigonometria/                       ]
 │   ├── 16-ondas/                               ]
 │   ├── 17-vetores-e-matrizes/                  ]
 │   ├── 18-girar-multiplicando/                 ]
-│   ├── 19-limites-e-a-derivada/                ] Nível 4 — Superior I
+│   ├── 19-limites-e-a-derivada/                ] Nível 4 — Especialista
 │   ├── 20-a-integral/                          ]
 │   ├── 21-a-curva-normal/                      ]
 │   ├── 22-correlacao/                          ]
 │   ├── 23-projecao-e-minimos-quadrados/        ]
 │   ├── 24-fourier/                             ]
-│   ├── 25-determinante-inversa-e-autovalores/  ] Nível 5 — Superior II
+│   ├── 25-determinante-inversa-e-autovalores/  ] Nível 5 — Pesquisador
 │   ├── 26-pca/                                 ]
 │   ├── 27-otimizacao-e-gradiente/              ]
 │   ├── 28-equacoes-diferenciais/               ]

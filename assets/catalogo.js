@@ -6,7 +6,7 @@
  */
 window.CATALOGO = [
   {
-    n: 1, nome: "Fundamentos", etapa: "Ensino Fundamental I e II", estado: "completo",
+    n: 1, nome: "Básico", etapa: "Ensino Fundamental I e II", estado: "completo",
     resumo: "Conta com qualquer tipo de número — primos, frações, negativos, porcentagem, potências — e o resumo de uma lista de dados.",
     aulas: [
       { n: 1, slug: "01-multiplos-divisores-e-primos", titulo: "Múltiplos, divisores e primos", desc: "Quem cabe dentro de quem: pulos na reta, o crivo dos primos, engrenagens (MMC) e ladrilhos (MDC)." },
@@ -18,7 +18,7 @@ window.CATALOGO = [
     ]
   },
   {
-    n: 2, nome: "Álgebra e Geometria", etapa: "Ensino Fundamental II", estado: "completo",
+    n: 2, nome: "Intermediário", etapa: "Ensino Fundamental II", estado: "completo",
     resumo: "Letras no lugar de números, equações, o plano cartesiano e as medidas de figuras no plano e no espaço.",
     aulas: [
       { n: 7, slug: "07-letras-no-lugar-de-numeros", titulo: "Letras no lugar de números: a função", desc: "A máquina de números, aquele f(x) que assustou você na escola, a regra de ouro e o primeiro gráfico." },
@@ -30,7 +30,7 @@ window.CATALOGO = [
     ]
   },
   {
-    n: 3, nome: "Ensino Médio", etapa: "Ensino Médio", estado: "completo",
+    n: 3, nome: "Avançado", etapa: "Ensino Médio", estado: "completo",
     resumo: "O comportamento das funções clássicas, trigonometria, vetores e matrizes e os números que giram.",
     aulas: [
       { n: 13, slug: "13-curvas-que-nao-sao-retas", titulo: "Curvas que não são retas", desc: "Parábolas e polinômios: a máquina de sempre com um quadrado dentro." },
@@ -42,7 +42,7 @@ window.CATALOGO = [
     ]
   },
   {
-    n: 4, nome: "Superior I", etapa: "Faculdade: cálculo e dados", estado: "completo",
+    n: 4, nome: "Especialista", etapa: "Faculdade: cálculo e dados", estado: "completo",
     resumo: "Limites, derivadas e integrais, a curva normal e a extração de padrões em dados.",
     aulas: [
       { n: 19, slug: "19-limites-e-a-derivada", titulo: "Limites e a derivada", desc: "A lupa que endireita a curva: a inclinação em cada ponto." },
@@ -54,7 +54,7 @@ window.CATALOGO = [
     ]
   },
   {
-    n: 5, nome: "Superior II", etapa: "Faculdade: aplicada e computacional", estado: "completo",
+    n: 5, nome: "Pesquisador", etapa: "Faculdade: aplicada e computacional", estado: "completo",
     resumo: "Transformações, dados em muitas dimensões, otimização, sistemas que mudam no tempo, o acaso no tempo e a demonstração.",
     aulas: [
       { n: 25, slug: "25-determinante-inversa-e-autovalores", titulo: "Matrizes que transformam", desc: "Determinante é área, inversa desfaz, autovetor é a seta que só estica." },
