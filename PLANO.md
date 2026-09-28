@@ -12,7 +12,9 @@ dividir" até cálculo, álgebra linear, probabilidade, equações diferenciais 
 quem pesquisa matemática — **sem pular nenhum degrau e sem decorar nada**.
 
 O curso segue a **ordem da escola** (Ensino Fundamental → Ensino Médio → Faculdade), porque é a
-ordem em que os conceitos de fato dependem uns dos outros, e porque o aluno se reconhece nela. O
+ordem em que os conceitos de fato dependem uns dos outros, e porque o aluno se reconhece nela. Os
+**nomes dos níveis** vêm da trilha de referência — **Básico, Intermediário, Avançado, Especialista e
+Pesquisador** —, e a etapa da escola aparece ao lado de cada um como referência. O
 que muda é o **jeito de ensinar**: em vez de lista de fórmulas, cada ideia chega por um desenho que
 se mexe, uma história e um exercício que explica o erro — a metodologia da série *Head First*, da
 O'Reilly.
@@ -33,11 +35,11 @@ Três regras valem para as 30 aulas:
 
 | Nível | Etapa da escola | Aulas | Ao terminar, o aluno consegue... |
 |---|---|---|---|
-| **1 — Fundamentos** | Fundamental I e II | 1–6 | fazer conta com qualquer tipo de número (inteiro, negativo, fração, decimal, porcentagem, potência) e resumir uma lista de dados |
-| **2 — Álgebra e Geometria** | Fundamental II | 7–12 | trocar número por letra, resolver equações e sistemas, desenhar retas e medir figuras no plano e no espaço |
-| **3 — Ensino Médio** | Ensino Médio | 13–18 | entender o comportamento das funções clássicas (quadrática, exponencial, trigonométricas), usar vetores e matrizes e girar com números complexos |
-| **4 — Superior I** | Faculdade: cálculo e dados | 19–24 | derivar, integrar, medir incerteza com a curva normal e extrair padrões de dados (correlação, regressão, Fourier) |
-| **5 — Superior II** | Faculdade: matemática aplicada e computacional | 25–30 | modelar sistemas que mudam no tempo, otimizar, trabalhar com acaso ao longo do tempo e demonstrar um resultado |
+| **1 — Básico** | Fundamental I e II | 1–6 | fazer conta com qualquer tipo de número (inteiro, negativo, fração, decimal, porcentagem, potência) e resumir uma lista de dados |
+| **2 — Intermediário** | Fundamental II | 7–12 | trocar número por letra, resolver equações e sistemas, desenhar retas e medir figuras no plano e no espaço |
+| **3 — Avançado** | Ensino Médio | 13–18 | entender o comportamento das funções clássicas (quadrática, exponencial, trigonométricas), usar vetores e matrizes e girar com números complexos |
+| **4 — Especialista** | Faculdade: cálculo e dados | 19–24 | derivar, integrar, medir incerteza com a curva normal e extrair padrões de dados (correlação, regressão, Fourier) |
+| **5 — Pesquisador** | Faculdade: matemática aplicada e computacional | 25–30 | modelar sistemas que mudam no tempo, otimizar, trabalhar com acaso ao longo do tempo e demonstrar um resultado |
 | **Eletivas** | Aprofundamento | 31–40 | seguir para áreas específicas: criptografia, grafos, grupos, topologia, curvatura, séries, EDPs, fractais, cálculo estocástico e métodos numéricos |
 
 Nas tabelas abaixo, o **Estado** registra de onde veio cada aula (todas já publicadas):
@@ -89,7 +91,7 @@ Seno × Cosseno (N3) · Derivada × Integral (N4) · Determinístico × Aleatór
 
 ---
 
-## Nível 1 — Fundamentos
+## Nível 1 — Básico
 
 *Ensino Fundamental I e II · trilha: frações e decimais, múltiplos e divisores, potências e raízes,
 proporcionalidade.*
@@ -192,7 +194,7 @@ decoradas.
 
 ---
 
-## Nível 2 — Álgebra e Geometria
+## Nível 2 — Intermediário
 
 *Ensino Fundamental II · trilha: expressões algébricas, equações e inequações, sistemas lineares,
 geometria plana.*
@@ -276,7 +278,7 @@ quadrados · a prova dos quatro triângulos · empilhe a base · a lata de refri
 
 ---
 
-## Nível 3 — Ensino Médio
+## Nível 3 — Avançado
 
 *Ensino Médio · trilha: sequências (PA e PG), matemática financeira, funções, trigonometria,
 exponenciais e logaritmos, polinômios e complexos, geometria analítica, matemática discreta.*
@@ -364,7 +366,7 @@ complexo · o ponto de Euler · as raízes que faltavam
 
 ---
 
-## Nível 4 — Superior I: Cálculo e Dados
+## Nível 4 — Especialista: Cálculo e Dados
 
 *Faculdade · trilha: limites e continuidade, cálculo diferencial, cálculo integral; estatística e
 análise de sinais.*
@@ -429,7 +431,7 @@ vindas da atual Aula 18: a soma de setas girando `e^(iωt)` é a forma de verdad
 
 ---
 
-## Nível 5 — Superior II: Matemática Aplicada e Computacional
+## Nível 5 — Pesquisador: Matemática Aplicada e Computacional
 
 *Faculdade · trilha: equações diferenciais, probabilidade avançada e processos estocásticos,
 análise numérica, otimização; e o que a trilha não tem — lógica e demonstração.*
@@ -875,9 +877,9 @@ meta de cobertura foi atingida.
   1. Vetores e matrizes vêm no Ensino Médio (Aula 17), não depois do cálculo — álgebra linear não
      depende de cálculo, e o cálculo e a estatística ficam mais claros com vetores.
   2. Limites entram dentro da derivada (Aula 19), com a lupa, e não como bloco isolado.
-  3. O Nível 5 foi rebatizado de "Superior II — Aplicada e Computacional": o que a trilha chama de
-     "Pesquisador" são disciplinas de graduação e pós. Temas que exigem anos de base (topologia,
-     geometria diferencial, EDP rigorosa) viraram eletivas em versão visual.
+  3. O Nível 5 mantém o nome "Pesquisador" da trilha, mas o conteúdo é o de disciplinas de
+     graduação aplicadas e computacionais. Temas que exigem anos de base (topologia, geometria
+     diferencial, EDP rigorosa) viraram eletivas em versão visual.
   4. Entrou **lógica e demonstração** (Aula 30), que a trilha não tem e que é o que separa usar
      matemática de fazer matemática.
 - **Auditorias anteriores** deste curso: frações, porcentagem e decimais já eram usados sem terem
