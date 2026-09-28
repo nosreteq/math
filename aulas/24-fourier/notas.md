@@ -118,9 +118,9 @@ projeção por frequência, e o resultado de cada uma vira uma barra do espectro
 
 Um ponto girando no círculo tem uma **altura** que sobe e desce: a onda seno da Aula 16. Agora junte
 setas girando, uma na ponta da outra, cada uma com sua velocidade: a altura da última ponta desenha
-a **soma de ondas** da Aula 24. É assim que a decomposição de Fourier é escrita de verdade: como uma
-soma de números complexos `e^(iωt)` girando (Aula 18) — cada nota do espectro é uma seta, com o
-tamanho da altura daquela onda.
+a **soma de ondas** do começo desta aula. É assim que a decomposição de Fourier é escrita de
+verdade: como uma soma de números complexos `e^(iωt)` girando (Aula 18) — cada nota do espectro é
+uma seta, com o tamanho da altura daquela onda.
 
 > 🔧 **Laboratório — ondas como giros.** A seta grande dá 1 volta; a pequena, na ponta dela, gira
 > mais rápido. A altura da ponta vira a onda à direita. *(interativo, na versão em HTML)*

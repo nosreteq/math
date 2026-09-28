@@ -773,8 +773,12 @@ function pintaComp(){
   retaCompB.setAttribute("x1",X(-6)); retaCompB.setAttribute("y1",Y(b*-6));
   retaCompB.setAttribute("x2",X(6));  retaCompB.setAttribute("y2",Y(b*6));
   var t=document.getElementById("txtComp");
-  var quem = Math.abs(a)===Math.abs(b) ? "empate — os dois sobem (ou descem) no mesmo ritmo"
-    : Math.abs(a)>Math.abs(b) ? "a reta A sobe mais rápido" : "a reta B sobe mais rápido";
+  function jeito(p){ return p>0?"sobe":p<0?"desce":"fica deitada"; }
+  var maior=a>b?"A":"B", menor=a>b?"B":"A", pMaior=Math.max(a,b), pMenor=Math.min(a,b);
+  var quem = a===b ? "mesmo passo: as duas "+(a>0?"sobem":a<0?"descem":"ficam deitadas")+" no mesmo ritmo (são paralelas)"
+    : pMaior>0 ? "a reta "+maior+" sobe mais rápido"+(pMenor>0?"":" — a reta "+menor+" "+jeito(pMenor))
+    : pMenor<0 && pMaior<0 ? "as duas descem; a reta "+menor+" desce mais rápido"
+    : "a reta "+menor+" desce e a reta "+maior+" fica deitada";
   t.textContent="Passo A = "+a+" · Passo B = "+b+" → "+quem+".";
 }
 slCompA.addEventListener("input",pintaComp);

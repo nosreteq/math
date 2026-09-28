@@ -648,7 +648,7 @@ function pinta6(){
     var dig=String(c.n).length;
     el("circle",{cx:P.X(dig),cy:P.Y(Math.log10(Math.max(1,c.t))),r:i===D-1?8:5,fill:i<D?"var(--verm)":"#fecaca"},P.camada);
   });
-  $("txt6").textContent=cs.p+" × "+cs.q+" = "+milhar(cs.n)+" (1 multiplicação) · fatorar testando divisores: "+milhar(cs.t)+" tentativas. Cada 2 dígitos a mais em n multiplicam o trabalho por 10; um n de 600 dígitos pediria ~10³⁰⁰ tentativas.";
+  $("txt6").textContent=cs.p+" × "+cs.q+" = "+milhar(cs.n)+" (1 multiplicação) · fatorar testando divisores: "+milhar(cs.t)+(cs.t===1?" tentativa.":" tentativas.")+" Cada 2 dígitos a mais em n multiplicam o trabalho por 10; um n de 600 dígitos pediria ~10³⁰⁰ tentativas.";
 }
 $("slD6").addEventListener("input",pinta6); pinta6();
 /* ---------- exercicios ---------- */
