@@ -474,6 +474,13 @@ document.getElementById("sinalProxima").addEventListener("click",novoSinal);
 var slNuvem=document.getElementById("slNuvem"), pontosNuvem=document.getElementById("pontosNuvem"), txtNuvem=document.getElementById("txtNuvem");
 var seedNuvem=[];
 for(var i=0;i<28;i++){ seedNuvem.push({x:Math.random(), ruido:(Math.random()-0.5)}); }
+/* tira do ruído qualquer pedaço parecido com x (ruído centralizado e perpendicular a x): assim, em 0%, a correlação é 0 de verdade */
+(function(){
+  var n=seedNuvem.length, mx=0, mr=0, sxr=0, sxx=0;
+  seedNuvem.forEach(function(p){ mx+=p.x/n; mr+=p.ruido/n; });
+  seedNuvem.forEach(function(p){ sxr+=(p.x-mx)*(p.ruido-mr); sxx+=(p.x-mx)*(p.x-mx); });
+  seedNuvem.forEach(function(p){ p.ruido=p.ruido-mr-sxr/sxx*(p.x-mx); });
+})();
 function pintaNuvem(){
   var forca=parseInt(slNuvem.value,10)/100;
   document.getElementById("vNuvem").textContent=(forca*100)+"%";
@@ -482,7 +489,7 @@ function pintaNuvem(){
   seedNuvem.forEach(function(p){
     var px=30+p.x*320;
     var yBase=p.x;
-    var y=yBase*forca + p.ruido*(1-forca)*1.4 + p.ruido*0.15;
+    var y=0.5+(yBase-0.5)*forca + p.ruido*(1-forca)*0.8;
     y=Math.max(0,Math.min(1,y));
     xsN.push(p.x); ysN.push(y);
     var py=230-y*200;
@@ -492,8 +499,9 @@ function pintaNuvem(){
     pontosNuvem.appendChild(c);
   });
   var rN=pearson(xsN,ysN);
-  txtNuvem.textContent = "Correlação = "+fmt(rN)+" — "+(rN>0.7 ? "alta: os pontos quase formam uma reta que sobe."
-    : rN>0.3 ? "moderada: dá para notar uma tendência de subida."
+  var aN=Math.abs(rN);
+  txtNuvem.textContent = "Correlação = "+fmt(rN)+" — "+(aN>0.7 ? "alta: os pontos quase formam uma reta que "+(rN>0?"sobe.":"desce.")
+    : aN>0.3 ? "moderada: dá para notar uma tendência de "+(rN>0?"subida.":"descida.")
     : "baixa: nuvem espalhada, sem tendência clara.");
 }
 slNuvem.addEventListener("input",pintaNuvem);

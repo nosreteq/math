@@ -819,6 +819,12 @@ arrastáveis (helper `arrasta()` + 09, 17, 23; checado pelo `verifica.js`) e blo
 de preveja e confira dentro dos laboratórios das aulas 04 (raiz na mão), 12 (Pitágoras) e 20
 (somar as fatias).
 
+Terceira rodada (análise lúdica): rubrica de Malone & Lepper (desafio, curiosidade, controle,
+fantasia) + rejogabilidade + Bloom, aplicada às 40 aulas a partir de um playtest automático
+(`tests/playtest.js`). Nota média 4,3/10: labs inteligentes e com ótimo controle, mas poucos com
+meta, aposta ou sorteio, e só 18% dos exercícios situados. Nota por aula, os defeitos corrigidos e a
+proposta para levar todas à excelência em [`QUALIDADE.md`](QUALIDADE.md).
+
 ## Fase 9 — testes unitários em todas as aulas
 
 **Por quê.** O `tests/verifica.js` é um teste de ponta a ponta: abre cada aula num navegador e confere

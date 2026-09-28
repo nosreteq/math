@@ -605,7 +605,7 @@ function pinta3(){
   $("vC3").textContent=n;
   limpa(svg3);
   cubinhos(svg3,n,Math.min(40,120/n));
-  $("txt3").textContent="aresta "+n+" → "+n+" camadas de "+n+" · "+n+" = "+(n*n)+" → volume "+n+"³ = "+(n*n*n)+(n===1?" cubinho":" cubinhos");
+  $("txt3").textContent="aresta "+n+" → "+n+(n===1?" camada de ":" camadas de ")+n+" · "+n+" = "+(n*n)+" → volume "+n+"³ = "+(n*n*n)+(n===1?" cubinho":" cubinhos");
 }
 $("slC3").addEventListener("input",pinta3); pinta3();
 

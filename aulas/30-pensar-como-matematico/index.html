@@ -526,7 +526,7 @@ function pinta2(){
     el("text",{x:x+9.5,y:y+20,"font-size":10,"text-anchor":"middle",fill:vis?"#1b1b1b":"#9ca3af"},svg2).textContent=k;
   }
   var primeiro=-1; for(k=0;k<=n;k++) if(!primo(k*k+k+41)){ primeiro=k; break; }
-  $("txt2").textContent="n = "+n+": "+n+"² + "+n+" + 41 = "+milhar(v)+(pr?" é primo ✔":" = "+fatores(v).join(" · ")+" não é primo ✘")+(primeiro>=0?" · primeiro contraexemplo: n = "+primeiro+". Depois de 40 acertos seguidos!":" · até aqui, "+(n+1)+" acertos seguidos... isso prova alguma coisa?");
+  $("txt2").textContent="n = "+n+": "+n+"² + "+n+" + 41 = "+milhar(v)+(pr?" é primo ✔":" = "+fatores(v).join(" · ")+" não é primo ✘")+(primeiro>=0?" · primeiro contraexemplo: n = "+primeiro+". Depois de 40 acertos seguidos!":" · até aqui, "+(n+1)+(n===0?" acerto":" acertos seguidos")+"... isso prova alguma coisa?");
 }
 $("slN2").addEventListener("input",pinta2); pinta2();
 
@@ -612,7 +612,7 @@ function pinta6(){
   var d=""; s.forEach(function(y,i){ d+=(i?" L":"M")+P.X(i).toFixed(1)+" "+P.Y(y).toFixed(1); });
   el("path",{d:d,fill:"none",stroke:"var(--roxo)","stroke-width":2},P.camada);
   if(s.length<=60) s.forEach(function(y,i){ el("circle",{cx:P.X(i),cy:P.Y(y),r:2.8,fill:y%2?"var(--verm)":"var(--azul)"},P.camada); });
-  $("txt6").textContent="partindo de "+n0+": "+(s.length-1)+" passos até 1, subindo até "+milhar(mx)+(s.length<=14?" · "+s.join(" → "):"")+(n0===27?" · o 27 é famoso: um número pequeno que dá uma volta enorme.":"");
+  $("txt6").textContent="partindo de "+n0+": "+(s.length-1)+(s.length===2?" passo":" passos")+" até 1, subindo até "+milhar(mx)+(s.length<=14?" · "+s.join(" → "):"")+(n0===27?" · o 27 é famoso: um número pequeno que dá uma volta enorme.":"");
 }
 $("slC6").addEventListener("input",pinta6); pinta6();
 /* ---------- exercicios ---------- */

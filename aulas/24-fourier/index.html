@@ -167,7 +167,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
       <polyline id="ondaMSoma" points="" fill="none" stroke="var(--roxo)" stroke-width="4"/>
     </svg>
   </div>
-  <p class="rabisco centro">Tracejadas: as ondas simples (frequência 1, 2 e 3). Linha roxa cheia: a soma.</p>
+  <p class="rabisco centro" id="txtMontar">Tracejadas: as ondas simples (frequência 1, 2 e 3). Linha roxa cheia: a soma.</p>
 </div>
 
 <!-- ============ 2 ============ -->
@@ -326,7 +326,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <!-- ============ 5 ============ -->
 <h2><span class="n">5</span> Ondas como giros</h2>
 
-<p>Um ponto girando no círculo tem uma <strong>altura</strong> que sobe e desce: a onda seno da Aula 16. Agora junte setas girando, uma na ponta da outra, cada uma com sua velocidade: a altura da última ponta desenha a <strong>soma de ondas</strong> da Aula 24. É assim que a decomposição de Fourier é escrita de verdade: como uma soma de números complexos <span class="mono">e^(iωt)</span> girando (Aula 18) — cada nota do espectro é uma seta, com o tamanho da altura daquela onda.</p>
+<p>Um ponto girando no círculo tem uma <strong>altura</strong> que sobe e desce: a onda seno da Aula 16. Agora junte setas girando, uma na ponta da outra, cada uma com sua velocidade: a altura da última ponta desenha a <strong>soma de ondas</strong> do começo desta aula. É assim que a decomposição de Fourier é escrita de verdade: como uma soma de números complexos <span class="mono">e^(iωt)</span> girando (Aula 18) — cada nota do espectro é uma seta, com o tamanho da altura daquela onda.</p>
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: ondas como giros</div>
@@ -487,6 +487,9 @@ function pintaMontar(){
   barraEsp1.setAttribute("height", m1*maxAltura); barraEsp1.setAttribute("y", 140-m1*maxAltura);
   barraEsp2.setAttribute("height", m2*maxAltura); barraEsp2.setAttribute("y", 140-m2*maxAltura);
   barraEsp3.setAttribute("height", m3*maxAltura); barraEsp3.setAttribute("y", 140-m3*maxAltura);
+  var termos=[[m1,"seno(x)"],[m2,"seno(2x)"],[m3,"seno(3x)"]].filter(function(t){ return t[0]>0; });
+  document.getElementById("txtMontar").textContent = !termos.length ? "Tudo desligado: a soma é uma linha reta (silêncio)."
+    : "Roxa = "+termos.map(function(t){ return fmt1(t[0])+" · "+t[1]; }).join(" + ")+(termos.length===1?" — uma onda simples só.":" — "+termos.length+" ondas simples somadas: a forma fica \"cheia\".");
 }
 [slM1,slM2,slM3].forEach(function(s){ s.addEventListener("input",pintaMontar); });
 pintaMontar();
@@ -836,7 +839,7 @@ function pinta6(){
   el("line",{x1:p2[0],y1:p2[1],x2:xt,y2:p2[1],stroke:"var(--roxo)","stroke-width":1,"stroke-dasharray":"3 3"},svg6);
   el("circle",{cx:xt,cy:p2[1],r:5,fill:"var(--roxo)"},svg6);
   var alt=Math.sin(t)+a*Math.sin(f*t);
-  $("txt6").textContent="altura = sen(t) + "+num(a,1)+" · sen("+f+"t) = "+num(alt)+" · a pequena dá "+f+" voltas enquanto a grande dá 1 — a mesma soma de ondas da Aula 24.";
+  $("txt6").textContent="altura = sen(t) + "+num(a,1)+" · sen("+f+"t) = "+num(alt)+" · a pequena dá "+f+" voltas enquanto a grande dá 1 — a mesma soma de ondas do primeiro laboratório.";
 }
 function passo6(){
   var s=$("slT6"), k=(parseInt(s.value,10)+1)%49;

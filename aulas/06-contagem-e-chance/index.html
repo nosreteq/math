@@ -585,7 +585,7 @@ function pinta1(){
   }
   el("text",{x:396,y:232,"font-size":11,fill:"#6b7280","text-anchor":"end"},P.camada).textContent="lançamentos: "+milhar(N);
   $("txt1").textContent = N===0 ? "Nenhum lançamento ainda. Jogue!"
-    : milhar(N)+" lançamentos: "+milhar(caras1)+" caras = "+pct(caras1/N)+(N>=500?" — grudando no ½.":N<20?" — com poucas jogadas, a fração pula muito.":"");
+    : milhar(N)+(N===1?" lançamento: ":" lançamentos: ")+milhar(caras1)+(caras1===1?" cara = ":" caras = ")+pct(caras1/N)+(N>=500?" — grudando no ½.":N<20?" — com poucas jogadas, a fração pula muito.":"");
 }
 $("bt1a").addEventListener("click",function(){ joga1(1); });
 $("bt1b").addEventListener("click",function(){ joga1(100); });

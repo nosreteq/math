@@ -596,7 +596,7 @@ function pinta4(){
   var o=proj4(0,0,0);
   el("circle",{cx:o[0],cy:o[1],r:5,fill:"#1b1b1b"},svg4);
   var nome=Math.abs(K)<1e-9?(Math.abs(a)+Math.abs(b)<1e-9?"plano":"cano (cilindro)"):K>0?(a>0?"tigela (bola)":"domo (bola de cabeça para baixo)"):"sela";
-  $("txt4").textContent="K = κ₁ · κ₂ = "+num(a,1)+" · "+num(b,1)+" = "+num(K,2)+" → "+(K>1e-9?"positiva":K<-1e-9?"negativa":"zero")+": "+nome+(Math.abs(K)<1e-9&&Math.abs(a)+Math.abs(b)>1e-9?". Dá para fazer de papel sem amassar.":".");
+  $("txt4").textContent="K = κ₁ · κ₂ = "+num(a,1)+" · "+(b<0?"("+num(b,1)+")":num(b,1))+" = "+num(K,2)+" → "+(K>1e-9?"positiva":K<-1e-9?"negativa":"zero")+": "+nome+(Math.abs(K)<1e-9&&Math.abs(a)+Math.abs(b)>1e-9?". Dá para fazer de papel sem amassar.":".");
 }
 $("slA4").addEventListener("input",pinta4); $("slB4").addEventListener("input",pinta4); pinta4();
 

@@ -503,7 +503,8 @@ function pinta1(){
   el("path",{d:linha(P,pos1.map(function(v,i){return [i,v];})),fill:"none",stroke:"var(--azul)","stroke-width":2.5},P.camada);
   el("circle",{cx:P.X(n),cy:P.Y(pos1[n]),r:6,fill:"var(--laranja)",stroke:"#1b1b1b","stroke-width":1.5},P.camada);
   var caras=(n+pos1[n])/2;
-  $("txt1").textContent=n?n+" jogadas: "+caras+" caras e "+(n-caras)+" coroas · posição "+num(pos1[n],0)+" · longe de 0 tipicamente uns √"+n+" ≈ "+num(Math.sqrt(n),1)+" passos":"Jogue a moeda: cara sobe, coroa desce.";
+  var pl=function(k,um,muitos){ return k+" "+(k===1?um:muitos); };
+  $("txt1").textContent=n?pl(n,"jogada","jogadas")+": "+pl(caras,"cara","caras")+" e "+pl(n-caras,"coroa","coroas")+" · posição "+num(pos1[n],0)+" · longe de 0 tipicamente uns √"+n+" ≈ "+num(Math.sqrt(n),1)+(Math.sqrt(n)<1.05?" passo":" passos"):"Jogue a moeda: cara sobe, coroa desce.";
 }
 function anda1(k){ for(var i=0;i<k;i++) pos1.push(pos1[pos1.length-1]+moeda()); pinta1(); }
 $("btP1").addEventListener("click",function(){ anda1(1); });

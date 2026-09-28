@@ -518,7 +518,7 @@ function pinta2(){
   el("circle",{cx:P2.X(a),cy:P2.Y(b),r:6,fill:"var(--roxo)"},g2);
   var tt=Math.round(t)===t?"= "+t:"≈ "+num(t);
   $("txt2").textContent = (a===0&&b===0) ? "0: o próprio zero, sem tamanho nem direção."
-    : txtC(z)+" é o ponto ("+num(a)+", "+num(b)+") · tamanho √("+num(a)+"² + "+num(b)+"²) "+tt+" · ângulo "+num(angulo(z),1)+"°";
+    : txtC(z)+" é o ponto ("+num(a)+", "+num(b)+") · tamanho √("+(a<0?"("+num(a)+")":num(a))+"² + "+(b<0?"("+num(b)+")":num(b))+"²) "+tt+" · ângulo "+num(angulo(z),1)+"°";
 }
 $("slA2").addEventListener("input",pinta2); $("slB2").addEventListener("input",pinta2); pinta2();
 

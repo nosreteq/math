@@ -553,8 +553,8 @@ function pinta2(){
   });
   el("text",{x:200,y:228,"font-size":13,"font-weight":800,fill:"var(--laranja)","text-anchor":"middle"},svg2).textContent=pot(2,n)+" = "+milhar(Math.pow(2,n))+" camadas";
   var t = mm<10 ? num(mm,1)+" mm" : mm<1000 ? num(mm/10,1)+" cm" : mm<1e6 ? num(mm/1000,1)+" m" : milhar(mm/1e6)+" km";
-  var falta = prox ? " · próximo: "+prox[0]+", com "+Math.ceil(Math.log(prox[1]/0.1)/Math.LN2-1e-9)+" dobras" : " · passou da Lua!";
-  $("txt2").textContent=n+" dobras → 0,1 · "+pot(2,n)+" mm = "+t+(passou?" · já passou de "+passou:"")+falta+".";
+  var falta = prox ? " · próximo: "+prox[0]+", com "+Math.ceil(Math.log(prox[1]/0.1)/Math.LN2-1e-9)+" dobras." : "";
+  $("txt2").textContent=n+" dobras → 0,1 · "+pot(2,n)+" mm = "+t+(passou?" · já passou "+passou.replace(/^o /,"do ").replace(/^a /,"da ").replace(/^(um|uma) /,"de $1 "):"")+(prox?falta:" 🌕");
 }
 $("slDobra2").addEventListener("input",pinta2); pinta2();
 

@@ -494,7 +494,7 @@ function pintaPas(){
   }
   var tot=Math.pow(2,L), mx=comb(L,Math.floor(L/2)), base=322, H=100, w=Math.min(28,360/(L+1));
   for(var k2=0;k2<=L;k2++){ var h=comb(L,k2)/mx*H; el("rect",{x:200+(k2-L/2)*w-w*0.4,y:base-h,width:w*0.8,height:h,fill:"#a78bfa"},svgP); }
-  $("txtPas").textContent="linha "+L+": "+(L<=8?Array.apply(null,{length:L+1}).map(function(_,k){return comb(L,k);}).join(", "):"1, "+L+", ..., "+L+", 1")+" · soma = 2"+pot("",L)+" = "+milhar(tot)+" · chance de metade caras em "+L+" moedas: "+(L%2?"—":pct(comb(L,L/2)/tot));
+  $("txtPas").textContent="linha "+L+": "+(L<=8?Array.apply(null,{length:L+1}).map(function(_,k){return comb(L,k);}).join(", "):"1, "+L+", ..., "+L+", 1")+" · soma = 2"+pot("",L)+" = "+milhar(tot)+" · chance de metade caras em "+L+(L===1?" moeda: ":" moedas: ")+(L%2?"—":pct(comb(L,L/2)/tot));
 }
 $("slLp").addEventListener("input",pintaPas); pintaPas();
 
@@ -534,7 +534,7 @@ function pinta4(){
   }
   var meioC = n4%2===0 ? pilhas4[n4/2] : pilhas4[(n4-1)/2]+pilhas4[(n4+1)/2];
   $("txt4").textContent = N===0 ? "Nenhuma bolinha ainda. Cada uma decide esquerda ou direita "+n4+" vezes."
-    : milhar(N)+" bolinhas · nas "+(n4%2===0?"pilha":"duas pilhas")+" do meio: "+pct(meioC/N)+" · nas pontas: "+pct((pilhas4[0]+pilhas4[n4])/N,2)+(N>=50?" — a curva vermelha é o sino da seção 5.":"");
+    : milhar(N)+(N===1?" bolinha · ":" bolinhas · ")+(n4%2===0?"na pilha":"nas duas pilhas")+" do meio: "+pct(meioC/N)+" · nas pontas: "+pct((pilhas4[0]+pilhas4[n4])/N,2)+(N>=50?" — a curva vermelha é o sino da seção 5.":"");
 }
 $("slF4").addEventListener("input",function(){ zera4(); pinta4(); });
 $("bt4a").addEventListener("click",function(){ solta4(1); });

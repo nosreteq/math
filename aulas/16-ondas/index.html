@@ -294,7 +294,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: somador de ondas</div>
-  <p>A onda verde é fixa (<span class="mono">seno(x)</span>). Ajuste a onda azul e observe a onda roxa — a soma das duas.</p>
+  <p>A onda verde é fixa (<span class="mono">seno(x)</span>). Ajuste a onda azul e observe a onda roxa — a soma das duas. <strong>Preveja</strong> antes: com a mesma largura e atraso de 180°, o que sobra?</p>
 
   <div class="sl-linha">
     <label class="lab-l" for="slAmp2" style="min-width:170px;color:var(--azul)">altura da onda azul:</label>
@@ -306,6 +306,11 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
     <input type="range" id="slFreq2" min="1" max="4" step="1" value="2">
     <span class="sl-val" id="vFreq2">2</span>
   </div>
+  <div class="sl-linha">
+    <label class="lab-l" for="slFase2" style="min-width:170px;color:var(--azul)">atraso da onda azul:</label>
+    <input type="range" id="slFase2" min="0" max="180" step="15" value="0">
+    <span class="sl-val" id="vFase2">0°</span>
+  </div>
 
   <div class="tela">
     <svg viewBox="0 0 380 220" id="svgSoma" role="img" aria-label="Soma de duas ondas: uma fixa em verde, outra ajustável em azul, e o resultado em roxo">
@@ -315,7 +320,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
       <polyline id="ondaSoma" points="" fill="none" stroke="var(--roxo)" stroke-width="4"/>
     </svg>
   </div>
-  <p class="rabisco centro">Tracejado verde: <span class="mono">seno(x)</span>. Tracejado azul: a onda ajustável. Linha roxa cheia: a soma das duas.</p>
+  <p class="rabisco centro" id="txtSoma">Tracejado verde: <span class="mono">seno(x)</span>. Tracejado azul: a onda ajustável. Linha roxa cheia: a soma das duas.</p>
 </div>
 
 <div class="lab">
@@ -553,18 +558,20 @@ slFase.addEventListener("input",pintaOnda3);
 pintaOnda3();
 
 /* ---------- lab 3: somador de ondas ---------- */
-var slAmp2=document.getElementById("slAmp2"), slFreq2=document.getElementById("slFreq2");
+var slAmp2=document.getElementById("slAmp2"), slFreq2=document.getElementById("slFreq2"), slFase2=document.getElementById("slFase2");
 var ondaFixa=document.getElementById("ondaFixa"), ondaAjust=document.getElementById("ondaAjust"), ondaSoma=document.getElementById("ondaSoma");
 function pintaSoma(){
-  var A=parseFloat(slAmp2.value), F=parseInt(slFreq2.value,10);
+  var A=parseFloat(slAmp2.value), F=parseInt(slFreq2.value,10), fase=parseInt(slFase2.value,10);
   document.getElementById("vAmp2").textContent=A.toFixed(1).replace(".",",");
   document.getElementById("vFreq2").textContent=F;
-  var p1=[], p2=[], p3=[];
+  document.getElementById("vFase2").textContent=fase+"°";
+  var p1=[], p2=[], p3=[], topo=0;
   for(var px=0; px<=380; px+=4){
     var xdeg=(px/380)*360;
     var y1=seno(xdeg);
-    var y2=A*seno(F*xdeg);
+    var y2=A*seno(F*xdeg-fase);
     var ys=y1+y2;
+    topo=Math.max(topo,Math.abs(ys));
     p1.push(px+","+(110-y1*55));
     p2.push(px+","+(110-y2*55));
     p3.push(px+","+(110-ys*55));
@@ -572,9 +579,16 @@ function pintaSoma(){
   ondaFixa.setAttribute("points",p1.join(" "));
   ondaAjust.setAttribute("points",p2.join(" "));
   ondaSoma.setAttribute("points",p3.join(" "));
+  var n1=function(v){ return v.toFixed(1).replace(".",","); }, t;
+  if(F!==1) t="Larguras diferentes: a soma deixa de ser uma onda simples e ganha calombos. Altura máxima da roxa ≈ "+n1(topo)+".";
+  else if(fase===0) t="Mesma largura e sem atraso: os topos coincidem e as alturas se somam — 1 + "+n1(A)+" = "+n1(1+A)+". Reforço!";
+  else if(fase===180) t="Mesma largura e atraso de 180°: uma sobe quando a outra desce. Sobra |1 − "+n1(A)+"| = "+n1(Math.abs(1-A))+(Math.abs(1-A)<0.05?" — cancelamento total: silêncio!":" — quase se cancelam.");
+  else t="Mesma largura, atraso de "+fase+"°: a soma ainda é uma onda simples, com altura ≈ "+n1(topo)+" — entre |1 − "+n1(A)+"| (opostas) e 1 + "+n1(A)+" (juntas).";
+  document.getElementById("txtSoma").textContent=t;
 }
 slAmp2.addEventListener("input",pintaSoma);
 slFreq2.addEventListener("input",pintaSoma);
+slFase2.addEventListener("input",pintaSoma);
 pintaSoma();
 
 /* ---------- lab: quantas ondas cabem ---------- */

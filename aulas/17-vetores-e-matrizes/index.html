@@ -394,7 +394,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <p><input type="number" data-r="5"></p>
   <button class="check" data-ex="ex5">Conferir</button>
   <div class="fb"></div>
-  <p class="dica">Dica: (2 · 4) + (3 · −1) = 8 − 3.</p>
+  <p class="dica">Dica: (2 · 4) + (3 · (−1)) = 8 − 3.</p>
 </div>
 
 <div class="ex" id="ex6">
@@ -545,10 +545,10 @@ function pintaMatriz(){
   var transf = pontosBase.map(function(p){ var t=aplicaMatriz(p,deg); return X(t.x)+","+Y(t.y); }).join(" ");
   figTransf.setAttribute("points", transf);
   var partes=[];
-  if(espH<0) partes.push("espelhada na horizontal");
-  if(espV<0) partes.push("espelhada na vertical");
-  if(escala!==1) partes.push("esticada "+escala.toFixed(1).replace(".",",")+"×");
-  if(deg!==0) partes.push("girada "+deg+"°");
+  if(espH<0) partes.push("espelhado na horizontal");
+  if(espV<0) partes.push("espelhado na vertical");
+  if(escala!==1) partes.push("esticado "+escala.toFixed(1).replace(".",",")+"×");
+  if(deg!==0) partes.push("girado "+deg+"°");
   txtMatriz.textContent = partes.length ? "Triângulo " + partes.join(", ") + "." : "Triângulo original em cinza tracejado; transformado em azul.";
 }
 slRot.addEventListener("input",pintaMatriz);
@@ -631,7 +631,7 @@ var explica={
   ex4:{ok:"Isso! 3 · 4 + 4 · (−3) = 12 − 12 = 0: as setas são perpendiculares (ângulo reto).",no:"Multiplique coordenada com coordenada e some: 3 · 4 + 4 · (−3) = 12 − 12 = <strong>0</strong>. Produto escalar zero = ângulo reto."},
   ex6:{"ok": "Tudo certo! Seta, encaixe, ângulo reto e a máquina de setas.", "no": "Quase. Vetor = seta com tamanho e direção; somar = encaixar ponta com cauda; produto escalar zero = perpendiculares; matriz = máquina que transforma setas."},
   ex2:{ok:"Isso! √(36 + 64) = √100 = 10.",no:"Tamanho = √(6² + 8²) = √(36 + 64) = √100 = <strong>10</strong>."},
-  ex5:{ok:"Isso! (2·4) + (3·−1) = 8 − 3 = 5.",no:"(2 · 4) + (3 · −1) = 8 − 3 = <strong>5</strong>."}
+  ex5:{ok:"Isso! (2 · 4) + (3 · (−1)) = 8 − 3 = 5.",no:"(2 · 4) + (3 · (−1)) = 8 − 3 = <strong>5</strong>."}
 };
 document.querySelectorAll("button.check").forEach(function(b){
   b.addEventListener("click",function(){

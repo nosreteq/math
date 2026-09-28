@@ -110,7 +110,8 @@ duas sobem juntas, o resultado sobe mais. Onde uma sobe e a outra desce, elas se
 (ou até completamente).
 
 > 🔧 **Laboratório — somador de ondas.** A onda verde é fixa (`seno(x)`). Ajuste a onda azul e
-> observe a onda roxa — a soma das duas. *(interativo, na versão em HTML)*
+> observe a onda roxa — a soma das duas. **Preveja** antes: com a mesma largura e atraso de 180°, o
+> que sobra? *(interativo, na versão em HTML)*
 
 > 🔧 **Laboratório — reconheça a onda.** A onda cinza tracejada é um alvo secreto. Ajuste amplitude e
 > frequência até a onda azul cobrir a cinza. *(interativo, na versão em HTML)*

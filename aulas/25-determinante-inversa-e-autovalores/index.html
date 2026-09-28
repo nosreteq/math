@@ -497,7 +497,8 @@ function pinta1(){
   var q=[[0,0],aplica(M,[1,0]),aplica(M,[1,1]),aplica(M,[0,1])];
   el("polygon",{points:pts(P,q),fill:det<0?"rgba(220,38,38,.25)":"rgba(37,99,235,.25)",stroke:det<0?"var(--verm)":"var(--azul)","stroke-width":2.5},P.camada);
   seta(P,P.camada,[0,0],q[1],"var(--verde)",3); seta(P,P.camada,[0,0],q[3],"var(--laranja)",3);
-  $("txt1").textContent="det = "+num(a)+" · "+num(d)+" − "+num(b)+" · "+num(c)+" = "+num(det)+" → área "+num(Math.abs(det))+(det<0?" (espelhado: a ordem das setas verde e laranja inverteu)":det===0?" — achatou!":"");
+  var np=function(v){ return v<0?"("+num(v)+")":num(v); };
+  $("txt1").textContent="det = "+np(a)+" · "+np(d)+" − "+np(b)+" · "+np(c)+" = "+num(det)+" → área "+num(Math.abs(det))+(det<0?" (espelhado: a ordem das setas verde e laranja inverteu)":det===0?" — achatou!":"");
 }
 ["slA1","slB1","slC1","slD1"].forEach(function(id){ $(id).addEventListener("input",pinta1); }); pinta1();
 
@@ -510,7 +511,7 @@ function pinta2(){
   var P=plano(svg2,{w:340,h:340,xmin:-6,xmax:6,ymin:-6,ymax:6,px:1,py:1,rotulos:false});
   for(var i=-2;i<=2;i++) for(var j=-2;j<=2;j++){ var w=aplica(M,[i,j]); el("circle",{cx:P.X(w[0]),cy:P.Y(w[1]),r:4,fill:(i===0&&j===0)?"#1b1b1b":"var(--azul)",opacity:.8},P.camada); }
   seta(P,P.camada,[0,0],[2,1],"var(--verde)",3); seta(P,P.camada,[0,0],[1,s],"var(--laranja)",3);
-  $("txt2").textContent="det = 2 · "+num(s,1)+" − 1 · 1 = "+num(det,1)+(Math.abs(det)<1e-9?" → zero! As duas colunas ficaram na mesma direção e todos os pontos caíram numa reta. O sistema 2x + y = …, x + 0,5y = … não tem solução única.":" → os 25 pontos ainda espalham pelo plano: dá para desfazer.");
+  $("txt2").textContent="det = 2 · "+(s<0?"("+num(s,1)+")":num(s,1))+" − 1 · 1 = "+num(det,1)+(Math.abs(det)<1e-9?" → zero! As duas colunas ficaram na mesma direção e todos os pontos caíram numa reta. O sistema 2x + y = …, x + 0,5y = … não tem solução única.":" → os 25 pontos ainda espalham pelo plano: dá para desfazer.");
 }
 $("slS2").addEventListener("input",pinta2); pinta2();
 
