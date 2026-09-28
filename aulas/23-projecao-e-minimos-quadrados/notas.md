@@ -117,7 +117,7 @@ padrão dos dados que já existem. Não é garantia, é a melhor aposta linear d
 ## ✏️ Afie o lápis
 
 1. Uma seta de tamanho 10 faz um ângulo de **60°** com uma reta. Qual é o tamanho da sombra (a
-   projeção) dela sobre a reta? → **5 — tamanho · cosseno de 60° = 10 · 0,5.**
+   projeção) dela sobre a reta? → **5**
 2. *(quem faz o quê?)* Ligue cada peça ao seu papel. → **projeção → a sombra de um vetor sobre
    outro; erro de um ponto → a distância vertical do ponto até a reta; mínimos quadrados → o
    critério: menor soma dos erros ao quadrado; reta de regressão → a reta que esse critério

@@ -51,3 +51,7 @@
 .pc-fim{background:#ecfdf5;border:2px solid #059669;border-radius:10px;padding:10px 14px;font-weight:700;font-size:16px}
 .pc-placar{font-weight:400;font-size:14px;color:#374151}
 @media(max-width:620px){.pc-passo input{width:78px}.pc-pede{flex-basis:100%}}
+
+/* alças arrastáveis também respondem ao teclado: mostrar onde está o foco */
+svg [tabindex]:focus{outline:none;stroke:#f59e0b !important;stroke-width:5px !important}
+svg:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}

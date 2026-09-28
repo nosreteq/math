@@ -181,6 +181,20 @@ async function checaSPA(browser) {
     }));
     for (const [id, ruins] of pcs) if (ruins.length) falha(slug, `${id}: preveja-e-confira quebrou: ${ruins[0]}`);
 
+    // acessibilidade: toda alça focável dentro de um laboratório precisa andar com as setas do teclado
+    const nTecla = await p.locator('.lab svg [tabindex], .lab svg[tabindex]').count();
+    for (let k = 0; k < nTecla; k++) {
+      const alca = p.locator('.lab svg [tabindex], .lab svg[tabindex]').nth(k);
+      const lab = await alca.evaluate(e => { e.focus(); const l = e.closest('.lab'); l.dataset.tk = '1'; return l.innerHTML; });
+      let mudou = false;
+      for (const tecla of ['ArrowRight', 'ArrowUp', 'ArrowLeft', 'ArrowDown']) {
+        await p.keyboard.press(tecla);
+        if (await p.evaluate(a => document.querySelector('.lab[data-tk]').innerHTML !== a, lab)) { mudou = true; break; }
+      }
+      await p.evaluate(() => document.querySelector('.lab[data-tk]').removeAttribute('data-tk'));
+      if (!mudou) falha(slug, `alça ${k + 1} de laboratório não responde ao teclado`);
+    }
+
     // exercícios: primeiro errado (não pode pontuar), depois certo (tem que pontuar)
     const ids = await p.locator('.ex').evaluateAll(els => els.map(e => e.id));
     if (ids.length !== 6) falha(slug, `${ids.length} exercícios (esperado 6)`);

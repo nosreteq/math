@@ -154,5 +154,5 @@ tamanho da altura daquela onda.
    no sinal**
 5. *(o desafio)* O sinal é `2 · seno(x) + 0,5 · seno(2x)`. Qual é a altura da barra mais alta do
    espectro? → **2**
-6. Para descobrir quanto de `seno(2x)` existe dentro de um sinal complicado, o jeito direto é: →
-   **Projetar o sinal sobre seno(2x) — o produto escalar entre os dois.**
+6. Um sinal medido em 4 instantes é `(2, 0, −2, 0)` e a onda de teste é `(1, 0, −1, 0)`. Quanto
+   dessa onda existe no sinal? Calcule (sinal · onda) ÷ (onda · onda). → **2**

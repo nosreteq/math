@@ -111,27 +111,27 @@ JavaScript, e passam em L1, L2, E1 e E2 (FATO, medido). As colunas L3 e E4 são 
 | 01 Múltiplos e primos | crivo, árvore de fatores, engrenagens (MMC), ladrilhos (MDC) | ✅ engrenagens: quando realinham? | 3 | ✅ |
 | 02 Frações e negativos | pizza, equivalentes, régua decimal, termômetro, saldo | ✅ | 4 | ✅ |
 | 03 Porcentagem | receita que dobra, desconto × aumento, direta ou inversa? | ✅ desconto × aumento | 4 | ✅ |
-| 04 Potências e raízes | quadrado/cubo crescem, ache o lado, potências de 10 | ✅ | 5 | ✅ |
+| 04 Potências e raízes | quadrado/cubo crescem, ache o lado **+ raiz na mão (preveja)**, potências de 10 | ✅ **novo** | 5 | ✅ |
 | 05 Estatística | gangorra da média, salário do chefe, histograma | ✅ salário do chefe | 3 | ✅ |
 | 06 Contagem e chance | árvore de roupas, moedas, dado viciado?, média que gruda | ✅ dado viciado? | 4 | ✅ |
 | 07 Letras e números | máquina, fórmula clicável, **ordem das contas (preveja)** | ✅ **novo** | 3 | ✅ |
 | 08 Equações | balança, **máquina ao contrário e x dos dois lados (preveja)** | ✅ **novo** | 4 | ✅ |
-| 09 Plano e reta | encontre/leia o ponto, elevador, fábrica de retas | ✅ | 3 | ✅ |
+| 09 Plano e reta | encontre/leia o ponto (**mouse ou teclado**), elevador, fábrica de retas | ✅ | 3 | ✅ |
 | 10 Sistemas | cruzamento, paralelas, **resolva passo a passo (preveja)**, alvo | ✅ **novo** | 4 | ✅ |
 | 11 Ângulos e π | ponteiro, transferidor, desenrole o círculo, gomos | ✅ | 4 (**+2**) | ✅ **refeito** |
-| 12 Áreas e Pitágoras | triângulos, prova dos quatro triângulos, lata | ✅ | 4 | ✅ |
+| 12 Áreas e Pitágoras | triângulos, Pitágoras **+ passo a passo (preveja)**, prova dos quatro triângulos, lata | ✅ **novo** | 4 | ✅ |
 | 13 Curvas | três sliders da parábola, caça ao vértice, reta ou curva? | ✅ | 3 | ✅ |
 | 14 Crescimento | corrida soma × multiplicação, dobras, régua log, o e | ✅ corrida | 4 | ✅ |
 | 15 Trigonometria | sombra e altura, simetria, triângulo, radianos | ✅ | 4 | ✅ **refeito** |
 | 16 Ondas | três sliders, somador, reconheça, **onda ao vivo com boia** | ✅ **novo** | 3 (**+3**) | ✅ **refeito** |
-| 17 Vetores e matrizes | setas arrastáveis, produto escalar, gire com matriz | ✅ | 2 (+ ligar) | ✅ |
+| 17 Vetores e matrizes | setas arrastáveis (**mouse ou teclado**), produto escalar, gire com matriz | ✅ | 3 (**+1**) | ✅ |
 | 18 Complexos | multiplique por i, girar e esticar, Euler, raízes | ✅ | 4 | ✅ |
 | 19 Derivada | lupa, reta que encosta, saltos e bicos, caça ao topo | ✅ | 4 | ✅ |
-| 20 Integral | fatias, velocidade → distância, derivar o acumulado | ✅ | 4 | ✅ |
+| 20 Integral | fatias **+ some as fatias (preveja)**, velocidade → distância, derivar o acumulado | ✅ **novo** | 4 | ✅ |
 | 21 Normal | Galton, sino ajustável, padronizar, caudas gordas | ✅ | 4 | ✅ |
 | 22 Correlação | nuvem ao vivo, **adivinhe a correlação**, o que ela não vê | ✅ adivinhe | 3 (**+1**) | ✅ **refeito** |
-| 23 Projeção e MQ | **monte a projeção (preveja)**, regressão ao vivo, comparador | ✅ **novo** | 2 (**+2**) + 1 conta em alternativas | ✅ **refeito** |
-| 24 Fourier | monte a onda, **equalizador**, decomponha a misteriosa | ✅ **novo** | 2 (**+1**) | ✅ **refeito** |
+| 23 Projeção e MQ | **monte a projeção (preveja)**, regressão ao vivo (**mouse ou teclado**), comparador | ✅ **novo** | 3 (**+3**) | ✅ **refeito** |
+| 24 Fourier | monte a onda, **equalizador**, decomponha a misteriosa | ✅ **novo** | 3 (**+2**) | ✅ **refeito** |
 | 25 Determinante e autovalores | achatar o plano, caça às setas que não giram | ✅ | 4 | ✅ |
 | 26 PCA | gire a reta de projeção, variância explicada, imagem comprimida | ✅ | 3 | ✅ |
 | 27 Otimização | bolinha na curva, tamanho do passo, vale local | ✅ passo | 3 | ✅ |
@@ -151,15 +151,32 @@ JavaScript, e passam em L1, L2, E1 e E2 (FATO, medido). As colunas L3 e E4 são 
 
 "Contas" conta os campos numéricos; o exercício "quem faz o quê?" (ligar) está fora dessa contagem.
 
-## O que ainda pode melhorar (INFERÊNCIA — não feito nesta rodada)
+## Segunda rodada — pendências aplicadas
 
-- **17, 23 e 24 ficam com 2 exercícios de campo** (os outros são múltipla escolha com conta dentro,
-  como 23 ex1). Atende à intenção de E3, mas não à letra; pode virar 3 numa próxima revisão.
-- **Laboratórios com arraste não têm alternativa por teclado** (09 "leia o ponto", 11 transferidor,
-  17 setas). Funcionam no mouse e no toque; para acessibilidade plena falta controle por setas do
-  teclado.
+- **Mínimo de 3 contas em todas as aulas.** 17 ex4 (produto escalar de (3, 4) e (4, −3) → 0),
+  23 ex1 (sombra de uma seta de 10 a 60° → 5, agora em campo numérico) e 24 ex6 (projeção de
+  (2, 0, −2, 0) sobre (1, 0, −1, 0) → 2) viraram contas. **FATO:** 66 múltipla escolha + 174
+  campos/ligar; nenhuma aula com menos de 3 campos numéricos.
+- **Teclado em todos os arrastes.** O helper `arrasta()` (usado por 35 aulas) ganhou `teclaAlca`:
+  a alça recebe foco e as setas a movem (Shift = passo maior), aumentando o passo até ela sair do
+  lugar — funciona também nos laboratórios que encaixam numa grade. Casos à parte: 09 "leia o ponto"
+  (setas andam uma casa), 17 somador de setas (pontas de v e w) e 23 regressão (cada ponto).
+  Foco visível em laranja. **FATO:** 13 alças focáveis em 6 aulas, todas respondem às setas; o
+  `tests/verifica.js` agora falha se alguma alça focável não responder ao teclado.
+- **"Agora é você" nas aulas 04, 12 e 20** — em vez de trocar laboratórios bons, o bloco
+  *preveja e confira* entrou **dentro** do laboratório, depois da parte visual:
+  - **04 ache o lado** → raiz de um quadrado perfeito (121 a 841) sem calculadora: a dezena pelo
+    tamanho, a unidade pelo último algarismo, teste do candidato.
+  - **12 Pitágoras com quadrados** → hipotenusa pelos catetos ou altura da escada no muro
+    (Pitágoras ao contrário), com triplas inteiras e o triângulo desenhado no fim.
+  - **20 fatias mais finas** → alturas das fatias pela esquerda ou pela direita, soma, área exata
+    e o erro em %, ligando ao slider de mais fatias.
+  - Aluno simulado: 200 problemas em cada, 0 falhas.
+
+## O que ainda pode melhorar (INFERÊNCIA)
+
 - **Sem medida com alunos reais.** A rubrica mede o desenho da aula; tempo gasto, taxa de acerto de
   primeira e desistência por laboratório só aparecem com telemetria (o placar do "preveja e
-  confira" já calcula o acerto de primeira, mas não o guarda).
-- O "preveja e confira" é reaproveitável: bons candidatos a seguir são 04 (raiz por tentativa),
-  12 (Pitágoras) e 20 (soma das fatias).
+  confira" calcula o acerto de primeira, mas não o guarda).
+- Elementos **clicáveis** dentro de desenhos (barras do equalizador da 24, fórmula clicável da 07)
+  têm botões equivalentes ou são complementares, mas não recebem foco eles mesmos.

@@ -150,8 +150,8 @@ vezes andar em cada seta** para chegar no ponto `(5, 1)`.
 2. Qual é o tamanho da seta `(6, 8)`? → **10**
 3. Multiplicar um vetor por **−2** faz o quê com a seta? → **Estica ao dobro do tamanho e inverte
    a direção.**
-4. Se o produto escalar entre duas setas é **zero**, o que isso diz sobre o ângulo entre elas? →
-   **É um ângulo reto — as setas são perpendiculares.**
+4. Quanto vale o produto escalar de `(3, 4)` com `(4, −3)`? E o que isso diz do ângulo entre as
+   setas? → **0**
 5. *(o desafio)* Calcule o produto escalar `(2, 3) · (4, −1)`. → **5**
 6. *(quem faz o quê?)* Ligue cada peça ao seu papel. → **vetor → uma seta: tamanho e direção;
    somar vetores → encaixar as setas, ponta com cauda; produto escalar zero → as setas são

@@ -313,13 +313,10 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <div class="tit">Exercício 1</div>
   <div class="selo">✅</div>
   <p>Uma seta de tamanho 10 faz um ângulo de <strong>60°</strong> com uma reta. Qual é o tamanho da sombra (a projeção) dela sobre a reta?</p>
-  <div class="alts" data-r="1">
-    <div class="alt" data-i="0">10 — a sombra tem sempre o tamanho da seta.</div>
-    <div class="alt" data-i="1">5 — tamanho · cosseno de 60° = 10 · 0,5.</div>
-    <div class="alt" data-i="2">8,66 — tamanho · seno de 60°.</div>
-    <div class="alt" data-i="3">0 — a seta não está deitada na reta.</div>
-  </div>
+  <p><input type="number" step="any" data-r="5" aria-label="Resposta do exercício 1"></p>
+  <button class="check" data-ex="ex1">Conferir</button>
   <div class="fb"></div>
+  <p class="dica">Dica: cosseno de 60° = 0,5.</p>
 </div>
 
 <div class="ex" id="ex2">
@@ -490,7 +487,7 @@ function pintaRegr(){
     var c=document.createElementNS(NS,"circle");
     c.setAttribute("cx",X(p.x)); c.setAttribute("cy",Y(p.y)); c.setAttribute("r",9);
     c.setAttribute("fill","var(--azul)"); c.setAttribute("stroke","#fff"); c.setAttribute("stroke-width",2.5);
-    c.setAttribute("data-idx",i); c.classList.add("alca-regr");
+    c.setAttribute("data-idx",i); c.classList.add("alca-regr"); c.setAttribute("tabindex","0"); c.setAttribute("aria-label","ponto "+(i+1)+": use as setas do teclado");
     c.style.cursor="grab";
     pontosRegr.appendChild(c);
   });
@@ -517,6 +514,16 @@ svgRegr.addEventListener("pointermove",function(ev){
   pintaRegr();
 });
 window.addEventListener("pointerup",function(){ arrastandoRegr=null; });
+/* teclado: setas mexem o ponto focado meia casa */
+pontosRegr.addEventListener("keydown",function(ev){
+  if(!ev.target.classList.contains("alca-regr")) return;
+  var d={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,1],ArrowDown:[0,-1]}[ev.key]; if(!d) return;
+  ev.preventDefault();
+  var i=parseInt(ev.target.getAttribute("data-idx"),10), p=pontosDadosRegr[i];
+  pontosDadosRegr[i]={x:Math.max(-6,Math.min(6,p.x+d[0]*0.5)), y:Math.max(-6,Math.min(6,p.y+d[1]*0.5))};
+  pintaRegr();
+  var novo=pontosRegr.querySelector('[data-idx="'+i+'"]'); if(novo) novo.focus();
+});
 pintaRegr();
 
 /* ---------- lab: comparador de erro ---------- */
@@ -624,6 +631,7 @@ function fb(box,ok,txt){
   if(!ok){ void box.offsetWidth; box.classList.add("chacoalha"); }
 }
 var explica={
+  ex1:{ok:"Isso! Projeção = tamanho · cosseno = 10 · 0,5 = 5 — a mesma sombra da Aula 15.",no:"Projeção = tamanho · cosseno do ângulo = 10 · cos 60° = 10 · 0,5 = <strong>5</strong>. (Com seno daria a altura, 8,66.)"},
   ex2:{"ok": "Tudo certo! Sombra, erro, critério e a reta escolhida.", "no": "Quase. Projeção = sombra; erro = distância vertical até a reta; mínimos quadrados = menor soma dos erros ao quadrado; regressão = a reta escolhida."},
   ex5:{ok:"Isso! Erros 1, −1 e 0; quadrados 1 + 1 + 0 = 2.",no:"Erros (ponto − reta): 2 − 1 = 1, 1 − 2 = −1, 3 − 3 = 0. Ao quadrado: 1 + 1 + 0 = <strong>2</strong>. Sem o quadrado a soma daria 0 e a reta pareceria perfeita!"},
   ex6:{ok:"Isso! f(3) = 6, e 9 − 6 = 3.",no:"A reta em x = 3 vale 2 · 3 = 6; o ponto está em 9. Erro = 9 − 6 = <strong>3</strong>."}
@@ -645,11 +653,7 @@ document.querySelectorAll("button.check").forEach(function(b){
   });
 });
 var expAlt={
-  ex1:[
-  "Só se o ângulo fosse 0° (seta deitada na reta). Inclinada, a sombra encolhe.",
-  "Isso! Projeção = tamanho · cosseno do ângulo = 10 · 0,5 = 5 — a mesma sombra da Aula 15.",
-  "Seno dá a ALTURA (a parte perpendicular), não a sombra sobre a reta.",
-  "Sombra zero só acontece a 90° (seta em pé). A 60° ainda sobra sombra."],
+  
   ex2:["Retas existem perfeitamente na matemática — o problema é a variação dos dados reais.",
        "Isso! Dados reais têm variação, então sempre sobra algum erro entre ponto e reta.",
        "Retas funcionam com qualquer número real, não só inteiros."],

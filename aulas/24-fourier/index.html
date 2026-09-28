@@ -418,14 +418,11 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <div class="ex" id="ex6">
   <div class="tit">Exercício 6</div>
   <div class="selo">✅</div>
-  <p>Para descobrir quanto de <span class="mono">seno(2x)</span> existe dentro de um sinal complicado, o jeito direto é:</p>
-  <div class="alts" data-r="2">
-    <div class="alt" data-i="0">Somar o sinal com seno(2x).</div>
-    <div class="alt" data-i="1">Olhar só o ponto mais alto do sinal.</div>
-    <div class="alt" data-i="2">Projetar o sinal sobre seno(2x) — o produto escalar entre os dois.</div>
-    <div class="alt" data-i="3">Contar quantas vezes o sinal cruza o zero.</div>
-  </div>
+  <p>Um sinal medido em 4 instantes é <span class="mono">(2, 0, −2, 0)</span> e a onda de teste é <span class="mono">(1, 0, −1, 0)</span>. Quanto dessa onda existe no sinal? Calcule (sinal · onda) ÷ (onda · onda).</p>
+  <p><input type="number" step="any" data-r="2" aria-label="Resposta do exercício 6"></p>
+  <button class="check" data-ex="ex6">Conferir</button>
   <div class="fb"></div>
+  <p class="dica">Dica: é a projeção da Aula 23, com listas de 4 números.</p>
 </div>
 
 <div class="placar" id="placar">
@@ -631,6 +628,7 @@ function fb(box,ok,txt){
   if(!ok){ void box.offsetWidth; box.classList.add("chacoalha"); }
 }
 var explica={
+  ex6:{ok:"Isso! sinal · onda = 2 + 0 + 2 + 0 = 4; onda · onda = 2; 4 ÷ 2 = 2. O sinal é 2 vezes a onda de teste.",no:"sinal · onda = 2·1 + 0·0 + (−2)·(−1) + 0·0 = 4. onda · onda = 1 + 0 + 1 + 0 = 2. Projeção: 4 ÷ 2 = <strong>2</strong>."},
   ex5:{ok:"Isso! A barra da frequência 1 tem altura 2, maior que 0,5.",no:"As barras têm as amplitudes: 2 (freq. 1) e 0,5 (freq. 2). A mais alta mede <strong>2</strong>."},
   ex4:{"ok": "Tudo certo! Decompor, espectro, frequência e o teste de cada onda.", "no": "Quase. Decompor = soma de ondas simples; espectro = quanto há de cada frequência; frequência = voltas no mesmo espaço; produto escalar = mede quanto daquela onda há no sinal."},
   ex3:{ok:"Isso! Barras de altura 3 (freq. 1) e 1 (freq. 3); nenhuma na freq. 2.",no:"A barra de cada frequência tem a altura da amplitude: <strong>3</strong> na freq. 1 e <strong>1</strong> na freq. 3 (seno(3x) sem número na frente vale 1 ·)."}
@@ -666,11 +664,7 @@ var expAlt={
        "Isso! Frequências pouco percebidas pelo ouvido são descartadas com cuidado, economizando espaço.",
        "A ordem das notas no tempo não muda com a decomposição em frequências."],
   
-  ex6:[
-  "Somar só mistura mais — não mede nada.",
-  "O pico mistura todas as notas ao mesmo tempo; não separa a de frequência 2.",
-  "Isso! A projeção (produto escalar) sobre seno(2x) isola a altura dessa nota — as outras frequências dão zero.",
-  "Os cruzamentos misturam todas as frequências; não isolam a quantidade de seno(2x)."]
+  
 };
 document.querySelectorAll(".alts").forEach(function(grupo){
   var box=grupo.closest(".ex"), certa=parseInt(grupo.dataset.r,10);
@@ -772,6 +766,24 @@ function arrasta(svg,alca,cb){
   alca.addEventListener("pointerdown",function(ev){ ativo=true; ev.preventDefault(); pos(ev); });
   svg.addEventListener("pointermove",function(ev){ if(ativo) pos(ev); });
   window.addEventListener("pointerup",function(){ ativo=false; });
+  teclaAlca(svg,alca,cb);
+}
+/* teclado: as setas movem a alça (Shift = passo maior); aumenta o passo até ela sair do lugar,
+   para funcionar também quando o laboratório encaixa a posição numa grade */
+function teclaAlca(svg,alca,cb){
+  alca.setAttribute("tabindex","0");
+  if(!alca.getAttribute("aria-label")) alca.setAttribute("aria-label","alça arrastável: use as setas do teclado");
+  alca.addEventListener("keydown",function(ev){
+    var d={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[ev.key]; if(!d) return;
+    ev.preventDefault();
+    var r=svg.getBoundingClientRect(), vb=svg.viewBox.baseVal;
+    function centro(){ var b=alca.getBoundingClientRect(); return [(b.left+b.width/2-r.left)/r.width*vb.width,(b.top+b.height/2-r.top)/r.height*vb.height]; }
+    var c=centro(), passo=vb.width/(ev.shiftKey?20:80);
+    for(var k=1;k<=40;k++){
+      cb(c[0]+d[0]*passo*k,c[1]+d[1]*passo*k);
+      var n=centro(); if(Math.abs(n[0]-c[0])+Math.abs(n[1]-c[1])>0.5) break;
+    }
+  });
 }
 /* texto de receita sem "+ -": termos [[coef, "x²"], [coef, "x"], [coef, ""]] */
 function receita(termos){

@@ -380,14 +380,11 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <div class="ex" id="ex4">
   <div class="tit">Exercício 4</div>
   <div class="selo">✅</div>
-  <p>Se o produto escalar entre duas setas é <strong>zero</strong>, o que isso diz sobre o ângulo entre elas?</p>
-  <div class="alts" data-r="1">
-    <div class="alt" data-i="0">É um ângulo agudo.</div>
-    <div class="alt" data-i="1">É um ângulo reto — as setas são perpendiculares.</div>
-    <div class="alt" data-i="2">É um ângulo obtuso.</div>
-    <div class="alt" data-i="3">As setas apontam para o mesmo lado.</div>
-  </div>
+  <p>Quanto vale o produto escalar de <span class="mono">(3, 4)</span> com <span class="mono">(4, −3)</span>? E o que isso diz do ângulo entre as setas?</p>
+  <p><input type="number" step="any" data-r="0" aria-label="Resposta do exercício 4"></p>
+  <button class="check" data-ex="ex4">Conferir</button>
   <div class="fb"></div>
+  <p class="dica">Dica: x com x, y com y, depois some.</p>
 </div>
 
 <div class="ex" id="ex5">
@@ -494,6 +491,19 @@ svgSoma.addEventListener("pointermove",function(ev){
   pintaSoma();
 });
 window.addEventListener("pointerup",function(){ arrastando=null; });
+/* teclado: setas mexem a ponta de v ou de w uma casa */
+[["v",alcaV],["w",alcaW]].forEach(function(par){
+  par[1].setAttribute("tabindex","0");
+  par[1].setAttribute("aria-label","ponta da seta "+par[0]+": use as setas do teclado");
+  par[1].addEventListener("keydown",function(ev){
+    var d={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,1],ArrowDown:[0,-1]}[ev.key]; if(!d) return;
+    ev.preventDefault();
+    var lim=function(n){ return Math.max(-6,Math.min(6,n)); };
+    if(par[0]==="v") vVec={x:lim(vVec.x+d[0]),y:lim(vVec.y+d[1])};
+    else wVec={x:lim(vVec.x+wVec.x+d[0])-vVec.x,y:lim(vVec.y+wVec.y+d[1])-vVec.y};
+    pintaSoma();
+  });
+});
 pintaSoma();
 
 /* ---------- lab 2: produto escalar ---------- */
@@ -618,6 +628,7 @@ function fb(box,ok,txt){
   if(!ok){ void box.offsetWidth; box.classList.add("chacoalha"); }
 }
 var explica={
+  ex4:{ok:"Isso! 3 · 4 + 4 · (−3) = 12 − 12 = 0: as setas são perpendiculares (ângulo reto).",no:"Multiplique coordenada com coordenada e some: 3 · 4 + 4 · (−3) = 12 − 12 = <strong>0</strong>. Produto escalar zero = ângulo reto."},
   ex6:{"ok": "Tudo certo! Seta, encaixe, ângulo reto e a máquina de setas.", "no": "Quase. Vetor = seta com tamanho e direção; somar = encaixar ponta com cauda; produto escalar zero = perpendiculares; matriz = máquina que transforma setas."},
   ex2:{ok:"Isso! √(36 + 64) = √100 = 10.",no:"Tamanho = √(6² + 8²) = √(36 + 64) = √100 = <strong>10</strong>."},
   ex5:{ok:"Isso! (2·4) + (3·−1) = 8 − 3 = 5.",no:"(2 · 4) + (3 · −1) = 8 − 3 = <strong>5</strong>."}
@@ -649,11 +660,7 @@ var expAlt={
   "Encolher sozinho seria multiplicar por um número entre −1 e 1.",
   "Esticar sem inverter seria multiplicar por um número positivo maior que 1.",
   "Isso! O 2 estica ao dobro, e o sinal de menos inverte a direção."],
-  ex4:[
-  "Ângulo agudo dá produto escalar positivo, não zero.",
-  "Isso! Produto escalar zero significa ângulo reto — as setas são perpendiculares.",
-  "Ângulo obtuso dá produto escalar negativo, não zero.",
-  "Mesmo lado (0°) dá o MAIOR produto escalar positivo, não zero."],
+  
   ex6:["Uma seta especial ainda seria só um vetor, não uma matriz.",
        "Isso! Matriz é uma tabela de números que transforma setas.",
        "Um único número seria um escalar, como o resultado do produto escalar — não uma matriz."]
@@ -758,6 +765,24 @@ function arrasta(svg,alca,cb){
   alca.addEventListener("pointerdown",function(ev){ ativo=true; ev.preventDefault(); pos(ev); });
   svg.addEventListener("pointermove",function(ev){ if(ativo) pos(ev); });
   window.addEventListener("pointerup",function(){ ativo=false; });
+  teclaAlca(svg,alca,cb);
+}
+/* teclado: as setas movem a alça (Shift = passo maior); aumenta o passo até ela sair do lugar,
+   para funcionar também quando o laboratório encaixa a posição numa grade */
+function teclaAlca(svg,alca,cb){
+  alca.setAttribute("tabindex","0");
+  if(!alca.getAttribute("aria-label")) alca.setAttribute("aria-label","alça arrastável: use as setas do teclado");
+  alca.addEventListener("keydown",function(ev){
+    var d={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[ev.key]; if(!d) return;
+    ev.preventDefault();
+    var r=svg.getBoundingClientRect(), vb=svg.viewBox.baseVal;
+    function centro(){ var b=alca.getBoundingClientRect(); return [(b.left+b.width/2-r.left)/r.width*vb.width,(b.top+b.height/2-r.top)/r.height*vb.height]; }
+    var c=centro(), passo=vb.width/(ev.shiftKey?20:80);
+    for(var k=1;k<=40;k++){
+      cb(c[0]+d[0]*passo*k,c[1]+d[1]*passo*k);
+      var n=centro(); if(Math.abs(n[0]-c[0])+Math.abs(n[1]-c[1])>0.5) break;
+    }
+  });
 }
 /* texto de receita sem "+ -": termos [[coef, "x²"], [coef, "x"], [coef, ""]] */
 function receita(termos){
