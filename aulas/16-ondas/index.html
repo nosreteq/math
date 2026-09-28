@@ -349,20 +349,28 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <div class="lab">
   <div class="tit">🔧 Laboratório: onda ao vivo</div>
-  <p>Aumente a velocidade e veja a onda correr — quanto mais rápido, mais aguda seria a nota se isso fosse som.</p>
+  <p>Antes de mexer, <strong>preveja</strong>: a boia laranja vai ser carregada para o lado junto com a onda? Depois mude a velocidade e o número de ondas e observe o sobe-e-desce da boia.</p>
 
   <div class="sl-linha">
     <label class="lab-l" for="slVelOnda" style="min-width:110px">velocidade:</label>
     <input type="range" id="slVelOnda" min="0" max="10" step="1" value="4">
     <span class="sl-val" id="vVelOnda">4</span>
   </div>
+  <div class="sl-linha">
+    <label class="lab-l" for="slFreqViva" style="min-width:110px">ondas na tela:</label>
+    <input type="range" id="slFreqViva" min="1" max="4" step="1" value="2">
+    <span class="sl-val" id="vFreqViva">2</span>
+  </div>
 
   <div class="tela">
     <svg viewBox="0 0 380 160" id="svgOndaViva" role="img" aria-label="Onda animada correndo em tempo real">
       <line x1="0" y1="80" x2="380" y2="80" stroke="#c9c1ae" stroke-width="1.5"/>
       <polyline id="poliOndaViva" points="" fill="none" stroke="var(--roxo)" stroke-width="4"/>
+      <line x1="190" y1="10" x2="190" y2="150" stroke="#c9c1ae" stroke-width="1" stroke-dasharray="4 4"/>
+      <circle id="boiaViva" cx="190" cy="80" r="9" fill="#f59e0b" stroke="#92400e" stroke-width="2"/>
     </svg>
   </div>
+  <p class="rabisco" id="txtOndaViva"></p>
 </div>
 
 <div class="pontos">
@@ -385,10 +393,11 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <div class="tit">Exercício 1</div>
   <div class="selo">✅</div>
   <p>O que gera o formato de onda que vimos hoje?</p>
-  <div class="alts" data-r="1">
-    <div class="alt" data-i="0">Uma reta inclinada, como na Aula 9.</div>
-    <div class="alt" data-i="1">A altura de um ponto girando num círculo, desenrolada ao longo do tempo.</div>
-    <div class="alt" data-i="2">Uma soma de números inteiros, um após o outro.</div>
+  <div class="alts" data-r="2">
+    <div class="alt" data-i="0">Uma parábola que se repete.</div>
+    <div class="alt" data-i="1">Uma reta inclinada, como na Aula 9.</div>
+    <div class="alt" data-i="2">A altura de um ponto girando num círculo, desenrolada ao longo do tempo.</div>
+    <div class="alt" data-i="3">Uma soma de números inteiros, um após o outro.</div>
   </div>
   <div class="fb"></div>
 </div>
@@ -396,25 +405,21 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <div class="ex" id="ex2">
   <div class="tit">Exercício 2</div>
   <div class="selo">✅</div>
-  <p>Qual dos três controles faz a onda ficar <strong>mais alta</strong>?</p>
-  <div class="alts" data-r="0">
-    <div class="alt" data-i="0">A amplitude.</div>
-    <div class="alt" data-i="1">A frequência.</div>
-    <div class="alt" data-i="2">A fase.</div>
-  </div>
+  <p>Na receita <span class="mono">y = 3 · seno(2 · x)</span>, qual é a altura máxima que a onda atinge?</p>
+  <p><input type="number" step="any" data-r="3" aria-label="Resposta do exercício 2"></p>
+  <button class="check" data-ex="ex2">Conferir</button>
   <div class="fb"></div>
+  <p class="dica">Dica: qual dos números é a amplitude?</p>
 </div>
 
 <div class="ex" id="ex3">
   <div class="tit">Exercício 3</div>
   <div class="selo">✅</div>
-  <p>Qual dos três controles faz a onda ficar <strong>mais apertada</strong> (mais voltas no mesmo espaço)?</p>
-  <div class="alts" data-r="1">
-    <div class="alt" data-i="0">A amplitude.</div>
-    <div class="alt" data-i="1">A frequência.</div>
-    <div class="alt" data-i="2">A fase.</div>
-  </div>
+  <p>A onda <span class="mono">y = seno(4 · x)</span> vai de x = 0° até x = 360°. Quantas ondas completas cabem nesse trecho?</p>
+  <p><input type="number" step="any" data-r="4" aria-label="Resposta do exercício 3"></p>
+  <button class="check" data-ex="ex3">Conferir</button>
   <div class="fb"></div>
+  <p class="dica">Dica: é o laboratório "quantas ondas cabem?".</p>
 </div>
 
 <div class="ex" id="ex4">
@@ -433,14 +438,12 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <div class="ex" id="ex5">
   <div class="tit">Exercício 5 — o desafio</div>
-  <div class="selo">🏆</div>
-  <p>Se duas ondas estão exatamente sincronizadas (sobem e descem juntas), o que acontece quando elas se somam?</p>
-  <div class="alts" data-r="0">
-    <div class="alt" data-i="0">A onda resultante fica mais alta — elas se reforçam.</div>
-    <div class="alt" data-i="1">Elas se cancelam completamente.</div>
-    <div class="alt" data-i="2">Nada muda — a soma é sempre igual a uma das ondas originais.</div>
-  </div>
+  <div class="selo">✅</div>
+  <p>Duas ondas <strong>sincronizadas</strong>, de amplitudes 2 e 3, são somadas. Qual é a amplitude da onda resultante?</p>
+  <p><input type="number" step="any" data-r="5" aria-label="Resposta do exercício 5"></p>
+  <button class="check" data-ex="ex5">Conferir</button>
   <div class="fb"></div>
+  <p class="dica">Dica: use o somador de ondas com as duas em fase.</p>
 </div>
 
 <div class="ex" id="ex6">
@@ -451,6 +454,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
     <div class="alt" data-i="0">A amplitude.</div>
     <div class="alt" data-i="1">A frequência.</div>
     <div class="alt" data-i="2">A fase.</div>
+    <div class="alt" data-i="3">Nenhum: não dá para baixar a onda sem estreitá-la.</div>
   </div>
   <div class="fb"></div>
 </div>
@@ -633,26 +637,40 @@ slFreqAlvo.addEventListener("input",pintaOndaAlvo);
 pintaOndaAlvo();
 
 /* ---------- lab: onda ao vivo ---------- */
-var slVelOnda=document.getElementById("slVelOnda"), poliOndaViva=document.getElementById("poliOndaViva");
+var slVelOnda=document.getElementById("slVelOnda"), slFreqViva=document.getElementById("slFreqViva");
+var poliOndaViva=document.getElementById("poliOndaViva"), boiaViva=document.getElementById("boiaViva");
 var faseViva=0, timerViva=null;
 function pintaOndaViva(){
-  var pts=[];
+  var k=parseInt(slFreqViva.value,10), pts=[];
   for(var px=0; px<=380; px+=4){
-    var xdeg=(px/380)*360;
+    var xdeg=(px/380)*360*k;
     var y=seno(xdeg+faseViva);
     pts.push(px+","+(80-y*60));
   }
   poliOndaViva.setAttribute("points",pts.join(" "));
+  boiaViva.setAttribute("cy",80-seno(180*k+faseViva)*60);
+}
+function textoOndaViva(){
+  var vel=parseInt(slVelOnda.value,10), k=parseInt(slFreqViva.value,10);
+  var t=document.getElementById("txtOndaViva");
+  if(vel===0){ t.innerHTML="Parada, a onda é só uma foto. Com "+k+" onda"+(k>1?"s":"")+" na tela, cada uma ocupa 1/"+k+" da largura: esse é o <strong>comprimento de onda</strong>. Agora dê velocidade."; return; }
+  // a cada 30 ms a fase anda vel*2 graus: uma volta de 360° leva 180/vel passos
+  var periodo=(180/vel)*0.03, freq=1/periodo;
+  t.innerHTML="A boia só <strong>sobe e desce</strong>, nunca vai para o lado: quem viaja é a <em>forma</em> da onda, não a água. "+
+    "Um sobe-e-desce completo leva <strong>"+periodo.toFixed(2).replace(".",",")+" s</strong> (período) → "+freq.toFixed(2).replace(".",",")+" vezes por segundo (frequência). "+
+    "Mais ondas na tela = comprimento de onda menor. Mais velocidade = período menor = nota mais aguda.";
 }
 function reiniciaTimerViva(){
   clearInterval(timerViva);
   var vel=parseInt(slVelOnda.value,10);
   document.getElementById("vVelOnda").textContent=vel;
+  document.getElementById("vFreqViva").textContent=slFreqViva.value;
+  textoOndaViva(); pintaOndaViva();
   if(vel===0) return;
   timerViva=setInterval(function(){ faseViva=(faseViva+vel*2)%360; pintaOndaViva(); },30);
 }
 slVelOnda.addEventListener("input",reiniciaTimerViva);
-pintaOndaViva();
+slFreqViva.addEventListener("input",reiniciaTimerViva);
 reiniciaTimerViva();
 
 /* ---------- exercicios ---------- */
@@ -710,6 +728,9 @@ function fb(box,ok,txt){
   if(!ok){ void box.offsetWidth; box.classList.add("chacoalha"); }
 }
 var explica={
+  ex5:{ok:"Isso! Sincronizadas, os topos coincidem: 2 + 3 = 5.",no:"Sincronizadas, os topos acontecem juntos e se somam: 2 + 3 = <strong>5</strong>. (Se fossem opostas, daria 3 − 2 = 1.)"},
+  ex3:{ok:"Isso! Frequência 4 = 4 voltas no espaço de uma.",no:"A frequência multiplica o ângulo: o ponto gira 4 vezes mais rápido, cabem <strong>4</strong> ondas."},
+  ex2:{ok:"Isso! O seno vai no máximo até 1; a amplitude 3 estica até 3.",no:"O seno vai no máximo até 1; multiplicado pela amplitude 3, o topo fica em <strong>3</strong>. O 2 só aperta a onda."},
   ex4:{"ok": "Tudo certo! Altura, aperto, deslocamento e o cancelamento.", "no": "Quase. Amplitude = altura; frequência = quantas voltas no mesmo espaço; fase = desloca para o lado; ondas opostas somadas = se cancelam."}};
 document.querySelectorAll("button.check").forEach(function(b){
   b.addEventListener("click",function(){
@@ -728,24 +749,22 @@ document.querySelectorAll("button.check").forEach(function(b){
   });
 });
 var expAlt={
-  ex1:["A reta é a Aula 9 — hoje é sobre giro, não sobre passo constante.",
-       "Isso! A onda é a altura do ponto girando, desenrolada ao longo do tempo.",
-       "Soma de inteiros não tem nada a ver com o formato suave de uma onda."],
-  ex2:["Isso! A amplitude multiplica a onda inteira, esticando para cima e para baixo.",
-       "A frequência muda a largura, não a altura.",
-       "A fase só desloca a onda para o lado, não muda sua altura."],
-  ex3:["A amplitude muda a altura, não a largura.",
-       "Isso! A frequência multiplica o ângulo, cabendo mais voltas no mesmo espaço.",
-       "A fase só desloca — não aperta nem alarga."],
+  ex1:[
+  "A parábola sobe sem parar dos dois lados; a onda vem do giro, que se repete a cada volta.",
+  "A reta é a Aula 9 — hoje é sobre giro, não sobre passo constante.",
+  "Isso! A onda é a altura do ponto girando, desenrolada ao longo do tempo.",
+  "Soma de inteiros não tem nada a ver com o formato suave de uma onda."],
+  
+  
   ex4:["A amplitude muda a altura.",
        "A frequência muda a largura.",
        "Isso! A fase soma no ângulo e só desloca a onda para o lado."],
-  ex5:["Isso! Ondas sincronizadas se somam e ficam mais altas — é reforço.",
-       "Cancelamento completo só acontece quando elas estão perfeitamente opostas, não sincronizadas.",
-       "A soma muda sim — ondas sincronizadas se reforçam."],
-  ex6:["Isso! Diminuir a amplitude deixa a onda mais baixa sem mudar a largura.",
-       "Mudar a frequência mudaria a largura, que você quer manter igual.",
-       "A fase só desloca para o lado, não muda a altura."]
+  
+  ex6:[
+  "Isso! Diminuir a amplitude deixa a onda mais baixa sem mudar a largura.",
+  "Mudar a frequência mudaria a largura, que você quer manter igual.",
+  "A fase só desloca para o lado, não muda a altura.",
+  "Dá sim: amplitude e frequência são controles independentes — diminua só a amplitude."]
 };
 document.querySelectorAll(".alts").forEach(function(grupo){
   var box=grupo.closest(".ex"), certa=parseInt(grupo.dataset.r,10);

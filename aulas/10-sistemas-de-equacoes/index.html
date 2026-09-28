@@ -259,13 +259,10 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <p>Já sabemos que o cruzamento é o ponto onde <span class="mono">f(x) = g(x)</span>. A ideia da substituição é <strong>juntar as duas receitas numa só equação</strong>, resolver para <span class="mono">x</span> com a balança da Aula 8, e depois usar qualquer uma das receitas para achar <span class="mono">y</span>.</p>
 
 <div class="lab">
-  <div class="tit">🔧 Laboratório: resolva por substituição, passo a passo</div>
-  <div class="controles">
-    <button id="substGo">▶ Ver os passos</button>
-  </div>
-  <div style="background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:14px 18px" id="substCaixa">
-    <p style="margin:0;font-size:19px;line-height:2.1">clique no botão…</p>
-  </div>
+  <div class="tit">🔧 Laboratório: resolva o sistema, passo a passo</div>
+  <p>Duas retas se cruzam. Ache o ponto de cruzamento fazendo cada passo — o laboratório confere e desenha.</p>
+  <div class="controles"><button id="pc10-novo" class="sec">🎲 Novo problema</button></div>
+  <div class="pc-caixa" id="pc10-caixa"></div>
 </div>
 
 <div class="idiota">
@@ -360,6 +357,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
     <div class="alt" data-i="0">Desenhar as duas retas em papéis separados.</div>
     <div class="alt" data-i="1">Achar o único ponto que serve para as duas receitas ao mesmo tempo.</div>
     <div class="alt" data-i="2">Descobrir qual das duas retas é "mais correta".</div>
+    <div class="alt" data-i="3">Somar as duas receitas e ver quanto dá.</div>
   </div>
   <div class="fb"></div>
 </div>
@@ -547,26 +545,7 @@ document.querySelectorAll("[data-chute]").forEach(function(b){
 document.getElementById("classProxima").addEventListener("click",novoClass);
 
 /* ---------- lab 3: substituicao passo a passo ---------- */
-document.getElementById("substGo").addEventListener("click",function(){
-  var caixa=document.getElementById("substCaixa");
-  caixa.innerHTML="";
-  var passos=[
-    "f(x) = 2 · x + 1 &nbsp;&nbsp; g(x) = −1 · x + 7",
-    "No cruzamento, f(x) = g(x): &nbsp; 2x + 1 = −x + 7",
-    "Junto os x dos dois lados: &nbsp; 2x + x = 7 − 1 &nbsp;→&nbsp; 3x = 6",
-    "Resolvo para x: &nbsp; x = 6 / 3 = <strong>2</strong>",
-    "Uso a receita de f para achar y: &nbsp; f(2) = 2 · 2 + 1 = <strong>5</strong>",
-    "Cruzamento: <strong style='font-size:22px'>(2, 5)</strong> ✔"
-  ];
-  passos.forEach(function(t,i){
-    setTimeout(function(){
-      var d=document.createElement("p");
-      d.style.margin="0 0 8px"; d.style.fontSize="18px";
-      d.innerHTML=t;
-      caixa.appendChild(d);
-    }, i*650);
-  });
-});
+
 
 /* ---------- lab 5: ache o cruzamento no desenho ---------- */
 var retaLeia1=document.getElementById("retaLeia1"), retaLeia2=document.getElementById("retaLeia2"), txtLeiaSis=document.getElementById("txtLeiaSis");
@@ -698,9 +677,11 @@ document.querySelectorAll("button.check").forEach(function(b){
   });
 });
 var expAlt={
-  ex1:["As retas ficam no mesmo papel — separá-las não ajuda a resolver nada.",
-       "Isso mesmo! É achar o único ponto que serve para as duas receitas.",
-       "Nenhuma reta é \"mais correta\" — as duas são igualmente válidas, só descrevem coisas diferentes."],
+  ex1:[
+  "As retas ficam no mesmo papel — separá-las não ajuda a resolver nada.",
+  "Isso mesmo! É achar o único ponto que serve para as duas receitas.",
+  "Nenhuma reta é \"mais correta\" — as duas são igualmente válidas, só descrevem coisas diferentes.",
+  "Somar as receitas cria uma terceira reta; resolver é achar o ponto que as duas têm em comum."],
   ex4:["Retas idênticas se tocam em todo lugar, não em lugar nenhum.",
        "Se são a mesma reta, elas coincidem em mais de um ponto — não é só uma solução.",
        "Isso! A mesma reta desenhada duas vezes coincide em todo lugar — infinitas soluções."]
@@ -726,6 +707,81 @@ document.querySelectorAll(".alts").forEach(function(grupo){
 
 restauraProgresso();
 
+})();
+</script>
+<script>
+/* ---------- "preveja e confira": o aluno faz cada passo, o laboratório confere ---------- */
+function PrevejaConfira(o){
+  var caixa=document.getElementById(o.caixa), prob, k, tent, primeira;
+  function lerNumero(v){ v=String(v).trim().replace(/\s/g,"").replace("−","-").replace(",","."); return v===""?null:Number(v); }
+  function novo(){
+    prob=o.gerar(); k=0; primeira=0; caixa.innerHTML="";
+    var e=document.createElement("p"); e.className="pc-enun"; e.innerHTML=prob.enunciado; caixa.appendChild(e);
+    mostraPasso();
+  }
+  function mostraPasso(){
+    var P=prob.passos[k], linha=document.createElement("div"); tent=0;
+    linha.className="pc-passo";
+    var rs=[].concat(P.r), ins=[];
+    linha.innerHTML="<span class='pc-num'>"+(k+1)+"</span><span class='pc-pede'>"+P.pede+"</span>";
+    rs.forEach(function(r,i){
+      if(P.rotulos) { var l=document.createElement("span"); l.className="pc-rot"; l.textContent=P.rotulos[i]; linha.appendChild(l); }
+      var inp=document.createElement("input"); inp.type="text"; inp.inputMode="decimal"; inp.setAttribute("aria-label","resposta do passo "+(k+1)+(rs.length>1?", valor "+(i+1):""));
+      linha.appendChild(inp); ins.push(inp);
+    });
+    var bt=document.createElement("button"); bt.className="pc-conf"; bt.textContent="Conferir"; linha.appendChild(bt);
+    var fb=document.createElement("div"); fb.className="pc-fb"; linha.appendChild(fb);
+    caixa.appendChild(linha);
+    ins[0].addEventListener("keydown",function(ev){ if(ev.key==="Enter") bt.click(); });
+    bt.addEventListener("click",function(){
+      var vals=ins.map(function(i){ return lerNumero(i.value); });
+      if(vals.some(function(v){ return v===null||isNaN(v); })){ fb.className="pc-fb pc-no"; fb.textContent="Digite um número em cada campo."; return; }
+      var tol=P.tol||1e-6, ok=vals.every(function(v,i){ return Math.abs(v-rs[i])<=tol; });
+      if(ok){
+        if(tent===0) primeira++;
+        ins.forEach(function(i){ i.disabled=true; i.style.borderColor="#059669"; i.style.background="#d1fae5"; });
+        bt.remove(); linha.classList.add("pc-ok");
+        fb.className="pc-fb pc-sim"; fb.innerHTML="✔ "+(P.mostra||"certo!");
+        k++;
+        if(k<prob.passos.length) mostraPasso(); else fim();
+      } else {
+        tent++;
+        ins.forEach(function(i,j){ var c=Math.abs(vals[j]-rs[j])<=tol; i.style.borderColor=c?"#059669":"#dc2626"; i.style.background=c?"#d1fae5":"#fee2e2"; });
+        fb.className="pc-fb pc-no";
+        fb.innerHTML="✘ "+(P.dica||"Ainda não.")+(tent>=2?" <button class='pc-ver sec'>Mostrar a resposta</button>":"");
+        var ver=fb.querySelector(".pc-ver");
+        if(ver) ver.addEventListener("click",function(){ ins.forEach(function(i,j){ i.value=String(rs[j]).replace(".",",").replace("-","−"); }); bt.click(); });
+        linha.classList.remove("chacoalha"); void linha.offsetWidth; linha.classList.add("chacoalha");
+      }
+    });
+  }
+  function fim(){
+    var f=document.createElement("div"); f.className="pc-fim";
+    f.innerHTML=prob.fim+"<br><span class='pc-placar'>Você acertou "+primeira+" de "+prob.passos.length+" passos de primeira. Clique em <strong>Novo problema</strong> para treinar com outros números.</span>";
+    caixa.appendChild(f);
+    if(prob.depois) prob.depois();
+  }
+  document.getElementById(o.novo).addEventListener("click",novo);
+  novo();
+}
+function sorteia(a,b){ return a+Math.floor(Math.random()*(b-a+1)); }
+function sinalTxt(n){ return n<0?" − "+(-n):" + "+n; }
+function numTxt(n){ return String(n).replace(".",",").replace("-","−"); }
+</script>
+<script>
+(function(){
+PrevejaConfira({caixa:"pc10-caixa", novo:"pc10-novo", gerar:function(){
+  var m1=sorteia(1,4), m2; do { m2=m1-sorteia(1,4); } while(m2===0);
+  var x=sorteia(-3,4), b1=sorteia(-4,5), y=m1*x+b1, b2=y-m2*x;
+  var xp=x<0?"("+numTxt(x)+")":numTxt(x), m2p=m2<0?"("+numTxt(m2)+")":String(m2);
+  function rec(m,b){ if(m===0) return numTxt(b); return (m===1?"":m===-1?"−":m+" · ")+"x"+(b?sinalTxt(b):""); }
+  return {enunciado:"f(x) = "+rec(m1,b1).replace(/-/g,"−")+" &nbsp;e&nbsp; g(x) = "+rec(m2,b2).replace(/-/g,"−")+". Onde elas se cruzam?",
+    passos:[
+      {pede:"No cruzamento, f(x) = g(x). Juntando os x de um lado, quantos x sobram? ("+m1+" − "+m2p+")", r:m1-m2, dica:"Subtraia os passos: "+m1+" − "+m2p+".", mostra:(m1-m2)+" · x = "+numTxt(b2-b1)},
+      {pede:"Agora x = "+numTxt(b2-b1)+" ÷ "+(m1-m2)+" = ?", r:x, dica:"Divida.", mostra:"x = "+numTxt(x)},
+      {pede:"Ponha x na receita de f para achar y: y = ?", r:y, dica:"f("+numTxt(x)+") = "+m1+" · "+xp+sinalTxt(b1).replace("-","−")+".", mostra:"y = "+numTxt(y)}],
+    fim:"✔ As retas se cruzam em <strong>("+numTxt(x)+", "+numTxt(y)+")</strong>. Confira em g: "+numTxt(m2)+" · "+xp+sinalTxt(b2).replace("-","−")+" = "+numTxt(m2*x+b2)+"."};
+}});
 })();
 </script>
 </body>

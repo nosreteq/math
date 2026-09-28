@@ -62,8 +62,8 @@ Lembra da ordem das contas da Aula 7? A máquina `3 · x + 2` primeiro multiplic
 descobrir o que entrou, você **desfaz na ordem inversa**: primeiro desfaz a soma, depois desfaz a
 multiplicação — como tirar a meia depois do sapato.
 
-> 🔧 **Laboratório — a máquina ao contrário.** A máquina `3 · x + 2` devolveu **17**. Que número
-> entrou? *(interativo, na versão em HTML)*
+> 🔧 **Laboratório — a máquina ao contrário.** A máquina devolveu um número. Descubra o que entrou,
+> **desfazendo as contas de trás para a frente**. *(interativo, na versão em HTML)*
 
 > 🧘 **O Guru:** Equação não é um bicho diferente de função. É a mesma máquina da Aula 7, só que a
 > pergunta anda de trás para frente: você conhece a saída e quer a entrada. Quem sabe montar a
@@ -77,7 +77,9 @@ multiplicação — como tirar a meia depois do sapato.
 caixas de cada lado** — assim todas as caixas ficam de um lado só. Depois é o que você já sabe
 fazer.
 
-> 🔧 **Laboratório — x dos dois lados, passo a passo.** *(interativo, na versão em HTML)*
+> 🔧 **Laboratório — x dos dois lados, passo a passo.** Uma balança com x nos dois pratos. Faça cada
+> passo — sempre **o mesmo dos dois lados** — e o laboratório confere. *(interativo, na versão em
+> HTML)*
 
 ### Não existe pergunta idiota
 

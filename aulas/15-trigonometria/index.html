@@ -434,12 +434,12 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <div class="ex" id="ex5">
   <div class="tit">Exercício 5 — o desafio</div>
-  <div class="selo">🏆</div>
-  <p>Quanto vale <span class="mono">cosseno de 180°</span>?</p>
-  <p><input type="number" data-r="-1"></p>
+  <div class="selo">✅</div>
+  <p>Uma rampa de 5 m faz com o chão um ângulo cujo cosseno é 0,8. Quantos metros ela avança na horizontal?</p>
+  <p><input type="number" step="any" data-r="4" aria-label="Resposta do exercício 5"></p>
   <button class="check" data-ex="ex5">Conferir</button>
   <div class="fb"></div>
-  <p class="dica">Dica: em 180° o ponto está do lado esquerdo do círculo — a sombra dele está do outro lado do zero.</p>
+  <p class="dica">Dica: cosseno é a sombra horizontal de cada 1 de comprimento.</p>
 </div>
 
 <div class="ex" id="ex6">
@@ -633,7 +633,7 @@ var explica={
   ex4:{"ok": "Tudo certo! Sombra, altura, inclinação e o ângulo medido em arco.", "no": "Quase. Cosseno = sombra (x); seno = altura (y); tangente = seno ÷ cosseno; radiano = ângulo medido pelo comprimento do arco no círculo de raio 1."},
   ex2:{ok:"Isso! Em 0° a sombra é máxima: vale exatamente o raio, 1.",no:"Em 0° o ponto está no lugar mais afastado para o lado — a sombra é máxima, vale <strong>1</strong>."},
   ex3:{ok:"Exato! Em 90° a altura é máxima.",no:"Em 90° o ponto está reto para cima, na altura máxima — o seno vale <strong>1</strong>."},
-  ex5:{ok:"Isso! Do outro lado do zero.",no:"Em 180° o ponto está do lado esquerdo do círculo — a sombra é <strong>−1</strong>, do outro lado do zero."},
+  ex5:{ok:"Isso! Sombra = comprimento · cosseno = 5 · 0,8 = 4 m.",no:"A sombra no chão é comprimento · cosseno = 5 · 0,8 = <strong>4 m</strong>."},
   ex6:{ok:"Leitura perfeita: nenhuma sombra, altura no fundo do círculo.",no:"Reto para baixo não tem sombra para o lado (cosseno = <strong>0</strong>) e está no ponto mais baixo (seno = <strong>−1</strong>)."}
 };
 document.querySelectorAll("button.check").forEach(function(b){

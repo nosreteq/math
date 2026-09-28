@@ -160,13 +160,10 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 </div>
 
 <div class="lab">
-  <div class="tit">🔧 Laboratório: monte a projeção passo a passo</div>
-  <div class="controles">
-    <button id="projGo">▶ Ver os passos</button>
-  </div>
-  <div style="background:#fff;border:3px solid var(--tinta);border-radius:10px;padding:14px 18px" id="projCaixa">
-    <p style="margin:0;font-size:18px;line-height:2.1">clique no botão…</p>
-  </div>
+  <div class="tit">🔧 Laboratório: monte a projeção, passo a passo</div>
+  <p>Calcule a sombra de <span class='mono'>v</span> sobre <span class='mono'>w</span> com o produto escalar (Aula 17): <span class='mono'>sombra = (v · w) / tamanho(w)</span>. O laboratório confere e desenha.</p>
+  <div class="controles"><button id="pc23-novo" class="sec">🎲 Novo problema</button></div>
+  <div class="pc-caixa" id="pc23-caixa"></div>
 </div>
 
 <!-- ============ 2 ============ -->
@@ -315,11 +312,12 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <div class="ex" id="ex1">
   <div class="tit">Exercício 1</div>
   <div class="selo">✅</div>
-  <p>Projetar um vetor sobre outro é a mesma ideia de qual laboratório da Aula 15?</p>
+  <p>Uma seta de tamanho 10 faz um ângulo de <strong>60°</strong> com uma reta. Qual é o tamanho da sombra (a projeção) dela sobre a reta?</p>
   <div class="alts" data-r="1">
-    <div class="alt" data-i="0">O laboratório da tabela que se preenche sozinha.</div>
-    <div class="alt" data-i="1">O laboratório da sombra (cosseno) e da altura (seno).</div>
-    <div class="alt" data-i="2">O laboratório de "ache o ângulo certo".</div>
+    <div class="alt" data-i="0">10 — a sombra tem sempre o tamanho da seta.</div>
+    <div class="alt" data-i="1">5 — tamanho · cosseno de 60° = 10 · 0,5.</div>
+    <div class="alt" data-i="2">8,66 — tamanho · seno de 60°.</div>
+    <div class="alt" data-i="3">0 — a seta não está deitada na reta.</div>
   </div>
   <div class="fb"></div>
 </div>
@@ -342,10 +340,11 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <div class="tit">Exercício 3</div>
   <div class="selo">✅</div>
   <p>Mínimos quadrados escolhe a reta que minimiza o quê?</p>
-  <div class="alts" data-r="2">
-    <div class="alt" data-i="0">O número de pontos no gráfico.</div>
-    <div class="alt" data-i="1">A distância entre os pontos entre si.</div>
-    <div class="alt" data-i="2">A soma dos erros (distância ponto-reta) elevados ao quadrado.</div>
+  <div class="alts" data-r="3">
+    <div class="alt" data-i="0">A inclinação da reta.</div>
+    <div class="alt" data-i="1">O número de pontos no gráfico.</div>
+    <div class="alt" data-i="2">A distância entre os pontos entre si.</div>
+    <div class="alt" data-i="3">A soma dos erros (distância ponto-reta) elevados ao quadrado.</div>
   </div>
   <div class="fb"></div>
 </div>
@@ -357,28 +356,30 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <div class="alts" data-r="0">
     <div class="alt" data-i="0">Para que erros positivos e negativos não se cancelem.</div>
     <div class="alt" data-i="1">Para deixar a conta mais difícil de propósito.</div>
-    <div class="alt" data-i="2">Elevar ao quadrado não faz diferença nenhuma no resultado.</div>
+    <div class="alt" data-i="2">Para obrigar a reta a passar pela origem (0, 0).</div>
+    <div class="alt" data-i="3">Elevar ao quadrado não faz diferença nenhuma no resultado.</div>
   </div>
   <div class="fb"></div>
 </div>
 
 <div class="ex" id="ex5">
   <div class="tit">Exercício 5 — o desafio</div>
-  <div class="selo">🏆</div>
-  <p>A reta de regressão ainda cabe na receita <span class="mono">f(x) = passo · x + altura de partida</span>. Se o passo dela é 2 e a altura de partida é 3, quanto vale <span class="mono">f(4)</span>?</p>
-  <p><input type="number" data-r="11"></p>
+  <div class="selo">✅</div>
+  <p>A reta <span class="mono">f(x) = x</span> passa perto dos pontos (1, 2), (2, 1) e (3, 3). Qual é a <strong>soma dos erros ao quadrado</strong>?</p>
+  <p><input type="number" step="any" data-r="2" aria-label="Resposta do exercício 5"></p>
   <button class="check" data-ex="ex5">Conferir</button>
   <div class="fb"></div>
-  <p class="dica">Dica: é a mesma conta da Aula 9 — nada muda na receita, só em como passo e altura foram escolhidos.</p>
+  <p class="dica">Dica: para cada ponto, calcule y − f(x), eleve ao quadrado e some.</p>
 </div>
 
 <div class="ex" id="ex6">
   <div class="tit">Exercício 6</div>
   <div class="selo">✅</div>
-  <p>Um ponto está exatamente sobre a reta de regressão (não sobra distância nenhuma). Qual é o erro dele?</p>
-  <p><input type="number" data-r="0"></p>
+  <p>A reta de regressão é <span class="mono">f(x) = 2 · x</span>. O ponto (3, 9) fica quanto acima dela (o erro)?</p>
+  <p><input type="number" step="any" data-r="3" aria-label="Resposta do exercício 6"></p>
   <button class="check" data-ex="ex6">Conferir</button>
   <div class="fb"></div>
+  <p class="dica">Dica: calcule f(3) e compare com o y do ponto.</p>
 </div>
 
 <div class="placar" id="placar">
@@ -444,25 +445,7 @@ slProjAng.addEventListener("input",pintaProj);
 pintaProj();
 
 /* ---------- lab: monte a projecao passo a passo ---------- */
-document.getElementById("projGo").addEventListener("click",function(){
-  var caixa=document.getElementById("projCaixa");
-  caixa.innerHTML="";
-  var passos=[
-    "v aponta a 35° · w aponta a 0° (na horizontal)",
-    "A sombra de v sobre w é: tamanho(v) · cosseno(ângulo entre eles)",
-    "cosseno(35°) ≈ 0,82",
-    "Se v tem tamanho 1: sombra ≈ 1 · 0,82 = <strong>0,82</strong>",
-    "Essa sombra é a projeção de v sobre w ✔"
-  ];
-  passos.forEach(function(t,i){
-    setTimeout(function(){
-      var d=document.createElement("p");
-      d.style.margin="0 0 8px"; d.style.fontSize="17px";
-      d.innerHTML=t;
-      caixa.appendChild(d);
-    }, i*650);
-  });
-});
+
 
 /* ---------- lab: erro grande ou pequeno ---------- */
 var erroCasos=[
@@ -642,8 +625,8 @@ function fb(box,ok,txt){
 }
 var explica={
   ex2:{"ok": "Tudo certo! Sombra, erro, critério e a reta escolhida.", "no": "Quase. Projeção = sombra; erro = distância vertical até a reta; mínimos quadrados = menor soma dos erros ao quadrado; regressão = a reta escolhida."},
-  ex5:{ok:"Isso! f(4) = 2 · 4 + 3 = 11.",no:"f(4) = 2 · 4 + 3 = 8 + 3 = <strong>11</strong>."},
-  ex6:{ok:"Isso! Sem distância, o erro é zero.",no:"Se o ponto está exatamente na reta, a distância — o erro — é <strong>0</strong>."}
+  ex5:{ok:"Isso! Erros 1, −1 e 0; quadrados 1 + 1 + 0 = 2.",no:"Erros (ponto − reta): 2 − 1 = 1, 1 − 2 = −1, 3 − 3 = 0. Ao quadrado: 1 + 1 + 0 = <strong>2</strong>. Sem o quadrado a soma daria 0 e a reta pareceria perfeita!"},
+  ex6:{ok:"Isso! f(3) = 6, e 9 − 6 = 3.",no:"A reta em x = 3 vale 2 · 3 = 6; o ponto está em 9. Erro = 9 − 6 = <strong>3</strong>."}
 };
 document.querySelectorAll("button.check").forEach(function(b){
   b.addEventListener("click",function(){
@@ -662,18 +645,24 @@ document.querySelectorAll("button.check").forEach(function(b){
   });
 });
 var expAlt={
-  ex1:["Essa tabela era da Aula 15, mas não tem a ver com projeção/sombra.",
-       "Isso! Projetar é exatamente a mesma ideia da sombra e altura (cosseno e seno).",
-       "Esse laboratório era de reconhecimento de ângulo, não de projeção."],
+  ex1:[
+  "Só se o ângulo fosse 0° (seta deitada na reta). Inclinada, a sombra encolhe.",
+  "Isso! Projeção = tamanho · cosseno do ângulo = 10 · 0,5 = 5 — a mesma sombra da Aula 15.",
+  "Seno dá a ALTURA (a parte perpendicular), não a sombra sobre a reta.",
+  "Sombra zero só acontece a 90° (seta em pé). A 60° ainda sobra sombra."],
   ex2:["Retas existem perfeitamente na matemática — o problema é a variação dos dados reais.",
        "Isso! Dados reais têm variação, então sempre sobra algum erro entre ponto e reta.",
        "Retas funcionam com qualquer número real, não só inteiros."],
-  ex3:["O número de pontos não muda com a escolha da reta.",
-       "Distância entre os pontos entre si não depende da reta escolhida.",
-       "Isso! Minimiza a soma dos erros (distância vertical) elevados ao quadrado."],
-  ex4:["Isso! Sem o quadrado, erros positivos e negativos se cancelariam, escondendo o tamanho real do erro.",
-       "O objetivo é ter uma medida útil, não dificultar de propósito.",
-       "Faz diferença sim — sem o quadrado, a soma poderia dar um valor enganosamente pequeno."]
+  ex3:[
+  "A inclinação é o que o método escolhe, não o que ele minimiza.",
+  "O número de pontos não muda com a escolha da reta.",
+  "Distância entre os pontos entre si não depende da reta escolhida.",
+  "Isso! Minimiza a soma dos erros (distância vertical) elevados ao quadrado."],
+  ex4:[
+  "Isso! Sem o quadrado, erros positivos e negativos se cancelariam, escondendo o tamanho real do erro.",
+  "O objetivo é ter uma medida útil, não dificultar de propósito.",
+  "O quadrado não força a reta a passar por (0, 0); ele só impede que erros de sinais opostos se anulem.",
+  "Faz diferença sim — sem o quadrado, a soma poderia dar um valor enganosamente pequeno."]
 };
 document.querySelectorAll(".alts").forEach(function(grupo){
   var box=grupo.closest(".ex"), certa=parseInt(grupo.dataset.r,10);
@@ -696,6 +685,92 @@ document.querySelectorAll(".alts").forEach(function(grupo){
 
 restauraProgresso();
 
+})();
+</script>
+<script>
+/* ---------- "preveja e confira": o aluno faz cada passo, o laboratório confere ---------- */
+function PrevejaConfira(o){
+  var caixa=document.getElementById(o.caixa), prob, k, tent, primeira;
+  function lerNumero(v){ v=String(v).trim().replace(/\s/g,"").replace("−","-").replace(",","."); return v===""?null:Number(v); }
+  function novo(){
+    prob=o.gerar(); k=0; primeira=0; caixa.innerHTML="";
+    var e=document.createElement("p"); e.className="pc-enun"; e.innerHTML=prob.enunciado; caixa.appendChild(e);
+    mostraPasso();
+  }
+  function mostraPasso(){
+    var P=prob.passos[k], linha=document.createElement("div"); tent=0;
+    linha.className="pc-passo";
+    var rs=[].concat(P.r), ins=[];
+    linha.innerHTML="<span class='pc-num'>"+(k+1)+"</span><span class='pc-pede'>"+P.pede+"</span>";
+    rs.forEach(function(r,i){
+      if(P.rotulos) { var l=document.createElement("span"); l.className="pc-rot"; l.textContent=P.rotulos[i]; linha.appendChild(l); }
+      var inp=document.createElement("input"); inp.type="text"; inp.inputMode="decimal"; inp.setAttribute("aria-label","resposta do passo "+(k+1)+(rs.length>1?", valor "+(i+1):""));
+      linha.appendChild(inp); ins.push(inp);
+    });
+    var bt=document.createElement("button"); bt.className="pc-conf"; bt.textContent="Conferir"; linha.appendChild(bt);
+    var fb=document.createElement("div"); fb.className="pc-fb"; linha.appendChild(fb);
+    caixa.appendChild(linha);
+    ins[0].addEventListener("keydown",function(ev){ if(ev.key==="Enter") bt.click(); });
+    bt.addEventListener("click",function(){
+      var vals=ins.map(function(i){ return lerNumero(i.value); });
+      if(vals.some(function(v){ return v===null||isNaN(v); })){ fb.className="pc-fb pc-no"; fb.textContent="Digite um número em cada campo."; return; }
+      var tol=P.tol||1e-6, ok=vals.every(function(v,i){ return Math.abs(v-rs[i])<=tol; });
+      if(ok){
+        if(tent===0) primeira++;
+        ins.forEach(function(i){ i.disabled=true; i.style.borderColor="#059669"; i.style.background="#d1fae5"; });
+        bt.remove(); linha.classList.add("pc-ok");
+        fb.className="pc-fb pc-sim"; fb.innerHTML="✔ "+(P.mostra||"certo!");
+        k++;
+        if(k<prob.passos.length) mostraPasso(); else fim();
+      } else {
+        tent++;
+        ins.forEach(function(i,j){ var c=Math.abs(vals[j]-rs[j])<=tol; i.style.borderColor=c?"#059669":"#dc2626"; i.style.background=c?"#d1fae5":"#fee2e2"; });
+        fb.className="pc-fb pc-no";
+        fb.innerHTML="✘ "+(P.dica||"Ainda não.")+(tent>=2?" <button class='pc-ver sec'>Mostrar a resposta</button>":"");
+        var ver=fb.querySelector(".pc-ver");
+        if(ver) ver.addEventListener("click",function(){ ins.forEach(function(i,j){ i.value=String(rs[j]).replace(".",",").replace("-","−"); }); bt.click(); });
+        linha.classList.remove("chacoalha"); void linha.offsetWidth; linha.classList.add("chacoalha");
+      }
+    });
+  }
+  function fim(){
+    var f=document.createElement("div"); f.className="pc-fim";
+    f.innerHTML=prob.fim+"<br><span class='pc-placar'>Você acertou "+primeira+" de "+prob.passos.length+" passos de primeira. Clique em <strong>Novo problema</strong> para treinar com outros números.</span>";
+    caixa.appendChild(f);
+    if(prob.depois) prob.depois();
+  }
+  document.getElementById(o.novo).addEventListener("click",novo);
+  novo();
+}
+function sorteia(a,b){ return a+Math.floor(Math.random()*(b-a+1)); }
+function sinalTxt(n){ return n<0?" − "+(-n):" + "+n; }
+function parTxt(n){ return n<0?"("+numTxt(n)+")":numTxt(n); }
+function numTxt(n){ return String(n).replace(".",",").replace("-","−"); }
+</script>
+<script>
+(function(){
+var svgPC23=null;
+PrevejaConfira({caixa:"pc23-caixa", novo:"pc23-novo", gerar:function(){
+  var W=[[3,4],[4,3],[5,0],[0,5],[-3,4],[4,-3]][sorteia(0,5)], v=[sorteia(-2,5),sorteia(-1,5)];
+  if(v[0]===0&&v[1]===0) v=[3,2];
+  var pe=v[0]*W[0]+v[1]*W[1], s=pe/5;
+  return {enunciado:"v = ("+numTxt(v[0])+", "+numTxt(v[1])+") &nbsp;e&nbsp; w = ("+numTxt(W[0])+", "+numTxt(W[1])+"). Qual é o tamanho da sombra de v sobre w?",
+    passos:[
+      {pede:"Produto escalar v · w = "+numTxt(v[0])+" · "+parTxt(W[0])+" + "+parTxt(v[1])+" · "+parTxt(W[1])+" = ?", r:pe, dica:"Multiplique coordenada com coordenada e some.", mostra:"v · w = "+numTxt(pe)},
+      {pede:"Tamanho de w = √("+parTxt(W[0])+"² + "+parTxt(W[1])+"²) = ?", r:5, dica:"Pitágoras (Aula 12): √("+(W[0]*W[0])+" + "+(W[1]*W[1])+").", mostra:"tamanho(w) = 5"},
+      {pede:"Sombra = "+numTxt(pe)+" ÷ 5 = ?", r:s, tol:0.001, dica:"Divida o produto escalar pelo tamanho de w.", mostra:"sombra = "+numTxt(s)+(s<0?" (negativa: v aponta contra w)":"")}],
+    fim:"✔ A sombra de v sobre w mede <strong>"+numTxt(s)+"</strong>. É a mesma ideia do cosseno da Aula 15: tamanho(v) · cos(ângulo) = (v · w) / tamanho(w).",
+    depois:function(){
+      var caixa=document.getElementById("pc23-caixa"), NSs="http://www.w3.org/2000/svg", sv=document.createElementNS(NSs,"svg");
+      sv.setAttribute("viewBox","0 0 300 220"); sv.style.maxWidth="300px"; sv.style.display="block"; sv.style.margin="10px auto 0";
+      var esc=18, cx=150, cy=120;
+      function L(x1,y1,x2,y2,cor,w,tr){ var l=document.createElementNS(NSs,"line"); l.setAttribute("x1",cx+x1*esc); l.setAttribute("y1",cy-y1*esc); l.setAttribute("x2",cx+x2*esc); l.setAttribute("y2",cy-y2*esc); l.setAttribute("stroke",cor); l.setAttribute("stroke-width",w); l.setAttribute("stroke-linecap","round"); if(tr) l.setAttribute("stroke-dasharray",tr); sv.appendChild(l); }
+      L(-8,0,8,0,"#d6d0c2",1); L(0,-6,0,6,"#d6d0c2",1);
+      var u=[W[0]/5,W[1]/5], p=[s*u[0],s*u[1]];
+      L(0,0,W[0],W[1],"#d97706",4); L(0,0,v[0],v[1],"#2563eb",4); L(v[0],v[1],p[0],p[1],"#9ca3af",2,"4 4"); L(0,0,p[0],p[1],"#059669",6);
+      caixa.appendChild(sv);
+    }};
+}});
 })();
 </script>
 </body>

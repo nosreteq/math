@@ -34,7 +34,9 @@ outra — a sombra que uma joga sobre a outra.
 > 🔧 **Laboratório — projeção de um vetor sobre outro.** Gire o vetor v e observe a sombra dele (em
 > verde) caindo sobre a direção de w. *(interativo, na versão em HTML)*
 
-> 🔧 **Laboratório — monte a projeção passo a passo.** *(interativo, na versão em HTML)*
+> 🔧 **Laboratório — monte a projeção, passo a passo.** Calcule a sombra de `v` sobre `w` com o
+> produto escalar (Aula 17): `sombra = (v · w) / tamanho(w)`. O laboratório confere e desenha.
+> *(interativo, na versão em HTML)*
 
 ---
 
@@ -114,8 +116,8 @@ padrão dos dados que já existem. Não é garantia, é a melhor aposta linear d
 
 ## ✏️ Afie o lápis
 
-1. Projetar um vetor sobre outro é a mesma ideia de qual laboratório da Aula 15? → **O
-   laboratório da sombra (cosseno) e da altura (seno).**
+1. Uma seta de tamanho 10 faz um ângulo de **60°** com uma reta. Qual é o tamanho da sombra (a
+   projeção) dela sobre a reta? → **5 — tamanho · cosseno de 60° = 10 · 0,5.**
 2. *(quem faz o quê?)* Ligue cada peça ao seu papel. → **projeção → a sombra de um vetor sobre
    outro; erro de um ponto → a distância vertical do ponto até a reta; mínimos quadrados → o
    critério: menor soma dos erros ao quadrado; reta de regressão → a reta que esse critério
@@ -124,7 +126,6 @@ padrão dos dados que já existem. Não é garantia, é a melhor aposta linear d
    ponto-reta) elevados ao quadrado.**
 4. Por que elevar os erros ao quadrado, em vez de simplesmente somá-los? → **Para que erros
    positivos e negativos não se cancelem.**
-5. *(o desafio)* A reta de regressão ainda cabe na receita `f(x) = passo · x + altura de
-   partida`. Se o passo dela é 2 e a altura de partida é 3, quanto vale `f(4)`? → **11**
-6. Um ponto está exatamente sobre a reta de regressão (não sobra distância nenhuma). Qual é o
-   erro dele? → **0**
+5. *(o desafio)* A reta `f(x) = x` passa perto dos pontos (1, 2), (2, 1) e (3, 3). Qual é a
+   **soma dos erros ao quadrado**? → **2**
+6. A reta de regressão é `f(x) = 2 · x`. O ponto (3, 9) fica quanto acima dela (o erro)? → **3**

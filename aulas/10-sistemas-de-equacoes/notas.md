@@ -81,7 +81,8 @@ Já sabemos que o cruzamento é o ponto onde `f(x) = g(x)`. A ideia da substitui
 receitas numa só equação**, resolver para `x` com a balança da Aula 8, e depois usar qualquer uma
 das receitas para achar `y`.
 
-> 🔧 **Laboratório — resolva por substituição, passo a passo.** *(interativo, na versão em HTML)*
+> 🔧 **Laboratório — resolva o sistema, passo a passo.** Duas retas se cruzam. Ache o ponto de
+> cruzamento fazendo cada passo — o laboratório confere e desenha. *(interativo, na versão em HTML)*
 
 ### Não existe pergunta idiota
 

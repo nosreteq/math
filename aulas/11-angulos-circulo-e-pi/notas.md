@@ -197,12 +197,13 @@ meia volta = `π · raio`.
 ## ✏️ Afie o lápis
 
 1. O que um ângulo realmente mede? → **O quanto alguma coisa virou.**
-2. Quantos graus tem uma volta completa? → **360**
-3. Um ângulo reto — o giro de uma esquina bem quadrada — vale quantos graus? → **90**
+2. O ponteiro dos minutos vai de 12h00 até 12h45. Quantos graus ele girou? → **270**
+3. Uma roda de bicicleta tem 70 cm de diâmetro. Quantos centímetros a bicicleta anda quando a
+   roda dá uma volta completa? (use π = 3,14) → **219,8**
 4. *(quem faz o quê?)* Ligue cada peça ao que ela mede. → **1 grau → 1/360 de uma volta; ângulo
    reto → um quarto de volta: 90°; π → quantas vezes o diâmetro cabe na volta do círculo; área do
    círculo → π · raio²**
-5. *(o desafio)* Um ponteiro deu três quartos de uma volta completa. Quantos graus ele girou? →
-   **270**
+5. *(o desafio)* Uma pizza de raio 20 cm é cortada em 8 fatias iguais. Qual é a área de uma
+   fatia, em cm²? (use π = 3,14) → **157**
 6. *(leia o desenho)* O ponteiro abaixo começou apontando para a direita e girou até aqui.
    Quantos graus ele girou? → **90**

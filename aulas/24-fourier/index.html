@@ -205,20 +205,32 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <p>Um jeito de "ver" as notas escondidas numa onda é desenhar um gráfico à parte: uma barra para cada frequência, do tamanho da altura (amplitude) daquela onda. Esse gráfico chama-se <strong>espectro</strong>.</p>
 
 <div class="lab">
-  <div class="tit">🔧 Laboratório: o espectro revelado</div>
-  <p>O espectro abaixo mostra ao vivo as alturas que você ajustou lá em cima.</p>
+  <div class="tit">🔧 Laboratório: o equalizador</div>
+  <p>As barras mostram o espectro da onda que você montou no laboratório anterior. <strong>Clique numa barra</strong> (ou nos botões) para desligar ou religar aquela frequência — como o equalizador de um aparelho de som — e veja o que sobra da onda.</p>
+  <div class="controles">
+    <button id="eqB1">freq. 1: ligada</button>
+    <button id="eqB2">freq. 2: ligada</button>
+    <button id="eqB3">freq. 3: ligada</button>
+  </div>
   <div class="tela" style="max-width:320px;margin:0 auto">
-    <svg viewBox="0 0 300 160" id="svgEspectro" role="img" aria-label="Gráfico de barras mostrando a amplitude de cada frequência">
+    <svg viewBox="0 0 300 160" id="svgEspectro" role="img" aria-label="Gráfico de barras mostrando a amplitude de cada frequência; cada barra liga e desliga a frequência">
       <line x1="20" y1="140" x2="280" y2="140" stroke="#1b1b1b" stroke-width="2"/>
-      <rect id="barraEsp1" x="60" y="140" width="40" height="0" fill="var(--verde)"/>
-      <rect id="barraEsp2" x="140" y="140" width="40" height="0" fill="var(--azul)"/>
-      <rect id="barraEsp3" x="220" y="140" width="40" height="0" fill="var(--laranja)"/>
+      <rect id="barraEsp1" x="60" y="140" width="40" height="0" fill="var(--verde)" style="cursor:pointer"/>
+      <rect id="barraEsp2" x="140" y="140" width="40" height="0" fill="var(--azul)" style="cursor:pointer"/>
+      <rect id="barraEsp3" x="220" y="140" width="40" height="0" fill="var(--laranja)" style="cursor:pointer"/>
       <text x="80" y="155" text-anchor="middle" font-size="12" fill="#6b7280">freq. 1</text>
       <text x="160" y="155" text-anchor="middle" font-size="12" fill="#6b7280">freq. 2</text>
       <text x="240" y="155" text-anchor="middle" font-size="12" fill="#6b7280">freq. 3</text>
     </svg>
   </div>
-  <p class="rabisco centro">Mexa nos sliders do laboratório anterior — as barras acompanham ao vivo.</p>
+  <div class="tela">
+    <svg viewBox="0 0 380 220" id="svgEqual" role="img" aria-label="Onda original e onda depois do equalizador">
+      <line x1="0" y1="110" x2="380" y2="110" stroke="#d6d0c2" stroke-width="1.5"/>
+      <polyline id="eqOrig" fill="none" stroke="#9ca3af" stroke-width="2" stroke-dasharray="6 4"/>
+      <polyline id="eqFilt" fill="none" stroke="var(--roxo)" stroke-width="3.5"/>
+    </svg>
+  </div>
+  <p class="rabisco centro" id="eqTxt"></p>
 </div>
 
 <div class="idiota">
@@ -351,6 +363,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
     <div class="alt" data-i="0">Apagar partes do sinal até ele ficar simples.</div>
     <div class="alt" data-i="1">Descobrir quais ondas simples, somadas, formam aquele sinal.</div>
     <div class="alt" data-i="2">Desenhar o sinal numa régua maior.</div>
+    <div class="alt" data-i="3">Trocar o sinal por uma única onda parecida com ele.</div>
   </div>
   <div class="fb"></div>
 </div>
@@ -359,10 +372,11 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <div class="tit">Exercício 2</div>
   <div class="selo">✅</div>
   <p>No espectro (gráfico de barras), o que a altura de cada barra representa?</p>
-  <div class="alts" data-r="0">
-    <div class="alt" data-i="0">A amplitude daquela frequência no sinal.</div>
-    <div class="alt" data-i="1">O tempo total do sinal.</div>
-    <div class="alt" data-i="2">O número de ondas simples que existem no universo.</div>
+  <div class="alts" data-r="1">
+    <div class="alt" data-i="0">A velocidade com que o sinal muda de um ponto para o outro.</div>
+    <div class="alt" data-i="1">A amplitude daquela frequência no sinal.</div>
+    <div class="alt" data-i="2">O tempo total do sinal.</div>
+    <div class="alt" data-i="3">O número de ondas simples que existem no universo.</div>
   </div>
   <div class="fb"></div>
 </div>
@@ -370,10 +384,11 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <div class="ex" id="ex3">
   <div class="tit">Exercício 3</div>
   <div class="selo">✅</div>
-  <p>Se um espectro tem barras nas frequências 1 e 3, quantas ondas simples diferentes formam o sinal?</p>
-  <p><input type="number" data-r="2"></p>
+  <p>O sinal é <span class="mono">3 · seno(x) + seno(3x)</span>. Qual é a altura da barra na frequência 1 e na frequência 3?</p>
+  <p><span class="rot-r">freq. 1:</span> <input type="number" step="any" data-r="3" aria-label="freq. 1 (exercício 3)" style="width:90px"> <span class="rot-r">freq. 3:</span> <input type="number" step="any" data-r="1" aria-label="freq. 3 (exercício 3)" style="width:90px"></p>
   <button class="check" data-ex="ex3">Conferir</button>
   <div class="fb"></div>
+  <p class="dica">Dica: seno(3x) sozinho tem amplitude 1.</p>
 </div>
 
 <div class="ex" id="ex4">
@@ -392,14 +407,12 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <div class="ex" id="ex5">
   <div class="tit">Exercício 5 — o desafio</div>
-  <div class="selo">🏆</div>
-  <p>Se a onda complicada é a soma de <span class="mono">seno(x)</span> com amplitude 1 e <span class="mono">seno(2x)</span> com amplitude 0,5, qual barra do espectro é mais alta: a da frequência 1 ou a da frequência 2?</p>
-  <div class="alts" data-r="0">
-    <div class="alt" data-i="0">A da frequência 1 — amplitude 1 é maior que 0,5.</div>
-    <div class="alt" data-i="1">A da frequência 2 — frequência maior sempre vence.</div>
-    <div class="alt" data-i="2">As duas ficam do mesmo tamanho.</div>
-  </div>
+  <div class="selo">✅</div>
+  <p>O sinal é <span class="mono">2 · seno(x) + 0,5 · seno(2x)</span>. Qual é a altura da barra mais alta do espectro?</p>
+  <p><input type="number" step="any" data-r="2" aria-label="Resposta do exercício 5"></p>
+  <button class="check" data-ex="ex5">Conferir</button>
   <div class="fb"></div>
+  <p class="dica">Dica: a altura de cada barra é o número na frente de cada seno.</p>
 </div>
 
 <div class="ex" id="ex6">
@@ -410,6 +423,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
     <div class="alt" data-i="0">Somar o sinal com seno(2x).</div>
     <div class="alt" data-i="1">Olhar só o ponto mais alto do sinal.</div>
     <div class="alt" data-i="2">Projetar o sinal sobre seno(2x) — o produto escalar entre os dois.</div>
+    <div class="alt" data-i="3">Contar quantas vezes o sinal cruza o zero.</div>
   </div>
   <div class="fb"></div>
 </div>
@@ -617,8 +631,9 @@ function fb(box,ok,txt){
   if(!ok){ void box.offsetWidth; box.classList.add("chacoalha"); }
 }
 var explica={
+  ex5:{ok:"Isso! A barra da frequência 1 tem altura 2, maior que 0,5.",no:"As barras têm as amplitudes: 2 (freq. 1) e 0,5 (freq. 2). A mais alta mede <strong>2</strong>."},
   ex4:{"ok": "Tudo certo! Decompor, espectro, frequência e o teste de cada onda.", "no": "Quase. Decompor = soma de ondas simples; espectro = quanto há de cada frequência; frequência = voltas no mesmo espaço; produto escalar = mede quanto daquela onda há no sinal."},
-  ex3:{ok:"Isso! Duas frequências presentes, duas ondas.",no:"Frequências 1 e 3 significam <strong>2</strong> ondas simples diferentes somadas."}
+  ex3:{ok:"Isso! Barras de altura 3 (freq. 1) e 1 (freq. 3); nenhuma na freq. 2.",no:"A barra de cada frequência tem a altura da amplitude: <strong>3</strong> na freq. 1 e <strong>1</strong> na freq. 3 (seno(3x) sem número na frente vale 1 ·)."}
 };
 document.querySelectorAll("button.check").forEach(function(b){
   b.addEventListener("click",function(){
@@ -637,21 +652,25 @@ document.querySelectorAll("button.check").forEach(function(b){
   });
 });
 var expAlt={
-  ex1:["Apagar partes muda o sinal — não é decompor, é destruir informação.",
-       "Isso! É achar quais ondas simples, somadas, reproduzem o sinal original.",
-       "Mudar a régua não revela nada sobre a composição do sinal."],
-  ex2:["Isso! A altura da barra é a amplitude daquela frequência no sinal.",
-       "O tempo é o eixo horizontal da onda em si, não do espectro.",
-       "O espectro mostra só as frequências presentes NESSE sinal, não todas que existem."],
+  ex1:[
+  "Apagar partes muda o sinal — não é decompor, é destruir informação.",
+  "Isso! É achar quais ondas simples, somadas, reproduzem o sinal original.",
+  "Mudar a régua não revela nada sobre a composição do sinal.",
+  "Uma onda só joga o resto fora; decompor é achar TODAS as ondas cuja soma dá exatamente o sinal."],
+  ex2:[
+  "Isso é inclinação; a barra mede quanto daquela frequência existe no sinal — a amplitude.",
+  "Isso! A altura da barra é a amplitude daquela frequência no sinal.",
+  "O tempo é o eixo horizontal da onda em si, não do espectro.",
+  "O espectro mostra só as frequências presentes NESSE sinal, não todas que existem."],
   ex4:["Volume é controlado separadamente — não é isso que a decomposição resolve.",
        "Isso! Frequências pouco percebidas pelo ouvido são descartadas com cuidado, economizando espaço.",
        "A ordem das notas no tempo não muda com a decomposição em frequências."],
-  ex5:["Isso! Amplitude 1 é maior que 0,5, então a barra da frequência 1 é mais alta.",
-       "Frequência maior não significa amplitude maior — são coisas independentes.",
-       "As alturas são diferentes (1 e 0,5), então as barras não ficam iguais."],
-  ex6:["Somar só mistura mais — não mede nada.",
-       "O pico mistura todas as notas ao mesmo tempo; não separa a de frequência 2.",
-       "Isso! A projeção (produto escalar) sobre seno(2x) isola a altura dessa nota — as outras frequências dão zero."]
+  
+  ex6:[
+  "Somar só mistura mais — não mede nada.",
+  "O pico mistura todas as notas ao mesmo tempo; não separa a de frequência 2.",
+  "Isso! A projeção (produto escalar) sobre seno(2x) isola a altura dessa nota — as outras frequências dão zero.",
+  "Os cruzamentos misturam todas as frequências; não isolam a quantidade de seno(2x)."]
 };
 document.querySelectorAll(".alts").forEach(function(grupo){
   var box=grupo.closest(".ex"), certa=parseInt(grupo.dataset.r,10);
@@ -819,6 +838,41 @@ $("bt6").addEventListener("click",function(){
 pinta6();
 
 
+})();
+</script>
+<script>
+(function(){
+/* ---------- o equalizador: liga e desliga cada frequência da onda montada no laboratório 1 ---------- */
+var liga=[true,true,true], sl=[document.getElementById("slM1"),document.getElementById("slM2"),document.getElementById("slM3")];
+function sen(g){ return Math.sin(g*Math.PI/180); }
+function pts(comp){ var p=[]; for(var px=0;px<=380;px+=4){ var xd=px/380*360, y=0; comp.forEach(function(c){ y+=c.a*sen(c.f*xd); }); p.push(px+","+(110-y*42).toFixed(1)); } return p.join(" "); }
+function pinta(){
+  var a=sl.map(function(s){ return parseFloat(s.value); });
+  var todos=a.map(function(v,i){ return {f:i+1,a:v}; }), filt=todos.filter(function(c,i){ return liga[i]; });
+  document.getElementById("eqOrig").setAttribute("points",pts(todos));
+  document.getElementById("eqFilt").setAttribute("points",pts(filt));
+  [0,1,2].forEach(function(i){
+    var b=document.getElementById("barraEsp"+(i+1)), bt=document.getElementById("eqB"+(i+1));
+    b.setAttribute("opacity",liga[i]?1:0.2);
+    bt.textContent="freq. "+(i+1)+": "+(liga[i]?"ligada":"desligada");
+    bt.className=liga[i]?"":"sec";
+  });
+  var total=a.reduce(function(s,v){ return s+v*v; },0), fica=a.reduce(function(s,v,i){ return s+(liga[i]?v*v:0); },0);
+  var t;
+  if(total===0) t="A onda do laboratório anterior está desligada: suba algum slider lá em cima.";
+  else if(fica===0) t="Tudo cortado: silêncio. A onda roxa virou uma linha reta.";
+  else if(fica===total) t=(liga.every(Boolean)?"Todas as frequências ligadas: a onda roxa é igual à original (tracejada).":"Você desligou uma frequência de amplitude 0 — não muda nada, porque ela não estava na onda.")+
+    (a.filter(function(v){ return v>0; }).length<2?" Dica: suba a freq. 2 e a freq. 3 no primeiro laboratório para ter o que equalizar.":"");
+  else t="Você cortou "+Math.round((1-fica/total)*100)+"% da \"energia\" (a soma dos quadrados das alturas). A onda roxa é o que sobra — "+(fica/total>0.8?"quase igual à original: por isso um MP3 pode jogar fora frequências fracas sem você perceber.":"bem diferente da original: essa frequência era importante.");
+  document.getElementById("eqTxt").textContent=t;
+}
+[0,1,2].forEach(function(i){
+  var f=function(){ liga[i]=!liga[i]; pinta(); };
+  document.getElementById("eqB"+(i+1)).addEventListener("click",f);
+  document.getElementById("barraEsp"+(i+1)).addEventListener("click",f);
+});
+sl.forEach(function(s){ s.addEventListener("input",pinta); });
+pinta();
 })();
 </script>
 </body>

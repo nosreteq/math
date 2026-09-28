@@ -401,20 +401,21 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <div class="ex" id="ex2">
   <div class="tit">Exercício 2</div>
   <div class="selo">✅</div>
-  <p>Quantos graus tem uma volta completa?</p>
-  <p><input type="number" data-r="360"></p>
+  <p>O ponteiro dos minutos vai de 12h00 até 12h45. Quantos graus ele girou?</p>
+  <p><input type="number" step="any" data-r="270" aria-label="Resposta do exercício 2"></p>
   <button class="check" data-ex="ex2">Conferir</button>
   <div class="fb"></div>
+  <p class="dica">Dica: quanto da volta completa são 45 dos 60 minutos?</p>
 </div>
 
 <div class="ex" id="ex3">
   <div class="tit">Exercício 3</div>
   <div class="selo">✅</div>
-  <p>Um ângulo reto — o giro de uma esquina bem quadrada — vale quantos graus?</p>
-  <p><input type="number" data-r="90"></p>
+  <p>Uma roda de bicicleta tem 70 cm de diâmetro. Quantos centímetros a bicicleta anda quando a roda dá uma volta completa? (use π = 3,14)</p>
+  <p><input type="number" step="any" data-r="219.8" aria-label="Resposta do exercício 3"></p>
   <button class="check" data-ex="ex3">Conferir</button>
   <div class="fb"></div>
-  <p class="dica">Dica: é a mesma fração de volta que um quarto de pizza.</p>
+  <p class="dica">Dica: lembre do laboratório "desenrole o círculo".</p>
 </div>
 
 <div class="ex" id="ex4">
@@ -433,12 +434,12 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 
 <div class="ex" id="ex5">
   <div class="tit">Exercício 5 — o desafio</div>
-  <div class="selo">🏆</div>
-  <p>Um ponteiro deu três quartos de uma volta completa. Quantos graus ele girou?</p>
-  <p><input type="number" data-r="270"></p>
+  <div class="selo">✅</div>
+  <p>Uma pizza de raio 20 cm é cortada em 8 fatias iguais. Qual é a área de uma fatia, em cm²? (use π = 3,14)</p>
+  <p><input type="number" step="any" data-r="157" aria-label="Resposta do exercício 5"></p>
   <button class="check" data-ex="ex5">Conferir</button>
   <div class="fb"></div>
-  <p class="dica">Dica: três quartos de 360° — pense em três fatias de uma pizza cortada em quatro.</p>
+  <p class="dica">Dica: primeiro a área da pizza inteira (π · raio²), depois divida.</p>
 </div>
 
 <div class="ex" id="ex6">
@@ -660,9 +661,9 @@ function fb(box,ok,txt){
 }
 var explica={
   ex4:{"ok": "Tudo certo! Grau, ângulo reto, π e a área pelos gomos.", "no": "Quase. 1 grau = 1/360 de volta; ângulo reto = 90°; π = volta ÷ diâmetro; área do círculo = π · raio²."},
-  ex2:{ok:"Isso mesmo, 360°.",no:"Uma volta completa vale <strong>360°</strong> — o número combinado há milhares de anos porque é fácil de dividir em partes iguais."},
-  ex3:{ok:"Exato, 90° — o ângulo reto.",no:"Um ângulo reto vale <strong>90°</strong>, um quarto dos 360° da volta completa."},
-  ex5:{ok:"Isso! 270°.",no:"Três quartos de 360° é <strong>270°</strong> — três fatias de uma pizza cortada em quatro pedaços iguais."},
+  ex2:{ok:"Isso! 45 min = 3/4 da hora, e 3/4 de 360° = 270°.",no:"45 minutos são 3/4 de hora: 3/4 · 360° = <strong>270°</strong>."},
+  ex3:{ok:"Isso! Uma volta desenrola a circunferência: 3,14 · 70 = 219,8 cm.",no:"Uma volta desenrola a circunferência inteira: π · diâmetro = 3,14 · 70 = <strong>219,8 cm</strong>."},
+  ex5:{ok:"Isso! Pizza inteira: 3,14 · 20² = 1.256 cm²; ÷ 8 = 157 cm².",no:"Área da pizza = π · raio² = 3,14 · 400 = 1.256 cm². Uma fatia é 1/8: <strong>157 cm²</strong>."},
   ex6:{ok:"Isso mesmo — apontando reto para cima é 90°.",no:"Apontando reto para cima é um dos marcos: <strong>90°</strong>, um quarto de volta a partir da direita."}
 };
 document.querySelectorAll("button.check").forEach(function(b){

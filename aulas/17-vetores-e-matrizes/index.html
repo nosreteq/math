@@ -349,6 +349,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
     <div class="alt" data-i="0">Um número sozinho, sem direção.</div>
     <div class="alt" data-i="1">Uma seta: tem tamanho e direção.</div>
     <div class="alt" data-i="2">Uma tabela de números 2 por 2.</div>
+    <div class="alt" data-i="3">Um ponto parado no plano, sem tamanho.</div>
   </div>
   <div class="fb"></div>
 </div>
@@ -356,21 +357,22 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
 <div class="ex" id="ex2">
   <div class="tit">Exercício 2</div>
   <div class="selo">✅</div>
-  <p>Quanto vale <span class="mono">(1, 4) + (3, −2)</span> na primeira coordenada?</p>
-  <p><input type="number" data-r="4"></p>
+  <p>Qual é o tamanho da seta <span class="mono">(6, 8)</span>?</p>
+  <p><input type="number" step="any" data-r="10" aria-label="Resposta do exercício 2"></p>
   <button class="check" data-ex="ex2">Conferir</button>
   <div class="fb"></div>
-  <p class="dica">Dica: soma cada coordenada separadamente: 1 + 3.</p>
+  <p class="dica">Dica: Pitágoras: √(x² + y²).</p>
 </div>
 
 <div class="ex" id="ex3">
   <div class="tit">Exercício 3</div>
   <div class="selo">✅</div>
   <p>Multiplicar um vetor por <strong>−2</strong> faz o quê com a seta?</p>
-  <div class="alts" data-r="2">
-    <div class="alt" data-i="0">Só encolhe, mantendo a direção.</div>
-    <div class="alt" data-i="1">Só estica, mantendo a direção.</div>
-    <div class="alt" data-i="2">Estica ao dobro do tamanho e inverte a direção.</div>
+  <div class="alts" data-r="3">
+    <div class="alt" data-i="0">Inverte a direção, mas mantém o tamanho.</div>
+    <div class="alt" data-i="1">Só encolhe, mantendo a direção.</div>
+    <div class="alt" data-i="2">Só estica, mantendo a direção.</div>
+    <div class="alt" data-i="3">Estica ao dobro do tamanho e inverte a direção.</div>
   </div>
   <div class="fb"></div>
 </div>
@@ -383,6 +385,7 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
     <div class="alt" data-i="0">É um ângulo agudo.</div>
     <div class="alt" data-i="1">É um ângulo reto — as setas são perpendiculares.</div>
     <div class="alt" data-i="2">É um ângulo obtuso.</div>
+    <div class="alt" data-i="3">As setas apontam para o mesmo lado.</div>
   </div>
   <div class="fb"></div>
 </div>
@@ -616,7 +619,7 @@ function fb(box,ok,txt){
 }
 var explica={
   ex6:{"ok": "Tudo certo! Seta, encaixe, ângulo reto e a máquina de setas.", "no": "Quase. Vetor = seta com tamanho e direção; somar = encaixar ponta com cauda; produto escalar zero = perpendiculares; matriz = máquina que transforma setas."},
-  ex2:{ok:"Isso! 1 + 3 = 4.",no:"Soma cada coordenada separadamente: 1 + 3 = <strong>4</strong>."},
+  ex2:{ok:"Isso! √(36 + 64) = √100 = 10.",no:"Tamanho = √(6² + 8²) = √(36 + 64) = √100 = <strong>10</strong>."},
   ex5:{ok:"Isso! (2·4) + (3·−1) = 8 − 3 = 5.",no:"(2 · 4) + (3 · −1) = 8 − 3 = <strong>5</strong>."}
 };
 document.querySelectorAll("button.check").forEach(function(b){
@@ -636,15 +639,21 @@ document.querySelectorAll("button.check").forEach(function(b){
   });
 });
 var expAlt={
-  ex1:["Isso seria só um número solto, sem direção — não é um vetor.",
-       "Isso mesmo! Um vetor é uma seta: tamanho e direção.",
-       "Essa é a descrição de uma matriz, não de um vetor."],
-  ex3:["Encolher sozinho seria multiplicar por um número entre −1 e 1.",
-       "Esticar sem inverter seria multiplicar por um número positivo maior que 1.",
-       "Isso! O 2 estica ao dobro, e o sinal de menos inverte a direção."],
-  ex4:["Ângulo agudo dá produto escalar positivo, não zero.",
-       "Isso! Produto escalar zero significa ângulo reto — as setas são perpendiculares.",
-       "Ângulo obtuso dá produto escalar negativo, não zero."],
+  ex1:[
+  "Isso seria só um número solto, sem direção — não é um vetor.",
+  "Isso mesmo! Um vetor é uma seta: tamanho e direção.",
+  "Essa é a descrição de uma matriz, não de um vetor.",
+  "Um ponto marca um lugar; o vetor é um deslocamento — tem tamanho e direção, e pode ser desenhado a partir de qualquer lugar."],
+  ex3:[
+  "Isso seria multiplicar por −1. O 2 do −2 também dobra o tamanho.",
+  "Encolher sozinho seria multiplicar por um número entre −1 e 1.",
+  "Esticar sem inverter seria multiplicar por um número positivo maior que 1.",
+  "Isso! O 2 estica ao dobro, e o sinal de menos inverte a direção."],
+  ex4:[
+  "Ângulo agudo dá produto escalar positivo, não zero.",
+  "Isso! Produto escalar zero significa ângulo reto — as setas são perpendiculares.",
+  "Ângulo obtuso dá produto escalar negativo, não zero.",
+  "Mesmo lado (0°) dá o MAIOR produto escalar positivo, não zero."],
   ex6:["Uma seta especial ainda seria só um vetor, não uma matriz.",
        "Isso! Matriz é uma tabela de números que transforma setas.",
        "Um único número seria um escalar, como o resultado do produto escalar — não uma matriz."]

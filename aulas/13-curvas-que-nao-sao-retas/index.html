@@ -364,10 +364,11 @@ footer{margin-top:60px;padding-top:22px;border-top:3px solid var(--linha);color:
   <div class="tit">Exercício 6</div>
   <div class="selo">✅</div>
   <p>Uma máquina deu esta tabela: x = 0, 1, 2, 3 → y = 1, 2, 5, 10. Que desenho ela faz?</p>
-  <div class="alts" data-r="1">
-    <div class="alt" data-i="0">Uma reta.</div>
-    <div class="alt" data-i="1">Uma parábola.</div>
-    <div class="alt" data-i="2">Nenhum desenho: a tabela está errada.</div>
+  <div class="alts" data-r="2">
+    <div class="alt" data-i="0">Uma exponencial, porque a tabela só cresce.</div>
+    <div class="alt" data-i="1">Uma reta.</div>
+    <div class="alt" data-i="2">Uma parábola.</div>
+    <div class="alt" data-i="3">Nenhum desenho: a tabela está errada.</div>
   </div>
   <div class="fb"></div>
   <p class="dica">Dica: calcule as diferenças (1, 3, 5) e depois as diferenças delas.</p>
@@ -732,10 +733,10 @@ var expAlt={
   "Nem toda parábola cruza o zero: se ela está toda acima do eixo, não encosta nele."
  ],
  "ex6": [
+  "Crescer sempre não basta: na exponencial cada y é o anterior vezes um número fixo (1→2→5 não é). As diferenças das diferenças são constantes (2, 2): parábola.",
   "As diferenças são 1, 3, 5 — não são iguais, então não é reta.",
   "Isso! Diferenças 1, 3, 5 e diferenças das diferenças 2, 2: é uma parábola (é a máquina x² + 1).",
-  "A tabela está certa: é a máquina x² + 1. As diferenças das diferenças (2, 2) denunciam a parábola."
- ]
+  "A tabela está certa: é a máquina x² + 1. As diferenças das diferenças (2, 2) denunciam a parábola."]
 };
 document.querySelectorAll(".alts").forEach(function(grupo){
   var box=grupo.closest(".ex"), certa=parseInt(grupo.dataset.r,10);
